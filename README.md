@@ -5,11 +5,11 @@ Converter between mathematical infix notation and PharmML math markup.
 
 PharmML is a markup for pharmacometrics documented at http://pharmml.org/
 
-Toni G at ISIB CNR
+Version 0.1. Author: Toni G at ISIB CNR
+
 
 Notes
 -----
-
 
 This is preliminary and can be later packed in a stand-alone exe.
 Until then, you need e.g. activeperl and the modules indicated at the
@@ -19,7 +19,11 @@ top of the source code. See notes therein.
 Usage
 -----
 
-Open a shell, then
+The expression to convert is expected either interactively, or as the first command-line argument. The expression syntax is the one defined by Math::Symbolic.
+
+Note that some conversions are performed automatically, e.g. sqrt -> ^ 0.5, and there may be mismatches due to different function coverage. In particular, the log function is always two-argument.
+
+E.g: open a shell, then
 
 ```
 shell>   perl -w infix2mathml.pl
