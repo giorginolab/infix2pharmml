@@ -34,14 +34,8 @@ use Math::SymbolicX::ParserExtensionFactory (
     }  
     );
 
-my $string='sin(call(pippo,a=2,b=cos(tan(t)+1)))';
-#my $string='sin(a)';
 
 
-# Limitations. 
-#  no logical operators
-#  many operators may be mismatched
-#  sqrt and exp are folded into power
 
 sub myarity {
 	my $x=shift;
@@ -142,11 +136,14 @@ sub xmlify {
 }
 
 
+my $string=shift @ARGV;
 
+if (!$string) {
+    print "Enter the expression to convert:\n";
+    $string=<>;
+    chomp $string; 
+} 
 
-print "Enter the expression to convert:\n";
-my $string=<>;
-chomp $string; 
 
 print "About to parse:              $string\n";
 my $tree = Math::Symbolic->parse_from_string($string);
