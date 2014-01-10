@@ -21,8 +21,6 @@ Usage
 
 The expression to convert is expected either interactively, or as the first command-line argument. The expression syntax is the one defined by Math::Symbolic.
 
-Note that some conversions are performed automatically, e.g. sqrt -> ^ 0.5, and there may be mismatches due to different function coverage. In particular, the log function is always two-argument.
-
 E.g: open a shell, then
 
 ```
@@ -46,6 +44,11 @@ XML:
 </Equation>
 ```
 
+
+Limitations
+-----------
+
+Note that some conversions are performed automatically, e.g. sqrt -> ^ 0.5, and there may be mismatches due to different function coverage. In particular, the log function is always two-argument.  Logical operators are not supported. 
 
 
 
