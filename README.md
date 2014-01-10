@@ -60,18 +60,18 @@ which should yield
 ```xml
     <math:Equation>
       <math:FunctionCall>
-	<ct:SymbRef symbIdRef="combinedErrorModel"/>
-	<math:FunctionArgument symbId="a">
-	  <ct:SymbRef symbIdRef="a"/>
-	</math:FunctionArgument>
-	<math:FunctionArgument symbId="b">
-	  <ct:SymbRef symbIdRef="b"/>
-	</math:FunctionArgument>
-	<math:FunctionArgument symbId="f">
-	  <math:Equation>
-	    <ct:SymbRef blkIdRef="main" symbIdRef="Cc"/>
-	  </math:Equation>
-	</math:FunctionArgument>
+        <ct:SymbRef symbIdRef="combinedErrorModel"/>
+        <math:FunctionArgument symbId="a">
+          <ct:SymbRef symbIdRef="a"/>
+        </math:FunctionArgument>
+        <math:FunctionArgument symbId="b">
+          <ct:SymbRef symbIdRef="b"/>
+        </math:FunctionArgument>
+        <math:FunctionArgument symbId="f">
+          <math:Equation>
+            <ct:SymbRef blkIdRef="main" symbIdRef="Cc"/>
+          </math:Equation>
+        </math:FunctionArgument>
       </math:FunctionCall>
     </math:Equation>
 ```
