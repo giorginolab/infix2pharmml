@@ -1,51 +1,46 @@
 #!/usr/bin/perl
 
-use CGI;
+use lib 'cgi-perl/lib/perl5';
+
+
+use CGI qw(:standard);
+use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::Twig;
+use Math::Symbolic;
+
 use infix2pharmml; 
 
 use strict;
 
 
-use CGI qw(:standard);
-$data = param('math') || '<i>(No input)</i>';
+my $string = param('math') || '<i>(No input)</i>';
 
-print <<END;
-Content-Type: text/html; charset=iso-8859-1
+print header,start_html('Infix notation to PharmML math XML'),
+	h1('Infix notation to PharmML math XML online converter'),
+	i('Toni Giorgino at isib.cnr.it');
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<title>Echoing user input</title>
-<h1>Echoing user input</h1>
-<p>You typed: $data</p>
-END
+print h2('You entered:'),$string;
+
+my $tree = Math::Symbolic->parse_from_string($string);
+
+if (!defined $tree) {
+	print h2("Parse failure, sorry."), end_html;
+	exit;
+}
+
+print h2("Parsed [call() is broken]:   "),$tree->to_string."\n" unless $infix2pharmml::using_call;
+
+my $xml= infix2pharmml::xmlify($tree);
+
+my $twig=XML::Twig->new( pretty_print => 'indented',
+			  output_filter => 'html' ); 
+$twig->safe_parse($xml);
+
+my $xml_indented=$twig->sprint;
+print h2("XML:"),pre($xml_indented);
+
+print end_html;
 
 exit;
 
-
-
-my $string=shift @ARGV;
-
-if (!$string) {
-    print "Enter the expression to convert:\n";
-    $string=<>;
-    chomp $string; 
-} 
-
-
-print "About to parse:              $string\n";
-my $tree = Math::Symbolic->parse_from_string($string);
-defined $tree or die "Parse failure";
-
-print "Parsed [call() is broken]:   ".$tree->to_string."\n" unless $infix2pharmml::using_call;
-
-print "XML:\n\n";
-my $xml= infix2pharmml::xmlify($tree);
-
-my $twig=XML::Twig->new( pretty_print => 'indented'); 
-$twig->parse($xml);
-$twig->print;
-
-
-
-	
 
