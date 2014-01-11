@@ -15,7 +15,8 @@ use strict;
 
 my $string = param('math') || '<i>(No input)</i>';
 
-print header,start_html('Infix notation to PharmML math'),
+print header(-expires=>'now'),
+        start_html('Infix notation to PharmML math'),
 	h1('Infix notation to PharmML math online converter'),
 	i('Toni Giorgino at isib.cnr.it');
 
@@ -33,7 +34,7 @@ print h2("Parsing result:"),$tree->to_string."\n" unless $infix2pharmml::using_c
 my $xml= infix2pharmml::xmlify($tree);
 
 my $twig=XML::Twig->new( pretty_print => 'indented',
-			  output_filter => 'html' ); 
+			 output_filter => 'html' ); 
 $twig->safe_parse($xml);
 
 my $xml_indented=$twig->sprint;
