@@ -51,12 +51,12 @@ XML:
 Limitations
 -----------
 
-* The expression syntax is the one defined by Math::Symbolic. Some of these functions may not match those defined by PharmML.
+The expression syntax is defined by the Math::Symbolic parser. Some of its functions do not match those defined by PharmML. 
 * In particular, the log function is always two-argument.
-* Note that some conversions are performed automatically, e.g. sqrt -> ^ 0.5
-* All symbols are assumed to reference variables in the current block.
-* The parser is does not use the recently-released libpharmml API.
+* Some conversions are performed automatically, e.g. sqrt -> ^ 0.5
+* All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
 * Error reporting may be unclear or surprising; for example, _foo(x)_ is not a function, but neither it does raise an exception; it is instead understood as a variable named _foo_. On the other hand, _log(x)_ is a function, but it raises an error because two arguments are expected.
+* The parser is does not use the recently-released _libpharmml_ API.
 * Logical operators are not supported.
 
 
