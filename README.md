@@ -61,8 +61,7 @@ Limitations
 Syntax for custom function calls
 --------------------------------
 
-Due to a limitation in Symbolic::Math parser, calling user-defined function
-(with named arguments) is achieved like this:
+Due to a limitation in Symbolic::Math parser, calling user-defined function (with named arguments) is achieved like this:
 
 ~~~~
    call(combinedErrorModel,a=a,b=b,f=Cc)
