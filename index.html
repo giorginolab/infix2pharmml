@@ -1,6 +1,22 @@
 <html><body>
+<h1>Infix notation to PharmML math online converter</h1>
+<i>Toni Giorgino at isib.cnr.it</i>
+
+<p> This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> math-XML markup. 
+
+<p> For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>  project  page at SourceForge.
+
+
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
-Formula: <textarea rows="4" cols="50" name="math">1+sin(t)+b</textarea>
+Enter the formula below:
+<p>
+<textarea rows="4" cols="50" name="math">1+sin(t)+b</textarea>
 <input type="submit" value="Submit">
 </form> 
+
+<h2>Examples:</h2>
+<p> <pre>1+sqrt(a^2+b^2)</pre> 
+<p> <pre>call(myFunction,arg1=sin(x),arg2=2)</pre> 
+<p> <pre>log(x,2.7)</pre> 
+
 </body></html>
