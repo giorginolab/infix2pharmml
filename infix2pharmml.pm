@@ -1,12 +1,13 @@
+package infix2pharmml;
+
 use Math::Symbolic::Parser;
 use Math::Symbolic;
 use Math::Symbolic::ExportConstants qw/:all/;
 use Data::Dumper;
-use XML::Twig;
 
 use strict;
 
-my $using_call=0;
+our $using_call=0;
 
 # This will extend all parser objects in your program:
 # http://search.cpan.org/~smueller/Math-SymbolicX-ParserExtensionFactory-3.02/lib/Math/SymbolicX/ParserExtensionFactory.pm
@@ -136,29 +137,4 @@ sub xmlify {
 }
 
 
-my $string=shift @ARGV;
-
-if (!$string) {
-    print "Enter the expression to convert:\n";
-    $string=<>;
-    chomp $string; 
-} 
-
-
-print "About to parse:              $string\n";
-my $tree = Math::Symbolic->parse_from_string($string);
-defined $tree or die "Parse failure";
-
-print "Parsed [call() is broken]:   ".$tree->to_string."\n" unless $using_call;
-
-print "XML:\n\n";
-my $xml= xmlify($tree);
-
-my $twig=XML::Twig->new( pretty_print => 'indented'); 
-$twig->parse($xml);
-$twig->print;
-
-
-
-	
-
+1;
