@@ -8,23 +8,26 @@ PharmML is a markup for pharmacometrics documented at http://pharmml.org/
 Version 0.1. Author: Toni G at ISIB CNR
 
 
-Notes
------
+License
+-------
 
-This is preliminary and can be later packed in a stand-alone exe.
-Until then, you need e.g. activeperl and the modules indicated at the
-top of the source code. See notes therein.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by     the Free Software Foundation, either version 3 of the License, or     (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,     but WITHOUT ANY WARRANTY; without even the implied warranty of     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the     GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 
 Usage
 -----
 
-The expression to convert is expected either interactively, or as the first command-line argument. The expression syntax is the one defined by Math::Symbolic.
+The expression to convert is expected either interactively, or as the first command-line argument. The expression syntax is the one defined by Math::Symbolic. 
 
 E.g: open a shell, then
 
 ~~~~~
-shell>   perl -w infix2mathml.pl
+shell>   perl -w convert.pl
 
 Enter the expression to convert:
 sin(-2*t)
@@ -34,12 +37,12 @@ XML:
 
 <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
   <Uniop op="sin">
-  <Binop op="times">
-  <Uniop op="minus">
-  <ct:Real>2</ct:Real>
-  </Uniop>
-  <ct:SymbRef symbIdRef="t"/>
-  </Binop>
+    <Binop op="times">
+      <Uniop op="minus">
+    	<ct:Real>2</ct:Real>
+      </Uniop>
+      <ct:SymbRef symbIdRef="t"/>
+    </Binop>
   </Uniop>
 </Equation>
 ~~~~~
@@ -48,15 +51,17 @@ XML:
 Limitations
 -----------
 
-Note that some conversions are performed automatically, e.g. sqrt -> ^ 0.5, and there may be mismatches due to different function coverage. In particular, the log function is always two-argument.  Logical operators are not supported. 
+* The expression syntax is the one defined by Math::Symbolic. Some of these functions may not match those defined by PharmML. 
+* In particular, the log function is always two-argument.  
+* Note that some conversions are performed automatically, e.g. sqrt -> ^ 0.5
+* Logical operators are not supported. 
 
 
 
 Syntax for custom function calls
 --------------------------------
 
-Due to a limitation in Symbolic::Math parser, calling user-defined function
-(with named arguments) is achieved like this:
+Due to a limitation in Symbolic::Math parser, calling user-defined function (with named arguments) is achieved like this:
 
 ~~~~
    call(combinedErrorModel,a=a,b=b,f=Cc)
@@ -82,3 +87,5 @@ which should yield
       </math:FunctionCall>
     </math:Equation>
 ~~~~
+
+
