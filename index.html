@@ -3,14 +3,22 @@
 <i>Toni Giorgino at isib.cnr.it</i>
 
 
-<p> This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> math-XML markup. 
-
-<p> For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>  project  page at SourceForge.
+<p> This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> math-XML markup.  For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>  project  page at SourceForge.
 
 
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li>The expression syntax is the one defined by <a href="http://search.cpan.org/~smueller/Math-Symbolic-0.612/lib/Math/Symbolic.pm">Math::Symbolic</a>. Some of these functions may not match those defined by PharmML. </li>
+<li>In particular, the log function is always two-argument.<br />
+</li>
+<li>Note that some conversions are performed automatically, e.g. sqrt -&gt; ^ 0.5</li>
+<li>Logical operators are not supported. </li>
+<li>User-defined function calls
+(with named arguments) are coded like:  <code>   call(combinedErrorModel,a=a,b=b,f=Cc)</code>
+</ul>
+
+<h2>Enter the formula below:</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
-Enter the formula below:
-<p>
 <textarea rows="4" cols="50" name="math">1+sin(t)+b</textarea>
 <input type="submit" value="Submit">
 </form> 
@@ -19,5 +27,12 @@ Enter the formula below:
 <p> <pre>1+sqrt(a^2+b^2)</pre> 
 <p> <pre>call(myFunction,arg1=sin(x),arg2=2)</pre> 
 <p> <pre>log(x,2.7)</pre> 
+
+
+<h2 id="license">License</h2>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by     the Free Software Foundation, either version 3 of the License, or     (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,     but WITHOUT ANY WARRANTY; without even the implied warranty of     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the     GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License     along with this program.  If not, see <a href="http://www.gnu.org/licenses/" rel="nofollow">http://www.gnu.org/licenses/</a>.</p>
+
 
 </body></html>
