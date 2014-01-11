@@ -11,11 +11,11 @@ Version 0.1. Author: Toni G at ISIB CNR
 License
 -------
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by     the Free Software Foundation, either version 3 of the License, or     (at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,     but WITHOUT ANY WARRANTY; without even the implied warranty of     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the     GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
@@ -51,10 +51,13 @@ XML:
 Limitations
 -----------
 
-* The expression syntax is the one defined by Math::Symbolic. Some of these functions may not match those defined by PharmML. 
-* In particular, the log function is always two-argument.  
+* The expression syntax is the one defined by Math::Symbolic. Some of these functions may not match those defined by PharmML.
+* In particular, the log function is always two-argument.
 * Note that some conversions are performed automatically, e.g. sqrt -> ^ 0.5
-* Logical operators are not supported. 
+* All symbols are assumed to reference variables in the current block.
+* The parser is does not use the recently-released libpharmml API.
+* Error reporting may be unclear or surprising; for example, _foo(x)_ is not a function, but neither it does raise an exception; it is instead understood as a variable named _foo_. On the other hand, _log(x)_ is a function, but it raises an error because two arguments are expected.
+* Logical operators are not supported.
 
 
 
