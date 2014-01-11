@@ -23,7 +23,7 @@ The expression to convert is expected either interactively, or as the first comm
 
 E.g: open a shell, then
 
-```
+~~~~~
 shell>   perl -w infix2mathml.pl
 
 Enter the expression to convert:
@@ -42,7 +42,7 @@ XML:
   </Binop>
   </Uniop>
 </Equation>
-```
+~~~~~
 
 
 Limitations
@@ -58,13 +58,13 @@ Syntax for custom function calls
 Due to a limitation in Symbolic::Math parser, calling user-defined function
 (with named arguments) is achieved like this:
 
-```
+~~~~
    call(combinedErrorModel,a=a,b=b,f=Cc)
-```
+~~~~
 
 which should yield
 
-```xml
+~~~~
     <math:Equation>
       <math:FunctionCall>
         <ct:SymbRef symbIdRef="combinedErrorModel"/>
@@ -81,4 +81,4 @@ which should yield
         </math:FunctionArgument>
       </math:FunctionCall>
     </math:Equation>
-```
+~~~~
