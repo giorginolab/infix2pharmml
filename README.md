@@ -53,8 +53,10 @@ Limitations
 -----------
 
 The expression syntax is defined by the Math::Symbolic parser. Some of its functions do not match those defined by PharmML. 
+
 * In particular, the log function is always two-argument.
-* Some conversions are performed automatically, e.g. sqrt -> ^ 0.5
+* Some conversions are performed automatically, e.g. sqrt -> ^ 0.5.
+* Calls to user-defined functions use a special syntax described in the next paragraph.
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
 * Error reporting may be unclear or surprising; for example, _foo(x)_ is not a function, but neither it does raise an exception; it is instead understood as a variable named _foo_. On the other hand, _log(x)_ is a function, but it raises an error because two arguments are expected.
 * The parser is does not use the recently-released _libpharmml_ API.
@@ -74,22 +76,27 @@ Due to a limitation in Symbolic::Math parser, calling user-defined function (wit
 which should yield
 
 ~~~~
-    <math:Equation>
-      <math:FunctionCall>
-        <ct:SymbRef symbIdRef="combinedErrorModel"/>
-        <math:FunctionArgument symbId="a">
-          <ct:SymbRef symbIdRef="a"/>
-        </math:FunctionArgument>
-        <math:FunctionArgument symbId="b">
-          <ct:SymbRef symbIdRef="b"/>
-        </math:FunctionArgument>
-        <math:FunctionArgument symbId="f">
-          <math:Equation>
-            <ct:SymbRef blkIdRef="main" symbIdRef="Cc"/>
-          </math:Equation>
-        </math:FunctionArgument>
-      </math:FunctionCall>
-    </math:Equation>
+<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+  <math:FunctionCall>
+    <!-- Translating: combinedErrorModel(a=a b=b f=Cc) -->
+    <ct:SymbRef symbIdRef="combinedErrorModel"/>
+    <math:FunctionArgument symbId="a">
+      <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+        <ct:SymbRef symbIdRef="a"/>
+      </math:Equation>
+    </math:FunctionArgument>
+    <math:FunctionArgument symbId="b">
+      <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+        <ct:SymbRef symbIdRef="b"/>
+      </math:Equation>
+    </math:FunctionArgument>
+    <math:FunctionArgument symbId="f">
+      <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+        <ct:SymbRef symbIdRef="Cc"/>
+      </math:Equation>
+    </math:FunctionArgument>
+  </math:FunctionCall>
+</math:Equation>
 ~~~~
 
-
+Note that arguments are always wrapped into _Equation_ elements, even when they could be omitted.
