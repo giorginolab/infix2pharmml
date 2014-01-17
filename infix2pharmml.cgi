@@ -7,6 +7,8 @@ use CGI qw(:standard);
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::Twig;
 use Math::Symbolic;
+# use FindBin qw($Bin); 
+# use Cwd;
 
 use infix2pharmml; 
 
@@ -15,10 +17,18 @@ use strict;
 
 my $string = param('math') || '<i>(No input)</i>';
 
+my $Bin=$ENV{SCRIPT_FILENAME};
+my $Rem=$ENV{HTTP_X_REMOTE_ADDR};
+open LOG,">>$Bin.log" or die "Error opening log file $Bin.log: $!";
+print LOG scalar localtime,"\t$Rem\t$string\n";
+close LOG;
+
 print header(-expires=>'now'),
         start_html('Infix notation to PharmML math'),
 	h1('Infix notation to PharmML math online converter'),
 	i('Toni Giorgino at isib.cnr.it');
+	
+# print h2('Env:');  foreach my $key (sort(keys(%ENV))) {     print "$key = $ENV{$key}<br>\n";     }
 
 print h2('You entered:'),$string;
 
