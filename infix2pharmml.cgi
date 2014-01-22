@@ -25,6 +25,7 @@ close LOG;
 
 print header(-expires=>'now'),
         start_html('Infix notation to PharmML math'),
+        img({alt=>"Logo CNR",style=>"float:right",src=>"/CNR_logo_100.png"}),
 	h1('Infix notation to PharmML math online converter'),
 	i('Toni Giorgino at isib.cnr.it');
 	

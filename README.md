@@ -54,7 +54,7 @@ Limitations
 
 The expression syntax is defined by the Math::Symbolic parser. Some of its functions do not match those defined by PharmML. 
 
-* In particular, the log function is always two-argument.
+* In particular, the log function is always two-argument (argument, base).
 * Some conversions are performed automatically, e.g. sqrt -> ^ 0.5.
 * Calls to user-defined functions use a special syntax described in the next paragraph. They can not be nested.
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
