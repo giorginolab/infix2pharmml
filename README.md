@@ -36,6 +36,8 @@ About to parse: sin(-2*t)
 Parsed:         sin((-2) * t)
 XML:
 
+~~~~~
+~~~~~
 <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
   <Uniop op="sin">
     <Binop op="times">
