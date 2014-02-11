@@ -3,7 +3,7 @@ infix2pharmml
 
 Converter between mathematical infix notation and PharmML math markup.
 
-PharmML is a markup for pharmacometrics documented at http://pharmml.org/
+PharmML is a markup for pharmacometrics documented at http://pharmml.org/ and developed within the DDMoRe consortium.
 
 Version 0.1. Author: Toni G at ISIB CNR
 
@@ -59,8 +59,8 @@ The expression syntax is defined by the Math::Symbolic parser. Some of its funct
 * Calls to user-defined functions use a special syntax described in the next paragraph. They can not be nested.
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
 * Error reporting may be unclear or surprising; for example, _foo(x)_ is not a function, but neither it does raise an exception; it is instead understood as a variable named _foo_. On the other hand, _log(x)_ is a function, but it raises an error because two arguments are expected.
-* The parser is does not use the recently-released _libpharmml_ API.
-* Logical operators are not supported.
+* The parser does not rely on the recently-released _libpharmml_ API.
+* Logical operators and assignments are not supported.
 
 
 
