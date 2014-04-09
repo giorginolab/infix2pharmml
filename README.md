@@ -5,7 +5,7 @@ Converter between mathematical infix notation and PharmML math markup.
 
 PharmML is a markup for pharmacometrics documented at http://pharmml.org/ and developed within the DDMoRe consortium.
 
-Version 0.1. Author: Toni G at ISIB CNR
+Version 0.2. Author: Toni G at ISIB CNR
 
 
 License
@@ -56,8 +56,8 @@ Limitations
 
 The expression syntax is defined by the Math::Symbolic parser. Some of its functions do not match those defined by PharmML. 
 
-* In particular, the log function is always two-argument (argument, base).
-* Some conversions are performed automatically, e.g. sqrt -> ^ 0.5.
+* Use _ln_ for the natural logarithm. The _log_ function is always two-argument (argument, base). 
+* Some conversions are performed automatically, e.g. _sqrt_ -> ^ 0.5.
 * Calls to user-defined functions use a special syntax described in the next paragraph. They can not be nested.
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
 * Error reporting may be unclear or surprising; for example, _foo(x)_ is not a function, but neither it does raise an exception; it is instead understood as a variable named _foo_. On the other hand, _log(x)_ is a function, but it raises an error because two arguments are expected.

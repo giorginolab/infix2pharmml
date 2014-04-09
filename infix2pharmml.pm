@@ -10,7 +10,21 @@ use Math::Symbolic::ExportConstants qw/:all/;
 
 use strict;
 
+
+
 our $using_call=0;
+
+# Contrieved way to add an operator
+use constant U_LN => 101;
+$Math::Symbolic::Operator::Op_Symbols{'ln'} = U_LN;
+$Math::Symbolic::Operator::Op_Types[U_LN] = {
+    	    infix_string  => undef,
+	    arity => 1,
+	    prefix_string => 'ln',
+	    application   => 'log($_[0])',
+};
+
+
 
 # This will extend all parser objects in your program:
 # http://search.cpan.org/~smueller/Math-SymbolicX-ParserExtensionFactory-3.02/lib/Math/SymbolicX/ParserExtensionFactory.pm
@@ -35,7 +49,17 @@ use Math::SymbolicX::ParserExtensionFactory (
 	    operands => \@operands,
 						    }); 
 	return $result;
-    }  
+    },
+
+    # http://search.cpan.org/~smueller/Math-Symbolic-0.606/lib/Math/Symbolic/Operator.pm
+    ln => sub {
+	my $arg=shift;
+	my $result =  Math::Symbolic::Operator->new({
+	    type => U_LN,
+	    operands => [$arg],
+						    });
+    }
+  
     );
 
 

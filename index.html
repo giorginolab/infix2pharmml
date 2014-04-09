@@ -11,7 +11,7 @@
 For a full list of the converter's limitations, see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the project's README</a>. As a non-exhaustive summary, note the following ones:
 <ul>
 <li>The expression syntax is defined by the <a href="http://search.cpan.org/~smueller/Math-Symbolic-0.612/lib/Math/Symbolic.pm">Math::Symbolic</a> parser. Some of its functions do not match those defined by PharmML. </li>
-<li>In particular, the log function is always two-argument.<br />
+<li>Use <code>ln</code> for the natural logarithm function (Requires PharmML &gt; 0.2.1).<br />
 </li>
 <li>Some conversions are performed automatically, e.g. sqrt -&gt; ^ 0.5</li>
 <li>Logical operators are not supported. </li>
@@ -27,6 +27,7 @@ For a full list of the converter's limitations, see <a href="https://sourceforge
 
 <h2>Examples:</h2>
 <p> <pre>1+sqrt(a^2+b^2)</pre> 
+<p> <pre>exp(ln(1))</pre> 
 <p> <pre>call(myFunction,arg1=sin(x),arg2=2)</pre> 
 <p> <pre>log(x,2.7)</pre> 
 <p> <pre>A*exp(-alpha*t)+B*exp(-beta*t)</pre> 

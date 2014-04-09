@@ -1,3 +1,5 @@
+use lib 'cgi-perl/lib/perl5';
+
 use XML::Twig;
 use infix2pharmml; 
 

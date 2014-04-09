@@ -1,5 +1,6 @@
 Functions are defined as follows
 
+~~~~~
 <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
 		    symbId="combinedErrorModel" symbolType="real">
   <FunctionArgument symbId="a" symbolType="real"/>
@@ -17,10 +18,11 @@ Functions are defined as follows
     </Equation>
   </Definition>
 </FunctionDefinition>
-
+~~~~~
 
 And used as follows
 
+~~~~~
 <math:Equation>
   <math:FunctionCall>
     <ct:SymbRef symbIdRef="combinedErrorModel"/>
@@ -37,8 +39,10 @@ And used as follows
     </math:FunctionArgument>
   </math:FunctionCall>
 </math:Equation>
+~~~~~
 
+In the pseudo-language defined here, they have to be called like this:
 
-In this pseudo-language, they have to be called like this:
-
+~~~~~
  call(combinedErrorModel,a=a,b=b,f=Cc)
+~~~~~
