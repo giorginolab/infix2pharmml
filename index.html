@@ -6,14 +6,16 @@
 
 <p> This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> math-XML markup.  For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>  project  page at SourceForge.
 
+<p> Version 0.2 
+
 
 <h2 id="limitations">Limitations</h2>
 For a full list of the converter's limitations, see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the project's README</a>. As a non-exhaustive summary, note the following ones:
 <ul>
 <li>The expression syntax is defined by the <a href="http://search.cpan.org/~smueller/Math-Symbolic-0.612/lib/Math/Symbolic.pm">Math::Symbolic</a> parser. Some of its functions do not match those defined by PharmML. </li>
-<li>Use <code>ln</code> for the natural logarithm function (Requires PharmML &gt; 0.2.1).<br />
+<li>Use <code>ln</code> for the natural logarithm function (requires PharmML &gt; 0.2.1).<br />
 </li>
-<li>Some conversions are performed automatically, e.g. sqrt -&gt; ^ 0.5</li>
+<li>Some conversions are performed automatically, e.g. <code>sqrt</code>  -&gt; ^ 0.5</li>
 <li>Logical operators are not supported. </li>
 <li>User-defined function calls
 (with named arguments) are coded like:  <code>   call(combinedErrorModel,a=a,b=b,f=Cc)</code>
