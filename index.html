@@ -1,4 +1,22 @@
-<html><body>
+<html>
+<head>
+<script  type="text/javascript">
+// <![CDATA[
+function copyUp(e) {
+	var targ;
+	if (!e) var e = window.event;
+	if (e.target) targ = e.target;
+	else if (e.srcElement) targ = e.srcElement;
+	if (targ.nodeType == 3) // defeat Safari bug
+		targ = targ.parentNode;
+	var math = document.getElementById("math");
+	math.value=targ.textContent;
+}
+// ]]>
+</script> 
+</head>
+
+<body>
 <img src="CNR_logo_100.png" alt="Logo CNR" style="float:right"/>
 <h1>Infix notation to PharmML math online converter</h1>
 <i>Toni Giorgino at isib.cnr.it</i>
@@ -13,9 +31,9 @@
 For a full list of the converter's limitations, see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the project's README</a>. As a non-exhaustive summary, note the following ones:
 <ul>
 <li>The expression syntax is defined by the <a href="http://search.cpan.org/~smueller/Math-Symbolic-0.612/lib/Math/Symbolic.pm">Math::Symbolic</a> parser. Some of its functions do not match those defined by PharmML. </li>
-<li>Use <code>ln</code> for the natural logarithm function (requires PharmML &gt;= 0.3).<br />
+<li>Use <code>ln(...)</code> for the natural logarithm function (requires PharmML &ge; 0.3).<br />
 </li>
-<li>Some conversions are performed automatically, e.g. <code>sqrt</code>  -&gt; ^ 0.5</li>
+<li>Some conversions are performed automatically, e.g. <code>sqrt(...)</code> &rarr; ^ 0.5</li>
 <li>Logical operators are not supported. </li>
 <li>User-defined function calls
 (with named arguments) are coded like:  <code>   call(combinedErrorModel,a=a,b=b,f=Cc)</code>
@@ -23,16 +41,19 @@ For a full list of the converter's limitations, see <a href="https://sourceforge
 
 <h2>Enter the formula below:</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
-<textarea rows="4" cols="50" name="math">1+sin(t)+b</textarea>
+<textarea rows="4" cols="50" id="math" name="math">1+sin(t)+b</textarea>
 <input type="submit" value="Submit">
 </form> 
 
 <h2>Examples:</h2>
-<p> <pre>1+sqrt(a^2+b^2)</pre> 
-<p> <pre>exp(ln(1))</pre> 
-<p> <pre>call(myFunction,arg1=sin(x),arg2=2)</pre> 
-<p> <pre>log(x,2.7)</pre> 
-<p> <pre>A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
+<p> Click to copy in the input area above.
+<div style="text-indent: 2em">
+<p> <pre onclick="copyUp(event)">1+sqrt(a^2+b^2)</pre> 
+<p> <pre onclick="copyUp(event)">exp(ln(1))</pre> 
+<p> <pre onclick="copyUp(event)">call(myFunction,arg1=sin(x),arg2=2)</pre> 
+<p> <pre onclick="copyUp(event)">log(x,2.7)</pre> 
+<p> <pre onclick="copyUp(event)">A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
+</div>
 
 
 <h2 id="license">License</h2>
@@ -52,6 +73,6 @@ For a full list of the converter's limitations, see <a href="https://sourceforge
 
 <p>
     You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
 
 </body></html>
