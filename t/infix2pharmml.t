@@ -5,8 +5,7 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 3;
-use Test::Exception;
+use Test::More tests => 4;
 use XML::Twig;
 
 BEGIN { use_ok('infix2pharmml') }; # TEST 1
@@ -56,3 +55,11 @@ is(i2p($s),
 </math:Equation>
 ',$s);
 
+$s="factorial(2)";
+is(i2p($s),
+'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+  <Uniop op="factorial">
+    <ct:Real>2</ct:Real>
+  </Uniop>
+</math:Equation>
+',$s);

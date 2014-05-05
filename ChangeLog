@@ -1,3 +1,7 @@
+2014-05-05  Toni  <toni@tabularasa>
+
+	* 0.3 added factorial()
+
 2014-04-09  Toni  <toni@pcgiorgino.isib.cnr.it>
 
 	* 0.2 added the ln() operator

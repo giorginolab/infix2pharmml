@@ -11,6 +11,13 @@ use Math::Symbolic::ExportConstants qw/:all/;
 use strict;
 
 
+# using a .. range
+sub factorial {
+    my $r = 1;
+    $r *= $_ for 1..shift;
+    $r;
+}
+
 
 our $using_call=0;
 
@@ -22,6 +29,15 @@ $Math::Symbolic::Operator::Op_Types[U_LN] = {
 	    arity => 1,
 	    prefix_string => 'ln',
 	    application   => 'log($_[0])',
+};
+
+use constant U_FACTORIAL => 102;
+$Math::Symbolic::Operator::Op_Symbols{'ln'} = U_FACTORIAL;
+$Math::Symbolic::Operator::Op_Types[U_FACTORIAL] = {
+    	    infix_string  => undef,
+	    arity => 1,
+	    prefix_string => 'factorial',
+	    application   => 'factorial($_[0])',
 };
 
 
@@ -58,7 +74,15 @@ use Math::SymbolicX::ParserExtensionFactory (
 	    type => U_LN,
 	    operands => [$arg],
 						    });
-    }
+    },
+
+    factorial => sub {
+	my $arg=shift;
+	my $result =  Math::Symbolic::Operator->new({
+	    type => U_FACTORIAL,
+	    operands => [$arg],
+						    });
+    },
   
     );
 
