@@ -11,7 +11,7 @@ use Math::Symbolic::ExportConstants qw/:all/;
 use strict;
 
 
-# using a .. range
+# indeed, not used
 sub factorial {
     my $r = 1;
     $r *= $_ for 1..shift;
@@ -20,6 +20,12 @@ sub factorial {
 
 
 our $using_call=0;
+use constant U_CALL => 100;
+$Math::Symbolic::Operator::Op_Symbols{'call'} = U_CALL;
+$Math::Symbolic::Operator::Op_Types[U_CALL] = {
+    	    infix_string  => undef,
+	    prefix_string => 'call',
+};
 
 # Contrieved way to add an operator
 use constant U_LN => 101;
@@ -32,7 +38,7 @@ $Math::Symbolic::Operator::Op_Types[U_LN] = {
 };
 
 use constant U_FACTORIAL => 102;
-$Math::Symbolic::Operator::Op_Symbols{'ln'} = U_FACTORIAL;
+$Math::Symbolic::Operator::Op_Symbols{'factorial'} = U_FACTORIAL;
 $Math::Symbolic::Operator::Op_Types[U_FACTORIAL] = {
     	    infix_string  => undef,
 	    arity => 1,
@@ -62,6 +68,7 @@ use Math::SymbolicX::ParserExtensionFactory (
 	    custom_name => $opname,
 	    custom_arguments => \@arguments,
 	    custom_string => "$opname(@as)",
+	    type => U_CALL,
 	    operands => \@operands,
 						    }); 
 	return $result;
