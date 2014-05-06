@@ -55,49 +55,40 @@ push @PEF, ( call => sub {
 	return $result;
 	     } );
 
-# ln ---------------------------------------- 
-$U++;
-$Math::Symbolic::Operator::Op_Symbols{'ln'} = $U;
-$Math::Symbolic::Operator::Op_Types[$U] = {
-    	    infix_string  => undef,
-	    arity => 1,
-	    prefix_string => 'ln',
-	    application   => 'log($_[0])',
-};
-{ my $Ut=$U;
-  push @PEF, (
-      ln => sub {
-	  my $arg=shift;
+
+
+sub add_pharmml_function {
+    my $fn=shift;
+    my $arity=shift;
+
+    $U++;
+    $Math::Symbolic::Operator::Op_Symbols{$fn} = $U;
+    $Math::Symbolic::Operator::Op_Types[$U] = {
+#    	    infix_string  => undef,
+	    arity => $arity,
+	    prefix_string => $fn,
+#	    application   => $fn.'(@_)',
+    };
+    { my $Ut=$U;
+      my $temp_fun = sub {
+	  my $args=shift;
+	  print "temp_fun: $args\n";
 	  my $result =  Math::Symbolic::Operator->new({
 	      type => $Ut,
-	      operands => [$arg],
+	      operands => [$args],
 						      });
-      } );
-};
+	  return $result;
+      };
+      push @PEF, (  $fn => $temp_fun );
+    };
+}
 
 
 
-
-
-$U++;
-$Math::Symbolic::Operator::Op_Symbols{'factorial'} = $U;
-$Math::Symbolic::Operator::Op_Types[$U] = {
-    	    infix_string  => undef,
-	    arity => 1,
-	    prefix_string => 'factorial',
-	    application   => 'factorial($_[0])',
-};
-{ my $Ut=$U;
-  push @PEF, (
-      factorial => sub {
-	  my $arg=shift;
-	  my $result =  Math::Symbolic::Operator->new({
-	      type => $Ut,
-	      operands => [$arg],
-						      });
-      } );
-};
-  
+add_pharmml_function("ln",1);
+add_pharmml_function("factorial",1);
+add_pharmml_function("gammaln",1);
+#add_pharmml_function("min",2);
 
 
 
