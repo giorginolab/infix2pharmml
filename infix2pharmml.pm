@@ -66,7 +66,7 @@ Math::SymbolicX::ParserExtensionFactory->add_private_functions(
       my $arity=shift;
 
       $Ut++;
-      print "add_pharmml_function: $fn is $U\n";
+      print "add_pharmml_function: $fn is $Ut\n";
       $Math::Symbolic::Operator::Op_Symbols{$fn} = $Ut;
       $Math::Symbolic::Operator::Op_Types[$Ut] = {
 #    	    infix_string  => undef,
@@ -78,12 +78,12 @@ Math::SymbolicX::ParserExtensionFactory->add_private_functions(
 	  $parser, 
 	  $fn => sub {
 	      my $args=shift;
-	      print "temp_fun: $fn, $args, $Ut, $U\n";
+	      print "temp_fun: args=$args, type=$Ut\n";
 	      my $result =  Math::Symbolic::Operator->new({
 		  type => $Ut,
 		  operands => [$args],
 							  });
-	      print Dumper($result);
+	  #    print Dumper($result);
 	      return $result;
 	  } );
   }
