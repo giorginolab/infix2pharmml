@@ -7,6 +7,7 @@ package infix2pharmml;
 use Math::Symbolic;
 use Math::Symbolic::Parser;
 use Math::Symbolic::ExportConstants qw/:all/;
+use Math::SymbolicX::ParserExtensionFactory;
 
 use strict;
 
@@ -20,38 +21,18 @@ sub factorial {
 
 
 our $using_call=0;
-use constant U_CALL => 100;
-$Math::Symbolic::Operator::Op_Symbols{'call'} = U_CALL;
-$Math::Symbolic::Operator::Op_Types[U_CALL] = {
+
+# call ---------------------------------------- 
+my $U=100;
+my @PEF=();
+
+$Math::Symbolic::Operator::Op_Symbols{'call'} = $U;
+$Math::Symbolic::Operator::Op_Types[$U] = {
     	    infix_string  => undef,
 	    prefix_string => 'call',
 };
 
-# Contrieved way to add an operator
-use constant U_LN => 101;
-$Math::Symbolic::Operator::Op_Symbols{'ln'} = U_LN;
-$Math::Symbolic::Operator::Op_Types[U_LN] = {
-    	    infix_string  => undef,
-	    arity => 1,
-	    prefix_string => 'ln',
-	    application   => 'log($_[0])',
-};
-
-use constant U_FACTORIAL => 102;
-$Math::Symbolic::Operator::Op_Symbols{'factorial'} = U_FACTORIAL;
-$Math::Symbolic::Operator::Op_Types[U_FACTORIAL] = {
-    	    infix_string  => undef,
-	    arity => 1,
-	    prefix_string => 'factorial',
-	    application   => 'factorial($_[0])',
-};
-
-
-
-# This will extend all parser objects in your program:
-# http://search.cpan.org/~smueller/Math-SymbolicX-ParserExtensionFactory-3.02/lib/Math/SymbolicX/ParserExtensionFactory.pm
-use Math::SymbolicX::ParserExtensionFactory (
-    call => sub {
+push @PEF, ( call => sub {
 	my $argumentstring = shift;
 	my @as=split(',',$argumentstring);
 	my $opname=shift @as;
@@ -68,32 +49,61 @@ use Math::SymbolicX::ParserExtensionFactory (
 	    custom_name => $opname,
 	    custom_arguments => \@arguments,
 	    custom_string => "$opname(@as)",
-	    type => U_CALL,
+	    type => $U,
 	    operands => \@operands,
 						    }); 
 	return $result;
-    },
+	     } );
 
-    # http://search.cpan.org/~smueller/Math-Symbolic-0.606/lib/Math/Symbolic/Operator.pm
-    ln => sub {
-	my $arg=shift;
-	my $result =  Math::Symbolic::Operator->new({
-	    type => U_LN,
-	    operands => [$arg],
-						    });
-    },
+# ln ---------------------------------------- 
+$U++;
+$Math::Symbolic::Operator::Op_Symbols{'ln'} = $U;
+$Math::Symbolic::Operator::Op_Types[$U] = {
+    	    infix_string  => undef,
+	    arity => 1,
+	    prefix_string => 'ln',
+	    application   => 'log($_[0])',
+};
+{ my $Ut=$U;
+  push @PEF, (
+      ln => sub {
+	  my $arg=shift;
+	  my $result =  Math::Symbolic::Operator->new({
+	      type => $Ut,
+	      operands => [$arg],
+						      });
+      } );
+};
 
-    factorial => sub {
-	my $arg=shift;
-	my $result =  Math::Symbolic::Operator->new({
-	    type => U_FACTORIAL,
-	    operands => [$arg],
-						    });
-    },
+
+
+
+
+$U++;
+$Math::Symbolic::Operator::Op_Symbols{'factorial'} = $U;
+$Math::Symbolic::Operator::Op_Types[$U] = {
+    	    infix_string  => undef,
+	    arity => 1,
+	    prefix_string => 'factorial',
+	    application   => 'factorial($_[0])',
+};
+{ my $Ut=$U;
+  push @PEF, (
+      factorial => sub {
+	  my $arg=shift;
+	  my $result =  Math::Symbolic::Operator->new({
+	      type => $Ut,
+	      operands => [$arg],
+						      });
+      } );
+};
   
-    );
 
 
+
+# This will extend all parser objects in your program:
+# http://search.cpan.org/~smueller/Math-SymbolicX-ParserExtensionFactory-3.02/lib/Math/SymbolicX/ParserExtensionFactory.pm
+#use Math::SymbolicX::ParserExtensionFactory (@PEF);
 
 
 sub myarity {
@@ -144,6 +154,15 @@ sub function_call_open {
 
 sub function_call_close {
     return "</math:FunctionCall>\n";
+}
+
+
+sub my_parse_from_string {
+    my $s=shift;
+    my $parser = Math::Symbolic::Parser->new();
+    Math::SymbolicX::ParserExtensionFactory->add_private_functions($parser, @PEF);
+    my $tree=$parser->parse($s);
+    return $tree;
 }
 
 
