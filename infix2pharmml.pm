@@ -2,7 +2,7 @@ package infix2pharmml;
 
 #use Devel::SimpleTrace;
 #use Carp::Always;
-#use Data::Dumper;
+use Data::Dumper;
 
 use Math::Symbolic;
 use Math::Symbolic::Parser;
@@ -59,34 +59,35 @@ Math::SymbolicX::ParserExtensionFactory->add_private_functions(
 	     } );
 
 
+{ my $Ut=$U;
 
-sub add_pharmml_function {
-    my $fn=shift;
-    my $arity=shift;
+  sub add_pharmml_function {
+      my $fn=shift;
+      my $arity=shift;
 
-    $U++;
-    $Math::Symbolic::Operator::Op_Symbols{$fn} = $U;
-    $Math::Symbolic::Operator::Op_Types[$U] = {
+      $Ut++;
+      print "add_pharmml_function: $fn is $U\n";
+      $Math::Symbolic::Operator::Op_Symbols{$fn} = $Ut;
+      $Math::Symbolic::Operator::Op_Types[$Ut] = {
 #    	    infix_string  => undef,
-	    arity => $arity,
-	    prefix_string => $fn,
+	  arity => $arity,
+	  prefix_string => $fn,
 #	    application   => $fn.'(@_)',
-    };
-    { my $Ut=$U;
-      my $temp_fun = sub {
-	  my $args=shift;
-	  print "temp_fun: $args\n";
-	  my $result =  Math::Symbolic::Operator->new({
-	      type => $Ut,
-	      operands => [$args],
-						      });
-	  return $result;
       };
       Math::SymbolicX::ParserExtensionFactory->add_private_functions(
 	  $parser, 
-	  $fn => $temp_fun );
-    };
-}
+	  $fn => sub {
+	      my $args=shift;
+	      print "temp_fun: $fn, $args, $Ut, $U\n";
+	      my $result =  Math::Symbolic::Operator->new({
+		  type => $Ut,
+		  operands => [$args],
+							  });
+	      print Dumper($result);
+	      return $result;
+	  } );
+  }
+};
 
 
 
