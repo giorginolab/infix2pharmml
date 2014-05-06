@@ -24,7 +24,8 @@ our $using_call=0;
 
 # call ---------------------------------------- 
 my $U=100;
-my @PEF=();
+my $parser = Math::Symbolic::Parser->new();
+
 
 $Math::Symbolic::Operator::Op_Symbols{'call'} = $U;
 $Math::Symbolic::Operator::Op_Types[$U] = {
@@ -32,7 +33,9 @@ $Math::Symbolic::Operator::Op_Types[$U] = {
 	    prefix_string => 'call',
 };
 
-push @PEF, ( call => sub {
+Math::SymbolicX::ParserExtensionFactory->add_private_functions(
+    $parser, 
+    call => sub {
 	my $argumentstring = shift;
 	my @as=split(',',$argumentstring);
 	my $opname=shift @as;
@@ -79,7 +82,9 @@ sub add_pharmml_function {
 						      });
 	  return $result;
       };
-      push @PEF, (  $fn => $temp_fun );
+      Math::SymbolicX::ParserExtensionFactory->add_private_functions(
+	  $parser, 
+	  $fn => $temp_fun );
     };
 }
 
@@ -149,11 +154,7 @@ sub function_call_close {
 
 
 sub my_parse_from_string {
-    my $s=shift;
-    my $parser = Math::Symbolic::Parser->new();
-    Math::SymbolicX::ParserExtensionFactory->add_private_functions($parser, @PEF);
-    my $tree=$parser->parse($s);
-    return $tree;
+    return $parser->parse(shift);
 }
 
 
