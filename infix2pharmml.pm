@@ -74,18 +74,20 @@ Math::SymbolicX::ParserExtensionFactory->add_private_functions(
 	  prefix_string => $fn,
 #	    application   => $fn.'(@_)',
       };
+      { my $Utt=$Ut;
       Math::SymbolicX::ParserExtensionFactory->add_private_functions(
 	  $parser, 
 	  $fn => sub {
 	      my $args=shift;
-	      print "temp_fun: args=$args, type=$Ut\n";
+#	      print "temp_fun: args=$args, type=$Utt\n";
 	      my $result =  Math::Symbolic::Operator->new({
-		  type => $Ut,
-		  operands => [$args],
+		  type => $Utt,
+		  operands => [$parser->parse($args)],
 							  });
 	  #    print Dumper($result);
 	      return $result;
 	  } );
+      };
   }
 };
 

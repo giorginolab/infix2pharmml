@@ -15,10 +15,10 @@ if (!$string) {
 
 
 print "About to parse:              $string\n";
-my $tree = Math::Symbolic->parse_from_string($string);
+my $tree = infix2pharmml::my_parse_from_string($string);
 defined $tree or die "Parse failure";
 
-print "Parsed [call() is broken]:   ".$tree->to_string."\n" ;#unless $infix2pharmml::using_call;
+print "Parsed:                      ".$tree->to_string."\n" ;#unless $infix2pharmml::using_call;
 
 print "XML:\n\n";
 my $xml= infix2pharmml::xmlify($tree);
