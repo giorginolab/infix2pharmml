@@ -1,4 +1,4 @@
-  parse: expr /^\\Z/
+  parse: expr /^\Z/
             {
               $return = $item[1]
             }
@@ -6,13 +6,13 @@
 
   expr: addition
             {
-              #warn \'expr \' if $Math::Symbolic::Parser::DEBUG;
+              #warn 'expr ' if $Math::Symbolic::Parser::DEBUG;
               $item[1]
             }
 
   addition: <leftop:multiplication add_op multiplication>
             {
-              #warn \'addition \'
+              #warn 'addition '
               #  if $Math::Symbolic::Parser::DEBUG;
               if (@{$item[1]} == 1) {
                 $item[1][0]
@@ -29,12 +29,12 @@
               }
             }
 
-  add_op: \'+\'
-        | \'-\'
+  add_op: '+'
+        | '-'
 
   multiplication: <leftop:exp mult_op exp>
             {
-              #warn \'multiplication \'
+              #warn 'multiplication '
               #  if $Math::Symbolic::Parser::DEBUG;
               if (@{$item[1]} == 1) {
                 $item[1][0]
@@ -51,13 +51,13 @@
               }
             }
 
-  mult_op: \'*\'
-         | \'/\'
+  mult_op: '*'
+         | '/'
 
 
-  exp: <rightop:factor \'^\' factor>
+  exp: <rightop:factor '^' factor>
             {
-              #warn \'exp \' if $Math::Symbolic::Parser::DEBUG;
+              #warn 'exp ' if $Math::Symbolic::Parser::DEBUG;
               if (@{$item[1]} == 1) {
                 $item[1][0]
               }
@@ -66,22 +66,22 @@
                 my $tree = shift @it;
                 while (@it) {
                   $tree = Math::Symbolic::Operator->new(
-                    \'^\', shift(@it), $tree
+                    '^', shift(@it), $tree
                   );
                 }
                 $tree;
               }
             }
 
-  factor: /(?:\\+|-)*/ number
+  factor: /(?:\+|-)*/ number
             {
-              #warn \'unary_n \'
+              #warn 'unary_n '
               #  if $Math::Symbolic::Parser::DEBUG;
               if ($item[1]) {
                 my @it = split //, $item[1];
                 my $ret = $item[2];
-                foreach (grep {$_ eq \'-\'} @it) {
-                  $ret = Math::Symbolic::Operator->new(\'neg\',$ret);
+                foreach (grep {$_ eq '-'} @it) {
+                  $ret = Math::Symbolic::Operator->new('neg',$ret);
                 }
                 $ret
               }
@@ -90,15 +90,15 @@
               }
             }
 
-         | /(?:\\+|-)*/ function
+         | /(?:\+|-)*/ function
             {
-              #warn \'unary_f \'
+              #warn 'unary_f '
               #  if $Math::Symbolic::Parser::DEBUG;
               if ($item[1]) {
                 my @it = split //, $item[1];
                 my $ret = $item[2];
-                foreach (grep {$_ eq \'-\'} @it) {
-                  $ret = Math::Symbolic::Operator->new(\'neg\',$ret);
+                foreach (grep {$_ eq '-'} @it) {
+                  $ret = Math::Symbolic::Operator->new('neg',$ret);
                 }
                 $ret
               }
@@ -107,15 +107,15 @@
               }
             }
 
-         | /(?:\\+|-)*/ variable
+         | /(?:\+|-)*/ variable
             {
-              #warn \'unary_v \'
+              #warn 'unary_v '
               #  if $Math::Symbolic::Parser::DEBUG;
               if ($item[1]) {
                 my @it = split //, $item[1];
                 my $ret = $item[2];
-                foreach (grep {$_ eq \'-\'} @it) {
-                  $ret = Math::Symbolic::Operator->new(\'neg\',$ret);
+                foreach (grep {$_ eq '-'} @it) {
+                  $ret = Math::Symbolic::Operator->new('neg',$ret);
                 }
                 $ret
               }
@@ -124,15 +124,15 @@
               }
             }
 
-          | /(?:\\+|-)*/ \'(\' expr \')\'
+          | /(?:\+|-)*/ '(' expr ')'
             {
-              #warn \'unary_expr \'
+              #warn 'unary_expr '
               #  if $Math::Symbolic::Parser::DEBUG;
               if ($item[1]) {
                 my @it = split //, $item[1];
                 my $ret = $item[3];
-                foreach (grep {$_ eq \'-\'} @it) {
-                  $ret = Math::Symbolic::Operator->new(\'neg\',$ret);
+                foreach (grep {$_ eq '-'} @it) {
+                  $ret = Math::Symbolic::Operator->new('neg',$ret);
                 }
                 $ret
               }
@@ -141,27 +141,27 @@
               }
             }
 
-  number:        /([+-]?)(?=\\d|\\.\\d)\\d*(\\.\\d*)?([Ee]([+-]?\\d+))?/
+  number:        /([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?/
             {
-              #warn \'number \'
+              #warn 'number '
               #  if $Math::Symbolic::Parser::DEBUG;
               Math::Symbolic::Constant->new($item[1])
             }
 
-  function: function_name \'(\' expr_list \')\'
+  function: function_name '(' expr_list ')'
             {
-              #warn \'function \' 
+              #warn 'function ' 
               #  if $Math::Symbolic::Parser::DEBUG;
               my $fname = $item[1];
               my $function;
               if (exists($Math::Symbolic::Parser::Parser_Functions{$fname})) {
                 $function = $Math::Symbolic::Parser::Parser_Functions{$fname}->($fname, @{$item[3]});
-                die "Invalid function \'$fname\'!"
+                die "Invalid function '$fname'!"
                   unless defined $function;
               }
               else {
                 $function = $Math::Symbolic::Operator::Op_Symbols{ $fname };
-                die "Invalid function \'$fname\'!"
+                die "Invalid function '$fname'!"
                   unless defined $function;
                 $function = Math::Symbolic::Operator->new(
                   { type => $function, operands => $item[3] }
@@ -170,49 +170,49 @@
               $function
             }
 
-  function_name: \'log\'
-               | \'partial_derivative\'
-               | \'total_derivative\'
-               | \'sinh\'
-               | \'cosh\'
-               | \'asinh\'
-               | \'acosh\'
-               | \'asin\'
-               | \'acos\'
-               | \'atan2\'
-               | \'atan\'
-               | \'acot\'
-               | \'sin\'
-               | \'cos\'
-               | \'tan\'
-               | \'cot\'
-               | \'exp\'
-               | \'sqrt\'
+  function_name: 'log'
+               | 'partial_derivative'
+               | 'total_derivative'
+               | 'sinh'
+               | 'cosh'
+               | 'asinh'
+               | 'acosh'
+               | 'asin'
+               | 'acos'
+               | 'atan2'
+               | 'atan'
+               | 'acot'
+               | 'sin'
+               | 'cos'
+               | 'tan'
+               | 'cot'
+               | 'exp'
+               | 'sqrt'
 
 
-  expr_list: <leftop:expr \',\' expr>
+  expr_list: <leftop:expr ',' expr>
             {
-              #warn \'expr_list \'
+              #warn 'expr_list '
               #  if $Math::Symbolic::Parser::DEBUG;
               $item[1]
             }
 
-  variable: /[a-zA-Z][a-zA-Z0-9_]*/ /\\\'*/ \'(\' identifier_list \')\'
+  variable: /[a-zA-Z][a-zA-Z0-9_]*/ /\'*/ '(' identifier_list ')'
             {
-              #warn \'variable \'
+              #warn 'variable '
               #  if $Math::Symbolic::Parser::DEBUG;
               my $varname = $item[1];
               my $ticks = $item[2];
               if ($ticks) {
                 my $n = length($ticks);
-                my $sig = $item[4] || [\'x\'];
+                my $sig = $item[4] || ['x'];
                 my $dep_var = $sig->[0];
                 my $return = Math::Symbolic::Variable->new(
                   { name => $varname, signature => $sig }
                 );
                 foreach (1..$n) {
                   $return = Math::Symbolic::Operator->new(
-                    \'partial_derivative\', 
+                    'partial_derivative', 
                      $return, $dep_var,
                   );
                 }
@@ -225,21 +225,21 @@
               }
             }
 
-          | /[a-zA-Z][a-zA-Z0-9_]*/ /\\\'*/
+          | /[a-zA-Z][a-zA-Z0-9_]*/ /\'*/
             {
-              #warn \'variable \'
+              #warn 'variable '
               #  if $Math::Symbolic::Parser::DEBUG;
               my $varname = $item[1];
               my $ticks = $item[2];
               if ($ticks) {
                 my $n = length($ticks);
                 my $return = Math::Symbolic::Variable->new(
-                  { name => $varname, signature => [\'x\'] }
+                  { name => $varname, signature => ['x'] }
                 );
                 foreach (1..$n) {
                   $return = Math::Symbolic::Operator->new(
-                    \'partial_derivative\', 
-                     $return, \'x\',
+                    'partial_derivative', 
+                     $return, 'x',
                   );
                 }
                 $return;
@@ -249,9 +249,9 @@
               }
             }
 
-  identifier_list: <leftop:/[a-zA-Z][a-zA-Z0-9_]*/ \',\' /[a-zA-Z][a-zA-Z0-9_]*/>
+  identifier_list: <leftop:/[a-zA-Z][a-zA-Z0-9_]*/ ',' /[a-zA-Z][a-zA-Z0-9_]*/>
             {
-              #warn \'identifier_list \'
+              #warn 'identifier_list '
               #  if $Math::Symbolic::Parser::DEBUG;
               $item[1]
             }
