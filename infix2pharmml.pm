@@ -66,23 +66,23 @@ Math::SymbolicX::ParserExtensionFactory->add_private_functions(
       my $arity=shift;
 
       $Ut++;
-      print "add_pharmml_function: $fn is $Ut\n";
+#      print "add_pharmml_function: $fn is $Ut\n";
       $Math::Symbolic::Operator::Op_Symbols{$fn} = $Ut;
       $Math::Symbolic::Operator::Op_Types[$Ut] = {
-#    	    infix_string  => undef,
 	  arity => $arity,
 	  prefix_string => $fn,
+#    	    infix_string  => undef,
 #	    application   => $fn.'(@_)',
       };
       { my $Utt=$Ut;
       Math::SymbolicX::ParserExtensionFactory->add_private_functions(
 	  $parser, 
 	  $fn => sub {
-	      my $args=shift;
-#	      print "temp_fun: args=$args, type=$Utt\n";
+	      print "temp_fun: args=@_, $#_, type=$Utt\n";
+	      my @args=map {$parser->parse($_)} (split /,/,shift);
 	      my $result =  Math::Symbolic::Operator->new({
 		  type => $Utt,
-		  operands => [$parser->parse($args)],
+		  operands => \@args,
 							  });
 	  #    print Dumper($result);
 	      return $result;
@@ -96,7 +96,8 @@ Math::SymbolicX::ParserExtensionFactory->add_private_functions(
 add_pharmml_function("ln",1);
 add_pharmml_function("factorial",1);
 add_pharmml_function("gammaln",1);
-#add_pharmml_function("min",2);
+add_pharmml_function("min",2);
+add_pharmml_function("max",2);
 
 
 

@@ -5,7 +5,7 @@ Converter between mathematical infix notation and PharmML math markup.
 
 PharmML is a markup for pharmacometrics documented at http://pharmml.org/ and developed within the DDMoRe consortium.
 
-Version 0.2. Author: Toni G at ISIB CNR
+Author: Toni G at ISIB CNR
 
 
 License
