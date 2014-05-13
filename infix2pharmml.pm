@@ -14,7 +14,7 @@ sub e {
 sub op {
     my $tag=shift;
     my $op=shift;
-    my $c="@_";
+    my $c=join('',@_);
     return "<$tag op=\"$op\">$c</$tag>\n";
 }
 
