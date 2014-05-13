@@ -44,6 +44,7 @@ sub symbref {
     return "<ct:SymbRef symbIdRef=\"$id\"/>";
 }
 
+#              | factor '!'               {main::u("factorial",$item[1])}
 
 
  $::RD_ERRORS = 1; # Make sure the parser dies when it encounters an error
@@ -60,12 +61,12 @@ start:        expression /^\Z/ {$item [1]}
 statement:      variable '=' statement   {$item [1] . "=" . $item [3]}
               | expression               {$item [1]}
 
-expression:     term '+' expression      {main::b("plus",$item [1], $item [3])}
-              | term '-' expression      {main::b("minus",$item [1] , $item [3])}
+expression:     term '+' expression      {main::b("plus", $item[1], $item[3])}
+              | term '-' expression      {main::b("minus",$item[1], $item[3])}
               | term                     
 
-term:           factor '*' term          {main::b("times",$item [1] , $item [3])}
-              | factor '/' term          {main::b("divide",$item [1] , $item [3])}
+term:           factor '*' term          {main::b("times", $item[1], $item[3])}
+              | factor '/' term          {main::b("divide",$item[1], $item[3])}
               | factor
 
 factor:         number
