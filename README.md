@@ -33,7 +33,6 @@ shell>   perl -w convert.pl
 Enter the expression to convert:
 sin(-2*t)
 About to parse: sin(-2*t)
-Parsed:         sin((-2) * t)
 XML:
 
 ~~~~~
@@ -57,10 +56,10 @@ Limitations
 The expression syntax is defined by the Math::Symbolic parser. Some of its functions do not match those defined by PharmML. 
 
 * Use _ln_ for the natural logarithm. The _log_ function is always two-argument (argument, base). 
-* Some conversions are performed automatically, e.g. _sqrt_ -> ^ 0.5.
-* Calls to user-defined functions use a special syntax described in the next paragraph. They can not be nested.
+* Calls to user-defined functions use a special syntax described in the next paragraph.
+* Factorial can be expressed as "factorial()" or with the usual exclamation mark.
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
-* Error reporting may be unclear or surprising; for example, _foo(x)_ is not a function, but neither it does raise an exception; it is instead understood as a variable named _foo_. On the other hand, _log(x)_ is a function, but it raises an error because two arguments are expected.
+* Error reporting is essentially non-existent.
 * The parser does not rely on the recently-released _libpharmml_ API.
 * Logical operators and assignments are not supported.
 
@@ -69,10 +68,10 @@ The expression syntax is defined by the Math::Symbolic parser. Some of its funct
 Syntax for custom function calls
 --------------------------------
 
-Due to a limitation in Symbolic::Math parser, calling user-defined function (with named arguments) is achieved like this:
+Calling user-defined function (with named arguments) is achieved like this:
 
 ~~~~
-   call(combinedErrorModel,a=a,b=b,f=Cc)
+   combinedErrorModel(a=a,b=b,f=Cc)
 ~~~~
 
 which should yield
