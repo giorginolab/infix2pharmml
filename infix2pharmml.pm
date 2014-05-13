@@ -1,215 +1,116 @@
 package infix2pharmml;
 
-#use Devel::SimpleTrace;
-#use Carp::Always;
-use Data::Dumper;
-
-use Math::Symbolic;
-use Math::Symbolic::Parser;
-use Math::Symbolic::ExportConstants qw/:all/;
-use Math::SymbolicX::ParserExtensionFactory;
-
 use strict;
+use warnings;
+use Parse::RecDescent;
+use Carp;
 
+sub e {
+    my $tag=shift;
+    my $c="@_";
+    return "<$tag>$c</$tag>\n";
+}
 
-# indeed, not used
-sub factorial {
-    my $r = 1;
-    $r *= $_ for 1..shift;
-    $r;
+sub op {
+    my $tag=shift;
+    my $op=shift;
+    my $c="@_";
+    return "<$tag op=\"$op\">$c</$tag>\n";
+}
+
+sub b {
+    return op("Binop",@_);
+}
+
+sub u {
+    return op("Uniop",@_);
+}
+
+sub fc {
+    my ($id,$args)=@_;
+    return "  <math:FunctionCall>
+    <ct:SymbRef symbIdRef=\"$id\"/>
+    $args
+    </math:FunctionCall>";
+}
+
+sub fa {
+    my ($id,$ref)=@_;
+    return "<math:FunctionArgument symbId=\"$id\">
+      <math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">$ref</math:Equation>
+     </math:FunctionArgument>";
+}
+
+sub symbref {
+    my $id=shift;
+    return "<ct:SymbRef symbIdRef=\"$id\"/>";
 }
 
 
-our $using_call=0;
 
-# call ---------------------------------------- 
-my $U=100;
-my $parser = Math::Symbolic::Parser->new();
+ $::RD_ERRORS = 1; # Make sure the parser dies when it encounters an error
+ $::RD_WARN   = 1; # Enable warnings. This will warn on unused rules &c.
+ $::RD_HINT   = 1; # Give out hints to help fix problems.
 
 
-$Math::Symbolic::Operator::Op_Symbols{'call'} = $U;
-$Math::Symbolic::Operator::Op_Types[$U] = {
-    	    infix_string  => undef,
-	    prefix_string => 'call',
+# http://www.adp-gmbh.ch/perl/rec_descent.html
+
+my $grammar = q {
+
+start:        expression /^\Z/ {$item [1]}
+
+statement:      variable '=' statement   {$item [1] . "=" . $item [3]}
+              | expression               {$item [1]}
+
+expression:     term '+' expression      {infix2pharmml::b("plus", $item[1], $item[3])}
+              | term '-' expression      {infix2pharmml::b("minus",$item[1], $item[3])}
+              | term                     
+
+term:           power '*' term          {infix2pharmml::b("times", $item[1], $item[3])}
+              | power '/' term          {infix2pharmml::b("divide",$item[1], $item[3])}
+              | power
+
+power:          factor '^' factor     {infix2pharmml::b("power", $item[1], $item[3])}
+              | factor '!'               {infix2pharmml::u("factorial",$item[1])}
+              | factor
+
+factor:         number
+              | '+' factor               {$item [2]}
+              | '-' factor               {infix2pharmml::u("minus",$item [2])}
+              | '(' expression ')'       {$item [2]}
+              | uniop '(' expression ')' {infix2pharmml::u($item[1],$item[3])}
+              | binop '(' expression ',' expression ')' 
+                                         {infix2pharmml::b($item[1],$item[3],$item[5])}
+              | variable '(' argpairlist ')' 
+                                         {infix2pharmml::fc($item[1],$item[3])}
+              | variable                 {infix2pharmml::symbref($item[1])}
+
+
+uniop:          'sinh' | 'cosh' | 'asinh' | 'acosh' | 'asin' | 'acos' | 'atan'
+              | 'acot' | 'sin'  | 'cos'   | 'tan'   | 'cot'  | 'exp'  | 'sqrt' 
+              | 'factorial' | 'gammaln' | 'ln'
+
+
+binop:          'atan2' | 'log' | 'min' | 'max'
+
+number:         /([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?/
+                                         {infix2pharmml::e("ct:Real",$item[1])}
+
+argpair:        variable '=' expression { infix2pharmml::fa($item[1],$item[3]) } 
+                                       
+
+argpairlist:    argpair ',' argpairlist { $item[1].$item[3] }
+              | argpair
+
+variable:       /[a-z]+/i
+
+
 };
 
-Math::SymbolicX::ParserExtensionFactory->add_private_functions(
-    $parser, 
-    call => sub {
-	my $argumentstring = shift;
-	my @as=split(',',$argumentstring);
-	my $opname=shift @as;
-	my @arguments=();
-	my @operands=();
-	$using_call++;
-	foreach my $arg (@as) {
-	    my ($arg,$val)=split('=',$arg);
-	    push @arguments,$arg;
-	    push @operands,$val;
-	}
-	my $result =  Math::Symbolic::Operator->new({
-	    custom_op => 1,
-	    custom_name => $opname,
-	    custom_arguments => \@arguments,
-	    custom_string => "$opname(@as)",
-	    type => $U,
-	    operands => \@operands,
-						    }); 
-	return $result;
-	     } );
-
-
-{ my $Ut=$U;
-
-  sub add_pharmml_function {
-      my $fn=shift;
-      my $arity=shift;
-
-      $Ut++;
-#      print "add_pharmml_function: $fn is $Ut\n";
-      $Math::Symbolic::Operator::Op_Symbols{$fn} = $Ut;
-      $Math::Symbolic::Operator::Op_Types[$Ut] = {
-	  arity => $arity,
-	  prefix_string => $fn,
-#    	    infix_string  => undef,
-#	    application   => $fn.'(@_)',
-      };
-      { my $Utt=$Ut;
-      Math::SymbolicX::ParserExtensionFactory->add_private_functions(
-	  $parser, 
-	  $fn => sub {
-	      print "temp_fun: args=@_, $#_, type=$Utt\n";
-	      my @args=map {$parser->parse($_)} (split /,/,shift);
-	      my $result =  Math::Symbolic::Operator->new({
-		  type => $Utt,
-		  operands => \@args,
-							  });
-	  #    print Dumper($result);
-	      return $result;
-	  } );
-      };
-  }
-};
-
-
-
-add_pharmml_function("ln",1);
-add_pharmml_function("factorial",1);
-add_pharmml_function("gammaln",1);
-add_pharmml_function("min",2);
-add_pharmml_function("max",2);
-
-
-
-# This will extend all parser objects in your program:
-# http://search.cpan.org/~smueller/Math-SymbolicX-ParserExtensionFactory-3.02/lib/Math/SymbolicX/ParserExtensionFactory.pm
-#use Math::SymbolicX::ParserExtensionFactory (@PEF);
-
-
-sub myarity {
-	my $x=shift;
-	my $p;
-	if($x->arity == 1) {
-		$p="Uniop";
-	} elsif($x->arity == 2) {
-		$p="Binop";
-	}
-	return $p;
-}
-
-# In Table 12.9-12.10
-# Math::Symbolic -> PharmML conversion table  
-sub renameop {
-	my $x=shift;
-	my %ot=( 
-		add=>'plus',
-		subtract=>'minus',
-		multiply=>'times',
-		division=>'divide',
-		exponentiate=>'power',
-		'log'=>'logx',
-		negate=>'minus', # pharmml minus is both arity-2 and arity-1
-	);
-	if(defined $ot{$x}) {
-		$x=$ot{$x};
-	} 
-	return $x;
-}
-
-# XMLify a custom operator
-sub function_call_open {
-    my $x=shift;
-    my $r="";
-    $r.="<math:FunctionCall>\n";
-    $r.="<!-- Translating: $x->{custom_string} -->\n";
-    $r.="<ct:SymbRef symbIdRef=\"".$x->{custom_name}."\"/>\n";
-    my $o=0;
-    foreach my $arg (@{$x->{custom_arguments}}) {
-	$r.="    <math:FunctionArgument symbId=\"$arg\">\n";
-	$r.=xmlify($x->{operands}->[$o++]);
-	$r.="    </math:FunctionArgument>\n";
-    }
-    return $r;
-}
-
-sub function_call_close {
-    return "</math:FunctionCall>\n";
-}
-
-
-sub my_parse_from_string {
-    return $parser->parse(shift);
-}
-
-
+my $parser=Parse::RecDescent->new($grammar);
 
 sub xmlify {
-    my $tree=shift;
-    my $r="";
-
-    my $pre = sub {
-	my $x=shift;
-#	print Dumper($x);
-	if (defined $x->{custom_op}) {
-	    $r.= function_call_open($x);
-	    return undef;
-	} elsif($x->term_type == T_OPERATOR) {
-	    my $p=myarity($x);
-	    my $o=$x->type;
-	    my $os=$Math::Symbolic::Operator::Op_Types[$o]->{prefix_string};
-	    $os=renameop($os);
-	    $r.= "  <$p op=\"$os\">";
-	} elsif($x->term_type == T_VARIABLE) {
-		my $a=$x->name;
-		$r.= "  <ct:SymbRef symbIdRef=\"$a\"/>";
-	} elsif($x->term_type == T_CONSTANT) {
-		my $a=$x->to_string;
-		$r.= "  <ct:Real>$a</ct:Real>";
-	} else {
-		$r.= "Unknown: ".$x->to_string;
-	}
-	$r.= "\n";
-	return();
-    };
-
-    my $post = sub {
-	my $x=shift;
-	if (defined $x->{custom_op}) {
-	    $r.= function_call_close($x);
-	} elsif($x->term_type == T_OPERATOR) {
-		my $p=myarity($x);
-		$r.= "  </$p>\n";
-	} 
-	return();
-    };
-
-    $r.="<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">\n";
-    $tree->descend(before=>$pre,after=>$post);
-    $r.="</math:Equation>\n";
-    return $r;
+    return $parser->start(shift);
 }
 
-
 1;
-
-

@@ -15,13 +15,10 @@ if (!$string) {
 
 
 print "About to parse:              $string\n";
-my $tree = infix2pharmml::my_parse_from_string($string);
-defined $tree or die "Parse failure";
-
-print "Parsed:                      ".$tree->to_string."\n" ;#unless $infix2pharmml::using_call;
 
 print "XML:\n\n";
-my $xml= infix2pharmml::xmlify($tree);
+my $xml= infix2pharmml::xmlify($string);
+defined $xml or die "Parse failure";
 
 my $twig=XML::Twig->new( pretty_print => 'indented'); 
 $twig->parse($xml);
