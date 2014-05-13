@@ -45,7 +45,8 @@ uniop:        'sin' | 'cos' | 'tan' | 'ln'
 
 binop:        'atan2' | 'log'
 
-number:         /\d+/                    {main::e("int",$item[1])}
+number:        /([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?/
+                {main::e("real",$item[1])}
 
 variable:       /[a-z]+/i
 
