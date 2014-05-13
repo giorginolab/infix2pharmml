@@ -70,6 +70,7 @@ term:           power '*' term          {main::b("times", $item[1], $item[3])}
               | power
 
 power:          factor '^' factor     {main::b("power", $item[1], $item[3])}
+              | factor '!'               {main::u("factorial",$item[1])}
               | factor
 
 factor:         number
