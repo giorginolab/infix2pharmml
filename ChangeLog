@@ -1,3 +1,7 @@
+2014-05-14  Toni  <toni@tabularasa>
+
+	* 0.5 reimplementation with own grammar
+
 2014-05-05  Toni  <toni@tabularasa>
 
 	* 0.4 parsable call()

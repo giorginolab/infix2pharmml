@@ -41,8 +41,3 @@ And used as follows
 </math:Equation>
 ~~~~~
 
-In the pseudo-language defined here, they have to be called like this:
-
-~~~~~
- call(combinedErrorModel,a=a,b=b,f=Cc)
-~~~~~
