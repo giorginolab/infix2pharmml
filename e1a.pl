@@ -65,8 +65,11 @@ expression:     term '+' expression      {main::b("plus", $item[1], $item[3])}
               | term '-' expression      {main::b("minus",$item[1], $item[3])}
               | term                     
 
-term:           factor '*' term          {main::b("times", $item[1], $item[3])}
-              | factor '/' term          {main::b("divide",$item[1], $item[3])}
+term:           power '*' term          {main::b("times", $item[1], $item[3])}
+              | power '/' term          {main::b("divide",$item[1], $item[3])}
+              | power
+
+power:          factor '^' factor     {main::b("power", $item[1], $item[3])}
               | factor
 
 factor:         number
@@ -80,7 +83,11 @@ factor:         number
                                          {main::fc($item[1],$item[3])}
               | variable                 {main::symbref($item[1])}
 
-uniop:          'sin' | 'cos' | 'tan' | 'ln'
+
+uniop:          'sinh' | 'cosh' | 'asinh' | 'acosh' | 'asin' | 'acos' | 'atan'
+              | 'acot' | 'sin'  | 'cos'   | 'tan'   | 'cot'  | 'exp'  | 'sqrt' 
+              | 'factorial' 
+
 
 binop:          'atan2' | 'log'
 
