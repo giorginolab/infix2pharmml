@@ -1,4 +1,3 @@
-
 # -*- antlr -*-
 
 %token NAN = /\b(nan|NaN|notanumber)\b/
