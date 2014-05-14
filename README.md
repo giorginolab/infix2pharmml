@@ -23,7 +23,7 @@ You should have received a copy of the GNU Affero General Public License along w
 Usage
 -----
 
-The expression to convert is expected either interactively, or as the first command-line argument. The expression syntax is the one defined by Math::Symbolic. 
+The converter can be run locally as _convert.pl_. The infix expression to convert is expected either interactively, or as the first command-line argument.  
 
 E.g: open a shell, then
 
@@ -35,8 +35,6 @@ sin(-2*t)
 About to parse: sin(-2*t)
 XML:
 
-~~~~~
-~~~~~
 <Equation xmlns="http://www.pharmml.org/2013/03/Maths">
   <Uniop op="sin">
     <Binop op="times">
