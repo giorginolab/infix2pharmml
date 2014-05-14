@@ -61,7 +61,7 @@ factor:         NUM                      {infix2pharmml::e("ct:Real",$_[1])}
 
 # page 245 spec. 0.2.1 + addenda
 
-uniop:  'exp ' | 'log' | 'minus' | 'factorial' | 'sin' | 'cos' | 'tan' |
+uniop:  'exp' | 'log' | 'minus' | 'factorial' | 'sin' | 'cos' | 'tan' |
         'sec' | 'csc' | 'cot' | 'sinh' | 'cosh' | 'tanh' | 'sech' |
         'csch' | 'coth' | 'arcsin' | 'arccos' | 'arctan' | 'arcsec' |
         'arccsc' | 'arccot' | 'arcsinh' | 'arccosh' | 'arctanh' |
