@@ -18,16 +18,19 @@
 # %left   NEG
 
 %%
-start:          expression 
+start:          statement 
     ;
 
-statement:      VAR '=' statement        {$_[1] . "=" . $_[3]}
-              | expression    
+statement:      VAR '=' equation        {$_[1] . "=" . $_[3]}
+              | equation    
     ;           
+
+equation:       expression               {infix2pharmml::eqn($_[1])}
+    ;
 
 expression:     term '+' expression      {infix2pharmml::b("plus", $_[1], $_[3])}
               | term '-' expression      {infix2pharmml::b("minus",$_[1], $_[3])}
-              | term                     
+              | term      
     ;
 
 term:           power '*' term           {infix2pharmml::b("times", $_[1], $_[3])}

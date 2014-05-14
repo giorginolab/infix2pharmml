@@ -39,11 +39,17 @@ sub fc {
     "</math:FunctionCall>";
 }
 
+sub eqn {
+    return "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">".
+	shift.
+	"</math:Equation>";
+}
+
 # Function arguments
 sub fa {
     my ($id,$ref)=@_;
     return "<math:FunctionArgument symbId=\"$id\">".
-      "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">$ref</math:Equation>".
+	$ref.
       "</math:FunctionArgument>";
 }
 
@@ -57,6 +63,12 @@ sub symbref {
 sub const {
     my $id=shift;
     return "<math:Constant op=\"$id\"/>";
+}
+
+sub assign {
+    my ($id,$y)=@_;
+    return "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
+	"<ct:Assign>$y</ct:Assign></ct:Variable>";
 }
     
 

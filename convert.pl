@@ -20,7 +20,7 @@ print "XML:\n\n";
 my $xml= infix2pharmml::xmlify($string);
 defined $xml or die "Parse failure";
 
-#print "Raw: $xml\n\n";
+print "Raw: $xml\n\n";
 
 
 my $twig=XML::Twig->new( pretty_print => 'indented'); 
