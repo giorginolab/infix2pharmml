@@ -21,7 +21,8 @@
 start:          statement 
     ;
 
-statement:      VAR '=' equation        {$_[1] . "=" . $_[3]}
+statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
+              | VAR '=' equation         {infix2pharmml::varass($_[1],$_[3])}
               | equation    
     ;           
 
@@ -78,7 +79,7 @@ constant:     NAN          {"notanumber"}
     ;
 
 
-argpair:        VAR '=' expression       {infix2pharmml::fa($_[1],$_[3]) } 
+argpair:        VAR '=' equation       {infix2pharmml::fa($_[1],$_[3]) } 
     ;                                  
 
 argpairlist:    argpair ',' argpairlist  { $_[1].$_[3] }

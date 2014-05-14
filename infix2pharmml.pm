@@ -65,10 +65,17 @@ sub const {
     return "<math:Constant op=\"$id\"/>";
 }
 
-sub assign {
+# P. 42
+sub vardef {
     my ($id,$y)=@_;
     return "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
 	"<ct:Assign>$y</ct:Assign></ct:Variable>";
+}
+
+sub varass {
+    my ($id,$y)=@_;
+    return "<ct:VariableAssignment><ct:SymbRef symbIdRef=\"$id\"/>".
+	"<ct:Assign>$y</ct:Assign></ct:VariableAssignment>";
 }
     
 
