@@ -33,23 +33,21 @@ print header(-expires=>'now'),
 
 print h2('You entered:'),$string;
 
-my $tree = Math::Symbolic->parse_from_string($string);
 
-if (!defined $tree) {
-	print h2("Parse failure, sorry."), end_html;
-	exit;
+my $xml=eval {
+    infix2pharmml::xmlify($tree);
+};
+
+if ($@) {
+    print h2('Parse error:'),$@;
+} else {
+    my $twig=XML::Twig->new( pretty_print => 'indented',
+			     output_filter => 'html' ); 
+    $twig->safe_parse($xml);
+    
+    my $xml_indented=$twig->sprint;
+    print h2("PharmML:"),pre($xml_indented);
 }
-
-print h2("Parsing result:"),$tree->to_string."\n" unless $infix2pharmml::using_call;
-
-my $xml= infix2pharmml::xmlify($tree);
-
-my $twig=XML::Twig->new( pretty_print => 'indented',
-			 output_filter => 'html' ); 
-$twig->safe_parse($xml);
-
-my $xml_indented=$twig->sprint;
-print h2("PharmML:"),pre($xml_indented);
 
 print end_html;
 
