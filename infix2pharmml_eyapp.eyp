@@ -13,9 +13,8 @@
 
 %right  '='
 %left   '-' '+'
-%left   '*' '/'
-
-# %left   NEG
+%left   '*' '/' 
+%left   NEG
 
 %%
 start:          statement 
@@ -33,17 +32,17 @@ statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
 equation:       expression               {infix2pharmml::eqn($_[1])}
     ;
 
-expression:     term '+' expression      {infix2pharmml::b("plus", $_[1], $_[3])}
-              | term '-' expression      {infix2pharmml::b("minus",$_[1], $_[3])}
+expression:     expression '+' term      {infix2pharmml::b("plus", $_[1], $_[3])}
+              | expression '-' term      {infix2pharmml::b("minus",$_[1], $_[3])}
               | term      
     ;
 
-term:           power '*' term           {infix2pharmml::b("times", $_[1], $_[3])}
-              | power '/' term           {infix2pharmml::b("divide",$_[1], $_[3])}
+term:           term '*' power           {infix2pharmml::b("times", $_[1], $_[3])}
+              | term '/' power           {infix2pharmml::b("divide",$_[1], $_[3])}
               | power
     ;
 
-power:          factor '^' factor        {infix2pharmml::b("power", $_[1], $_[3])}
+power:          power '^' factor        {infix2pharmml::b("power", $_[1], $_[3])}
               | factor '!'               {infix2pharmml::u("factorial",$_[1])}
               | factor
     ;
@@ -51,7 +50,7 @@ power:          factor '^' factor        {infix2pharmml::b("power", $_[1], $_[3]
 factor:         NUM                      {infix2pharmml::e("ct:Real",$_[1])}
               | constant                 {infix2pharmml::const($_[1])}
               | '+' factor               {$_[2]}
-              | '-' factor               {infix2pharmml::u("minus",$_[2])}
+              | '-' factor %prec NEG     {infix2pharmml::u("minus",$_[2])}
               | '(' expression ')'       {$_[2]}
               | uniop '(' expression ')' {infix2pharmml::u($_[1],$_[3])}
               | binop '(' expression ',' expression ')' 
