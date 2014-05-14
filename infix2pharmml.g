@@ -1,8 +1,10 @@
 
-start:        expression /^\Z/ {$item [1]}
+start:        expression EOF {$item [1]}     | <error>
+
+EOF:          /^\Z/
 
 statement:      variable '=' statement   {$item [1] . "=" . $item [3]}
-              | expression               {$item [1]}
+              | expression               
 
 expression:     term '+' expression      {infix2pharmml::b("plus", $item[1], $item[3])}
               | term '-' expression      {infix2pharmml::b("minus",$item[1], $item[3])}
@@ -12,7 +14,7 @@ term:           power '*' term          {infix2pharmml::b("times", $item[1], $it
               | power '/' term          {infix2pharmml::b("divide",$item[1], $item[3])}
               | power
 
-power:          factor '^' factor     {infix2pharmml::b("power", $item[1], $item[3])}
+power:          factor '^' factor        {infix2pharmml::b("power", $item[1], $item[3])}
               | factor '!'               {infix2pharmml::u("factorial",$item[1])}
               | factor
 
@@ -26,16 +28,17 @@ factor:         number
               | variable '(' argpairlist ')' 
                                          {infix2pharmml::fc($item[1],$item[3])}
               | variable                 {infix2pharmml::symbref($item[1])}
+    | <error>
 
 
 uniop:          'sinh' | 'cosh' | 'asinh' | 'acosh' | 'asin' | 'acos' | 'atan'
               | 'acot' | 'sin'  | 'cos'   | 'tan'   | 'cot'  | 'exp'  | 'sqrt' 
-              | 'factorial' | 'gammaln' | 'ln'
+              | 'factorial' | 'gammaln' | 'ln' 
 
 
 binop:          'atan2' | 'log' | 'min' | 'max'
 
-number:         /([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?/
+number:         /[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/
                                          {infix2pharmml::e("ct:Real",$item[1])}
 
 argpair:        variable '=' expression { infix2pharmml::fa($item[1],$item[3]) } 

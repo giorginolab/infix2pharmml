@@ -59,7 +59,7 @@ my $grammar = join("", <FILE>);
 close FILE;
 
 
-my $parser=Parse::RecDescent->new($grammar);
+my $parser=Parse::RecDescent->new($grammar) or die "Building grammar"; 
 
 sub xmlify {
     return $parser->start(shift);
