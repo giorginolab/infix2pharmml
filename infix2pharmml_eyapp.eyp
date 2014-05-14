@@ -10,6 +10,7 @@
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
 
+%left   ','
 %right  '='
 %left   '-' '+'
 %left   '*' '/' 
@@ -73,15 +74,12 @@ constant:     NAN          {"notanumber"}
     ;
 
 
-argpair:        VAR '=' equation       {infix2pharmml::fa($_[1],$_[3]) } 
-    ;                                  
-
-argpairlist:    argpair ',' argpairlist  { $_[1].$_[3] }
-              | argpair
+argpairlist:    argpairlist ',' argpairlist  { $_[1].$_[3] }
+              | VAR '=' equation             {infix2pharmml::fa($_[1],$_[3]) } 
     ;
 
-varlist:        VAR ',' varlist  {infix2pharmml::funcarg($_[1]).$_[3] }
-              | VAR              {infix2pharmml::funcarg($_[1])}
+varlist:        varlist ',' varlist  {$_[1].$_[3]}
+              | VAR                  {infix2pharmml::funcarg($_[1])}
     ;
 
 %%
