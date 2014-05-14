@@ -1,4 +1,7 @@
-Functions are defined as follows
+User-defined function in PharmML
+========================================
+
+PharmML prescribes functions to be defined as follows
 
 ~~~~~
 <FunctionDefinition xmlns="http://www.pharmml.org/2013/03/CommonTypes"
@@ -20,7 +23,7 @@ Functions are defined as follows
 </FunctionDefinition>
 ~~~~~
 
-And used as follows
+and used as follows
 
 ~~~~~
 <math:Equation>
