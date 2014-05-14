@@ -65,17 +65,36 @@ sub const {
     return "<math:Constant op=\"$id\"/>";
 }
 
+sub assign {
+    my $y=shift;
+    return "<ct:Assign>$y</ct:Assign>";
+}
+
 # P. 42
 sub vardef {
     my ($id,$y)=@_;
     return "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
-	"<ct:Assign>$y</ct:Assign></ct:Variable>";
+	assign($y).
+	"</ct:Variable>";
 }
 
 sub varass {
     my ($id,$y)=@_;
-    return "<ct:VariableAssignment><ct:SymbRef symbIdRef=\"$id\"/>".
-	"<ct:Assign>$y</ct:Assign></ct:VariableAssignment>";
+    return "<ct:VariableAssignment>".symbref($id).
+	assign($y).
+	"</ct:VariableAssignment>";
+}
+
+sub diff {
+    my ($id,$t,$y)=@_;
+    return "<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
+	assign($y).
+	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
+	"<ct:InitialCondition>".
+	"<!-- WARNING InitialCondition need be edited -->".
+	assign("<ct:Real>0</ct:Real>").
+	"</ct:InitialCondition>".
+	"</ct:DerivativeVariable>";
 }
     
 
