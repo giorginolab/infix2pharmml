@@ -3487,10 +3487,10 @@ sub new {
   [ 'term_12' => 'term', [ 'term', '/', 'power' ], 0 ],
   [ 'term_13' => 'term', [ 'power' ], 0 ],
   [ 'power_14' => 'power', [ 'factor', '^', 'power' ], 0 ],
-  [ 'power_15' => 'power', [ 'factor', '!' ], 0 ],
-  [ 'power_16' => 'power', [ 'factor' ], 0 ],
-  [ 'factor_17' => 'factor', [ 'NUM' ], 0 ],
-  [ 'factor_18' => 'factor', [ 'constant' ], 0 ],
+  [ 'power_15' => 'power', [ 'factor' ], 0 ],
+  [ 'factor_16' => 'factor', [ 'NUM' ], 0 ],
+  [ 'factor_17' => 'factor', [ 'constant' ], 0 ],
+  [ 'factor_18' => 'factor', [ 'factor', '!' ], 0 ],
   [ 'factor_19' => 'factor', [ '+', 'factor' ], 0 ],
   [ 'factor_20' => 'factor', [ '-', 'factor' ], 0 ],
   [ 'factor_21' => 'factor', [ '(', 'expression', ')' ], 0 ],
@@ -3570,7 +3570,7 @@ sub new {
   'term_13' => 13,
   'power_14' => 14,
   'power_15' => 15,
-  'power_16' => 16,
+  'factor_16' => 16,
   'factor_17' => 17,
   'factor_18' => 18,
   'factor_19' => 19,
@@ -3990,7 +3990,7 @@ sub new {
 		DEFAULT => -63
 	},
 	{#State 30
-		DEFAULT => -18
+		DEFAULT => -17
 	},
 	{#State 31
 		DEFAULT => -64
@@ -4008,7 +4008,7 @@ sub new {
 		DEFAULT => -60
 	},
 	{#State 36
-		DEFAULT => -17
+		DEFAULT => -16
 	},
 	{#State 37
 		ACTIONS => {
@@ -4135,7 +4135,7 @@ sub new {
 			"!" => 77,
 			"^" => 78
 		},
-		DEFAULT => -16
+		DEFAULT => -15
 	},
 	{#State 54
 		ACTIONS => {
@@ -4183,6 +4183,9 @@ sub new {
 		DEFAULT => -25
 	},
 	{#State 66
+		ACTIONS => {
+			"!" => 77
+		},
 		DEFAULT => -20
 	},
 	{#State 67
@@ -4255,6 +4258,9 @@ sub new {
 		DEFAULT => 0
 	},
 	{#State 69
+		ACTIONS => {
+			"!" => 77
+		},
 		DEFAULT => -19
 	},
 	{#State 70
@@ -4605,7 +4611,7 @@ sub new {
 		}
 	},
 	{#State 77
-		DEFAULT => -15
+		DEFAULT => -18
 	},
 	{#State 78
 		ACTIONS => {
@@ -5223,406 +5229,406 @@ sub new {
 [
 	[#Rule _SUPERSTART
 		 '$start', 2, undef
-#line 5226 ./infix2pharmml_eyapp.pm
+#line 5232 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule start_1
 		 'start', 1, undef
-#line 5230 ./infix2pharmml_eyapp.pm
+#line 5236 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_2
 		 'statement', 3,
 sub {
 #line 24 "infix2pharmml_eyapp.eyp"
 infix2pharmml::vardef($_[1],$_[3])}
-#line 5237 ./infix2pharmml_eyapp.pm
+#line 5243 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_3
 		 'statement', 3,
 sub {
 #line 25 "infix2pharmml_eyapp.eyp"
 infix2pharmml::varass($_[1],$_[3])}
-#line 5244 ./infix2pharmml_eyapp.pm
+#line 5250 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_4
 		 'statement', 6,
 sub {
 #line 27 "infix2pharmml_eyapp.eyp"
 infix2pharmml::diff($_[2],$_[4],$_[6])}
-#line 5251 ./infix2pharmml_eyapp.pm
+#line 5257 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_5
 		 'statement', 5,
 sub {
 #line 29 "infix2pharmml_eyapp.eyp"
 infix2pharmml::funcdef($_[1],$_[3],$_[5])}
-#line 5258 ./infix2pharmml_eyapp.pm
+#line 5264 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_6
 		 'statement', 1, undef
-#line 5262 ./infix2pharmml_eyapp.pm
+#line 5268 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule equation_7
 		 'equation', 1,
 sub {
 #line 33 "infix2pharmml_eyapp.eyp"
 infix2pharmml::eqn($_[1])}
-#line 5269 ./infix2pharmml_eyapp.pm
+#line 5275 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule expression_8
 		 'expression', 3,
 sub {
 #line 36 "infix2pharmml_eyapp.eyp"
 infix2pharmml::b("plus", $_[1], $_[3])}
-#line 5276 ./infix2pharmml_eyapp.pm
+#line 5282 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule expression_9
 		 'expression', 3,
 sub {
 #line 37 "infix2pharmml_eyapp.eyp"
 infix2pharmml::b("minus",$_[1], $_[3])}
-#line 5283 ./infix2pharmml_eyapp.pm
+#line 5289 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule expression_10
 		 'expression', 1, undef
-#line 5287 ./infix2pharmml_eyapp.pm
+#line 5293 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule term_11
 		 'term', 3,
 sub {
 #line 41 "infix2pharmml_eyapp.eyp"
 infix2pharmml::b("times", $_[1], $_[3])}
-#line 5294 ./infix2pharmml_eyapp.pm
+#line 5300 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule term_12
 		 'term', 3,
 sub {
 #line 42 "infix2pharmml_eyapp.eyp"
 infix2pharmml::b("divide",$_[1], $_[3])}
-#line 5301 ./infix2pharmml_eyapp.pm
+#line 5307 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule term_13
 		 'term', 1, undef
-#line 5305 ./infix2pharmml_eyapp.pm
+#line 5311 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule power_14
 		 'power', 3,
 sub {
 #line 46 "infix2pharmml_eyapp.eyp"
 infix2pharmml::b("power", $_[1], $_[3])}
-#line 5312 ./infix2pharmml_eyapp.pm
+#line 5318 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule power_15
-		 'power', 2,
-sub {
-#line 47 "infix2pharmml_eyapp.eyp"
-infix2pharmml::u("factorial",$_[1])}
-#line 5319 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule power_16
 		 'power', 1, undef
-#line 5323 ./infix2pharmml_eyapp.pm
+#line 5322 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule factor_16
+		 'factor', 1,
+sub {
+#line 50 "infix2pharmml_eyapp.eyp"
+infix2pharmml::e("ct:Real",$_[1])}
+#line 5329 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_17
 		 'factor', 1,
 sub {
 #line 51 "infix2pharmml_eyapp.eyp"
-infix2pharmml::e("ct:Real",$_[1])}
-#line 5330 ./infix2pharmml_eyapp.pm
+infix2pharmml::const($_[1])}
+#line 5336 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_18
-		 'factor', 1,
+		 'factor', 2,
 sub {
 #line 52 "infix2pharmml_eyapp.eyp"
-infix2pharmml::const($_[1])}
-#line 5337 ./infix2pharmml_eyapp.pm
+infix2pharmml::u("factorial",$_[1])}
+#line 5343 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_19
 		 'factor', 2,
 sub {
 #line 53 "infix2pharmml_eyapp.eyp"
 $_[2]}
-#line 5344 ./infix2pharmml_eyapp.pm
+#line 5350 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_20
 		 'factor', 2,
 sub {
 #line 54 "infix2pharmml_eyapp.eyp"
 infix2pharmml::u("minus",$_[2])}
-#line 5351 ./infix2pharmml_eyapp.pm
+#line 5357 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_21
 		 'factor', 3,
 sub {
 #line 55 "infix2pharmml_eyapp.eyp"
 $_[2]}
-#line 5358 ./infix2pharmml_eyapp.pm
+#line 5364 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_22
 		 'factor', 4,
 sub {
 #line 56 "infix2pharmml_eyapp.eyp"
 infix2pharmml::u($_[1],$_[3])}
-#line 5365 ./infix2pharmml_eyapp.pm
+#line 5371 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_23
 		 'factor', 6,
 sub {
 #line 58 "infix2pharmml_eyapp.eyp"
 infix2pharmml::b($_[1],$_[3],$_[5])}
-#line 5372 ./infix2pharmml_eyapp.pm
+#line 5378 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_24
 		 'factor', 4,
 sub {
 #line 59 "infix2pharmml_eyapp.eyp"
 infix2pharmml::fc($_[1],$_[3])}
-#line 5379 ./infix2pharmml_eyapp.pm
+#line 5385 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule factor_25
 		 'factor', 1,
 sub {
 #line 60 "infix2pharmml_eyapp.eyp"
 infix2pharmml::symbref($_[1])}
-#line 5386 ./infix2pharmml_eyapp.pm
+#line 5392 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_26
 		 'uniop', 1, undef
-#line 5390 ./infix2pharmml_eyapp.pm
+#line 5396 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_27
 		 'uniop', 1, undef
-#line 5394 ./infix2pharmml_eyapp.pm
+#line 5400 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_28
 		 'uniop', 1, undef
-#line 5398 ./infix2pharmml_eyapp.pm
+#line 5404 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_29
 		 'uniop', 1, undef
-#line 5402 ./infix2pharmml_eyapp.pm
+#line 5408 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_30
 		 'uniop', 1, undef
-#line 5406 ./infix2pharmml_eyapp.pm
+#line 5412 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_31
 		 'uniop', 1, undef
-#line 5410 ./infix2pharmml_eyapp.pm
+#line 5416 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_32
 		 'uniop', 1, undef
-#line 5414 ./infix2pharmml_eyapp.pm
+#line 5420 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_33
 		 'uniop', 1, undef
-#line 5418 ./infix2pharmml_eyapp.pm
+#line 5424 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_34
 		 'uniop', 1, undef
-#line 5422 ./infix2pharmml_eyapp.pm
+#line 5428 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_35
 		 'uniop', 1, undef
-#line 5426 ./infix2pharmml_eyapp.pm
+#line 5432 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_36
 		 'uniop', 1, undef
-#line 5430 ./infix2pharmml_eyapp.pm
+#line 5436 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_37
 		 'uniop', 1, undef
-#line 5434 ./infix2pharmml_eyapp.pm
+#line 5440 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_38
 		 'uniop', 1, undef
-#line 5438 ./infix2pharmml_eyapp.pm
+#line 5444 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_39
 		 'uniop', 1, undef
-#line 5442 ./infix2pharmml_eyapp.pm
+#line 5448 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_40
 		 'uniop', 1, undef
-#line 5446 ./infix2pharmml_eyapp.pm
+#line 5452 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_41
 		 'uniop', 1, undef
-#line 5450 ./infix2pharmml_eyapp.pm
+#line 5456 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_42
 		 'uniop', 1, undef
-#line 5454 ./infix2pharmml_eyapp.pm
+#line 5460 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_43
 		 'uniop', 1, undef
-#line 5458 ./infix2pharmml_eyapp.pm
+#line 5464 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_44
 		 'uniop', 1, undef
-#line 5462 ./infix2pharmml_eyapp.pm
+#line 5468 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_45
 		 'uniop', 1, undef
-#line 5466 ./infix2pharmml_eyapp.pm
+#line 5472 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_46
 		 'uniop', 1, undef
-#line 5470 ./infix2pharmml_eyapp.pm
+#line 5476 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_47
 		 'uniop', 1, undef
-#line 5474 ./infix2pharmml_eyapp.pm
+#line 5480 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_48
 		 'uniop', 1, undef
-#line 5478 ./infix2pharmml_eyapp.pm
+#line 5484 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_49
 		 'uniop', 1, undef
-#line 5482 ./infix2pharmml_eyapp.pm
+#line 5488 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_50
 		 'uniop', 1, undef
-#line 5486 ./infix2pharmml_eyapp.pm
+#line 5492 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_51
 		 'uniop', 1, undef
-#line 5490 ./infix2pharmml_eyapp.pm
+#line 5496 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_52
 		 'uniop', 1, undef
-#line 5494 ./infix2pharmml_eyapp.pm
+#line 5500 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_53
 		 'uniop', 1, undef
-#line 5498 ./infix2pharmml_eyapp.pm
+#line 5504 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_54
 		 'uniop', 1, undef
-#line 5502 ./infix2pharmml_eyapp.pm
+#line 5508 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_55
 		 'uniop', 1, undef
-#line 5506 ./infix2pharmml_eyapp.pm
+#line 5512 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_56
 		 'uniop', 1, undef
-#line 5510 ./infix2pharmml_eyapp.pm
+#line 5516 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_57
 		 'uniop', 1, undef
-#line 5514 ./infix2pharmml_eyapp.pm
+#line 5520 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_58
 		 'uniop', 1, undef
-#line 5518 ./infix2pharmml_eyapp.pm
+#line 5524 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_59
 		 'uniop', 1, undef
-#line 5522 ./infix2pharmml_eyapp.pm
+#line 5528 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_60
 		 'uniop', 1, undef
-#line 5526 ./infix2pharmml_eyapp.pm
+#line 5532 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_61
 		 'uniop', 1, undef
-#line 5530 ./infix2pharmml_eyapp.pm
+#line 5536 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_62
 		 'uniop', 1, undef
-#line 5534 ./infix2pharmml_eyapp.pm
+#line 5540 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_63
 		 'uniop', 1, undef
-#line 5538 ./infix2pharmml_eyapp.pm
+#line 5544 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_64
 		 'uniop', 1, undef
-#line 5542 ./infix2pharmml_eyapp.pm
+#line 5548 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule binop_65
 		 'binop', 1, undef
-#line 5546 ./infix2pharmml_eyapp.pm
+#line 5552 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule binop_66
 		 'binop', 1, undef
-#line 5550 ./infix2pharmml_eyapp.pm
+#line 5556 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule binop_67
 		 'binop', 1, undef
-#line 5554 ./infix2pharmml_eyapp.pm
+#line 5560 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule binop_68
 		 'binop', 1, undef
-#line 5558 ./infix2pharmml_eyapp.pm
+#line 5564 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule binop_69
 		 'binop', 1, undef
-#line 5562 ./infix2pharmml_eyapp.pm
+#line 5568 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule constant_70
 		 'constant', 1,
 sub {
 #line 79 "infix2pharmml_eyapp.eyp"
 "notanumber"}
-#line 5569 ./infix2pharmml_eyapp.pm
+#line 5575 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule constant_71
 		 'constant', 1,
 sub {
 #line 80 "infix2pharmml_eyapp.eyp"
 "pi"}
-#line 5576 ./infix2pharmml_eyapp.pm
+#line 5582 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule constant_72
 		 'constant', 1,
 sub {
 #line 81 "infix2pharmml_eyapp.eyp"
 "exponentiale"}
-#line 5583 ./infix2pharmml_eyapp.pm
+#line 5589 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule constant_73
 		 'constant', 1,
 sub {
 #line 82 "infix2pharmml_eyapp.eyp"
 "infinity"}
-#line 5590 ./infix2pharmml_eyapp.pm
+#line 5596 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule argpair_74
 		 'argpair', 3,
 sub {
 #line 86 "infix2pharmml_eyapp.eyp"
 infix2pharmml::fa($_[1],$_[3]) }
-#line 5597 ./infix2pharmml_eyapp.pm
+#line 5603 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule argpairlist_75
 		 'argpairlist', 3,
 sub {
 #line 89 "infix2pharmml_eyapp.eyp"
  $_[1].$_[3] }
-#line 5604 ./infix2pharmml_eyapp.pm
+#line 5610 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule argpairlist_76
 		 'argpairlist', 1, undef
-#line 5608 ./infix2pharmml_eyapp.pm
+#line 5614 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule varlist_77
 		 'varlist', 3,
 sub {
 #line 93 "infix2pharmml_eyapp.eyp"
 infix2pharmml::funcarg($_[1]).$_[3] }
-#line 5615 ./infix2pharmml_eyapp.pm
+#line 5621 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule varlist_78
 		 'varlist', 1,
 sub {
 #line 94 "infix2pharmml_eyapp.eyp"
 infix2pharmml::funcarg($_[1])}
-#line 5622 ./infix2pharmml_eyapp.pm
+#line 5628 ./infix2pharmml_eyapp.pm
 	]
 ],
-#line 5625 ./infix2pharmml_eyapp.pm
+#line 5631 ./infix2pharmml_eyapp.pm
     yybypass       => 0,
     yybuildingtree => 0,
     yyprefix       => '',
@@ -5652,7 +5658,7 @@ infix2pharmml::funcarg($_[1])}
          'term_13', 
          'power_14', 
          'power_15', 
-         'power_16', 
+         'factor_16', 
          'factor_17', 
          'factor_18', 
          'factor_19', 
@@ -5727,7 +5733,7 @@ infix2pharmml::funcarg($_[1])}
 =cut
 
 
-#line 5730 ./infix2pharmml_eyapp.pm
+#line 5736 ./infix2pharmml_eyapp.pm
 
 
 
