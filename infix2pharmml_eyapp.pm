@@ -3479,78 +3479,75 @@ sub new {
   [ 'statement_4' => 'statement', [ 'diff(', 'VAR', ',', 'VAR', ')=', 'equation' ], 0 ],
   [ 'statement_5' => 'statement', [ 'VAR', '(', 'varlist', '):=', 'equation' ], 0 ],
   [ 'statement_6' => 'statement', [ 'equation' ], 0 ],
-  [ 'equation_7' => 'equation', [ 'expression' ], 0 ],
-  [ 'expression_8' => 'expression', [ 'expression', '+', 'term' ], 0 ],
-  [ 'expression_9' => 'expression', [ 'expression', '-', 'term' ], 0 ],
-  [ 'expression_10' => 'expression', [ 'term' ], 0 ],
-  [ 'term_11' => 'term', [ 'term', '*', 'power' ], 0 ],
-  [ 'term_12' => 'term', [ 'term', '/', 'power' ], 0 ],
-  [ 'term_13' => 'term', [ 'power' ], 0 ],
-  [ 'power_14' => 'power', [ 'factor', '^', 'power' ], 0 ],
-  [ 'power_15' => 'power', [ 'factor' ], 0 ],
-  [ 'factor_16' => 'factor', [ 'NUM' ], 0 ],
-  [ 'factor_17' => 'factor', [ 'constant' ], 0 ],
-  [ 'factor_18' => 'factor', [ 'factor', '!' ], 0 ],
-  [ 'factor_19' => 'factor', [ '+', 'factor' ], 0 ],
-  [ 'factor_20' => 'factor', [ '-', 'factor' ], 0 ],
-  [ 'factor_21' => 'factor', [ '(', 'expression', ')' ], 0 ],
-  [ 'factor_22' => 'factor', [ 'uniop', '(', 'expression', ')' ], 0 ],
-  [ 'factor_23' => 'factor', [ 'binop', '(', 'expression', ',', 'expression', ')' ], 0 ],
-  [ 'factor_24' => 'factor', [ 'VAR', '(', 'argpairlist', ')' ], 0 ],
-  [ 'factor_25' => 'factor', [ 'VAR' ], 0 ],
-  [ 'uniop_26' => 'uniop', [ 'exp' ], 0 ],
-  [ 'uniop_27' => 'uniop', [ 'log' ], 0 ],
-  [ 'uniop_28' => 'uniop', [ 'minus' ], 0 ],
-  [ 'uniop_29' => 'uniop', [ 'factorial' ], 0 ],
-  [ 'uniop_30' => 'uniop', [ 'sin' ], 0 ],
-  [ 'uniop_31' => 'uniop', [ 'cos' ], 0 ],
-  [ 'uniop_32' => 'uniop', [ 'tan' ], 0 ],
-  [ 'uniop_33' => 'uniop', [ 'sec' ], 0 ],
-  [ 'uniop_34' => 'uniop', [ 'csc' ], 0 ],
-  [ 'uniop_35' => 'uniop', [ 'cot' ], 0 ],
-  [ 'uniop_36' => 'uniop', [ 'sinh' ], 0 ],
-  [ 'uniop_37' => 'uniop', [ 'cosh' ], 0 ],
-  [ 'uniop_38' => 'uniop', [ 'tanh' ], 0 ],
-  [ 'uniop_39' => 'uniop', [ 'sech' ], 0 ],
-  [ 'uniop_40' => 'uniop', [ 'csch' ], 0 ],
-  [ 'uniop_41' => 'uniop', [ 'coth' ], 0 ],
-  [ 'uniop_42' => 'uniop', [ 'arcsin' ], 0 ],
-  [ 'uniop_43' => 'uniop', [ 'arccos' ], 0 ],
-  [ 'uniop_44' => 'uniop', [ 'arctan' ], 0 ],
-  [ 'uniop_45' => 'uniop', [ 'arcsec' ], 0 ],
-  [ 'uniop_46' => 'uniop', [ 'arccsc' ], 0 ],
-  [ 'uniop_47' => 'uniop', [ 'arccot' ], 0 ],
-  [ 'uniop_48' => 'uniop', [ 'arcsinh' ], 0 ],
-  [ 'uniop_49' => 'uniop', [ 'arccosh' ], 0 ],
-  [ 'uniop_50' => 'uniop', [ 'arctanh' ], 0 ],
-  [ 'uniop_51' => 'uniop', [ 'arcsech' ], 0 ],
-  [ 'uniop_52' => 'uniop', [ 'arccsch' ], 0 ],
-  [ 'uniop_53' => 'uniop', [ 'arccoth' ], 0 ],
-  [ 'uniop_54' => 'uniop', [ 'floor' ], 0 ],
-  [ 'uniop_55' => 'uniop', [ 'ceiling' ], 0 ],
-  [ 'uniop_56' => 'uniop', [ 'abs' ], 0 ],
-  [ 'uniop_57' => 'uniop', [ 'logistic' ], 0 ],
-  [ 'uniop_58' => 'uniop', [ 'logit' ], 0 ],
-  [ 'uniop_59' => 'uniop', [ 'probit' ], 0 ],
-  [ 'uniop_60' => 'uniop', [ 'ln' ], 0 ],
-  [ 'uniop_61' => 'uniop', [ 'factln' ], 0 ],
-  [ 'uniop_62' => 'uniop', [ 'gammaln' ], 0 ],
-  [ 'uniop_63' => 'uniop', [ 'normcdf' ], 0 ],
-  [ 'uniop_64' => 'uniop', [ 'sqrt' ], 0 ],
-  [ 'binop_65' => 'binop', [ 'atan2' ], 0 ],
-  [ 'binop_66' => 'binop', [ 'logx' ], 0 ],
-  [ 'binop_67' => 'binop', [ 'min' ], 0 ],
-  [ 'binop_68' => 'binop', [ 'max' ], 0 ],
-  [ 'binop_69' => 'binop', [ 'root' ], 0 ],
-  [ 'constant_70' => 'constant', [ 'NAN' ], 0 ],
-  [ 'constant_71' => 'constant', [ 'PI' ], 0 ],
-  [ 'constant_72' => 'constant', [ 'EULER' ], 0 ],
-  [ 'constant_73' => 'constant', [ 'INF' ], 0 ],
-  [ 'argpair_74' => 'argpair', [ 'VAR', '=', 'equation' ], 0 ],
-  [ 'argpairlist_75' => 'argpairlist', [ 'argpair', ',', 'argpairlist' ], 0 ],
-  [ 'argpairlist_76' => 'argpairlist', [ 'argpair' ], 0 ],
-  [ 'varlist_77' => 'varlist', [ 'VAR', ',', 'varlist' ], 0 ],
-  [ 'varlist_78' => 'varlist', [ 'VAR' ], 0 ],
+  [ 'equation_7' => 'equation', [ 'expr' ], 0 ],
+  [ 'expr_8' => 'expr', [ 'expr', '+', 'expr' ], 0 ],
+  [ 'expr_9' => 'expr', [ 'expr', '-', 'expr' ], 0 ],
+  [ 'expr_10' => 'expr', [ 'expr', '*', 'expr' ], 0 ],
+  [ 'expr_11' => 'expr', [ 'expr', '/', 'expr' ], 0 ],
+  [ 'expr_12' => 'expr', [ 'expr', '^', 'expr' ], 0 ],
+  [ 'expr_13' => 'expr', [ 'NUM' ], 0 ],
+  [ 'expr_14' => 'expr', [ 'constant' ], 0 ],
+  [ 'expr_15' => 'expr', [ 'expr', '!' ], 0 ],
+  [ 'expr_16' => 'expr', [ '+', 'expr' ], 0 ],
+  [ 'expr_17' => 'expr', [ '-', 'expr' ], 0 ],
+  [ 'expr_18' => 'expr', [ '(', 'expr', ')' ], 0 ],
+  [ 'expr_19' => 'expr', [ 'uniop', '(', 'expr', ')' ], 0 ],
+  [ 'expr_20' => 'expr', [ 'binop', '(', 'expr', ',', 'expr', ')' ], 0 ],
+  [ 'expr_21' => 'expr', [ 'VAR', '(', 'argpairlist', ')' ], 0 ],
+  [ 'expr_22' => 'expr', [ 'VAR' ], 0 ],
+  [ 'uniop_23' => 'uniop', [ 'exp' ], 0 ],
+  [ 'uniop_24' => 'uniop', [ 'log' ], 0 ],
+  [ 'uniop_25' => 'uniop', [ 'minus' ], 0 ],
+  [ 'uniop_26' => 'uniop', [ 'factorial' ], 0 ],
+  [ 'uniop_27' => 'uniop', [ 'sin' ], 0 ],
+  [ 'uniop_28' => 'uniop', [ 'cos' ], 0 ],
+  [ 'uniop_29' => 'uniop', [ 'tan' ], 0 ],
+  [ 'uniop_30' => 'uniop', [ 'sec' ], 0 ],
+  [ 'uniop_31' => 'uniop', [ 'csc' ], 0 ],
+  [ 'uniop_32' => 'uniop', [ 'cot' ], 0 ],
+  [ 'uniop_33' => 'uniop', [ 'sinh' ], 0 ],
+  [ 'uniop_34' => 'uniop', [ 'cosh' ], 0 ],
+  [ 'uniop_35' => 'uniop', [ 'tanh' ], 0 ],
+  [ 'uniop_36' => 'uniop', [ 'sech' ], 0 ],
+  [ 'uniop_37' => 'uniop', [ 'csch' ], 0 ],
+  [ 'uniop_38' => 'uniop', [ 'coth' ], 0 ],
+  [ 'uniop_39' => 'uniop', [ 'arcsin' ], 0 ],
+  [ 'uniop_40' => 'uniop', [ 'arccos' ], 0 ],
+  [ 'uniop_41' => 'uniop', [ 'arctan' ], 0 ],
+  [ 'uniop_42' => 'uniop', [ 'arcsec' ], 0 ],
+  [ 'uniop_43' => 'uniop', [ 'arccsc' ], 0 ],
+  [ 'uniop_44' => 'uniop', [ 'arccot' ], 0 ],
+  [ 'uniop_45' => 'uniop', [ 'arcsinh' ], 0 ],
+  [ 'uniop_46' => 'uniop', [ 'arccosh' ], 0 ],
+  [ 'uniop_47' => 'uniop', [ 'arctanh' ], 0 ],
+  [ 'uniop_48' => 'uniop', [ 'arcsech' ], 0 ],
+  [ 'uniop_49' => 'uniop', [ 'arccsch' ], 0 ],
+  [ 'uniop_50' => 'uniop', [ 'arccoth' ], 0 ],
+  [ 'uniop_51' => 'uniop', [ 'floor' ], 0 ],
+  [ 'uniop_52' => 'uniop', [ 'ceiling' ], 0 ],
+  [ 'uniop_53' => 'uniop', [ 'abs' ], 0 ],
+  [ 'uniop_54' => 'uniop', [ 'logistic' ], 0 ],
+  [ 'uniop_55' => 'uniop', [ 'logit' ], 0 ],
+  [ 'uniop_56' => 'uniop', [ 'probit' ], 0 ],
+  [ 'uniop_57' => 'uniop', [ 'ln' ], 0 ],
+  [ 'uniop_58' => 'uniop', [ 'factln' ], 0 ],
+  [ 'uniop_59' => 'uniop', [ 'gammaln' ], 0 ],
+  [ 'uniop_60' => 'uniop', [ 'normcdf' ], 0 ],
+  [ 'uniop_61' => 'uniop', [ 'sqrt' ], 0 ],
+  [ 'binop_62' => 'binop', [ 'atan2' ], 0 ],
+  [ 'binop_63' => 'binop', [ 'logx' ], 0 ],
+  [ 'binop_64' => 'binop', [ 'min' ], 0 ],
+  [ 'binop_65' => 'binop', [ 'max' ], 0 ],
+  [ 'binop_66' => 'binop', [ 'root' ], 0 ],
+  [ 'constant_67' => 'constant', [ 'NAN' ], 0 ],
+  [ 'constant_68' => 'constant', [ 'PI' ], 0 ],
+  [ 'constant_69' => 'constant', [ 'EULER' ], 0 ],
+  [ 'constant_70' => 'constant', [ 'INF' ], 0 ],
+  [ 'argpair_71' => 'argpair', [ 'VAR', '=', 'equation' ], 0 ],
+  [ 'argpairlist_72' => 'argpairlist', [ 'argpair', ',', 'argpairlist' ], 0 ],
+  [ 'argpairlist_73' => 'argpairlist', [ 'argpair' ], 0 ],
+  [ 'varlist_74' => 'varlist', [ 'VAR', ',', 'varlist' ], 0 ],
+  [ 'varlist_75' => 'varlist', [ 'VAR' ], 0 ],
 ],
     yyLABELS  =>
 {
@@ -3562,24 +3559,24 @@ sub new {
   'statement_5' => 5,
   'statement_6' => 6,
   'equation_7' => 7,
-  'expression_8' => 8,
-  'expression_9' => 9,
-  'expression_10' => 10,
-  'term_11' => 11,
-  'term_12' => 12,
-  'term_13' => 13,
-  'power_14' => 14,
-  'power_15' => 15,
-  'factor_16' => 16,
-  'factor_17' => 17,
-  'factor_18' => 18,
-  'factor_19' => 19,
-  'factor_20' => 20,
-  'factor_21' => 21,
-  'factor_22' => 22,
-  'factor_23' => 23,
-  'factor_24' => 24,
-  'factor_25' => 25,
+  'expr_8' => 8,
+  'expr_9' => 9,
+  'expr_10' => 10,
+  'expr_11' => 11,
+  'expr_12' => 12,
+  'expr_13' => 13,
+  'expr_14' => 14,
+  'expr_15' => 15,
+  'expr_16' => 16,
+  'expr_17' => 17,
+  'expr_18' => 18,
+  'expr_19' => 19,
+  'expr_20' => 20,
+  'expr_21' => 21,
+  'expr_22' => 22,
+  'uniop_23' => 23,
+  'uniop_24' => 24,
+  'uniop_25' => 25,
   'uniop_26' => 26,
   'uniop_27' => 27,
   'uniop_28' => 28,
@@ -3616,23 +3613,20 @@ sub new {
   'uniop_59' => 59,
   'uniop_60' => 60,
   'uniop_61' => 61,
-  'uniop_62' => 62,
-  'uniop_63' => 63,
-  'uniop_64' => 64,
+  'binop_62' => 62,
+  'binop_63' => 63,
+  'binop_64' => 64,
   'binop_65' => 65,
   'binop_66' => 66,
-  'binop_67' => 67,
-  'binop_68' => 68,
-  'binop_69' => 69,
+  'constant_67' => 67,
+  'constant_68' => 68,
+  'constant_69' => 69,
   'constant_70' => 70,
-  'constant_71' => 71,
-  'constant_72' => 72,
-  'constant_73' => 73,
-  'argpair_74' => 74,
-  'argpairlist_75' => 75,
-  'argpairlist_76' => 76,
-  'varlist_77' => 77,
-  'varlist_78' => 78,
+  'argpair_71' => 71,
+  'argpairlist_72' => 72,
+  'argpairlist_73' => 73,
+  'varlist_74' => 74,
+  'varlist_75' => 75,
 },
     yyTERMS  =>
 { '' => { ISSEMANTIC => 0 },
@@ -3710,1518 +3704,1503 @@ sub new {
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"arcsin" => 40,
-			"log" => 39,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arctanh" => 44,
-			"arccos" => 43,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 47,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"logit" => 51,
-			"tan" => 50,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"diff(" => 56,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 29,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"diff(" => 46,
+			"gammaln" => 45,
+			"arctan" => 48,
+			"sech" => 47,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'constant' => 30,
-			'equation' => 22,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13,
-			'uniop' => 24,
-			'statement' => 3,
-			'expression' => 37,
-			'power' => 5,
-			'start' => 19
+			'uniop' => 42,
+			'expr' => 43,
+			'statement' => 6,
+			'constant' => 54,
+			'equation' => 39,
+			'start' => 33,
+			'binop' => 22
 		}
 	},
 	{#State 1
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'constant' => 30,
-			'factor' => 66,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 63,
+			'constant' => 54,
+			'binop' => 22
 		}
 	},
 	{#State 2
-		DEFAULT => -68
+		DEFAULT => -65
 	},
 	{#State 3
-		DEFAULT => -1
+		DEFAULT => -67
 	},
 	{#State 4
-		DEFAULT => -36
+		DEFAULT => -57
 	},
 	{#State 5
 		DEFAULT => -13
 	},
 	{#State 6
-		DEFAULT => -52
+		DEFAULT => -1
 	},
 	{#State 7
-		DEFAULT => -31
+		DEFAULT => -45
 	},
 	{#State 8
-		DEFAULT => -61
+		DEFAULT => -33
 	},
 	{#State 9
-		DEFAULT => -54
+		DEFAULT => -49
 	},
 	{#State 10
 		DEFAULT => -28
 	},
 	{#State 11
-		DEFAULT => -41
+		DEFAULT => -39
 	},
 	{#State 12
-		DEFAULT => -72
+		DEFAULT => -24
 	},
 	{#State 13
-		ACTIONS => {
-			"(" => 67
-		}
+		DEFAULT => -58
 	},
 	{#State 14
-		DEFAULT => -65
+		DEFAULT => -51
 	},
 	{#State 15
-		DEFAULT => -55
+		DEFAULT => -25
 	},
 	{#State 16
-		DEFAULT => -33
+		DEFAULT => -23
 	},
 	{#State 17
-		DEFAULT => -37
+		DEFAULT => -38
 	},
 	{#State 18
-		DEFAULT => -67
+		DEFAULT => -69
 	},
 	{#State 19
-		ACTIONS => {
-			'' => 68
-		}
+		DEFAULT => -53
 	},
 	{#State 20
+		DEFAULT => -47
+	},
+	{#State 21
+		DEFAULT => -40
+	},
+	{#State 22
+		ACTIONS => {
+			"(" => 64
+		}
+	},
+	{#State 23
+		DEFAULT => -62
+	},
+	{#State 24
+		DEFAULT => -52
+	},
+	{#State 25
+		DEFAULT => -30
+	},
+	{#State 26
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'constant' => 30,
-			'factor' => 69,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 65,
+			'constant' => 54,
+			'binop' => 22
 		}
-	},
-	{#State 21
-		DEFAULT => -53
-	},
-	{#State 22
-		DEFAULT => -6
-	},
-	{#State 23
-		DEFAULT => -29
-	},
-	{#State 24
-		ACTIONS => {
-			"(" => 70
-		}
-	},
-	{#State 25
-		DEFAULT => -38
-	},
-	{#State 26
-		DEFAULT => -44
 	},
 	{#State 27
-		DEFAULT => -39
+		DEFAULT => -34
 	},
 	{#State 28
-		DEFAULT => -66
+		DEFAULT => -32
 	},
 	{#State 29
-		DEFAULT => -63
+		ACTIONS => {
+			":=" => 67,
+			"=" => 68,
+			"(" => 66
+		},
+		DEFAULT => -22
 	},
 	{#State 30
-		DEFAULT => -17
+		DEFAULT => -66
 	},
 	{#State 31
 		DEFAULT => -64
 	},
 	{#State 32
-		DEFAULT => -47
-	},
-	{#State 33
-		DEFAULT => -40
-	},
-	{#State 34
-		DEFAULT => -70
-	},
-	{#State 35
-		DEFAULT => -60
-	},
-	{#State 36
-		DEFAULT => -16
-	},
-	{#State 37
-		ACTIONS => {
-			"-" => 71,
-			"+" => 72
-		},
-		DEFAULT => -7
-	},
-	{#State 38
 		DEFAULT => -48
 	},
-	{#State 39
-		DEFAULT => -27
+	{#State 33
+		ACTIONS => {
+			'' => 69
+		}
 	},
-	{#State 40
-		DEFAULT => -42
+	{#State 34
+		DEFAULT => -55
 	},
-	{#State 41
-		DEFAULT => -26
+	{#State 35
+		DEFAULT => -29
 	},
-	{#State 42
-		DEFAULT => -56
-	},
-	{#State 43
-		DEFAULT => -43
-	},
-	{#State 44
-		DEFAULT => -50
-	},
-	{#State 45
+	{#State 36
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'expression' => 73,
-			'power' => 5,
-			'constant' => 30,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 70,
+			'constant' => 54,
+			'binop' => 22
 		}
 	},
-	{#State 46
+	{#State 37
+		DEFAULT => -50
+	},
+	{#State 38
+		DEFAULT => -54
+	},
+	{#State 39
+		DEFAULT => -6
+	},
+	{#State 40
+		DEFAULT => -26
+	},
+	{#State 41
+		DEFAULT => -70
+	},
+	{#State 42
+		ACTIONS => {
+			"(" => 71
+		}
+	},
+	{#State 43
+		ACTIONS => {
+			"-" => 72,
+			"+" => 75,
+			"/" => 77,
+			"!" => 73,
+			"^" => 76,
+			"*" => 74
+		},
+		DEFAULT => -7
+	},
+	{#State 44
 		DEFAULT => -35
 	},
-	{#State 47
-		ACTIONS => {
-			":=" => 75,
-			"=" => 76,
-			"(" => 74
-		},
-		DEFAULT => -25
-	},
-	{#State 48
-		DEFAULT => -69
-	},
-	{#State 49
-		DEFAULT => -51
-	},
-	{#State 50
-		DEFAULT => -32
-	},
-	{#State 51
-		DEFAULT => -58
-	},
-	{#State 52
-		DEFAULT => -57
-	},
-	{#State 53
-		ACTIONS => {
-			"!" => 77,
-			"^" => 78
-		},
-		DEFAULT => -15
-	},
-	{#State 54
-		ACTIONS => {
-			"/" => 80,
-			"*" => 79
-		},
-		DEFAULT => -10
-	},
-	{#State 55
-		DEFAULT => -73
-	},
-	{#State 56
-		ACTIONS => {
-			'VAR' => 81
-		}
-	},
-	{#State 57
-		DEFAULT => -62
-	},
-	{#State 58
-		DEFAULT => -46
-	},
-	{#State 59
-		DEFAULT => -34
-	},
-	{#State 60
-		DEFAULT => -49
-	},
-	{#State 61
-		DEFAULT => -30
-	},
-	{#State 62
-		DEFAULT => -45
-	},
-	{#State 63
+	{#State 45
 		DEFAULT => -59
 	},
+	{#State 46
+		ACTIONS => {
+			'VAR' => 78
+		}
+	},
+	{#State 47
+		DEFAULT => -36
+	},
+	{#State 48
+		DEFAULT => -41
+	},
+	{#State 49
+		DEFAULT => -43
+	},
+	{#State 50
+		DEFAULT => -31
+	},
+	{#State 51
+		DEFAULT => -63
+	},
+	{#State 52
+		DEFAULT => -60
+	},
+	{#State 53
+		DEFAULT => -46
+	},
+	{#State 54
+		DEFAULT => -14
+	},
+	{#State 55
+		DEFAULT => -61
+	},
+	{#State 56
+		DEFAULT => -27
+	},
+	{#State 57
+		DEFAULT => -44
+	},
+	{#State 58
+		DEFAULT => -42
+	},
+	{#State 59
+		DEFAULT => -56
+	},
+	{#State 60
+		DEFAULT => -37
+	},
+	{#State 61
+		DEFAULT => -68
+	},
+	{#State 62
+		ACTIONS => {
+			"(" => 79
+		},
+		DEFAULT => -22
+	},
+	{#State 63
+		ACTIONS => {
+			"!" => 73
+		},
+		DEFAULT => -17
+	},
 	{#State 64
-		DEFAULT => -71
+		ACTIONS => {
+			"-" => 1,
+			"max" => 2,
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
+		},
+		GOTOS => {
+			'uniop' => 42,
+			'expr' => 80,
+			'constant' => 54,
+			'binop' => 22
+		}
 	},
 	{#State 65
 		ACTIONS => {
-			"(" => 82
-		},
-		DEFAULT => -25
+			"-" => 72,
+			"^" => 76,
+			"!" => 73,
+			"*" => 74,
+			"+" => 75,
+			"/" => 77,
+			")" => 81
+		}
 	},
 	{#State 66
 		ACTIONS => {
-			"!" => 77
+			'VAR' => 84
 		},
-		DEFAULT => -20
+		GOTOS => {
+			'argpair' => 85,
+			'argpairlist' => 82,
+			'varlist' => 83
+		}
 	},
 	{#State 67
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'expression' => 83,
-			'power' => 5,
-			'constant' => 30,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 43,
+			'constant' => 54,
+			'equation' => 86,
+			'binop' => 22
 		}
 	},
 	{#State 68
-		DEFAULT => 0
-	},
-	{#State 69
-		ACTIONS => {
-			"!" => 77
-		},
-		DEFAULT => -19
-	},
-	{#State 70
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'expression' => 84,
-			'power' => 5,
-			'constant' => 30,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 43,
+			'constant' => 54,
+			'equation' => 87,
+			'binop' => 22
 		}
+	},
+	{#State 69
+		DEFAULT => 0
+	},
+	{#State 70
+		ACTIONS => {
+			"/" => 77,
+			"!" => 73,
+			"^" => 76,
+			"*" => 74
+		},
+		DEFAULT => -16
 	},
 	{#State 71
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'power' => 5,
-			'constant' => 30,
-			'term' => 85,
-			'factor' => 53,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 88,
+			'constant' => 54,
+			'binop' => 22
 		}
 	},
 	{#State 72
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'power' => 5,
-			'constant' => 30,
-			'term' => 86,
-			'factor' => 53,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 89,
+			'constant' => 54,
+			'binop' => 22
 		}
 	},
 	{#State 73
-		ACTIONS => {
-			"-" => 71,
-			"+" => 72,
-			")" => 87
-		}
+		DEFAULT => -15
 	},
 	{#State 74
 		ACTIONS => {
-			'VAR' => 90
+			"-" => 1,
+			"max" => 2,
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'argpair' => 91,
-			'argpairlist' => 88,
-			'varlist' => 89
+			'uniop' => 42,
+			'expr' => 90,
+			'constant' => 54,
+			'binop' => 22
 		}
 	},
 	{#State 75
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'constant' => 30,
-			'equation' => 92,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13,
-			'uniop' => 24,
-			'expression' => 37,
-			'power' => 5
+			'uniop' => 42,
+			'expr' => 91,
+			'constant' => 54,
+			'binop' => 22
 		}
 	},
 	{#State 76
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'constant' => 30,
-			'equation' => 93,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13,
-			'uniop' => 24,
-			'expression' => 37,
-			'power' => 5
+			'uniop' => 42,
+			'expr' => 92,
+			'constant' => 54,
+			'binop' => 22
 		}
 	},
 	{#State 77
-		DEFAULT => -18
-	},
-	{#State 78
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'power' => 94,
-			'constant' => 30,
-			'factor' => 53,
-			'binop' => 13
+			'uniop' => 42,
+			'expr' => 93,
+			'constant' => 54,
+			'binop' => 22
+		}
+	},
+	{#State 78
+		ACTIONS => {
+			"," => 94
 		}
 	},
 	{#State 79
 		ACTIONS => {
-			"-" => 1,
-			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'VAR' => 95
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'power' => 95,
-			'constant' => 30,
-			'factor' => 53,
-			'binop' => 13
+			'argpair' => 85,
+			'argpairlist' => 82
 		}
 	},
 	{#State 80
 		ACTIONS => {
-			"-" => 1,
-			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
-		},
-		GOTOS => {
-			'uniop' => 24,
-			'power' => 96,
-			'constant' => 30,
-			'factor' => 53,
-			'binop' => 13
+			"-" => 72,
+			"^" => 76,
+			"!" => 73,
+			"*" => 74,
+			"+" => 75,
+			"/" => 77,
+			"," => 96
 		}
 	},
 	{#State 81
-		ACTIONS => {
-			"," => 97
-		}
+		DEFAULT => -18
 	},
 	{#State 82
 		ACTIONS => {
-			'VAR' => 98
-		},
-		GOTOS => {
-			'argpair' => 91,
-			'argpairlist' => 88
+			")" => 97
 		}
 	},
 	{#State 83
 		ACTIONS => {
-			"-" => 71,
-			"+" => 72,
-			"," => 99
+			"):=" => 98
 		}
 	},
 	{#State 84
 		ACTIONS => {
-			"-" => 71,
-			"+" => 72,
-			")" => 100
-		}
+			"," => 99,
+			"=" => 100
+		},
+		DEFAULT => -75
 	},
 	{#State 85
 		ACTIONS => {
-			"/" => 80,
-			"*" => 79
+			"," => 101
 		},
-		DEFAULT => -9
+		DEFAULT => -73
 	},
 	{#State 86
-		ACTIONS => {
-			"/" => 80,
-			"*" => 79
-		},
-		DEFAULT => -8
+		DEFAULT => -2
 	},
 	{#State 87
-		DEFAULT => -21
+		DEFAULT => -3
 	},
 	{#State 88
 		ACTIONS => {
-			")" => 101
+			"-" => 72,
+			"^" => 76,
+			"!" => 73,
+			"*" => 74,
+			"+" => 75,
+			"/" => 77,
+			")" => 102
 		}
 	},
 	{#State 89
 		ACTIONS => {
-			"):=" => 102
-		}
+			"/" => 77,
+			"!" => 73,
+			"^" => 76,
+			"*" => 74
+		},
+		DEFAULT => -9
 	},
 	{#State 90
 		ACTIONS => {
-			"," => 103,
-			"=" => 104
+			"!" => 73,
+			"^" => 76
 		},
-		DEFAULT => -78
+		DEFAULT => -10
 	},
 	{#State 91
 		ACTIONS => {
-			"," => 105
+			"/" => 77,
+			"!" => 73,
+			"^" => 76,
+			"*" => 74
 		},
-		DEFAULT => -76
+		DEFAULT => -8
 	},
 	{#State 92
-		DEFAULT => -2
-	},
-	{#State 93
-		DEFAULT => -3
-	},
-	{#State 94
-		DEFAULT => -14
-	},
-	{#State 95
-		DEFAULT => -11
-	},
-	{#State 96
+		ACTIONS => {
+			"!" => 73,
+			"^" => 76
+		},
 		DEFAULT => -12
 	},
-	{#State 97
+	{#State 93
 		ACTIONS => {
-			'VAR' => 106
+			"!" => 73,
+			"^" => 76
+		},
+		DEFAULT => -11
+	},
+	{#State 94
+		ACTIONS => {
+			'VAR' => 103
 		}
+	},
+	{#State 95
+		ACTIONS => {
+			"=" => 100
+		}
+	},
+	{#State 96
+		ACTIONS => {
+			"-" => 1,
+			"max" => 2,
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
+		},
+		GOTOS => {
+			'uniop' => 42,
+			'expr' => 104,
+			'constant' => 54,
+			'binop' => 22
+		}
+	},
+	{#State 97
+		DEFAULT => -21
 	},
 	{#State 98
 		ACTIONS => {
-			"=" => 104
+			"-" => 1,
+			"max" => 2,
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
+		},
+		GOTOS => {
+			'uniop' => 42,
+			'expr' => 43,
+			'constant' => 54,
+			'equation' => 105,
+			'binop' => 22
 		}
 	},
 	{#State 99
 		ACTIONS => {
-			"-" => 1,
-			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'VAR' => 107
 		},
 		GOTOS => {
-			'uniop' => 24,
-			'expression' => 107,
-			'power' => 5,
-			'constant' => 30,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13
+			'varlist' => 106
 		}
 	},
 	{#State 100
-		DEFAULT => -22
-	},
-	{#State 101
-		DEFAULT => -24
-	},
-	{#State 102
 		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'constant' => 30,
+			'uniop' => 42,
+			'expr' => 43,
+			'constant' => 54,
 			'equation' => 108,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13,
-			'uniop' => 24,
-			'expression' => 37,
-			'power' => 5
+			'binop' => 22
 		}
+	},
+	{#State 101
+		ACTIONS => {
+			'VAR' => 95
+		},
+		GOTOS => {
+			'argpair' => 85,
+			'argpairlist' => 109
+		}
+	},
+	{#State 102
+		DEFAULT => -19
 	},
 	{#State 103
 		ACTIONS => {
-			'VAR' => 110
-		},
-		GOTOS => {
-			'varlist' => 109
+			")=" => 110
 		}
 	},
 	{#State 104
 		ACTIONS => {
-			"-" => 1,
-			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
-		},
-		GOTOS => {
-			'constant' => 30,
-			'equation' => 111,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13,
-			'uniop' => 24,
-			'expression' => 37,
-			'power' => 5
+			"-" => 72,
+			"^" => 76,
+			"!" => 73,
+			"*" => 74,
+			"+" => 75,
+			"/" => 77,
+			")" => 111
 		}
 	},
 	{#State 105
-		ACTIONS => {
-			'VAR' => 98
-		},
-		GOTOS => {
-			'argpair' => 91,
-			'argpairlist' => 112
-		}
+		DEFAULT => -5
 	},
 	{#State 106
-		ACTIONS => {
-			")=" => 113
-		}
+		DEFAULT => -74
 	},
 	{#State 107
 		ACTIONS => {
-			"-" => 71,
-			"+" => 72,
-			")" => 114
-		}
+			"," => 99
+		},
+		DEFAULT => -75
 	},
 	{#State 108
-		DEFAULT => -5
+		DEFAULT => -71
 	},
 	{#State 109
-		DEFAULT => -77
+		DEFAULT => -72
 	},
 	{#State 110
 		ACTIONS => {
-			"," => 103
-		},
-		DEFAULT => -78
-	},
-	{#State 111
-		DEFAULT => -74
-	},
-	{#State 112
-		DEFAULT => -75
-	},
-	{#State 113
-		ACTIONS => {
 			"-" => 1,
 			"max" => 2,
-			'NAN' => 34,
-			"ln" => 35,
-			'NUM' => 36,
-			"arcsinh" => 38,
-			"sinh" => 4,
-			"arccsch" => 6,
-			"cos" => 7,
-			"log" => 39,
-			"arcsin" => 40,
-			"factln" => 8,
-			"floor" => 9,
-			"minus" => 10,
-			"exp" => 41,
-			"coth" => 11,
-			"abs" => 42,
-			'EULER' => 12,
-			"arccos" => 43,
-			"arctanh" => 44,
-			"(" => 45,
-			"atan2" => 14,
-			"ceiling" => 15,
-			"sec" => 16,
-			"cot" => 46,
-			"cosh" => 17,
-			'VAR' => 65,
-			"root" => 48,
-			"arcsech" => 49,
-			"min" => 18,
-			"tan" => 50,
-			"logit" => 51,
-			"+" => 20,
-			"arccoth" => 21,
-			"logistic" => 52,
-			"factorial" => 23,
-			'INF' => 55,
-			"tanh" => 25,
-			"gammaln" => 57,
-			"arctan" => 26,
-			"sech" => 27,
-			"arccsc" => 58,
-			"csc" => 59,
-			"arccosh" => 60,
-			"logx" => 28,
-			"normcdf" => 29,
-			"sin" => 61,
-			"sqrt" => 31,
-			"arccot" => 32,
-			"arcsec" => 62,
-			"probit" => 63,
-			"csch" => 33,
-			'PI' => 64
+			'NAN' => 3,
+			"ln" => 4,
+			'NUM' => 5,
+			"arcsinh" => 7,
+			"sinh" => 8,
+			"cos" => 10,
+			"arccsch" => 9,
+			"log" => 12,
+			"arcsin" => 11,
+			"factln" => 13,
+			"floor" => 14,
+			"minus" => 15,
+			"exp" => 16,
+			"coth" => 17,
+			"abs" => 19,
+			'EULER' => 18,
+			"arccos" => 21,
+			"arctanh" => 20,
+			"(" => 26,
+			"sec" => 25,
+			"ceiling" => 24,
+			"atan2" => 23,
+			"cot" => 28,
+			"cosh" => 27,
+			'VAR' => 62,
+			"root" => 30,
+			"arcsech" => 32,
+			"min" => 31,
+			"logit" => 34,
+			"tan" => 35,
+			"+" => 36,
+			"arccoth" => 37,
+			"factorial" => 40,
+			"logistic" => 38,
+			'INF' => 41,
+			"tanh" => 44,
+			"gammaln" => 45,
+			"sech" => 47,
+			"arctan" => 48,
+			"arccsc" => 49,
+			"csc" => 50,
+			"arccosh" => 53,
+			"normcdf" => 52,
+			"logx" => 51,
+			"sin" => 56,
+			"sqrt" => 55,
+			"arccot" => 57,
+			"arcsec" => 58,
+			"csch" => 60,
+			"probit" => 59,
+			'PI' => 61
 		},
 		GOTOS => {
-			'constant' => 30,
-			'equation' => 115,
-			'term' => 54,
-			'factor' => 53,
-			'binop' => 13,
-			'uniop' => 24,
-			'expression' => 37,
-			'power' => 5
+			'uniop' => 42,
+			'expr' => 43,
+			'constant' => 54,
+			'equation' => 112,
+			'binop' => 22
 		}
 	},
-	{#State 114
-		DEFAULT => -23
+	{#State 111
+		DEFAULT => -20
 	},
-	{#State 115
+	{#State 112
 		DEFAULT => -4
 	}
 ],
@@ -5229,406 +5208,394 @@ sub new {
 [
 	[#Rule _SUPERSTART
 		 '$start', 2, undef
-#line 5232 ./infix2pharmml_eyapp.pm
+#line 5211 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule start_1
 		 'start', 1, undef
-#line 5236 ./infix2pharmml_eyapp.pm
+#line 5215 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_2
 		 'statement', 3,
 sub {
-#line 24 "infix2pharmml_eyapp.eyp"
+#line 25 "infix2pharmml_eyapp.eyp"
 infix2pharmml::vardef($_[1],$_[3])}
-#line 5243 ./infix2pharmml_eyapp.pm
+#line 5222 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_3
 		 'statement', 3,
 sub {
-#line 25 "infix2pharmml_eyapp.eyp"
+#line 26 "infix2pharmml_eyapp.eyp"
 infix2pharmml::varass($_[1],$_[3])}
-#line 5250 ./infix2pharmml_eyapp.pm
+#line 5229 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_4
 		 'statement', 6,
 sub {
-#line 27 "infix2pharmml_eyapp.eyp"
+#line 28 "infix2pharmml_eyapp.eyp"
 infix2pharmml::diff($_[2],$_[4],$_[6])}
-#line 5257 ./infix2pharmml_eyapp.pm
+#line 5236 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_5
 		 'statement', 5,
 sub {
-#line 29 "infix2pharmml_eyapp.eyp"
+#line 30 "infix2pharmml_eyapp.eyp"
 infix2pharmml::funcdef($_[1],$_[3],$_[5])}
-#line 5264 ./infix2pharmml_eyapp.pm
+#line 5243 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule statement_6
 		 'statement', 1, undef
-#line 5268 ./infix2pharmml_eyapp.pm
+#line 5247 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule equation_7
 		 'equation', 1,
 sub {
-#line 33 "infix2pharmml_eyapp.eyp"
+#line 34 "infix2pharmml_eyapp.eyp"
 infix2pharmml::eqn($_[1])}
+#line 5254 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule expr_8
+		 'expr', 3,
+sub {
+#line 38 "infix2pharmml_eyapp.eyp"
+infix2pharmml::b("plus", $_[1], $_[3])}
+#line 5261 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule expr_9
+		 'expr', 3,
+sub {
+#line 39 "infix2pharmml_eyapp.eyp"
+infix2pharmml::b("minus",$_[1], $_[3])}
+#line 5268 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule expr_10
+		 'expr', 3,
+sub {
+#line 40 "infix2pharmml_eyapp.eyp"
+infix2pharmml::b("times", $_[1], $_[3])}
 #line 5275 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule expression_8
-		 'expression', 3,
-sub {
-#line 36 "infix2pharmml_eyapp.eyp"
-infix2pharmml::b("plus", $_[1], $_[3])}
-#line 5282 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule expression_9
-		 'expression', 3,
-sub {
-#line 37 "infix2pharmml_eyapp.eyp"
-infix2pharmml::b("minus",$_[1], $_[3])}
-#line 5289 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule expression_10
-		 'expression', 1, undef
-#line 5293 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule term_11
-		 'term', 3,
+	[#Rule expr_11
+		 'expr', 3,
 sub {
 #line 41 "infix2pharmml_eyapp.eyp"
-infix2pharmml::b("times", $_[1], $_[3])}
-#line 5300 ./infix2pharmml_eyapp.pm
+infix2pharmml::b("divide",$_[1], $_[3])}
+#line 5282 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule term_12
-		 'term', 3,
+	[#Rule expr_12
+		 'expr', 3,
 sub {
 #line 42 "infix2pharmml_eyapp.eyp"
-infix2pharmml::b("divide",$_[1], $_[3])}
-#line 5307 ./infix2pharmml_eyapp.pm
+infix2pharmml::b("power", $_[1], $_[3])}
+#line 5289 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule term_13
-		 'term', 1, undef
-#line 5311 ./infix2pharmml_eyapp.pm
+	[#Rule expr_13
+		 'expr', 1,
+sub {
+#line 43 "infix2pharmml_eyapp.eyp"
+infix2pharmml::e("ct:Real",$_[1])}
+#line 5296 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule power_14
-		 'power', 3,
+	[#Rule expr_14
+		 'expr', 1,
+sub {
+#line 44 "infix2pharmml_eyapp.eyp"
+infix2pharmml::const($_[1])}
+#line 5303 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule expr_15
+		 'expr', 2,
+sub {
+#line 45 "infix2pharmml_eyapp.eyp"
+infix2pharmml::u("factorial",$_[1])}
+#line 5310 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule expr_16
+		 'expr', 2,
 sub {
 #line 46 "infix2pharmml_eyapp.eyp"
-infix2pharmml::b("power", $_[1], $_[3])}
-#line 5318 ./infix2pharmml_eyapp.pm
+$_[2]}
+#line 5317 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule power_15
-		 'power', 1, undef
-#line 5322 ./infix2pharmml_eyapp.pm
+	[#Rule expr_17
+		 'expr', 2,
+sub {
+#line 47 "infix2pharmml_eyapp.eyp"
+infix2pharmml::u("minus",$_[2])}
+#line 5324 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule factor_16
-		 'factor', 1,
+	[#Rule expr_18
+		 'expr', 3,
+sub {
+#line 48 "infix2pharmml_eyapp.eyp"
+$_[2]}
+#line 5331 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule expr_19
+		 'expr', 4,
+sub {
+#line 49 "infix2pharmml_eyapp.eyp"
+infix2pharmml::u($_[1],$_[3])}
+#line 5338 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule expr_20
+		 'expr', 6,
 sub {
 #line 50 "infix2pharmml_eyapp.eyp"
-infix2pharmml::e("ct:Real",$_[1])}
-#line 5329 ./infix2pharmml_eyapp.pm
+infix2pharmml::b($_[1],$_[3],$_[5])}
+#line 5345 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule factor_17
-		 'factor', 1,
+	[#Rule expr_21
+		 'expr', 4,
 sub {
 #line 51 "infix2pharmml_eyapp.eyp"
-infix2pharmml::const($_[1])}
-#line 5336 ./infix2pharmml_eyapp.pm
+infix2pharmml::fc($_[1],$_[3])}
+#line 5352 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule factor_18
-		 'factor', 2,
+	[#Rule expr_22
+		 'expr', 1,
 sub {
 #line 52 "infix2pharmml_eyapp.eyp"
-infix2pharmml::u("factorial",$_[1])}
-#line 5343 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule factor_19
-		 'factor', 2,
-sub {
-#line 53 "infix2pharmml_eyapp.eyp"
-$_[2]}
-#line 5350 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule factor_20
-		 'factor', 2,
-sub {
-#line 54 "infix2pharmml_eyapp.eyp"
-infix2pharmml::u("minus",$_[2])}
-#line 5357 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule factor_21
-		 'factor', 3,
-sub {
-#line 55 "infix2pharmml_eyapp.eyp"
-$_[2]}
-#line 5364 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule factor_22
-		 'factor', 4,
-sub {
-#line 56 "infix2pharmml_eyapp.eyp"
-infix2pharmml::u($_[1],$_[3])}
-#line 5371 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule factor_23
-		 'factor', 6,
-sub {
-#line 58 "infix2pharmml_eyapp.eyp"
-infix2pharmml::b($_[1],$_[3],$_[5])}
-#line 5378 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule factor_24
-		 'factor', 4,
-sub {
-#line 59 "infix2pharmml_eyapp.eyp"
-infix2pharmml::fc($_[1],$_[3])}
-#line 5385 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule factor_25
-		 'factor', 1,
-sub {
-#line 60 "infix2pharmml_eyapp.eyp"
 infix2pharmml::symbref($_[1])}
-#line 5392 ./infix2pharmml_eyapp.pm
+#line 5359 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule uniop_23
+		 'uniop', 1, undef
+#line 5363 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule uniop_24
+		 'uniop', 1, undef
+#line 5367 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule uniop_25
+		 'uniop', 1, undef
+#line 5371 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_26
 		 'uniop', 1, undef
-#line 5396 ./infix2pharmml_eyapp.pm
+#line 5375 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_27
 		 'uniop', 1, undef
-#line 5400 ./infix2pharmml_eyapp.pm
+#line 5379 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_28
 		 'uniop', 1, undef
-#line 5404 ./infix2pharmml_eyapp.pm
+#line 5383 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_29
 		 'uniop', 1, undef
-#line 5408 ./infix2pharmml_eyapp.pm
+#line 5387 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_30
 		 'uniop', 1, undef
-#line 5412 ./infix2pharmml_eyapp.pm
+#line 5391 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_31
 		 'uniop', 1, undef
-#line 5416 ./infix2pharmml_eyapp.pm
+#line 5395 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_32
 		 'uniop', 1, undef
-#line 5420 ./infix2pharmml_eyapp.pm
+#line 5399 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_33
 		 'uniop', 1, undef
-#line 5424 ./infix2pharmml_eyapp.pm
+#line 5403 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_34
 		 'uniop', 1, undef
-#line 5428 ./infix2pharmml_eyapp.pm
+#line 5407 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_35
 		 'uniop', 1, undef
-#line 5432 ./infix2pharmml_eyapp.pm
+#line 5411 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_36
 		 'uniop', 1, undef
-#line 5436 ./infix2pharmml_eyapp.pm
+#line 5415 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_37
 		 'uniop', 1, undef
-#line 5440 ./infix2pharmml_eyapp.pm
+#line 5419 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_38
 		 'uniop', 1, undef
-#line 5444 ./infix2pharmml_eyapp.pm
+#line 5423 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_39
 		 'uniop', 1, undef
-#line 5448 ./infix2pharmml_eyapp.pm
+#line 5427 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_40
 		 'uniop', 1, undef
-#line 5452 ./infix2pharmml_eyapp.pm
+#line 5431 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_41
 		 'uniop', 1, undef
-#line 5456 ./infix2pharmml_eyapp.pm
+#line 5435 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_42
 		 'uniop', 1, undef
-#line 5460 ./infix2pharmml_eyapp.pm
+#line 5439 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_43
 		 'uniop', 1, undef
-#line 5464 ./infix2pharmml_eyapp.pm
+#line 5443 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_44
 		 'uniop', 1, undef
-#line 5468 ./infix2pharmml_eyapp.pm
+#line 5447 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_45
 		 'uniop', 1, undef
-#line 5472 ./infix2pharmml_eyapp.pm
+#line 5451 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_46
 		 'uniop', 1, undef
-#line 5476 ./infix2pharmml_eyapp.pm
+#line 5455 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_47
 		 'uniop', 1, undef
-#line 5480 ./infix2pharmml_eyapp.pm
+#line 5459 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_48
 		 'uniop', 1, undef
-#line 5484 ./infix2pharmml_eyapp.pm
+#line 5463 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_49
 		 'uniop', 1, undef
-#line 5488 ./infix2pharmml_eyapp.pm
+#line 5467 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_50
 		 'uniop', 1, undef
-#line 5492 ./infix2pharmml_eyapp.pm
+#line 5471 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_51
 		 'uniop', 1, undef
-#line 5496 ./infix2pharmml_eyapp.pm
+#line 5475 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_52
 		 'uniop', 1, undef
-#line 5500 ./infix2pharmml_eyapp.pm
+#line 5479 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_53
 		 'uniop', 1, undef
-#line 5504 ./infix2pharmml_eyapp.pm
+#line 5483 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_54
 		 'uniop', 1, undef
-#line 5508 ./infix2pharmml_eyapp.pm
+#line 5487 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_55
 		 'uniop', 1, undef
-#line 5512 ./infix2pharmml_eyapp.pm
+#line 5491 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_56
 		 'uniop', 1, undef
-#line 5516 ./infix2pharmml_eyapp.pm
+#line 5495 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_57
 		 'uniop', 1, undef
-#line 5520 ./infix2pharmml_eyapp.pm
+#line 5499 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_58
 		 'uniop', 1, undef
-#line 5524 ./infix2pharmml_eyapp.pm
+#line 5503 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_59
 		 'uniop', 1, undef
-#line 5528 ./infix2pharmml_eyapp.pm
+#line 5507 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_60
 		 'uniop', 1, undef
-#line 5532 ./infix2pharmml_eyapp.pm
+#line 5511 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule uniop_61
 		 'uniop', 1, undef
-#line 5536 ./infix2pharmml_eyapp.pm
+#line 5515 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule uniop_62
-		 'uniop', 1, undef
-#line 5540 ./infix2pharmml_eyapp.pm
+	[#Rule binop_62
+		 'binop', 1, undef
+#line 5519 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule uniop_63
-		 'uniop', 1, undef
-#line 5544 ./infix2pharmml_eyapp.pm
+	[#Rule binop_63
+		 'binop', 1, undef
+#line 5523 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule uniop_64
-		 'uniop', 1, undef
-#line 5548 ./infix2pharmml_eyapp.pm
+	[#Rule binop_64
+		 'binop', 1, undef
+#line 5527 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule binop_65
 		 'binop', 1, undef
-#line 5552 ./infix2pharmml_eyapp.pm
+#line 5531 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule binop_66
 		 'binop', 1, undef
+#line 5535 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule constant_67
+		 'constant', 1,
+sub {
+#line 70 "infix2pharmml_eyapp.eyp"
+"notanumber"}
+#line 5542 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule constant_68
+		 'constant', 1,
+sub {
+#line 71 "infix2pharmml_eyapp.eyp"
+"pi"}
+#line 5549 ./infix2pharmml_eyapp.pm
+	],
+	[#Rule constant_69
+		 'constant', 1,
+sub {
+#line 72 "infix2pharmml_eyapp.eyp"
+"exponentiale"}
 #line 5556 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule binop_67
-		 'binop', 1, undef
-#line 5560 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule binop_68
-		 'binop', 1, undef
-#line 5564 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule binop_69
-		 'binop', 1, undef
-#line 5568 ./infix2pharmml_eyapp.pm
 	],
 	[#Rule constant_70
 		 'constant', 1,
 sub {
-#line 79 "infix2pharmml_eyapp.eyp"
-"notanumber"}
-#line 5575 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule constant_71
-		 'constant', 1,
-sub {
-#line 80 "infix2pharmml_eyapp.eyp"
-"pi"}
-#line 5582 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule constant_72
-		 'constant', 1,
-sub {
-#line 81 "infix2pharmml_eyapp.eyp"
-"exponentiale"}
-#line 5589 ./infix2pharmml_eyapp.pm
-	],
-	[#Rule constant_73
-		 'constant', 1,
-sub {
-#line 82 "infix2pharmml_eyapp.eyp"
+#line 73 "infix2pharmml_eyapp.eyp"
 "infinity"}
-#line 5596 ./infix2pharmml_eyapp.pm
+#line 5563 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule argpair_74
+	[#Rule argpair_71
 		 'argpair', 3,
 sub {
-#line 86 "infix2pharmml_eyapp.eyp"
+#line 77 "infix2pharmml_eyapp.eyp"
 infix2pharmml::fa($_[1],$_[3]) }
-#line 5603 ./infix2pharmml_eyapp.pm
+#line 5570 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule argpairlist_75
+	[#Rule argpairlist_72
 		 'argpairlist', 3,
 sub {
-#line 89 "infix2pharmml_eyapp.eyp"
+#line 80 "infix2pharmml_eyapp.eyp"
  $_[1].$_[3] }
-#line 5610 ./infix2pharmml_eyapp.pm
+#line 5577 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule argpairlist_76
+	[#Rule argpairlist_73
 		 'argpairlist', 1, undef
-#line 5614 ./infix2pharmml_eyapp.pm
+#line 5581 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule varlist_77
+	[#Rule varlist_74
 		 'varlist', 3,
 sub {
-#line 93 "infix2pharmml_eyapp.eyp"
+#line 84 "infix2pharmml_eyapp.eyp"
 infix2pharmml::funcarg($_[1]).$_[3] }
-#line 5621 ./infix2pharmml_eyapp.pm
+#line 5588 ./infix2pharmml_eyapp.pm
 	],
-	[#Rule varlist_78
+	[#Rule varlist_75
 		 'varlist', 1,
 sub {
-#line 94 "infix2pharmml_eyapp.eyp"
+#line 85 "infix2pharmml_eyapp.eyp"
 infix2pharmml::funcarg($_[1])}
-#line 5628 ./infix2pharmml_eyapp.pm
+#line 5595 ./infix2pharmml_eyapp.pm
 	]
 ],
-#line 5631 ./infix2pharmml_eyapp.pm
+#line 5598 ./infix2pharmml_eyapp.pm
     yybypass       => 0,
     yybuildingtree => 0,
     yyprefix       => '',
@@ -5650,24 +5617,24 @@ infix2pharmml::funcarg($_[1])}
          'statement_5', 
          'statement_6', 
          'equation_7', 
-         'expression_8', 
-         'expression_9', 
-         'expression_10', 
-         'term_11', 
-         'term_12', 
-         'term_13', 
-         'power_14', 
-         'power_15', 
-         'factor_16', 
-         'factor_17', 
-         'factor_18', 
-         'factor_19', 
-         'factor_20', 
-         'factor_21', 
-         'factor_22', 
-         'factor_23', 
-         'factor_24', 
-         'factor_25', 
+         'expr_8', 
+         'expr_9', 
+         'expr_10', 
+         'expr_11', 
+         'expr_12', 
+         'expr_13', 
+         'expr_14', 
+         'expr_15', 
+         'expr_16', 
+         'expr_17', 
+         'expr_18', 
+         'expr_19', 
+         'expr_20', 
+         'expr_21', 
+         'expr_22', 
+         'uniop_23', 
+         'uniop_24', 
+         'uniop_25', 
          'uniop_26', 
          'uniop_27', 
          'uniop_28', 
@@ -5704,27 +5671,24 @@ infix2pharmml::funcarg($_[1])}
          'uniop_59', 
          'uniop_60', 
          'uniop_61', 
-         'uniop_62', 
-         'uniop_63', 
-         'uniop_64', 
+         'binop_62', 
+         'binop_63', 
+         'binop_64', 
          'binop_65', 
          'binop_66', 
-         'binop_67', 
-         'binop_68', 
-         'binop_69', 
+         'constant_67', 
+         'constant_68', 
+         'constant_69', 
          'constant_70', 
-         'constant_71', 
-         'constant_72', 
-         'constant_73', 
-         'argpair_74', 
-         'argpairlist_75', 
-         'argpairlist_76', 
-         'varlist_77', 
-         'varlist_78', );
+         'argpair_71', 
+         'argpairlist_72', 
+         'argpairlist_73', 
+         'varlist_74', 
+         'varlist_75', );
   $self;
 }
 
-#line 97 "infix2pharmml_eyapp.eyp"
+#line 88 "infix2pharmml_eyapp.eyp"
 
 
 
@@ -5733,7 +5697,7 @@ infix2pharmml::funcarg($_[1])}
 =cut
 
 
-#line 5736 ./infix2pharmml_eyapp.pm
+#line 5700 ./infix2pharmml_eyapp.pm
 
 
 

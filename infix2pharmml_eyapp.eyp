@@ -1,3 +1,4 @@
+
 # -*- antlr -*-
 
 %token NAN = /\b(nan|NaN|notanumber)\b/
@@ -30,34 +31,25 @@ statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
               | equation    
     ;           
 
-equation:       expression               {infix2pharmml::eqn($_[1])}
+equation:       expr                     {infix2pharmml::eqn($_[1])}
     ;
 
-expression:     expression '+' term      {infix2pharmml::b("plus", $_[1], $_[3])}
-              | expression '-' term      {infix2pharmml::b("minus",$_[1], $_[3])}
-              | term      
-    ;
-
-term:           term '*' power           {infix2pharmml::b("times", $_[1], $_[3])}
-              | term '/' power           {infix2pharmml::b("divide",$_[1], $_[3])}
-              | power
-    ;
-
-power:          factor '^' power        {infix2pharmml::b("power", $_[1], $_[3])}
-              | factor
-    ;
-
-factor:         NUM                      {infix2pharmml::e("ct:Real",$_[1])}
-              | constant                 {infix2pharmml::const($_[1])}
-              | factor '!'               {infix2pharmml::u("factorial",$_[1])}
-              | '+' factor               {$_[2]}
-              | '-' factor %prec NEG     {infix2pharmml::u("minus",$_[2])}
-              | '(' expression ')'       {$_[2]}
-              | uniop '(' expression ')' {infix2pharmml::u($_[1],$_[3])}
-              | binop '(' expression ',' expression ')' 
-                                         {infix2pharmml::b($_[1],$_[3],$_[5])}
-              | VAR '(' argpairlist ')'  {infix2pharmml::fc($_[1],$_[3])}
-              | VAR                      {infix2pharmml::symbref($_[1])}
+expr:   
+      expr '+' expr                      {infix2pharmml::b("plus", $_[1], $_[3])}
+    | expr '-' expr                      {infix2pharmml::b("minus",$_[1], $_[3])}
+    | expr '*' expr                      {infix2pharmml::b("times", $_[1], $_[3])}
+    | expr '/' expr                      {infix2pharmml::b("divide",$_[1], $_[3])}
+    | expr '^' expr                      {infix2pharmml::b("power", $_[1], $_[3])}
+    | NUM                                {infix2pharmml::e("ct:Real",$_[1])}
+    | constant                           {infix2pharmml::const($_[1])}
+    | expr '!'                           {infix2pharmml::u("factorial",$_[1])}
+    | '+' expr                           {$_[2]}
+    | '-' expr %prec NEG                 {infix2pharmml::u("minus",$_[2])}
+    | '(' expr ')'                       {$_[2]}
+    | uniop '(' expr ')'                 {infix2pharmml::u($_[1],$_[3])}
+    | binop '(' expr ',' expr ')'        {infix2pharmml::b($_[1],$_[3],$_[5])}
+    | VAR '(' argpairlist ')'            {infix2pharmml::fc($_[1],$_[3])}
+    | VAR                                {infix2pharmml::symbref($_[1])}
     ;
 
 
@@ -70,7 +62,6 @@ uniop:  'exp' | 'log' | 'minus' | 'factorial' | 'sin' | 'cos' | 'tan' |
         'arcsech' | 'arccsch' | 'arccoth' | 'floor' | 'ceiling' |
         'abs' | 'logistic' | 'logit' | 'probit' 
       | 'ln' | 'factln' | 'gammaln' | 'normcdf' | 'sqrt' 
-
     ;
 
 binop:          'atan2' | 'logx' | 'min' | 'max' | 'root'
