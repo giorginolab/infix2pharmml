@@ -53,6 +53,13 @@ sub symbref {
     return "<ct:SymbRef symbIdRef=\"$id\"/>";
 }
 
+# Constant
+sub const {
+    my $id=shift;
+    return "<math:Constant op=\"$id\"/>";
+}
+    
+
 
 
 
