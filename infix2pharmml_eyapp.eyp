@@ -31,7 +31,7 @@ power:          factor '^' factor        {infix2pharmml::b("power", $_[1], $_[3]
     ;
 
 factor:         NUM                      {infix2pharmml::e("ct:Real",$_[1])}
-              | constant                 {infix2pharmml::const($_[1])}
+              | constant                 
               | '+' factor               {$_[2]}
               | '-' factor               {infix2pharmml::u("minus",$_[2])}
               | '(' expression ')'       {$_[2]}
@@ -58,9 +58,19 @@ uniop:  'exp ' | 'log' | 'minus' | 'factorial' | 'sin' | 'cos' | 'tan' |
 binop:          'atan2' | 'logx' | 'min' | 'max' | 'root'
     ;
 
-constant:   'notanumber' | 'nan' | 'NaN' | 
-            'pi' | 'exponentiale' | 'e' |
-            'infinity' | 'inf'
+constant:     nan          {infix2pharmml::const("notanumber")}
+            | 'pi'         {infix2pharmml::const("pi")}
+            | euler        {infix2pharmml::const("exponentiale")}
+            | inf          {infix2pharmml::const("infinity")}
+    ;
+
+nan:                'nan' | 'NaN' | 'notanumber' 
+    ;
+
+euler:              'exponentiale' | 'e'
+    ;
+
+inf:            'inf' | 'infinity'
     ;
 
 
