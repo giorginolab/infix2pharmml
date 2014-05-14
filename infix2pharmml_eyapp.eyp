@@ -1,3 +1,5 @@
+# -*- antlr -*-
+
 %token NAN = /\b(nan|NaN|notanumber)\b/
 %token EULER = /\b(e|exponentiale)\b/
 %token PI = /\b(pi)\b/

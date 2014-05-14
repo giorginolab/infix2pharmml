@@ -1,9 +1,9 @@
 package infix2pharmml;
 
 use strict;
-use warnings;
 use Carp;
 use infix2pharmml_eyapp;
+use warnings;
 
 # Generic tag
 sub e {
@@ -61,17 +61,20 @@ sub const {
     
 
 
-
-
 my $parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
 
 sub xmlify {
     $parser->input(shift);
-    my $out=$parser->Run();
+    my $err;
+    my $out;
+
+    {
+	 local $SIG{__WARN__} = sub { $err=$_[0]; };
+	 $out=$parser->Run;
+    }
 
     if (my $ne = $parser->YYNberr > 0) {
-	print "There were $ne errors during parsing\n";
-	return undef;
+	croak "There were $ne errors during parsing: $err\n";
     } else {
 	return $out;
     }
