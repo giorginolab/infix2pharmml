@@ -50,18 +50,20 @@ XML:
 ~~~~~
 
 
-Limitations
+Features and limitations
 -----------
 
-The expression syntax is defined by the Math::Symbolic parser. Some of its functions do not match those defined by PharmML. 
-
+* Constants (and user-friendly aliases, such as _e_ for _exponentiale_)
+* Variable assignments, such as _a=b+c_ and definitions _a:=b+c_
+* _DerivativeVariable_ definitions, as _diff(q,t)=1+sin(t)_
+* All operators defined by PharmML 0.3 should be supported
 * Use _ln_ for the natural logarithm. The _log_ function is always two-argument (argument, base). 
 * Calls to user-defined functions use a special syntax described in the next paragraph.
 * Factorial can be expressed as "factorial()" or with the usual exclamation mark.
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
 * Error reporting is essentially non-existent.
 * The parser does not rely on the recently-released _libpharmml_ API.
-* Logical operators and assignments are not supported.
+* Logical operators are _not_ supported.
 
 
 
