@@ -52,11 +52,11 @@ Supported features
 ------------------
 
 * All operators defined by PharmML 0.3 should be supported
-* Constants (with user-friendly aliases, such as _e_ for _exponentiale_)
+* Constants (with user-friendly aliases, such as _e_ for _exponentiale_) - see below.
 * Variable assignments, such as _a=b+c_ and definitions _a:=b+c_
-* _DerivativeVariable_ definitions, as _diff(q,t)=1+sin(t)_
+* Derivative variable (ODE) definitions, as _diff(q,t)=1+sin(t)_
 * Use _ln_ for the natural logarithm. The _logx_ function is always two-argument (argument, base). 
-* Calls to user-defined functions use a special syntax described in the next paragraph.
+* Calls to user-defined functions use a special syntax described below.
 * Factorial can be expressed as "factorial()" or with the usual exclamation mark.
 
 
