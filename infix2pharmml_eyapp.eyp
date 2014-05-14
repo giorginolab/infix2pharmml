@@ -6,12 +6,8 @@
 %token PI = /\b(pi)\b/
 %token INF = /\b(inf|infinity)\b/
 
-%token UNIOP = /\b(exp|log|minus|factorial|sin|cos|tan|
-    sec|csc|cot|sinh|cosh|tanh|sech|
-    csch|coth|arcsin|arccos|arctan|arcsec|
-    arccsc|arccot|arcsinh|arccosh|arctanh|
-    arcsech|arccsch|arccoth|floor|ceiling|
-    abs|logistic|logit|probit|ln|factln|gammaln|normcdf|sqrt)\b/
+%token UNIOP = /\b(exp|log|minus|factorial|sin|cos|tan|sec|csc|cot|sinh|cosh|tanh|sech|csch|coth|arcsin|arccos|arctan|arcsec|arccsc|arccot|arcsinh|arccosh|arctanh|arcsech|arccsch|arccoth|floor|ceiling|abs|logistic|logit|probit|ln|factln|gammaln|normcdf|sqrt)\b/
+
 %token BINOP = /\b(atan2|logx|min|max|root)\b/
     
 
