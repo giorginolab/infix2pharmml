@@ -76,18 +76,18 @@ eq_or_diff(i2p($s),
 </math:Equation>
 ',$s);
 
-$s="f(a):=a+1";
+$s="-a*b+c";
 eq_or_diff(i2p($s),
-'<FunctionDefinition symbId="f" symbolType="real" xmlns="http://www.pharmml.org/2013/03/CommonTypes">
-  <FunctionArgument symbId="a" symbolType="real"/>
-  <Definition>
-    <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-      <Binop op="plus">
+'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+  <Binop op="plus">
+    <Binop op="times">
+      <Uniop op="minus">
         <ct:SymbRef symbIdRef="a"/>
-        <ct:Real>1</ct:Real>
-      </Binop>
-    </math:Equation>
-  </Definition>
-</FunctionDefinition>
+      </Uniop>
+      <ct:SymbRef symbIdRef="b"/>
+    </Binop>
+    <ct:SymbRef symbIdRef="c"/>
+  </Binop>
+</math:Equation>
 ',$s);
 

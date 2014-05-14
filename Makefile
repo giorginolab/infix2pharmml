@@ -3,5 +3,6 @@ infix2pharmml_eyapp.pm: infix2pharmml_eyapp.eyp
 
 .PHONY:
 test:
-	perl t/infix2pharmml.t
+	perl t/01base.t
+	perl t/02functions.t
 
