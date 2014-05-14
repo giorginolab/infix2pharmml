@@ -35,11 +35,13 @@ print h2('You entered:'),$string;
 
 
 my $xml=eval {
-    infix2pharmml::xmlify($tree);
+    infix2pharmml::xmlify($string);
 };
 
 if ($@) {
-    print h2('Parse error:'),$@;
+    my $err=$@;
+    $err =~ s/\n/<br\/>/g;
+    print h2('Parse error:'),$err;
 } else {
     my $twig=XML::Twig->new( pretty_print => 'indented',
 			     output_filter => 'html' ); 

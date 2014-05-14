@@ -27,14 +27,14 @@ function copyUp(e) {
 <p> Version 0.5
 
 <h2 id="limitations">What's new</h2>
-You can the following features are now supported:
+The following features are now supported:
 <ul>
   <li>Constants (and user-friendly aliases, such as <em>e</em> for <code>exponentiale</code>)
-  <li>Variable assignments, such as <code>a=b+c</code> and definitions <code>a:=b+c</code>
-  <li>DerivativeVariable definitions, as <code>diff(q,t)=1+sin(t)</code>
-  <li>More user-friendly function call syntax
-  <li>All operators defined by PharmML 0.3
-  <li>Factorial operator (!)
+  <li>Variable assignments, such as <code>a=b+c</code>, and definitions such as <code>a:=b+c</code>
+  <li><code>DerivativeVariable</code> definitions, as in <code>diff(q,t)=1+sin(t)</code>
+  <li>Function call syntax with named arguments is now more intuitive, e.g.: <code>f(x=4,n=2!)</code>
+  <li>All operators defined by PharmML 0.3 are implemented
+  <li>The postfix factorial operator (!) is also supported
 </ul>
 
 <h2 id="limitations">Limitations</h2>
@@ -42,8 +42,6 @@ For a full list of the converter's limitations, see <a href="https://sourceforge
 <ul>
   <li>Use <code>ln(...)</code> for the natural logarithm function (PharmML &ge; 0.3).</li>
   <li>Logical operators are not supported. </li>
-  <li>User-defined function calls
-    (with named arguments) are coded like:  <code>   combinedErrorModel(a=a,b=b,f=Cc)</code>
 </ul>
 
 <h2>Enter the formula below:</h2>
