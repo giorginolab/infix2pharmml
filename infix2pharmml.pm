@@ -5,12 +5,14 @@ use warnings;
 use Carp;
 use infix2pharmml_eyapp;
 
+# Generic tag
 sub e {
     my $tag=shift;
     my $c=join('',@_);
     return "<$tag>$c</$tag>\n";
 }
 
+# Uniop or binop (1st arg)
 sub op {
     my $tag=shift;
     my $op=shift;
@@ -18,14 +20,17 @@ sub op {
     return "<$tag op=\"$op\">$c</$tag>\n";
 }
 
+# Binop
 sub b {
     return op("Binop",@_);
 }
 
+# Uniop
 sub u {
     return op("Uniop",@_);
 }
 
+# Function call (name, args)
 sub fc {
     my ($id,$args)=@_;
     return "<math:FunctionCall>".
@@ -34,13 +39,15 @@ sub fc {
     "</math:FunctionCall>";
 }
 
+# Function arguments
 sub fa {
     my ($id,$ref)=@_;
-    return "<math:FunctionArgument symbId=\"$id\">
-      <math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">$ref</math:Equation>
-     </math:FunctionArgument>";
+    return "<math:FunctionArgument symbId=\"$id\">".
+      "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">$ref</math:Equation>".
+      "</math:FunctionArgument>";
 }
 
+# Symbol
 sub symbref {
     my $id=shift;
     return "<ct:SymbRef symbIdRef=\"$id\"/>";

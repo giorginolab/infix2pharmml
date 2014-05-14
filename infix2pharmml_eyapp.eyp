@@ -42,12 +42,19 @@ factor:         NUM                      {infix2pharmml::e("ct:Real",$_[1])}
     ;
 
 
-uniop:          'sinh' | 'cosh' | 'asinh' | 'acosh' | 'asin' | 'acos' | 'atan'
-              | 'acot' | 'sin'  | 'cos'   | 'tan'   | 'cot'  | 'exp'  | 'sqrt' 
-              | 'factorial' | 'gammaln' | 'ln' 
+# page 245 spec. 0.2.1 + addenda
+
+uniop:  'exp ' | 'log' | 'minus' | 'factorial' | 'sin' | 'cos' | 'tan' |
+        'sec' | 'csc' | 'cot' | 'sinh' | 'cosh' | 'tanh' | 'sech' |
+        'csch' | 'coth' | 'arcsin' | 'arccos' | 'arctan' | 'arcsec' |
+        'arccsc' | 'arccot' | 'arcsinh' | 'arccosh' | 'arctanh' |
+        'arcsech' | 'arccsch' | 'arccoth' | 'floor' | 'ceiling' |
+        'abs' | 'logistic' | 'logit' | 'probit' 
+      | 'ln' | 'factln' | 'gammaln' | 'normcdf' | 'sqrt' 
+
     ;
 
-binop:          'atan2' | 'log' | 'min' | 'max' 
+binop:          'atan2' | 'logx' | 'min' | 'max' | 'root'
     ;
 
 
