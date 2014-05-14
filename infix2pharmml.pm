@@ -39,6 +39,19 @@ sub fc {
     "</math:FunctionCall>";
 }
 
+sub funcarg {
+    my $id=shift;
+    return "<FunctionArgument symbId=\"$id\" symbolType=\"real\"/>"
+}
+
+sub funcdef {
+    my ($id,$al,$eq)=@_;
+    return "<FunctionDefinition xmlns=\"http://www.pharmml.org/2013/03/CommonTypes\"  symbId=\"$id\" symbolType=\"real\">".
+	$al.
+	"<Definition>$eq</Definition>".
+	"</FunctionDefinition>";
+}
+
 sub eqn {
     return "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">".
 	shift.

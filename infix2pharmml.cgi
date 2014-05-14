@@ -6,7 +6,7 @@ use lib 'cgi-perl/lib/perl5';
 use CGI qw(:standard);
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::Twig;
-use Math::Symbolic;
+
 # use FindBin qw($Bin); 
 # use Cwd;
 

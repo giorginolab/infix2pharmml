@@ -55,6 +55,7 @@ Supported features
 * Constants (with user-friendly aliases, such as _e_ for _exponentiale_) - see below.
 * Variable assignments, such as _a=b+c_ and definitions _a:=b+c_
 * Derivative variable (ODE) definitions, as _diff(q,t)=1+sin(t)_
+* Function definitions, such as _f(x,y):=x+y_
 * Use _ln_ for the natural logarithm. The _logx_ function is always two-argument (argument, base). 
 * Calls to user-defined functions use a special syntax described below.
 * Factorial can be expressed as "factorial()" or with the usual exclamation mark.
@@ -65,6 +66,7 @@ Limitations
 -----------
 
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
+* All symbols are assumed to be of  type _real_.
 * Logical operators are _not_ supported.
 * Piecewise functions are _not_ supported.
 * Initial conditions and starting time for differential equations are arbitrarily set to zero.
