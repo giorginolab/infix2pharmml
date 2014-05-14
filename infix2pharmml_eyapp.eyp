@@ -1,5 +1,11 @@
+%token NAN = /\b(nan|NaN|notanumber)\b/
+%token EULER = /\b(e|exponentiale)\b/
+%token PI = /\b(pi)\b/
+%token INF = /\b(inf|infinity)\b/
+
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
+
 
 # Probably can be greatly simplified bc. of automatic precedence assignments
 
@@ -60,19 +66,10 @@ uniop:  'exp ' | 'log' | 'minus' | 'factorial' | 'sin' | 'cos' | 'tan' |
 binop:          'atan2' | 'logx' | 'min' | 'max' | 'root'
     ;
 
-constant:     nan          {"notanumber"}
-            | 'pi'         {"pi"}
-            | euler        {"exponentiale"}
-            | inf          {"infinity"}
-    ;
-
-nan:                'nan' | 'NaN' | 'notanumber' 
-    ;
-
-euler:              'exponentiale' | 'e'
-    ;
-
-inf:            'inf' | 'infinity'
+constant:     NAN          {"notanumber"}
+            | PI           {"pi"}
+            | EULER        {"exponentiale"}
+            | INF          {"infinity"}
     ;
 
 
