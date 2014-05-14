@@ -7,7 +7,7 @@ use infix2pharmml_eyapp;
 
 sub e {
     my $tag=shift;
-    my $c="@_";
+    my $c=join('',@_);
     return "<$tag>$c</$tag>\n";
 }
 
@@ -28,10 +28,10 @@ sub u {
 
 sub fc {
     my ($id,$args)=@_;
-    return "  <math:FunctionCall>
-    <ct:SymbRef symbIdRef=\"$id\"/>
-    $args
-    </math:FunctionCall>";
+    return "<math:FunctionCall>".
+    "<ct:SymbRef symbIdRef=\"$id\"/>".
+    $args.
+    "</math:FunctionCall>";
 }
 
 sub fa {
@@ -53,7 +53,15 @@ my $parser=infix2pharmml_eyapp->new() or die "Building grammar";
 
 sub xmlify {
     $parser->input(shift);
-    return $parser->Run();
+    my $out=$parser->Run();
+
+    if (my $ne = $parser->YYNberr > 0) {
+	print "There were $ne errors during parsing\n";
+	return undef;
+    } else {
+	return $out;
+    }
+    
 }
 
 1;
