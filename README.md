@@ -50,27 +50,48 @@ XML:
 ~~~~~
 
 
-Features and limitations
------------
+Supported features
+------------------
 
-* Constants (and user-friendly aliases, such as _e_ for _exponentiale_)
+* All operators defined by PharmML 0.3 should be supported
+* Constants (with user-friendly aliases, such as _e_ for _exponentiale_)
 * Variable assignments, such as _a=b+c_ and definitions _a:=b+c_
 * _DerivativeVariable_ definitions, as _diff(q,t)=1+sin(t)_
-* All operators defined by PharmML 0.3 should be supported
-* Use _ln_ for the natural logarithm. The _log_ function is always two-argument (argument, base). 
+* Use _ln_ for the natural logarithm. The _logx_ function is always two-argument (argument, base). 
 * Calls to user-defined functions use a special syntax described in the next paragraph.
 * Factorial can be expressed as "factorial()" or with the usual exclamation mark.
+
+
+
+Limitations
+-----------
+
 * All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
-* Error reporting is essentially non-existent.
-* The parser does not rely on the recently-released _libpharmml_ API.
 * Logical operators are _not_ supported.
+* Piecewise functions are _not_ supported.
+* Initial conditions and starting time for differential equations are arbitrarily set to zero.
+* Code generation does not rely on the official _libpharmml_ API.
+
+
+
+Constants
+---------
+
+These constants and aliases are defined:
+
+PharmML      | Aliases
+------------ | ----------
+exponentiale | e
+pi	     |
+infinity     | inf
+notanumber   | nan, NaN
 
 
 
 Syntax for custom function calls
 --------------------------------
 
-Calling user-defined function (with named arguments) is achieved like this:
+Calling user-defined function (with named arguments) is achieved as follows:
 
 ~~~~
    combinedErrorModel(a=a,b=b,f=Cc)
