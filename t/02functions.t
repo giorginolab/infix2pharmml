@@ -5,7 +5,7 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 use Test::Differences;
 use XML::Twig;
 
@@ -113,4 +113,28 @@ eq_or_diff(i2p($s),
     </ct:Assign>
   </ct:InitialCondition>
 </ct:DerivativeVariable>
+',$s);
+
+
+$s="myFunction(x,y,z):=x^2+y^2";
+eq_or_diff(i2p($s),
+'<FunctionDefinition symbId="myFunction" symbolType="real" xmlns="http://www.pharmml.org/2013/03/CommonTypes">
+  <FunctionArgument symbId="x" symbolType="real"/>
+  <FunctionArgument symbId="y" symbolType="real"/>
+  <FunctionArgument symbId="z" symbolType="real"/>
+  <Definition>
+    <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+      <Binop op="plus">
+        <Binop op="power">
+          <ct:SymbRef symbIdRef="x"/>
+          <ct:Real>2</ct:Real>
+        </Binop>
+        <Binop op="power">
+          <ct:SymbRef symbIdRef="y"/>
+          <ct:Real>2</ct:Real>
+        </Binop>
+      </Binop>
+    </math:Equation>
+  </Definition>
+</FunctionDefinition>
 ',$s);

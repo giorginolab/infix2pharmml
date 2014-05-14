@@ -5,7 +5,7 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 6;
+use Test::More tests => 7;
 use Test::Differences;
 use XML::Twig;
 
@@ -91,3 +91,13 @@ eq_or_diff(i2p($s),
 </math:Equation>
 ',$s);
 
+
+$s="logx(x,e)";
+eq_or_diff(i2p($s),
+'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+  <Binop op="logx">
+    <ct:SymbRef symbIdRef="x"/>
+    <math:Constant op="exponentiale"/>
+  </Binop>
+</math:Equation>
+',$s);
