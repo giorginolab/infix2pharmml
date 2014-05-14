@@ -6,6 +6,19 @@
 %token PI = /\b(pi)\b/
 %token INF = /\b(inf|infinity)\b/
 
+%token UNIOP = /\b(exp|log|minus|factorial|sin|cos|tan|
+    sec|csc|cot|sinh|cosh|tanh|sech|
+    csch|coth|arcsin|arccos|arctan|arcsec|
+    arccsc|arccot|arcsinh|arccosh|arctanh|
+    arcsech|arccsch|arccoth|floor|ceiling|
+    abs|logistic|logit|probit|ln|factln|gammaln|normcdf|sqrt)\b/
+%token BINOP = /\b(atan2|logx|min|max|root)\b/
+    
+
+
+    
+
+
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
@@ -46,8 +59,8 @@ expr:
     | '+' expr                           {$_[2]}
     | '-' expr %prec NEG                 {infix2pharmml::u("minus",$_[2])}
     | '(' expr ')'                       {$_[2]}
-    | uniop '(' expr ')'                 {infix2pharmml::u($_[1],$_[3])}
-    | binop '(' expr ',' expr ')'        {infix2pharmml::b($_[1],$_[3],$_[5])}
+    | UNIOP '(' expr ')'                 {infix2pharmml::u($_[1],$_[3])}
+    | BINOP '(' expr ',' expr ')'        {infix2pharmml::b($_[1],$_[3],$_[5])}
     | VAR '(' argpairlist ')'            {infix2pharmml::fc($_[1],$_[3])}
     | VAR                                {infix2pharmml::symbref($_[1])}
     ;
@@ -55,17 +68,7 @@ expr:
 
 # page 245 spec. 0.2.1 + addenda
 
-uniop:  'exp' | 'log' | 'minus' | 'factorial' | 'sin' | 'cos' | 'tan' |
-        'sec' | 'csc' | 'cot' | 'sinh' | 'cosh' | 'tanh' | 'sech' |
-        'csch' | 'coth' | 'arcsin' | 'arccos' | 'arctan' | 'arcsec' |
-        'arccsc' | 'arccot' | 'arcsinh' | 'arccosh' | 'arctanh' |
-        'arcsech' | 'arccsch' | 'arccoth' | 'floor' | 'ceiling' |
-        'abs' | 'logistic' | 'logit' | 'probit' 
-      | 'ln' | 'factln' | 'gammaln' | 'normcdf' | 'sqrt' 
-    ;
 
-binop:          'atan2' | 'logx' | 'min' | 'max' | 'root'
-    ;
 
 constant:     NAN          {"notanumber"}
             | PI           {"pi"}
