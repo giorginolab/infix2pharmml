@@ -1,0 +1,64 @@
+%token NUM = /[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/
+%token VAR  = /([A-Za-z][A-Za-z0-9_]*)/
+
+%right  '='
+%left   '-' '+'
+%left   '*' '/'
+%left   NEG
+
+%%
+start:        $expression { print "$expression\n" }
+    ;
+
+statement:      $VAR '=' $statement   {$_[1] . "=" . $_[3]}
+              | $expression    
+    ;           
+
+expression:     $term '+' $expression      {infix2pharmml::b("plus", $_[1], $_[3])}
+              | $term '-' $expression      {infix2pharmml::b("minus",$_[1], $_[3])}
+              | $term                     
+    ;
+
+term:           $power '*' $term          {infix2pharmml::b("times", $_[1], $_[3])}
+              | $power '/' $term          {infix2pharmml::b("divide",$_[1], $_[3])}
+              | $power
+    ;
+
+power:          $factor '^' $factor        {infix2pharmml::b("power", $_[1], $_[3])}
+              | $factor '!'               {infix2pharmml::u("factorial",$_[1])}
+              | $factor
+    ;
+
+factor:         $number
+              | '+' $factor               {$_[2]}
+              | '-' $factor               {infix2pharmml::u("minus",$_[2])}
+              | '(' $expression ')'       {$_[2]}
+              | $uniop '(' $expression ')' {infix2pharmml::u($_[1],$_[3])}
+              | $binop '(' $expression ',' $expression ')' 
+                                         {infix2pharmml::b($_[1],$_[3],$_[5])}
+              | $VAR '(' $argpairlist ')' 
+                                         {infix2pharmml::fc($_[1],$_[3])}
+              | $VAR                 {infix2pharmml::symbref($_[1])}
+    ;
+
+
+uniop:          'sinh' | 'cosh' | 'asinh' | 'acosh' | 'asin' | 'acos' | 'atan'
+              | 'acot' | 'sin'  | 'cos'   | 'tan'   | 'cot'  | 'exp'  | 'sqrt' 
+              | 'factorial' | 'gammaln' | 'ln' 
+    ;
+
+binop:          'atan2' | 'log' | 'min' | 'max'
+    ;
+
+number:         $NUM                     {infix2pharmml::e("ct:Real",$_[1])}
+    ;
+
+argpair:        $VAR '=' $expression { infix2pharmml::fa($_[1],$_[3]) } 
+    ;                                  
+
+argpairlist:    $argpair ',' $argpairlist { $_[1].$_[3] }
+              | $argpair
+    ;
+
+
+%%

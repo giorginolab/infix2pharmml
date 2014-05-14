@@ -2,8 +2,8 @@ package infix2pharmml;
 
 use strict;
 use warnings;
-use Parse::RecDescent;
 use Carp;
+use infix2pharmml_eyapp;
 
 sub e {
     my $tag=shift;
@@ -48,21 +48,12 @@ sub symbref {
 
 
 
-$::RD_ERRORS = 1; # Make sure the parser dies when it encounters an error
-$::RD_WARN   = 1; # Enable warnings. This will warn on unused rules &c.
-$::RD_HINT   = 1; # Give out hints to help fix problems.
 
-
-# http://www.adp-gmbh.ch/perl/rec_descent.html
-open FILE, "infix2pharmml.g" or die "Couldn't open file: $!"; 
-my $grammar = join("", <FILE>); 
-close FILE;
-
-
-my $parser=Parse::RecDescent->new($grammar) or die "Building grammar"; 
+my $parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
 
 sub xmlify {
-    return $parser->start(shift);
+    $parser->input(shift);
+    return $parser->Run();
 }
 
 1;
