@@ -43,8 +43,8 @@ function copyUp(e,st) {
 only structural equations. In this mode, multiple statements can be
 provided, separated by semicolons. Statements are restricted to
 variable and derivative variable definitions. Stand-alone model is
-intended to jump-start development, and it is not a substitute of
-full-fledged modeling tools or human-readable languages.
+intended to jump-start development, and it is not a full-fledged
+modeling tool.
 </p>
 
 The following features are supported:
@@ -53,7 +53,7 @@ The following features are supported:
 <li>All operators defined by PharmML 0.3 should be supported</li>
 <li>Constants (with user-friendly aliases, such as <em>e</em> for <em>exponentiale</em>) - see below.</li>
 <li>Variable assignments, such as <em>a=b+c</em> and definitions <em>a:=b+c</em></li>
-<li>Derivative variable (ODE) definitions, as <em>diff(q,t)=1+sin(t)</em>. Initial condition has to be edited by hand.</li>
+<li>Derivative variable (ODE) definitions, as <em>diff(q,t):=1+sin(t)</em>. Initial condition has to be edited by hand.</li>
 <li>Function definitions, such as <em>f(x,y):=x+y</em></li>
 <li>Use <em>ln</em> for the natural logarithm. The <em>logx</em> function is always two-argument (argument, base). </li>
 <li>Calls to user-defined functions use a special syntax described below.</li>
