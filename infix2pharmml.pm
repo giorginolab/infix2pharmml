@@ -23,7 +23,7 @@ package infix2pharmml;
 
 use strict;
 use Carp;
-use infix2pharmml_eyapp;
+use infix2pharmml_statement;
 use infix2pharmml_model;
 use warnings;
 
@@ -192,7 +192,7 @@ sub xmlify {
     my $parser;
     
     if(!$fullmodel) {
-	$parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
+	$parser=infix2pharmml_statement->new() or die "Building grammar"; 
     } else {
 	$parser=infix2pharmml_model->new() or die "Building grammar"; 
     }

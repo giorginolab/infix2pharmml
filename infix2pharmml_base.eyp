@@ -9,11 +9,6 @@
 
 %token BINOP = /\b(atan2|logx|min|max|root)\b/
     
-
-
-    
-
-
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
@@ -26,13 +21,27 @@
 %left   '!'
 %left   NEG
 
+%start STARTRULE
+
 %%
-start:          statement 
+
+model:  structuralModel structuralstmt 
+                | structuralstmt
+    ;
+
+
+structuralstmt:  VAR ':=' equation ';' ?       {infix2pharmml::vardef($_[1],$_[3])}
+              | 'diff(' VAR ',' VAR ')=' equation ';' ?
+                                           {infix2pharmml::diff($_[2],$_[4],$_[6])}
+              | 'diff(' VAR ',' VAR '):=' equation ';' ?
+                                           {infix2pharmml::diff($_[2],$_[4],$_[6])}
     ;
 
 statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
               | VAR '=' equation         {infix2pharmml::varass($_[1],$_[3])}
               | 'diff(' VAR ',' VAR ')=' equation
+                                         {infix2pharmml::diff($_[2],$_[4],$_[6])}
+              | 'diff(' VAR ',' VAR '):=' equation
                                          {infix2pharmml::diff($_[2],$_[4],$_[6])}
               | VAR '(' varlist '):=' equation 
                                          {infix2pharmml::funcdef($_[1],$_[3],$_[5])}
