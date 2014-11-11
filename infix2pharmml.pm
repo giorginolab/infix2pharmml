@@ -67,16 +67,17 @@ sub vardef {
 sub varass {
     my ($id,$y)=@_;
     croak "Variable assignments not allowed in stand-alone mode yet" if $fullmodel;
-    return "<ct:VariableAssignment>".symbref_no_store($id).
+    return "<ct:VariableAssignment>".symbref($id).
 	assign($y).
 	"</ct:VariableAssignment>";
+    $localSymbols{$id}=1;
 }
 
 sub diff {
     my ($id,$t,$y)=@_;
     my $out="<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
 	assign($y).
-	"<ct:IndependentVariable>".symbref_no_store($t)."</ct:IndependentVariable>".
+	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
 	"<ct:InitialCondition>".
 	"<!-- WARNING InitialCondition need be edited -->".
 	assign("<ct:Real>0</ct:Real>").
@@ -187,16 +188,10 @@ sub getParameterModel {
 my $parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
 
 sub xmlify {
-    $parser->input(shift);
+    my $in=shift;
+    $parser->input($in);
     my $err;
     my $out;
-
-    my $tmpl;
-
-    if($fullmodel) {
-	open F,"<emptyModel.xml" or die "Opening template";
-	$tmpl=join("", <F>);
-    }
 
     {
 	 local $SIG{__WARN__} = sub { $err=$_[0]; };
@@ -211,6 +206,9 @@ sub xmlify {
 	$out=~s|INFIX2PHARMML_SYMBREF:(.+?):|<ct:SymbRef symbIdRef="$1"/>|g;
 	return $out;
     } else {
+	open F,"<emptyModel.xml" or die "Opening template";
+	my $tmpl=join("", <F>);
+
 	my $pm=getParameterModel();
 	$tmpl =~ s/INFIX2PHARMML_PARAMETERMODEL/$pm/;
 
@@ -219,6 +217,12 @@ sub xmlify {
 
 	my $vl=join "",@variableList;
 	$tmpl =~ s/INFIX2PHARMML_VARIABLE/$vl/;
+
+	my $dt=localtime;
+	$tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
+
+	$tmpl =~ s/INFIX2PHARMML_INPUT/$in/;
+
 
 	while($tmpl =~ m|INFIX2PHARMML_SYMBREF:(.+?):|) {
 	    my $m=quotemeta $&;
