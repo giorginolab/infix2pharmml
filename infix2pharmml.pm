@@ -24,6 +24,7 @@ package infix2pharmml;
 use strict;
 use Carp;
 use infix2pharmml_eyapp;
+use infix2pharmml_model;
 use warnings;
 
 our $fullmodel=0;
@@ -185,11 +186,18 @@ sub getParameterModel {
 
 
 
-my $parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
 
 sub xmlify {
     my $in=shift;
-    $parser->input($in);
+    my $parser;
+    
+    if(!$fullmodel) {
+	$parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
+    } else {
+	$parser=infix2pharmml_model->new() or die "Building grammar"; 
+    }
+
+    $parser->input($in) or die "At grammar input()";
     my $err;
     my $out;
 
@@ -201,6 +209,7 @@ sub xmlify {
     if (my $ne = $parser->YYNberr > 0) {
 	croak "There were $ne errors during parsing: $err\n";
     } 
+
 
     if(!$fullmodel) {
 	$out=~s|INFIX2PHARMML_SYMBREF:(.+?):|<ct:SymbRef symbIdRef="$1"/>|g;

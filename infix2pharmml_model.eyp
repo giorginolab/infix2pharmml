@@ -27,7 +27,17 @@
 %left   NEG
 
 %%
-start:          statement 
+#start:          statement
+#    ;
+
+structuralModel:  structuralModel structuralstmt 
+                | structuralstmt
+    ;
+
+
+structuralstmt:  VAR ':=' equation ';' ?       {infix2pharmml::vardef($_[1],$_[3])}
+              | 'diff(' VAR ',' VAR ')=' equation ';' ?
+                                           {infix2pharmml::diff($_[2],$_[4],$_[6])}
     ;
 
 statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
