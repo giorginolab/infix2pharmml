@@ -1,9 +1,108 @@
+# infix2pharmml model generator
+# Copyright (C) 2014 Toni Giorgino ISIB-CNR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+# Please note that this is a quick hack. This is not how XML or
+# PharmML should be generated.
+
 package infix2pharmml;
 
 use strict;
 use Carp;
 use infix2pharmml_eyapp;
+use infix2pharmml_model;
 use warnings;
+
+our $fullmodel=0;
+
+my %localSymbols=("t"=>1);
+my %allSymbols=("t"=>1);
+
+my @derivativeVariableList=();
+my @variableList=();
+my @functionList=();
+
+
+
+
+# Top-level declarations
+sub funcdef {
+    my ($id,$al,$eq)=@_;
+
+    croak "Function definitions not allowed in stand-alone mode yet" if $fullmodel;
+
+    my $out= "<FunctionDefinition xmlns=\"http://www.pharmml.org/2013/03/CommonTypes\"  symbId=\"$id\" symbolType=\"real\">".
+	$al.
+	"<Definition>$eq</Definition>".
+	"</FunctionDefinition>";
+    push @functionList,$out;
+    return $out;
+}
+
+# P. 42
+sub vardef {
+    my ($id,$y)=@_;
+    my $out= "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
+	assign($y).
+	"</ct:Variable>";
+    push @variableList,$out;
+    $localSymbols{$id}=1;
+    return $out;
+}
+
+# Can't be in StructuralModel.
+sub varass {
+    my ($id,$y)=@_;
+    croak "Variable assignments not allowed in stand-alone mode yet" if $fullmodel;
+    return "<ct:VariableAssignment>".symbref($id).
+	assign($y).
+	"</ct:VariableAssignment>";
+    $localSymbols{$id}=1;
+}
+
+sub diff {
+    my ($id,$t,$y)=@_;
+    my $out="<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
+	assign($y).
+	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
+	"<ct:InitialCondition>".
+	"<!-- WARNING InitialCondition need be edited -->".
+#	assign("<ct:Real>0</ct:Real>").
+	"</ct:InitialCondition>".
+	"</ct:DerivativeVariable>";
+    push @derivativeVariableList,$out;
+    $localSymbols{$id}=1;
+    return $out;
+}
+    
+
+
+
+
+sub eqn {
+    return "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">".
+	shift.
+	"</math:Equation>";
+}
+
+sub assign {
+    my $y=shift;
+    return "<ct:Assign>$y</ct:Assign>";
+}
 
 # Generic tag
 sub e {
@@ -30,7 +129,7 @@ sub u {
     return op("Uniop",@_);
 }
 
-# Function call (name, args)
+# Function call (name, args). Symbref should not be pushed in symbol table.
 sub fc {
     my ($id,$args)=@_;
     return "<math:FunctionCall>".
@@ -44,20 +143,6 @@ sub funcarg {
     return "<FunctionArgument symbId=\"$id\" symbolType=\"real\"/>"
 }
 
-sub funcdef {
-    my ($id,$al,$eq)=@_;
-    return "<FunctionDefinition xmlns=\"http://www.pharmml.org/2013/03/CommonTypes\"  symbId=\"$id\" symbolType=\"real\">".
-	$al.
-	"<Definition>$eq</Definition>".
-	"</FunctionDefinition>";
-}
-
-sub eqn {
-    return "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">".
-	shift.
-	"</math:Equation>";
-}
-
 # Function arguments
 sub fa {
     my ($id,$ref)=@_;
@@ -66,11 +151,16 @@ sub fa {
       "</math:FunctionArgument>";
 }
 
-# Symbol
+# Symbol - will be substituted later. This is tricky because we need
+# to figure out at the end whether each symbol was local or
+# not. Local: appears in localSymbols.
 sub symbref {
     my $id=shift;
-    return "<ct:SymbRef symbIdRef=\"$id\"/>";
+    $allSymbols{$id}=1;
+    return "INFIX2PHARMML_SYMBREF:$id:"
 }
+
+
 
 # Constant
 sub const {
@@ -78,44 +168,36 @@ sub const {
     return "<math:Constant op=\"$id\"/>";
 }
 
-sub assign {
-    my $y=shift;
-    return "<ct:Assign>$y</ct:Assign>";
+
+
+
+# Out of the list of all symbols encountered, return only those which
+# were not defined by the user.
+sub getParameterModel {
+    my $out="<ParameterModel blkId=\"p\">";
+    foreach my $s (keys %allSymbols) {
+	if(! defined $localSymbols{$s}) {
+	    $out.="<SimpleParameter symbId=\"$s\" />";
+	}
+    }
+    $out.="</ParameterModel>";
 }
 
-# P. 42
-sub vardef {
-    my ($id,$y)=@_;
-    return "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
-	assign($y).
-	"</ct:Variable>";
-}
-
-sub varass {
-    my ($id,$y)=@_;
-    return "<ct:VariableAssignment>".symbref($id).
-	assign($y).
-	"</ct:VariableAssignment>";
-}
-
-sub diff {
-    my ($id,$t,$y)=@_;
-    return "<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
-	assign($y).
-	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
-	"<ct:InitialCondition>".
-	"<!-- WARNING InitialCondition need be edited -->".
-	assign("<ct:Real>0</ct:Real>").
-	"</ct:InitialCondition>".
-	"</ct:DerivativeVariable>";
-}
-    
 
 
-my $parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
+
 
 sub xmlify {
-    $parser->input(shift);
+    my $in=shift;
+    my $parser;
+    
+    if(!$fullmodel) {
+	$parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
+    } else {
+	$parser=infix2pharmml_model->new() or die "Building grammar"; 
+    }
+
+    $parser->input($in) or die "At grammar input()";
     my $err;
     my $out;
 
@@ -126,10 +208,47 @@ sub xmlify {
 
     if (my $ne = $parser->YYNberr > 0) {
 	croak "There were $ne errors during parsing: $err\n";
-    } else {
+    } 
+
+
+    if(!$fullmodel) {
+	$out=~s|INFIX2PHARMML_SYMBREF:(.+?):|<ct:SymbRef symbIdRef="$1"/>|g;
 	return $out;
+    } else {
+	open F,"<emptyModel.xml" or die "Opening template";
+	my $tmpl=join("", <F>);
+
+	my $pm=getParameterModel();
+	$tmpl =~ s/INFIX2PHARMML_PARAMETERMODEL/$pm/;
+
+	my $dv=join "",@derivativeVariableList;
+	$tmpl =~ s/INFIX2PHARMML_DERIVATIVEVARIABLE/$dv/;
+
+	my $vl=join "",@variableList;
+	$tmpl =~ s/INFIX2PHARMML_VARIABLE/$vl/;
+
+	my $dt=localtime;
+	$tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
+
+	$tmpl =~ s/INFIX2PHARMML_INPUT/$in/;
+
+
+	while($tmpl =~ m|INFIX2PHARMML_SYMBREF:(.+?):|) {
+	    my $m=quotemeta $&;
+	    my $p=$1;
+	    my $blk="";
+	    if(! defined $localSymbols{$p}) {
+		$blk='blkIdRef="p"';
+	    } 
+	    my $r=sprintf('<ct:SymbRef symbIdRef="%s" %s />',$p,$blk);
+#	    print "***** Match: $m $p $r\n";
+	    $tmpl =~ s/$m/$r/g;
+	}
+
+	return $tmpl;
     }
     
 }
+
 
 1;

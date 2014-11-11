@@ -1,5 +1,14 @@
-infix2pharmml_eyapp.pm: infix2pharmml_eyapp.eyp
+default: infix2pharmml_eyapp.pm infix2pharmml_model.pm
+
+
+%.pm: %.eyp
 	eyapp -s $<
+
+
+infix2pharmml_eyapp.pm: infix2pharmml_eyapp.eyp
+
+infix2pharmml_model.pm: infix2pharmml_model.eyp
+
 
 .PHONY:
 test:
