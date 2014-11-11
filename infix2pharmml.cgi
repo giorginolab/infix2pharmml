@@ -34,12 +34,11 @@ print LOG scalar localtime,"\t$Rem\t$string\n";
 close LOG;
 
 print header(-expires=>'now'),
-        start_html('Infix notation to PharmML math',
-		   -script=> [ {-language => 'javascript',-src => "prism/prism.js"},
+        start_html(-title=>'Infix notation to PharmML math',
+		   -style=>{src=>'/prism/prism.css'},
+		   -script=> [ {-language => 'javascript',-src => "/prism/prism.js"},
 			       {-code => $analytics} ],
-		   -head => [
-		       Link( { -href => 'prism/prism.css', -rel => 'stylsheet', -type => 'text/css'}),
-		   ] ),
+	    ),
         img({alt=>"Logo CNR",style=>"float:right",src=>"/CNR_logo_100.png"}),
 	h1('Infix notation to PharmML math online converter'),
 	i('Toni Giorgino at isib.cnr.it');
@@ -66,7 +65,7 @@ if ($@) {
     $twig->safe_parse($xml);
     
     my $xml_indented=$twig->sprint;
-    print h2("PharmML:"),pre(code({-class=>"xml"},$xml_indented));
+    print h2("PharmML:"),pre(code({-class=>"language-markup"},$xml_indented));
 }
 
 print end_html;
