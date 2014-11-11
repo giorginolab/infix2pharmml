@@ -17,3 +17,6 @@ test:
 	perl t/01base.t
 	perl t/02functions.t
 
+.PHONY:
+clean:
+	rm infix2pharmml_model.eyp infix2pharmml_statement.eyp
