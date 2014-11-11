@@ -35,7 +35,8 @@ close LOG;
 
 print header(-expires=>'now'),
         start_html(-title=>'Infix notation to PharmML math',
-		   -style=>{src=>'/prism/prism.css'},
+		   -style=>{-src=>'/prism/prism.css',
+			    -code=>'body {margin:2em}'},
 		   -script=> [ {-language => 'javascript',-src => "/prism/prism.js"},
 			       {-code => $analytics} ],
 	    ),
