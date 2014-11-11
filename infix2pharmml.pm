@@ -1,5 +1,23 @@
-# Please note that this is a quick hack. This is not how XML should be
-# generated.
+# infix2pharmml model generator
+# Copyright (C) 2014 Toni Giorgino ISIB-CNR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+# Please note that this is a quick hack. This is not how XML or
+# PharmML should be generated.
 
 package infix2pharmml;
 
@@ -10,7 +28,9 @@ use warnings;
 
 our $fullmodel=0;
 
-my %symbols=();
+my %localSymbols=("t"=>1);
+my %allSymbols=("t"=>1);
+
 my @derivativeVariableList=();
 my @variableList=();
 my @functionList=();
@@ -18,7 +38,7 @@ my @functionList=();
 
 
 
-# Top-level symbols
+# Top-level declarations
 sub funcdef {
     my ($id,$al,$eq)=@_;
 
@@ -39,6 +59,7 @@ sub vardef {
 	assign($y).
 	"</ct:Variable>";
     push @variableList,$out;
+    $localSymbols{$id}=1;
     return $out;
 }
 
@@ -62,6 +83,7 @@ sub diff {
 	"</ct:InitialCondition>".
 	"</ct:DerivativeVariable>";
     push @derivativeVariableList,$out;
+    $localSymbols{$id}=1;
     return $out;
 }
     
@@ -127,21 +149,15 @@ sub fa {
       "</math:FunctionArgument>";
 }
 
-# Symbol
+# Symbol - will be substituted later. This is tricky because we need
+# to figure out at the end whether each symbol was local or
+# not. Local: appears in localSymbols.
 sub symbref {
     my $id=shift;
-    # Exception: time need not be stored in parameter block
-    if($id ne "t") {
-	$symbols{$id}=1;
-    }
-    return symbref_no_store($id);
+    $allSymbols{$id}=1;
+    return "INFIX2PHARMML_SYMBREF:$id:"
 }
 
-# Symbol, but don't store in table
-sub symbref_no_store {
-    my $id=shift;
-    return "<ct:SymbRef blkId=\"p\" symbIdRef=\"$id\"/>";
-}
 
 
 # Constant
@@ -153,11 +169,14 @@ sub const {
 
 
 
-
+# Out of the list of all symbols encountered, return only those which
+# were not defined by the user.
 sub getParameterModel {
     my $out="<ParameterModel blkId=\"p\">";
-    foreach my $s (keys %symbols) {
-	$out.="<SimpleParameter symbId=\"$s\" />";
+    foreach my $s (keys %allSymbols) {
+	if(! defined $localSymbols{$s}) {
+	    $out.="<SimpleParameter symbId=\"$s\" />";
+	}
     }
     $out.="</ParameterModel>";
 }
@@ -189,6 +208,7 @@ sub xmlify {
     } 
 
     if(!$fullmodel) {
+	$out=~s|INFIX2PHARMML_SYMBREF:(.+?):|<ct:SymbRef symbIdRef="$1"/>|g;
 	return $out;
     } else {
 	my $pm=getParameterModel();
@@ -199,6 +219,18 @@ sub xmlify {
 
 	my $vl=join "",@variableList;
 	$tmpl =~ s/INFIX2PHARMML_VARIABLE/$vl/;
+
+	while($tmpl =~ m|INFIX2PHARMML_SYMBREF:(.+?):|) {
+	    my $m=quotemeta $&;
+	    my $p=$1;
+	    my $blk="";
+	    if(! defined $localSymbols{$p}) {
+		$blk='blkIdRef="p"';
+	    } 
+	    my $r=sprintf('<ct:SymbRef symbIdRef="%s" %s />',$p,$blk);
+	    print "***** Match: $m $p $r\n";
+	    $tmpl =~ s/$m/$r/g;
+	}
 
 	return $tmpl;
     }
