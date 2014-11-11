@@ -24,7 +24,7 @@ function copyUp(e) {
 
 <p> This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> math-XML markup.  For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>  project  page at SourceForge.
 
-<p> Version 0.5
+<p> Version 0.6
 
 <h2 id="news">What's new</h2>
 The following features are now supported:
@@ -38,10 +38,20 @@ The following features are now supported:
 <li>Use <em>ln</em> for the natural logarithm. The <em>logx</em> function is always two-argument (argument, base). </li>
 <li>Calls to user-defined functions use a special syntax described below.</li>
 <li>Factorial can be expressed as "factorial()" or with the usual exclamation mark.</li>
+<li>Stand-alone model to jump-start structural models</li>
 </ul>
 
 
-For a full list of the converter's features and limitations,
+<p>Stand-alone mode creates (mostly) ready-to-run model comprising
+only structural equations. In this mode, multiple statements can be
+provided, separated by semicolons. Statements are restricted to
+variable and derivative variable definitions. Stand-alone model is
+intended to jump-start development, and it is not a substitute of
+full-fledged modeling tools or human-readable languages.
+</p>
+
+
+<p>For a full list of the converter's features and limitations,
 see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the
 project's README</a>.
 
@@ -51,8 +61,11 @@ project's README</a>.
 <h2>Enter the formula below:</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
 <textarea rows="4" cols="50" id="math" name="math">1+sin(t)+b</textarea>
+<input type="checkbox" name="standalone" value="true">Build a stand-alone model<br>
 <input type="submit" value="Submit">
 </form> 
+
+
 
 <h2>Examples:</h2>
 <p> Click to copy in the input area above.

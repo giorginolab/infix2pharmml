@@ -16,6 +16,7 @@ use strict;
 
 
 my $string = param('math') || '<i>(No input)</i>';
+my $standalone = param('standalone') eq "true";
 
 my $Bin=$ENV{SCRIPT_FILENAME};
 my $Rem=$ENV{HTTP_X_REMOTE_ADDR};
@@ -33,8 +34,11 @@ print header(-expires=>'now'),
 
 print h2('You entered:'),$string;
 
+print h2('Stand-alone mode:'), $standalone?'Yes':'No';
+
 
 my $xml=eval {
+    $infix2pharmml::fullmodel=$standalone;
     infix2pharmml::xmlify($string);
 };
 
