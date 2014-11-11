@@ -23,12 +23,15 @@ You should have received a copy of the GNU Affero General Public License along w
 Usage
 -----
 
-The converter can be run locally as _convert.pl_. The infix expression to convert is expected either interactively, or as the first command-line argument.  
+The converter can be run locally as _convert.pl_. The infix expression
+to convert is expected either interactively, or as the first
+command-line argument. The `-s` switch activates the stand-alone model
+output.
 
 E.g: open a shell, then
 
 ~~~~~
-shell>   perl -w convert.pl
+shell>   perl -w convert.pl [-s]
 
 Enter the expression to convert:
 sin(-2*t)
@@ -54,12 +57,16 @@ Supported features
 * All operators defined by PharmML 0.3 should be supported
 * Constants (with user-friendly aliases, such as _e_ for _exponentiale_) - see below.
 * Variable assignments, such as _a=b+c_ and definitions _a:=b+c_
-* Derivative variable (ODE) definitions, as _diff(q,t)=1+sin(t)_
+* Derivative variable (ODE) definitions, as _diff(q,t)=1+sin(t)_ . Initial conditions are not currently supported.
 * Function definitions, such as _f(x,y):=x+y_
 * Use _ln_ for the natural logarithm. The _logx_ function is always two-argument (argument, base). 
 * Calls to user-defined functions use a special syntax described below.
 * Factorial can be expressed as "factorial()" or with the usual exclamation mark.
 
+In stand-alone mode, the following caveats apply:
+
+* Only variable assignments and derivative variables are supported.
+* Multiple statements can be provided, separated by semicolon.
 
 
 Limitations

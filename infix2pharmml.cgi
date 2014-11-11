@@ -14,6 +14,15 @@ use infix2pharmml;
 
 use strict;
 
+my $analytics=<<'END';
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3201754-5', 'auto');
+  ga('send', 'pageview');
+END
 
 my $string = param('math') || '<i>(No input)</i>';
 my $standalone = param('standalone') eq "true";
@@ -25,7 +34,12 @@ print LOG scalar localtime,"\t$Rem\t$string\n";
 close LOG;
 
 print header(-expires=>'now'),
-        start_html('Infix notation to PharmML math'),
+        start_html('Infix notation to PharmML math',
+		   -script=> [ {-language => 'javascript',-src => "prism/prism.js"},
+			       {-code => $analytics} ],
+		   -head => [
+		       Link( { -href => 'prism/prism.css', -rel => 'stylsheet', -type => 'text/css'}),
+		   ] ),
         img({alt=>"Logo CNR",style=>"float:right",src=>"/CNR_logo_100.png"}),
 	h1('Infix notation to PharmML math online converter'),
 	i('Toni Giorgino at isib.cnr.it');
@@ -52,7 +66,7 @@ if ($@) {
     $twig->safe_parse($xml);
     
     my $xml_indented=$twig->sprint;
-    print h2("PharmML:"),pre($xml_indented);
+    print h2("PharmML:"),pre(code({-class=>"xml"},$xml_indented));
 }
 
 print end_html;

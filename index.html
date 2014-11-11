@@ -1,5 +1,15 @@
 <html>
 <head>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3201754-5', 'auto');
+  ga('send', 'pageview');
+
+</script>
 <script  type="text/javascript">
 // <![CDATA[
 function copyUp(e) {
@@ -27,7 +37,16 @@ function copyUp(e) {
 <p> Version 0.6
 
 <h2 id="news">What's new</h2>
-The following features are now supported:
+
+<p>Stand-alone mode creates (mostly) ready-to-run model comprising
+only structural equations. In this mode, multiple statements can be
+provided, separated by semicolons. Statements are restricted to
+variable and derivative variable definitions. Stand-alone model is
+intended to jump-start development, and it is not a substitute of
+full-fledged modeling tools or human-readable languages.
+</p>
+
+The following features are supported:
 
 <ul>
 <li>All operators defined by PharmML 0.3 should be supported</li>
@@ -42,13 +61,6 @@ The following features are now supported:
 </ul>
 
 
-<p>Stand-alone mode creates (mostly) ready-to-run model comprising
-only structural equations. In this mode, multiple statements can be
-provided, separated by semicolons. Statements are restricted to
-variable and derivative variable definitions. Stand-alone model is
-intended to jump-start development, and it is not a substitute of
-full-fledged modeling tools or human-readable languages.
-</p>
 
 
 <p>For a full list of the converter's features and limitations,
