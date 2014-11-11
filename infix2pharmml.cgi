@@ -46,9 +46,9 @@ print header(-expires=>'now'),
 	
 # print h2('Env:');  foreach my $key (sort(keys(%ENV))) {     print "$key = $ENV{$key}<br>\n";     }
 
-print h2('You entered:'),pre(code({-class=>"language-javascript"},$string));
+print h2('Your input'),pre(code({-class=>"language-javascript"},$string));
 
-print h2('Stand-alone mode:'), $standalone?'Yes':'No';
+print h2('Stand-alone mode'), $standalone?'Enabled':'Disabled';
 
 
 my $xml=eval {
@@ -66,7 +66,7 @@ if ($@) {
     $twig->safe_parse($xml);
     
     my $xml_indented=$twig->sprint;
-    print h2("PharmML:"),pre(code({-class=>"language-markup"},$xml_indented));
+    print h2("Generated PharmML"),pre({-class=>"line-numbers"},code({-class=>"language-markup"},$xml_indented));
 }
 
 print end_html;
