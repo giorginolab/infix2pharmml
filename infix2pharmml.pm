@@ -1,9 +1,84 @@
+# Please note that this is a quick hack. This is not how XML should be
+# generated.
+
 package infix2pharmml;
 
 use strict;
 use Carp;
 use infix2pharmml_eyapp;
 use warnings;
+
+our $fullmodel=0;
+
+my %symbols=();
+my @derivativeVariableList=();
+my @variableList=();
+my @functionList=();
+
+
+
+
+# Top-level symbols
+sub funcdef {
+    my ($id,$al,$eq)=@_;
+
+    croak "Function definitions not allowed in stand-alone mode yet" if $fullmodel;
+
+    my $out= "<FunctionDefinition xmlns=\"http://www.pharmml.org/2013/03/CommonTypes\"  symbId=\"$id\" symbolType=\"real\">".
+	$al.
+	"<Definition>$eq</Definition>".
+	"</FunctionDefinition>";
+    push @functionList,$out;
+    return $out;
+}
+
+# P. 42
+sub vardef {
+    my ($id,$y)=@_;
+    my $out= "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
+	assign($y).
+	"</ct:Variable>";
+    push @variableList,$out;
+    return $out;
+}
+
+# Can't be in StructuralModel.
+sub varass {
+    my ($id,$y)=@_;
+    croak "Variable assignments not allowed in stand-alone mode yet" if $fullmodel;
+    return "<ct:VariableAssignment>".symbref_no_store($id).
+	assign($y).
+	"</ct:VariableAssignment>";
+}
+
+sub diff {
+    my ($id,$t,$y)=@_;
+    my $out="<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
+	assign($y).
+	"<ct:IndependentVariable>".symbref_no_store($t)."</ct:IndependentVariable>".
+	"<ct:InitialCondition>".
+	"<!-- WARNING InitialCondition need be edited -->".
+	assign("<ct:Real>0</ct:Real>").
+	"</ct:InitialCondition>".
+	"</ct:DerivativeVariable>";
+    push @derivativeVariableList,$out;
+    return $out;
+}
+    
+
+
+
+
+sub eqn {
+    return "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">".
+	shift.
+	"</math:Equation>";
+}
+
+sub assign {
+    my $y=shift;
+    return "<ct:Assign>$y</ct:Assign>";
+}
 
 # Generic tag
 sub e {
@@ -30,7 +105,7 @@ sub u {
     return op("Uniop",@_);
 }
 
-# Function call (name, args)
+# Function call (name, args). Symbref should not be pushed in symbol table.
 sub fc {
     my ($id,$args)=@_;
     return "<math:FunctionCall>".
@@ -44,20 +119,6 @@ sub funcarg {
     return "<FunctionArgument symbId=\"$id\" symbolType=\"real\"/>"
 }
 
-sub funcdef {
-    my ($id,$al,$eq)=@_;
-    return "<FunctionDefinition xmlns=\"http://www.pharmml.org/2013/03/CommonTypes\"  symbId=\"$id\" symbolType=\"real\">".
-	$al.
-	"<Definition>$eq</Definition>".
-	"</FunctionDefinition>";
-}
-
-sub eqn {
-    return "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">".
-	shift.
-	"</math:Equation>";
-}
-
 # Function arguments
 sub fa {
     my ($id,$ref)=@_;
@@ -69,8 +130,19 @@ sub fa {
 # Symbol
 sub symbref {
     my $id=shift;
-    return "<ct:SymbRef symbIdRef=\"$id\"/>";
+    # Exception: time need not be stored in parameter block
+    if($id ne "t") {
+	$symbols{$id}=1;
+    }
+    return symbref_no_store($id);
 }
+
+# Symbol, but don't store in table
+sub symbref_no_store {
+    my $id=shift;
+    return "<ct:SymbRef blkId=\"p\" symbIdRef=\"$id\"/>";
+}
+
 
 # Constant
 sub const {
@@ -78,38 +150,19 @@ sub const {
     return "<math:Constant op=\"$id\"/>";
 }
 
-sub assign {
-    my $y=shift;
-    return "<ct:Assign>$y</ct:Assign>";
+
+
+
+
+sub getParameterModel {
+    my $out="<ParameterModel blkId=\"p\">";
+    foreach my $s (keys %symbols) {
+	$out.="<SimpleParameter symbId=\"$s\" />";
+    }
+    $out.="</ParameterModel>";
 }
 
-# P. 42
-sub vardef {
-    my ($id,$y)=@_;
-    return "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
-	assign($y).
-	"</ct:Variable>";
-}
 
-sub varass {
-    my ($id,$y)=@_;
-    return "<ct:VariableAssignment>".symbref($id).
-	assign($y).
-	"</ct:VariableAssignment>";
-}
-
-sub diff {
-    my ($id,$t,$y)=@_;
-    return "<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
-	assign($y).
-	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
-	"<ct:InitialCondition>".
-	"<!-- WARNING InitialCondition need be edited -->".
-	assign("<ct:Real>0</ct:Real>").
-	"</ct:InitialCondition>".
-	"</ct:DerivativeVariable>";
-}
-    
 
 
 my $parser=infix2pharmml_eyapp->new() or die "Building grammar"; 
@@ -119,6 +172,13 @@ sub xmlify {
     my $err;
     my $out;
 
+    my $tmpl;
+
+    if($fullmodel) {
+	open F,"<emptyModel.xml" or die "Opening template";
+	$tmpl=join("", <F>);
+    }
+
     {
 	 local $SIG{__WARN__} = sub { $err=$_[0]; };
 	 $out=$parser->Run;
@@ -126,10 +186,24 @@ sub xmlify {
 
     if (my $ne = $parser->YYNberr > 0) {
 	croak "There were $ne errors during parsing: $err\n";
-    } else {
+    } 
+
+    if(!$fullmodel) {
 	return $out;
+    } else {
+	my $pm=getParameterModel();
+	$tmpl =~ s/INFIX2PHARMML_PARAMETERMODEL/$pm/;
+
+	my $dv=join "",@derivativeVariableList;
+	$tmpl =~ s/INFIX2PHARMML_DERIVATIVEVARIABLE/$dv/;
+
+	my $vl=join "",@variableList;
+	$tmpl =~ s/INFIX2PHARMML_VARIABLE/$vl/;
+
+	return $tmpl;
     }
     
 }
+
 
 1;
