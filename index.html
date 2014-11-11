@@ -70,13 +70,31 @@ project's README</a>.
 <h2>Examples:</h2>
 <p> Click to copy in the input area above.
 <div style="text-indent: 2em">
-<p> <pre onclick="copyUp(event)">1+sqrt(a^2+b^2)</pre> 
-<p> <pre onclick="copyUp(event)">logx(x,e)</pre> 
-<p> <pre onclick="copyUp(event)">A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
-<p> <pre onclick="copyUp(event)">output=1+pi+myfunc(t=sin(x))</pre>
-<p> <pre onclick="copyUp(event)">diff(q,t)=1+sin(t)</pre>
-<p> <pre onclick="copyUp(event)">myFunction(x,y,z):=x^2+y^2</pre>
-<p> <pre onclick="copyUp(event)">myFunction(x=sin(t),y=4!)</pre> 
+ <table style="width:80%; margin:2em">
+  <tr>
+   <td><em>Simple mode</em></td>
+   <td><em>Stand-alone</em></td>
+  </tr>
+  <tr>
+   <td>  
+     <p> <pre onclick="copyUp(event)">1+sqrt(a^2+b^2)</pre> 
+     <p> <pre onclick="copyUp(event)">logx(x,e)</pre> 
+     <p> <pre onclick="copyUp(event)">A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
+     <p> <pre onclick="copyUp(event)">output=1+pi+myfunc(t=sin(x))</pre>
+     <p> <pre onclick="copyUp(event)">diff(q,t)=1+sin(t)</pre>
+     <p> <pre onclick="copyUp(event)">myFunction(x,y,z):=x^2+y^2</pre>
+     <p> <pre onclick="copyUp(event)">myFunction(x=sin(t),y=4!)</pre> 
+   </td>
+   <td>  
+     <p> <pre onclick="copyUp(event)">y:=A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
+     <p> <pre onclick="copyUp(event)">diff(a,t)=b; <br>diff(b,t)=-a;</pre> 
+     <p> <pre onclick="copyUp(event)">diff(A,t)=-k*A; <br>C:=A/V</pre> 
+     <p> <pre onclick="copyUp(event)">A:=dose*exp(-k*t); <br>C:=A/V</pre> 
+     <p> <pre onclick="copyUp(event)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre> 
+     <p> <pre onclick="copyUp(event)">diff(E,t)=Rin-Rout*E</pre> 
+   </td>
+  </tr>
+ </table>
 </div>
 
 
