@@ -45,7 +45,7 @@ print header(-expires=>'now'),
 	
 # print h2('Env:');  foreach my $key (sort(keys(%ENV))) {     print "$key = $ENV{$key}<br>\n";     }
 
-print h2('You entered:'),pre($string);
+print h2('You entered:'),pre(code({-class=>"language-javascript"},$string));
 
 print h2('Stand-alone mode:'), $standalone?'Yes':'No';
 
