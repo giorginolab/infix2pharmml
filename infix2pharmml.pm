@@ -241,7 +241,7 @@ sub xmlify {
 		$blk='blkIdRef="p"';
 	    } 
 	    my $r=sprintf('<ct:SymbRef symbIdRef="%s" %s />',$p,$blk);
-	    print "***** Match: $m $p $r\n";
+#	    print "***** Match: $m $p $r\n";
 	    $tmpl =~ s/$m/$r/g;
 	}
 
