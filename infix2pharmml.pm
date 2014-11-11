@@ -81,7 +81,7 @@ sub diff {
 	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
 	"<ct:InitialCondition>".
 	"<!-- WARNING InitialCondition need be edited -->".
-	assign("<ct:Real>0</ct:Real>").
+#	assign("<ct:Real>0</ct:Real>").
 	"</ct:InitialCondition>".
 	"</ct:DerivativeVariable>";
     push @derivativeVariableList,$out;
