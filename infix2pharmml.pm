@@ -45,10 +45,10 @@ sub funcdef {
 
     croak "Function definitions not allowed in stand-alone mode yet" if $fullmodel;
 
-    my $out= "<FunctionDefinition xmlns=\"http://www.pharmml.org/2013/03/CommonTypes\"  symbId=\"$id\" symbolType=\"real\">".
+    my $out= "<ct:FunctionDefinition symbId=\"$id\" symbolType=\"real\">".
 	$al.
-	"<Definition>$eq</Definition>".
-	"</FunctionDefinition>";
+	"<ct:Definition>$eq</ct:Definition>".
+	"</ct:FunctionDefinition>";
     push @functionList,$out;
     return $out;
 }
@@ -79,9 +79,11 @@ sub diff {
     my $out="<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
 	assign($y).
 	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
-	"<ct:InitialCondition>".
 	"<!-- FIXME InitialCondition need be edited -->".
+	"<ct:InitialCondition>".
+	"<ct:InitialValue>".
 	assign(eqn(symbref("${id}_init"))).
+	"</ct:InitialValue>".
 	"</ct:InitialCondition>".
 	"</ct:DerivativeVariable>";
     push @derivativeVariableList,$out;
@@ -94,7 +96,7 @@ sub diff {
 
 
 sub eqn {
-    return "<math:Equation xmlns=\"http://www.pharmml.org/2013/03/Maths\">".
+    return "<math:Equation>".
 	shift.
 	"</math:Equation>";
 }
@@ -121,12 +123,12 @@ sub op {
 
 # Binop
 sub b {
-    return op("Binop",@_);
+    return op("math:Binop",@_);
 }
 
 # Uniop
 sub u {
-    return op("Uniop",@_);
+    return op("math:Uniop",@_);
 }
 
 # Function call (name, args). Symbref should not be pushed in symbol table.
@@ -140,7 +142,7 @@ sub fc {
 
 sub funcarg {
     my $id=shift;
-    return "<FunctionArgument symbId=\"$id\" symbolType=\"real\"/>"
+    return "<ct:FunctionArgument symbId=\"$id\" symbolType=\"real\"/>"
 }
 
 # Function arguments
