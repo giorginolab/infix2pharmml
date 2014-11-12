@@ -29,8 +29,8 @@ use warnings;
 
 our $fullmodel=0;
 
-my %localSymbols=("t"=>1);
-my %allSymbols=("t"=>1);
+my %localSymbols=("t"=>2);
+my %allSymbols=("t"=>2);
 
 my @derivativeVariableList=();
 my @variableList=();
@@ -217,6 +217,7 @@ sub xmlify {
     } else {
 	open F,"<emptyModel.xml" or die "Opening template";
 	my $tmpl=join("", <F>);
+	close F;
 
 	my $pm=getParameterModel();
 	$tmpl =~ s/INFIX2PHARMML_PARAMETERMODEL/$pm/;
@@ -241,14 +242,69 @@ sub xmlify {
 		$blk='blkIdRef="p"';
 	    } 
 	    my $r=sprintf('<ct:SymbRef symbIdRef="%s" %s />',$p,$blk);
-#	    print "***** Match: $m $p $r\n";
 	    $tmpl =~ s/$m/$r/g;
 	}
 
 	return $tmpl;
     }
-    
 }
+
+
+
+# p <- list( name  = c('k'), 
+#            value = c(.1))
+
+
+# A <- list(name=c('A'),time=seq(0,5,length=20))
+# B <- list(name=c('B'),time=seq(0,5,length=20))
+
+# out <- list(A,B)
+
+# res <- simulx( model     = 'model/test.xml',
+#                parameter = p,
+#                output    = out
+#          );
+
+
+# Only valid after the model has been xmlified
+sub getSimulxCode {
+    my @par;
+    my @parq;
+    my $np=0;
+    foreach my $s (keys %allSymbols) {
+	if(! defined $localSymbols{$s}) {
+	    push @par,$s;
+	    push @parq,qq("$s");
+	    $np++;
+	}
+    }
+
+    my $out= "p <- list( name  = c(" . join(",",@parq). "),\n";
+    $out.=   "           value = c(".join(",",(1)x$np).")) # FIXME\n";
+
+    my %localVars=%localSymbols;
+    delete $localVars{"t"};
+
+    $out.="\n";
+
+    foreach my $s (keys %localVars) {
+	$out.=sprintf(qq(%s <- list(name=c('%s'),time=seq(0,5,length=20)) # FIXME\n),$s,$s);
+    }
+
+    $out.="\n";
+    $out.="out <- list(".join(",",keys %localVars).")\n";
+
+    $out.=<<EOF;
+
+res <- simulx( model     = 'model/test.xml',
+               parameter = p,
+               output    = out  );
+EOF
+
+}
+    
+
+
 
 
 1;

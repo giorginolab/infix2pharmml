@@ -51,6 +51,10 @@ $twig->parse($xml);
 $twig->print;
 print "\n\n";
 
+if( $infix2pharmml::fullmodel ) {
+    print "\n\nSimulx:\n";
+    print infix2pharmml::getSimulxCode();
+}
 
 
 	

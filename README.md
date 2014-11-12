@@ -23,15 +23,12 @@ You should have received a copy of the GNU Affero General Public License along w
 Usage
 -----
 
-The converter can be run locally as _convert.pl_. The infix expression
-to convert is expected either interactively, or as the first
-command-line argument. The `-s` switch activates the stand-alone model
-output.
+The converter can be run locally as `convert.pl`. The infix expression to convert is expected either interactively, or as the first command-line argument. The `-s` switch activates the stand-alone model output.
 
 E.g: open a shell, then
 
 ~~~~~
-shell>   perl -w convert.pl [-s]
+shell>   perl -w convert.pl
 
 Enter the expression to convert:
 sin(-2*t)
@@ -63,7 +60,11 @@ Supported features
 * Calls to user-defined functions use a special syntax described below.
 * Factorial can be expressed as "factorial()" or with the usual exclamation mark.
 
-In stand-alone mode, the following caveats apply:
+
+Stand-alone mode
+----------------
+
+Stand-alone mode generates full models which should be approximately ready to run. The following caveats apply:
 
 * Only variable assignments and derivative variables are supported.
 * Multiple statements can be provided, separated by semicolon.
@@ -77,7 +78,7 @@ Limitations
 * Logical operators are _not_ supported.
 * Piecewise functions are _not_ supported.
 * Initial conditions and starting time for differential equations are arbitrarily set to zero.
-* Code generation does not rely on the official _libpharmml_ API.
+* Code generation is based on string processing rather than a more appropriate abstract syntax tree, and does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
 
 
 
@@ -89,7 +90,7 @@ These constants and aliases are defined:
 PharmML      | Aliases
 ------------ | ----------
 exponentiale | e
-pi	     |
+pi	         |
 infinity     | inf
 notanumber   | nan, NaN
 
