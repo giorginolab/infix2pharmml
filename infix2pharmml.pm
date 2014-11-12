@@ -80,7 +80,7 @@ sub diff {
 	assign($y).
 	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
 	"<ct:InitialCondition>".
-	"<!-- WARNING InitialCondition need be edited -->".
+	"<!-- FIXME InitialCondition need be edited -->".
 #	assign("<ct:Real>0</ct:Real>").
 	"</ct:InitialCondition>".
 	"</ct:DerivativeVariable>";

@@ -21,6 +21,7 @@
 %left   '!'
 %left   NEG
 
+# "STARTRULE" will be replaced by makefile
 %start STARTRULE
 
 %%

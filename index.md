@@ -13,7 +13,7 @@ page at SourceForge.
 
 Version 0.6
 
-What's new {#news}
+What's new
 ----------
 
 Stand-alone mode creates (mostly) ready-to-run model comprising only

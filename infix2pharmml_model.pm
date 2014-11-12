@@ -47,7 +47,7 @@ our $LEX = sub {
       /\G\b(pi)\b/gc and return ('PI', $1);
       /\G\b(inf|infinity)\b/gc and return ('INF', $1);
       /\G\b(exp|log|minus|factorial|sin|cos|tan|sec|csc|cot|sinh|cosh|tanh|sech|csch|coth|arcsin|arccos|arctan|arcsec|arccsc|arccot|arcsinh|arccosh|arctanh|arcsech|arccsch|arccoth|floor|ceiling|abs|logistic|logit|probit|ln|factln|gammaln|normcdf|sqrt)\b/gc and return ('UNIOP', $1);
-      /\G\b(atan2|logx|min|max|root)\b/gc and return ('BINOP', $1);
+      /\G\b(atan2|logx|min|max|root|rem)\b/gc and return ('BINOP', $1);
       /\G([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/gc and return ('NUM', $1);
       /\G([A-Za-z][A-Za-z0-9_]*)/gc and return ('VAR', $1);
 
@@ -779,217 +779,217 @@ sub new {
 	[#Rule _OPTIONAL
 		 'OPTIONAL-1', 1,
 sub {
-#line 33 "infix2pharmml_model.eyp"
+#line 34 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
 #line 784 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-1', 0,
 sub {
-#line 33 "infix2pharmml_model.eyp"
+#line 34 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
 #line 791 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-2', 1,
 sub {
-#line 34 "infix2pharmml_model.eyp"
+#line 35 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
 #line 798 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-2', 0,
 sub {
-#line 34 "infix2pharmml_model.eyp"
+#line 35 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
 #line 805 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-3', 1,
 sub {
-#line 36 "infix2pharmml_model.eyp"
+#line 37 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
 #line 812 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-3', 0,
 sub {
-#line 36 "infix2pharmml_model.eyp"
+#line 37 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
 #line 819 ./infix2pharmml_model.pm
 	],
 	[#Rule structuralstmt_9
 		 'structuralstmt', 4,
 sub {
-#line 33 "infix2pharmml_model.eyp"
+#line 34 "infix2pharmml_model.eyp"
 infix2pharmml::vardef($_[1],$_[3])}
 #line 826 ./infix2pharmml_model.pm
 	],
 	[#Rule structuralstmt_10
 		 'structuralstmt', 7,
 sub {
-#line 35 "infix2pharmml_model.eyp"
+#line 36 "infix2pharmml_model.eyp"
 infix2pharmml::diff($_[2],$_[4],$_[6])}
 #line 833 ./infix2pharmml_model.pm
 	],
 	[#Rule structuralstmt_11
 		 'structuralstmt', 7,
 sub {
-#line 37 "infix2pharmml_model.eyp"
+#line 38 "infix2pharmml_model.eyp"
 infix2pharmml::diff($_[2],$_[4],$_[6])}
 #line 840 ./infix2pharmml_model.pm
 	],
 	[#Rule equation_12
 		 'equation', 1,
 sub {
-#line 51 "infix2pharmml_model.eyp"
+#line 52 "infix2pharmml_model.eyp"
 infix2pharmml::eqn($_[1])}
 #line 847 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_13
 		 'expr', 3,
 sub {
-#line 55 "infix2pharmml_model.eyp"
+#line 56 "infix2pharmml_model.eyp"
 infix2pharmml::b("plus",  $_[1], $_[3])}
 #line 854 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_14
 		 'expr', 3,
 sub {
-#line 56 "infix2pharmml_model.eyp"
+#line 57 "infix2pharmml_model.eyp"
 infix2pharmml::b("minus", $_[1], $_[3])}
 #line 861 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_15
 		 'expr', 3,
 sub {
-#line 57 "infix2pharmml_model.eyp"
+#line 58 "infix2pharmml_model.eyp"
 infix2pharmml::b("times", $_[1], $_[3])}
 #line 868 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_16
 		 'expr', 3,
 sub {
-#line 58 "infix2pharmml_model.eyp"
+#line 59 "infix2pharmml_model.eyp"
 infix2pharmml::b("divide",$_[1], $_[3])}
 #line 875 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_17
 		 'expr', 3,
 sub {
-#line 59 "infix2pharmml_model.eyp"
+#line 60 "infix2pharmml_model.eyp"
 infix2pharmml::b("power", $_[1], $_[3])}
 #line 882 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_18
 		 'expr', 1,
 sub {
-#line 60 "infix2pharmml_model.eyp"
+#line 61 "infix2pharmml_model.eyp"
 infix2pharmml::e("ct:Real",$_[1])}
 #line 889 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_19
 		 'expr', 1,
 sub {
-#line 61 "infix2pharmml_model.eyp"
+#line 62 "infix2pharmml_model.eyp"
 infix2pharmml::const($_[1])}
 #line 896 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_20
 		 'expr', 2,
 sub {
-#line 62 "infix2pharmml_model.eyp"
+#line 63 "infix2pharmml_model.eyp"
 infix2pharmml::u("factorial",$_[1])}
 #line 903 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_21
 		 'expr', 2,
 sub {
-#line 63 "infix2pharmml_model.eyp"
+#line 64 "infix2pharmml_model.eyp"
 $_[2]}
 #line 910 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_22
 		 'expr', 2,
 sub {
-#line 64 "infix2pharmml_model.eyp"
+#line 65 "infix2pharmml_model.eyp"
 infix2pharmml::u("minus",$_[2])}
 #line 917 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_23
 		 'expr', 3,
 sub {
-#line 65 "infix2pharmml_model.eyp"
+#line 66 "infix2pharmml_model.eyp"
 $_[2]}
 #line 924 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_24
 		 'expr', 4,
 sub {
-#line 66 "infix2pharmml_model.eyp"
+#line 67 "infix2pharmml_model.eyp"
 infix2pharmml::u($_[1],$_[3])}
 #line 931 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_25
 		 'expr', 6,
 sub {
-#line 67 "infix2pharmml_model.eyp"
+#line 68 "infix2pharmml_model.eyp"
 infix2pharmml::b($_[1],$_[3],$_[5])}
 #line 938 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_26
 		 'expr', 4,
 sub {
-#line 68 "infix2pharmml_model.eyp"
+#line 69 "infix2pharmml_model.eyp"
 infix2pharmml::fc($_[1],$_[3])}
 #line 945 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_27
 		 'expr', 1,
 sub {
-#line 69 "infix2pharmml_model.eyp"
+#line 70 "infix2pharmml_model.eyp"
 infix2pharmml::symbref($_[1])}
 #line 952 ./infix2pharmml_model.pm
 	],
 	[#Rule constant_28
 		 'constant', 1,
 sub {
-#line 77 "infix2pharmml_model.eyp"
+#line 78 "infix2pharmml_model.eyp"
 "notanumber"}
 #line 959 ./infix2pharmml_model.pm
 	],
 	[#Rule constant_29
 		 'constant', 1,
 sub {
-#line 78 "infix2pharmml_model.eyp"
+#line 79 "infix2pharmml_model.eyp"
 "pi"}
 #line 966 ./infix2pharmml_model.pm
 	],
 	[#Rule constant_30
 		 'constant', 1,
 sub {
-#line 79 "infix2pharmml_model.eyp"
+#line 80 "infix2pharmml_model.eyp"
 "exponentiale"}
 #line 973 ./infix2pharmml_model.pm
 	],
 	[#Rule constant_31
 		 'constant', 1,
 sub {
-#line 80 "infix2pharmml_model.eyp"
+#line 81 "infix2pharmml_model.eyp"
 "infinity"}
 #line 980 ./infix2pharmml_model.pm
 	],
 	[#Rule argpairlist_32
 		 'argpairlist', 3,
 sub {
-#line 84 "infix2pharmml_model.eyp"
+#line 85 "infix2pharmml_model.eyp"
  $_[1].$_[3] }
 #line 987 ./infix2pharmml_model.pm
 	],
 	[#Rule argpairlist_33
 		 'argpairlist', 3,
 sub {
-#line 85 "infix2pharmml_model.eyp"
+#line 86 "infix2pharmml_model.eyp"
 infix2pharmml::fa($_[1],$_[3]) }
 #line 994 ./infix2pharmml_model.pm
 	]
@@ -1045,7 +1045,7 @@ infix2pharmml::fa($_[1],$_[3]) }
   $self;
 }
 
-#line 92 "infix2pharmml_model.eyp"
+#line 93 "infix2pharmml_model.eyp"
 
 
 
