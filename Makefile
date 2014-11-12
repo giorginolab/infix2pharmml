@@ -1,4 +1,4 @@
-default: infix2pharmml_statement.pm infix2pharmml_model.pm
+default: infix2pharmml_statement.pm infix2pharmml_model.pm index.html
 
 
 
@@ -15,6 +15,9 @@ infix2pharmml_model.eyp: infix2pharmml_base.eyp
 
 infix2pharmml_model.pm: infix2pharmml_model.eyp
 	eyapp  $<
+
+index.html: index.md
+	pandoc -f markdown -t html -H index.head $< > $@
 
 
 .PHONY:

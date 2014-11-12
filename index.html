@@ -1,98 +1,84 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<style>
-body {margin: 2em}
-</style>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-3201754-5', 'auto');
-  ga('send', 'pageview');
-
-</script>
-<script  type="text/javascript">
-// <![CDATA[
-function copyUp(e,st) {
-	var targ;
-	if (!e) var e = window.event;
-	if (e.target) targ = e.target;
-	else if (e.srcElement) targ = e.srcElement;
-	if (targ.nodeType == 3) // defeat Safari bug
-		targ = targ.parentNode;
-	var math = document.getElementById("math");
-	math.value=targ.textContent;
-        document.getElementById("standalone").checked=st;
-}
-// ]]>
-</script> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+  body {margin: 2em}
+  </style>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-3201754-5', 'auto');
+    ga('send', 'pageview');
+  
+  </script>
+  <script  type="text/javascript">
+  // <![CDATA[
+  function copyUp(e,st) {
+  	var targ;
+  	if (!e) var e = window.event;
+  	if (e.target) targ = e.target;
+  	else if (e.srcElement) targ = e.srcElement;
+  	if (targ.nodeType == 3) // defeat Safari bug
+  		targ = targ.parentNode;
+  	var math = document.getElementById("math");
+  	math.value=targ.textContent;
+          document.getElementById("standalone").checked=st;
+  }
+  // ]]>
+  </script> 
 </head>
-
 <body>
-<img src="CNR_logo_100.png" alt="Logo CNR" style="float:right"/>
-<h1>Infix notation to PharmML math online converter</h1>
-<i>Toni Giorgino at isib.cnr.it</i>
-
-
-<p> This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> math-XML markup.  For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>  project  page at SourceForge.
-
-<p> Version 0.6
-
+<p><img src="CNR_logo_100.png" alt="Logo CNR" style="float:right"/></p>
+<h1 id="infix-notation-to-pharmml-math-online-converter">Infix notation to PharmML math online converter</h1>
+<p><em>Toni Giorgino at isib.cnr.it</em></p>
+<p>This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> math-XML markup. For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> project page at SourceForge.</p>
+<p>Version 0.6</p>
 <h2 id="news">What's new</h2>
-
-<p>Stand-alone mode creates (mostly) ready-to-run model comprising
-only structural equations. In this mode, multiple statements can be
-provided, separated by semicolons. Statements are restricted to
-variable and derivative variable definitions. Stand-alone model is
-intended to jump-start development, and it is not a full-fledged
-modeling tool.
-</p>
-
-The following features are supported:
-
+<p>Stand-alone mode creates (mostly) ready-to-run model comprising only structural equations. In this mode, multiple statements can be provided, separated by semicolons. Statements are restricted to variable and derivative variable definitions. Stand-alone model is intended to jump-start development, and it is not a full-fledged modeling tool.</p>
+<p>The following features are supported:</p>
 <ul>
 <li>All operators defined by PharmML 0.3 should be supported</li>
 <li>Constants (with user-friendly aliases, such as <em>e</em> for <em>exponentiale</em>) - see below.</li>
 <li>Variable assignments, such as <em>a=b+c</em> and definitions <em>a:=b+c</em></li>
 <li>Derivative variable (ODE) definitions, as <em>diff(q,t):=1+sin(t)</em>. Initial condition has to be edited by hand.</li>
 <li>Function definitions, such as <em>f(x,y):=x+y</em></li>
-<li>Use <em>ln</em> for the natural logarithm. The <em>logx</em> function is always two-argument (argument, base). </li>
+<li>Use <em>ln</em> for the natural logarithm. The <em>logx</em> function is always two-argument (argument, base).</li>
 <li>Calls to user-defined functions use a special syntax described below.</li>
-<li>Factorial can be expressed as "factorial()" or with the usual exclamation mark.</li>
+<li>Factorial can be expressed as &quot;factorial()&quot; or with the usual exclamation mark.</li>
 <li>Stand-alone model to jump-start structural models</li>
 </ul>
-
-
-
-
-<p>For a full list of the converter's features and limitations,
-see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the
-project's README</a>.
-
-
-
-
-<h2>Enter the formula below</h2>
+<p>For a full list of the converter's features and limitations, see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the project's README</a>.</p>
+<h2 id="enter-the-formula-below">Enter the formula below</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
-<textarea rows="4" cols="50" id="math" name="math">1+sin(t)+b</textarea>
-<input type="checkbox" id="standalone" name="standalone" value="true">Build a stand-alone model<br>
-<input type="submit" value="Submit">
+<textarea rows="4" cols="50" id="math" name="math">
+1+sin(t)+b
+</textarea>
+<input type="checkbox" id="standalone" name="standalone" value="true">Build a stand-alone model<br> <input type="submit" value="Submit">
 </form> 
 
 
+<h2 id="examples">Examples</h2>
+<p>Click to copy in the input area above.</p>
 
-<h2>Examples</h2>
-<p> Click to copy in the input area above.
-
- <table style="width:80%; margin:2em">
+<table style="width:80%; margin:2em">
   <tr>
-   <td><em>Single-statement mode</em></td>
-   <td><em>Stand-alone model mode</em></td>
+   <td>
+<em>Single-statement mode</em>
+</td>
+   <td>
+<em>Stand-alone model mode</em>
+</td>
   </tr>
   <tr>
-   <td>  
+   <td>
      <p> <pre onclick="copyUp(event,false)">1+sqrt(a^2+b^2)</pre> 
      <p> <pre onclick="copyUp(event,false)">logx(x,e)</pre> 
      <p> <pre onclick="copyUp(event,false)">A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
@@ -101,7 +87,7 @@ project's README</a>.
      <p> <pre onclick="copyUp(event,false)">myLength(x,y,z):=x^2+y^2+z^2</pre>
      <p> <pre onclick="copyUp(event,false)">sqrt(myLength(x=sin(t),y=4!,z=0))</pre> 
    </td>
-   <td>  
+   <td>
      <p> <pre onclick="copyUp(event,true)">y:=A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(a,t)=b; <br>diff(b,t)=-a;</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(A,t)=-k*A; <br>C:=A/V</pre> 
@@ -114,24 +100,10 @@ project's README</a>.
  </table>
 
 
-
 <h2 id="license">License</h2>
-<p> <i>   infix2pharmml - Infix notation to PharmML math online converter </i>
-
-<p>
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
-
-<p>
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-<p>
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
-
-</body></html>
+<p><em>infix2pharmml - Infix notation to PharmML math online converter</em></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.</p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+</body>
+</html>
