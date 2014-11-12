@@ -8,6 +8,7 @@ PharmML is a markup for pharmacometrics documented at http://pharmml.org/ and de
 Author: Toni G at ISIB CNR
 
 
+
 License
 -------
 
@@ -19,11 +20,12 @@ You should have received a copy of the GNU Affero General Public License along w
 
 
 
-
 Usage
 -----
 
-The converter can be run locally as `convert.pl`. The infix expression to convert is expected either interactively, or as the first command-line argument. The `-s` switch activates the stand-alone model output.
+Online: see http://infix2pharmml.sourceforge.net .
+
+Offline: use `convert.pl`. The infix expression to convert is expected either interactively, or as the first command-line argument. The `-s` switch activates the stand-alone model output.
 
 E.g: open a shell, then
 
@@ -73,11 +75,11 @@ Stand-alone mode generates full models which should be approximately ready to ru
 Limitations
 -----------
 
-* All symbols are assumed to reference variables in the current block. In other words, the _blkIdRef_ attribute is never generated.
+* In single-statement mode, all symbols are assumed to reference variables in the current block (in other words, the _blkIdRef_ attribute is never generated).
 * All symbols are assumed to be of  type _real_.
 * Logical operators are _not_ supported.
 * Piecewise functions are _not_ supported.
-* Initial conditions and starting time for differential equations are arbitrarily set to zero.
+* Initial conditions and starting time for differential equations are missing.
 * Code generation is based on string processing rather than a more appropriate abstract syntax tree, and does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
 
 
