@@ -79,6 +79,7 @@ Limitations
 * All symbols are assumed to be of  type _real_.
 * Logical operators are _not_ supported.
 * Piecewise functions are _not_ supported.
+* Matrix and vector operations are absent.
 * Initial conditions and starting time for differential equations are missing.
 * Code generation is based on string processing rather than a more appropriate abstract syntax tree, and does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
 

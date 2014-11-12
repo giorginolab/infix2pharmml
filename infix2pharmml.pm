@@ -53,17 +53,6 @@ sub funcdef {
     return $out;
 }
 
-# P. 42
-sub vardef {
-    my ($id,$y)=@_;
-    my $out= "<ct:Variable symbId=\"$id\" symbolType=\"real\">".
-	assign($y).
-	"</ct:Variable>";
-    push @variableList,$out;
-    $localSymbols{$id}=1;
-    return $out;
-}
-
 # Can't be in StructuralModel.
 sub varass {
     my ($id,$y)=@_;
@@ -74,15 +63,31 @@ sub varass {
     $localSymbols{$id}=1;
 }
 
+# P. 42
+sub vardef {
+    my ($id,$y)=@_;
+    my $out=
+	"<!-- $id (Variable) -->".
+	"<ct:Variable symbId=\"$id\" symbolType=\"real\">".
+	assign($y).
+	"</ct:Variable>";
+    push @variableList,$out;
+    $localSymbols{$id}=1;
+    return $out;
+}
+
+
 sub diff {
     my ($id,$t,$y)=@_;
-    my $out="<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
+    my $out=
+	"<!-- $id' (ODE) -->".
+	"<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
 	assign($y).
 	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
-	"<!-- FIXME InitialCondition need be edited -->".
 	"<ct:InitialCondition>".
 	"<ct:InitialValue>".
-	assign(eqn(symbref("${id}_init"))).
+#	assign(eqn(symbref("${id}_init"))).
+	assign(symbref("${id}_init")).
 	"</ct:InitialValue>".
 	"</ct:InitialCondition>".
 	"</ct:DerivativeVariable>";
