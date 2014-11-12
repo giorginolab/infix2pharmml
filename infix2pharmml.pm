@@ -302,9 +302,6 @@ res <- simulx( model     = 'model/test.xml',
 EOF
 
 }
-    
-
-
 
 
 1;
