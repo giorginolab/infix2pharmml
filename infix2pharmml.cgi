@@ -69,7 +69,7 @@ if ($@) {
     print h2("Generated PharmML"),pre({-class=>"line-numbers"},code({-class=>"language-markup"},$xml_indented));
     
     if($standalone) {
-	print h2("Simulx skeleton code"),pre(code({-class=>"language-r"},infix2pharmml::getSimulxCode()));
+	print h2("Simulx skeleton code"),pre(code({-class=>"language-javascript"},infix2pharmml::getSimulxCode()));
     }
 
 }
