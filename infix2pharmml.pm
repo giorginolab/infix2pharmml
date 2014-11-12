@@ -81,7 +81,7 @@ sub diff {
 	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
 	"<ct:InitialCondition>".
 	"<!-- FIXME InitialCondition need be edited -->".
-#	assign("<ct:Real>0</ct:Real>").
+	assign(eqn(symbref("${id}_init"))).
 	"</ct:InitialCondition>".
 	"</ct:DerivativeVariable>";
     push @derivativeVariableList,$out;
