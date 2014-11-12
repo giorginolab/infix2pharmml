@@ -132,3 +132,9 @@ which should yield
 ~~~~
 
 Note that arguments are always wrapped into _Equation_ elements, even when they could be omitted.
+
+
+Acknowledgments
+---------------
+
+This software is based on the [eyapp](http://search.cpan.org/~casiano/Parse-Eyapp-1.182/lib/Parse/Eyapp/eyapp) parser and several other Perl modules. Online syntax highlighting provided by [prism](http://prismjs.com/).
