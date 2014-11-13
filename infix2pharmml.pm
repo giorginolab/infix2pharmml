@@ -295,7 +295,7 @@ sub getSimulxCode {
     $out.="\n";
 
     foreach my $s (keys %localVars) {
-	$out.=sprintf(qq(%s <- list(name=c('%s'),time=seq(0,5,length=20)) # FIXME\n),$s,$s);
+	$out.=sprintf(qq(%s <- list(name=c('%s'),time=seq(0,5,length=21)) # FIXME\n),$s,$s);
     }
 
     $out.="\n";

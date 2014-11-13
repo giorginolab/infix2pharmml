@@ -3,41 +3,42 @@
 Infix notation to PharmML math online converter
 ===============================================
 
-*Toni Giorgino at isib.cnr.it*
+<toni.giorgino@isib.cnr.it>
 
 This web service converts a mathematical expression in the usual infix
-notation into the corresponding [PharmML](http://pharmml.org/) math-XML
+notation into the corresponding [PharmML](http://pharmml.org/)
 markup. For details and source code see the
-[infix2pharmml](http://sourceforge.net/projects/infix2pharmml/) project
-page at SourceForge.
+[infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
+project page at SourceForge.
 
 Version 0.6
+
 
 What's new
 ----------
 
-Stand-alone mode creates (mostly) ready-to-run model comprising only
-structural equations. In this mode, multiple statements can be provided,
-separated by semicolons. Statements are restricted to variable and
-derivative variable definitions. Stand-alone model is intended to
-jump-start development, and it is not a full-fledged modeling tool.
+The new *stand-alone mode* creates (mostly) ready-to-run model (only
+comprising structural equations). In this mode, multiple statements
+can be provided, separated by semicolons. Statements are restricted to
+variable and derivative variable definitions. Stand-alone mode is
+intended to jump-start development, and it is not a full-fledged
+modeling tool.
 
 The following features are supported:
 
 -   All operators defined by PharmML 0.3 should be supported
--   Constants (with user-friendly aliases, such as *e* for
-    *exponentiale*) - see below.
--   Variable assignments, such as *a=b+c* and definitions *a:=b+c*
--   Derivative variable (ODE) definitions, as *diff(q,t):=1+sin(t)*.
+-   Constants (with user-friendly aliases, such as `e` for
+    *exponentiale*).
+-   Variable assignments, as in `a=b+c` and definitions, as `a:=b+c`
+-   Derivative variable (ODE) definitions, as `diff(q,t):=1+sin(t)`.
     Initial condition has to be edited by hand.
--   Function definitions, such as *f(x,y):=x+y*
--   Use *ln* for the natural logarithm. The *logx* function is always
+-   Function definitions, such as `f(x,y):=x+y`.
+-   Use `ln` for the natural logarithm. The `logx` function is always
     two-argument (argument, base).
 -   Calls to user-defined functions use a special syntax described
     below.
--   Factorial can be expressed as "factorial()" or with the usual
+-   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
--   Stand-alone model to jump-start structural models
 
 For a full list of the converter's features and limitations, see [the
 project's
@@ -61,7 +62,7 @@ Click to copy in the input area above.
 
 
  <table style="width:80%; margin:2em">
-  <tr>
+  <tr style="background-color: rgb(15, 42, 82); color: white;">
    <td><em>Single-statement mode</em></td>
    <td><em>Stand-alone model mode</em></td>
   </tr>
