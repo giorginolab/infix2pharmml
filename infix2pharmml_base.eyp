@@ -36,6 +36,8 @@ structuralstmt:  VAR ':=' equation ';' ?       {infix2pharmml::vardef($_[1],$_[3
                                            {infix2pharmml::diff($_[2],$_[4],$_[6])}
               | 'diff(' VAR ',' VAR '):=' equation ';' ?
                                            {infix2pharmml::diff($_[2],$_[4],$_[6])}
+              | 'macro(' VAR ',' macroargpairlist ')' ';' ?
+                                           {infix2pharmml::macro($_[2],$_[4])}
     ;
 
 statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
@@ -84,6 +86,10 @@ constant:     NAN          {"notanumber"}
 
 argpairlist:    argpairlist ',' argpairlist  { $_[1].$_[3] }
               | VAR '=' equation             {infix2pharmml::fa($_[1],$_[3]) } 
+    ;
+
+macroargpairlist:    macroargpairlist ',' macroargpairlist  { $_[1].$_[3] }
+              | VAR '=' equation             {infix2pharmml::macroarg($_[1],$_[3]) } 
     ;
 
 varlist:        varlist ',' varlist  {$_[1].$_[3]}

@@ -35,7 +35,7 @@ my %allSymbols=("t"=>2);
 my @derivativeVariableList=();
 my @variableList=();
 my @functionList=();
-
+my @macroText=();
 
 
 
@@ -142,6 +142,25 @@ sub u {
     return op("math:Uniop",@_);
 }
 
+# Macro call (name, args). Symbref should not be pushed in symbol table.
+sub macro {
+    my ($id,$args)=@_;
+    my $o=
+    "<$id>".
+    $args.
+    "</$id>";
+    push @macroText,$o;
+}
+
+# Function arguments
+sub macroarg {
+    my ($id,$ref)=@_;
+    return "<Value argument=\"$id\">".
+	$ref.
+	"</Value>";
+}
+
+
 # Function call (name, args). Symbref should not be pushed in symbol table.
 sub fc {
     my ($id,$args)=@_;
@@ -240,6 +259,9 @@ sub xmlify {
 
 	my $vl=join "",@variableList;
 	$tmpl =~ s/INFIX2PHARMML_VARIABLE/$vl/;
+
+	my $mac=join "",@macroText;
+	$tmpl =~ s/INFIX2PHARMML_MACROS/$mac/;
 
 	my $dt=localtime;
 	$tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
