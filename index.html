@@ -57,7 +57,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+
 <li>Use <code>ln</code> for the natural logarithm. The <code>logx</code> function is always two-argument (argument, base).</li>
 <li>Calls to user-defined functions use a special syntax described below.</li>
 <li>Factorial can be expressed as <code>factorial()</code> or with the usual exclamation mark.</li>
-<li>Preliminary macro support, as e.g. <code>Oral(2)</code> or <code>IV(adm=1)</code>. Arguments names are unchecked.</li>
+<li>Experimental macro support in model mode, as e.g. <code>Oral(2)</code> or <code>IV(adm=1)</code>. Arguments names are unchecked. Other macros are <code>Peripheral</code>, <code>Compartment</code>, <code>Elimination</code>.</li>
 </ul>
 <p>For a full list of the converter's features and limitations, see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the project's README</a>.</p>
 <h2 id="enter-the-formula-below">Enter the formula below</h2>
@@ -96,6 +96,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+
      <p> <pre onclick="copyUp(event,true)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(E,t)=Rin-Rout*E</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;<br>diff(Z,t)=-lambda*Z+lambda*(I-Ib);</pre> 
+     <p> <pre onclick="copyUp(event,true)">Peripheral(k12, k21, amount=Ap1); E:=Ap1^2</pre> 
    </td>
   </tr>
  </table>

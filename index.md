@@ -40,8 +40,8 @@ The following features are supported:
     below.
 -   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
--   Preliminary macro support, as e.g. `Oral(2)` or `IV(adm=1)`. Arguments
-    names are unchecked.
+-   Experimental macro support in model mode, as e.g. `Oral(2)` or `IV(adm=1)`. Arguments
+    names are unchecked. Other macros are `Peripheral`, `Compartment`, `Elimination`.
 
 
 For a full list of the converter's features and limitations, see [the
@@ -88,6 +88,7 @@ Click to copy in the input area above.
      <p> <pre onclick="copyUp(event,true)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(E,t)=Rin-Rout*E</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;<br>diff(Z,t)=-lambda*Z+lambda*(I-Ib);</pre> 
+     <p> <pre onclick="copyUp(event,true)">Peripheral(k12, k21, amount=Ap1); E:=Ap1^2</pre> 
    </td>
   </tr>
  </table>
