@@ -70,6 +70,7 @@ sub vardef {
     my ($id,$y)=@_;
     my $desc="Variable $id";
     my $out=
+	"<!-- $id (Variable) -->".
 	"<ct:Variable symbId=\"$id\" symbolType=\"real\">".
 	"<ct:Description>$desc</ct:Description>".
 	assign($y).
@@ -84,6 +85,7 @@ sub diff {
     my ($id,$t,$y)=@_;
     my $desc="ODE: $id";
     my $out=
+	"<!-- $id' (ODE) -->".
 	"<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
 	"<ct:Description>$desc</ct:Description>".
 	assign($y).
@@ -242,7 +244,7 @@ sub xmlify {
 	my $dt=localtime;
 	$tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
 
-	$tmpl =~ s/INFIX2PHARMML_INPUT/$in/;
+	$tmpl =~ s/INFIX2PHARMML_INPUT/$in/g;
 
 
 	while($tmpl =~ m|INFIX2PHARMML_SYMBREF:(.+?):|) {
