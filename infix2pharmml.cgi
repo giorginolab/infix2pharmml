@@ -2,7 +2,7 @@
 
 use lib 'cgi-perl/lib/perl5';
 
-
+use Socket;
 use CGI qw(:standard);
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use XML::Twig;
@@ -29,8 +29,9 @@ my $standalone = param('standalone') eq "true";
 
 my $Bin=$ENV{SCRIPT_FILENAME};
 my $Rem=$ENV{HTTP_X_REMOTE_ADDR};
+my $Rh=gethostbyaddr(inet_aton($Rem),AF_INET) // $Rem;
 open LOG,">>$Bin.log" or die "Error opening log file $Bin.log: $!";
-print LOG scalar localtime,"\t$Rem\t$string\n";
+print LOG scalar localtime,"\t$Rh\t$standalone\t$string\n";
 close LOG;
 
 print header(-expires=>'now'),
