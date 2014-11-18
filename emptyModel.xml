@@ -20,17 +20,16 @@
   <ModelDefinition xmlns="http://www.pharmml.org/2013/03/ModelDefinition">
     INFIX2PHARMML_PARAMETERMODEL
 
-    <PKmacros>
-      INFIX2PHARMML_MACROS
-    </PKmacros>
-    
-
     <!-- STRUCTURAL MODEL -->
     <StructuralModel blkId="sm">
 
-	INFIX2PHARMML_DERIVATIVEVARIABLE 
+      <PKmacros>
+	INFIX2PHARMML_MACROS
+      </PKmacros>
 
-	INFIX2PHARMML_VARIABLE
+      INFIX2PHARMML_DERIVATIVEVARIABLE 
+
+      INFIX2PHARMML_VARIABLE
 
     </StructuralModel>
   </ModelDefinition>
