@@ -23,13 +23,13 @@
     <!-- STRUCTURAL MODEL -->
     <StructuralModel blkId="sm">
 
-      <PKmacros>
-	INFIX2PHARMML_MACROS
-      </PKmacros>
-
       INFIX2PHARMML_DERIVATIVEVARIABLE 
 
       INFIX2PHARMML_VARIABLE
+
+      <PKmacros>
+	INFIX2PHARMML_MACROS
+      </PKmacros>
 
     </StructuralModel>
   </ModelDefinition>

@@ -24,6 +24,7 @@ variable and derivative variable definitions. Stand-alone mode is
 intended to jump-start development, and it is not a full-fledged
 modeling tool.
 
+
 The following features are supported:
 
 -   All operators defined by PharmML 0.3 should be supported
@@ -39,6 +40,9 @@ The following features are supported:
     below.
 -   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
+-   Preliminary macro support, as e.g. `Oral(2)` or `IV(adm=1)`. Arguments
+    names are unchecked.
+
 
 For a full list of the converter's features and limitations, see [the
 project's
