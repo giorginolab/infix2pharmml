@@ -42,10 +42,12 @@ my @functionList=();
 # Top-level declarations
 sub funcdef {
     my ($id,$al,$eq)=@_;
+    my $desc="Function: $id";
 
     croak "Function definitions not allowed in stand-alone mode yet" if $fullmodel;
 
     my $out= "<ct:FunctionDefinition symbId=\"$id\" symbolType=\"real\">".
+	"<ct:Description>$desc</ct:Description>".
 	$al.
 	"<ct:Definition>$eq</ct:Definition>".
 	"</ct:FunctionDefinition>";
@@ -66,9 +68,10 @@ sub varass {
 # P. 42
 sub vardef {
     my ($id,$y)=@_;
+    my $desc="Variable $id";
     my $out=
-	"<!-- $id (Variable) -->".
 	"<ct:Variable symbId=\"$id\" symbolType=\"real\">".
+	"<ct:Description>$desc</ct:Description>".
 	assign($y).
 	"</ct:Variable>";
     push @variableList,$out;
@@ -79,9 +82,10 @@ sub vardef {
 
 sub diff {
     my ($id,$t,$y)=@_;
+    my $desc="ODE: $id";
     my $out=
-	"<!-- $id' (ODE) -->".
 	"<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
+	"<ct:Description>$desc</ct:Description>".
 	assign($y).
 	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
 	"<ct:InitialCondition>".
