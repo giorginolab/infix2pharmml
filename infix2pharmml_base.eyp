@@ -8,6 +8,8 @@
 %token UNIOP = /\b(exp|log|minus|factorial|sin|cos|tan|sec|csc|cot|sinh|cosh|tanh|sech|csch|coth|arcsin|arccos|arctan|arcsec|arccsc|arccot|arcsinh|arccosh|arctanh|arcsech|arccsch|arccoth|floor|ceiling|abs|logistic|logit|probit|ln|factln|gammaln|normcdf|sqrt)\b/
 
 %token BINOP = /\b(atan2|logx|min|max|root|rem)\b/
+
+%token MACRO = /\b(IV|Compartment|Elimination|Peripheral|Oral)\b/
     
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
@@ -36,9 +38,16 @@ structuralstmt:  VAR ':=' equation ';' ?       {infix2pharmml::vardef($_[1],$_[3
                                            {infix2pharmml::diff($_[2],$_[4],$_[6])}
               | 'diff(' VAR ',' VAR '):=' equation ';' ?
                                            {infix2pharmml::diff($_[2],$_[4],$_[6])}
-              | 'macro(' VAR ',' macroargpairlist ')' ';' ?
-                                           {infix2pharmml::macro($_[2],$_[4])}
+              | MACRO '(' macroargpairlist ')' ';' ?
+                                           {infix2pharmml::macro($_[1],$_[3])}
     ;
+
+macroargpairlist:    macroargpairlist ',' macroargpairlist  { $_[1].$_[3] }
+              | equation                     {infix2pharmml::macroarg($_[1]) } 
+              | VAR '=' equation             {infix2pharmml::macroarg($_[1],$_[3]) } 
+    ;
+
+
 
 statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
               | VAR '=' equation         {infix2pharmml::varass($_[1],$_[3])}
@@ -88,9 +97,6 @@ argpairlist:    argpairlist ',' argpairlist  { $_[1].$_[3] }
               | VAR '=' equation             {infix2pharmml::fa($_[1],$_[3]) } 
     ;
 
-macroargpairlist:    macroargpairlist ',' macroargpairlist  { $_[1].$_[3] }
-              | VAR '=' equation             {infix2pharmml::macroarg($_[1],$_[3]) } 
-    ;
 
 varlist:        varlist ',' varlist  {$_[1].$_[3]}
               | VAR                  {infix2pharmml::funcarg($_[1])}

@@ -145,19 +145,19 @@ sub u {
 # Macro call (name, args). Symbref should not be pushed in symbol table.
 sub macro {
     my ($id,$args)=@_;
-    my $o=
-    "<$id>".
-    $args.
-    "</$id>";
+    my $o="<$id>$args</$id>";
     push @macroText,$o;
 }
 
 # Function arguments
 sub macroarg {
-    my ($id,$ref)=@_;
-    return "<Value argument=\"$id\">".
-	$ref.
-	"</Value>";
+    if (scalar @_==2) {
+	my ($id,$ref)=@_;
+	return "<Value argument=\"$id\">$ref</Value>";
+    } else {
+	my $ref=shift;
+	return "<Value>$ref</Value>";
+    }	
 }
 
 
