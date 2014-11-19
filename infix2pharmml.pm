@@ -260,7 +260,10 @@ sub xmlify {
 	my $vl=join "",@variableList;
 	$tmpl =~ s/INFIX2PHARMML_VARIABLE/$vl/;
 
-	my $mac=join "",@macroText;
+	my $mac="";
+	if(scalar @macroText) {
+	    $mac="<PKmacros>@macroText</PKmacros>";
+	} 
 	$tmpl =~ s/INFIX2PHARMML_MACROS/$mac/;
 
 	my $dt=localtime;

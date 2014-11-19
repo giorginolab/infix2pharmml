@@ -28,9 +28,7 @@
 
       INFIX2PHARMML_VARIABLE
 
-      <PKmacros>
-	INFIX2PHARMML_MACROS
-      </PKmacros>
+      INFIX2PHARMML_MACROS
 
     </StructuralModel>
   </ModelDefinition>

@@ -48,7 +48,7 @@ our $LEX = sub {
       /\G\b(inf|infinity)\b/gc and return ('INF', $1);
       /\G\b(exp|log|minus|factorial|sin|cos|tan|sec|csc|cot|sinh|cosh|tanh|sech|csch|coth|arcsin|arccos|arctan|arcsec|arccsc|arccot|arcsinh|arccosh|arctanh|arcsech|arccsch|arccoth|floor|ceiling|abs|logistic|logit|probit|ln|factln|gammaln|normcdf|sqrt)\b/gc and return ('UNIOP', $1);
       /\G\b(atan2|logx|min|max|root|rem)\b/gc and return ('BINOP', $1);
-      /\G\b(IV|Compartment|Elimination|Peripheral|Oral)\b/gc and return ('MACRO', $1);
+      /\G\b(Absorption|Compartment|Depot|Effect|Elimination|IV|Oral|Peripheral|Transfer)\b/gc and return ('MACRO', $1);
       /\G([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/gc and return ('NUM', $1);
       /\G([A-Za-z][A-Za-z0-9_]*)/gc and return ('VAR', $1);
 
