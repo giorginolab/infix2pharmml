@@ -2,6 +2,7 @@ default: infix2pharmml_statement.pm infix2pharmml_model.pm index.html
 
 
 
+.INTERMEDIATE: infix2pharmml_statement.eyp infix2pharmml_model.eyp
 
 infix2pharmml_statement.eyp: infix2pharmml_base.eyp
 	sed s/STARTRULE/statement/ $< > $@
