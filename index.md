@@ -40,8 +40,10 @@ The following features are supported:
     below.
 -   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
--   Experimental macro support in model mode, as e.g. `Oral(2)` or `IV(adm=1)`. Arguments
-    names are unchecked. Other macros are `Peripheral`, `Compartment`, `Elimination`.
+-   Experimental macro support *in model mode*, as e.g. `Oral(2)` or
+    `IV(adm=1)`. Arguments names are unchecked and unprocessed. Macros are
+    `Absorption Compartment Depot Effect Elimination IV Oral
+    Peripheral Transfer`
 
 
 For a full list of the converter's features and limitations, see [the
