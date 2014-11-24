@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
   <style>
   body {margin: 2em}
   </style>
@@ -35,12 +36,12 @@
   </script> 
 </head>
 <body>
-<img src="CNR_logo_100.png" alt="Logo CNR" style="float:right"/>
+<p><img src="CNR_logo_100.png" alt="Logo CNR" style="float:right"/></p>
 <h1 id="infix-notation-to-pharmml-math-online-converter">Infix notation to PharmML math online converter</h1>
 <p><script type="text/javascript">
 <!--
 h='&#x69;&#x73;&#x69;&#98;&#46;&#x63;&#110;&#114;&#46;&#x69;&#116;';a='&#64;';n='&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+'a'+'>');
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 // -->
 </script><noscript>&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;&#32;&#x61;&#116;&#32;&#x69;&#x73;&#x69;&#98;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#110;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x69;&#116;</noscript></p>
 <p>This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> markup. For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> project page at SourceForge.</p>
@@ -49,7 +50,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+
 <p>The new <em>stand-alone mode</em> creates (mostly) ready-to-run model (only comprising structural equations). In this mode, multiple statements can be provided, separated by semicolons. Statements are restricted to variable and derivative variable definitions. Stand-alone mode is intended to jump-start development, and it is not a full-fledged modeling tool.</p>
 <p>The following features are supported:</p>
 <ul>
-<li>All operators defined by PharmML 0.3 should be supported</li>
+<li>All operators defined by PharmML 0.5 should be supported</li>
 <li>Constants (with user-friendly aliases, such as <code>e</code> for <em>exponentiale</em>).</li>
 <li>Variable assignments, as in <code>a=b+c</code> and definitions, as <code>a:=b+c</code></li>
 <li>Derivative variable (ODE) definitions, as <code>diff(q,t):=1+sin(t)</code>. Initial condition has to be edited by hand.</li>
@@ -57,12 +58,16 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+
 <li>Use <code>ln</code> for the natural logarithm. The <code>logx</code> function is always two-argument (argument, base).</li>
 <li>Calls to user-defined functions use a special syntax described below.</li>
 <li>Factorial can be expressed as <code>factorial()</code> or with the usual exclamation mark.</li>
+<li>Parameter assignments <em>in model mode</em>, as e.g. <code>par a=2</code>.</li>
 <li>Experimental macro support <em>in model mode</em>, as e.g. <code>Oral(2)</code> or <code>IV(adm=1)</code>. Arguments names are unchecked and unprocessed. Macros are <code>Absorption Compartment Depot Effect Elimination IV Oral     Peripheral Transfer</code></li>
 </ul>
 <p>For a full list of the converter's features and limitations, see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the project's README</a>.</p>
 <h2 id="enter-the-formula-below">Enter the formula below</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
-<textarea rows="4" cols="50" id="math" name="math">1+sin(t)+b</textarea> <input type="checkbox" id="standalone" name="standalone" value="true">Build a stand-alone model<br> <input type="submit" value="Submit">
+<textarea rows="4" cols="50" id="math" name="math">
+1+sin(t)+b
+</textarea>
+<input type="checkbox" id="standalone" name="standalone" value="true">Build a stand-alone model<br> <input type="submit" value="Submit">
 </form> 
 
 
@@ -96,6 +101,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+
      <p> <pre onclick="copyUp(event,true)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(E,t)=Rin-Rout*E</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;<br>diff(Z,t)=-lambda*Z+lambda*(I-Ib);</pre> 
+     <p> <pre onclick="copyUp(event,true)">par v_init=10, a=1; diff(v,t):=a+b;</pre> 
      <p> <pre onclick="copyUp(event,true)">Peripheral(k12, k21, amount=Ap1); E:=Ap1^2</pre> 
    </td>
   </tr>
