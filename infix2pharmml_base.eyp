@@ -33,7 +33,7 @@ model:  model structuralstmt
     ;
 
 
-structuralstmt:  VAR ':=' equation ';' ?       {infix2pharmml::vardef($_[1],$_[3])}
+structuralstmt:  VAR ':=' equation ';' ?   {infix2pharmml::vardef($_[1],$_[3])}
               | 'diff(' VAR ',' VAR ')=' equation ';' ?
                                            {infix2pharmml::diff($_[2],$_[4],$_[6])}
               | 'diff(' VAR ',' VAR '):=' equation ';' ?
@@ -43,13 +43,14 @@ structuralstmt:  VAR ':=' equation ';' ?       {infix2pharmml::vardef($_[1],$_[3
               | 'par' parlist ';' ?
     ;
 
-macroargpairlist:    macroargpairlist ',' macroargpairlist  { $_[1].$_[3] }
-              | equation                     {infix2pharmml::macroarg($_[1]) } 
-              | VAR '=' equation             {infix2pharmml::macroarg($_[1],$_[3]) } 
+macroargpairlist:    macroargpairlist ',' macroargpairlist  
+                                         {$_[1].$_[3]}
+              | equation                 {infix2pharmml::macroarg($_[1]) } 
+              | VAR '=' equation         {infix2pharmml::macroarg($_[1],$_[3]) } 
     ;
 
-parlist: parlist ',' parlist { $_[1] . $_[3] }
-    | VAR '=' equation                   {infix2pharmml::par($_[1],$_[3])}
+parlist:        parlist ',' parlist      {$_[1].$_[3]}
+              | VAR '=' equation         {infix2pharmml::par($_[1],$_[3])}
     ;
 
 statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
