@@ -40,8 +40,7 @@ structuralstmt:  VAR ':=' equation ';' ?       {infix2pharmml::vardef($_[1],$_[3
                                            {infix2pharmml::diff($_[2],$_[4],$_[6])}
               | MACRO '(' macroargpairlist ')' ';' ?
                                            {infix2pharmml::macro($_[1],$_[3])}
-              | 'par' VAR '=' equation ';' ?
-                                           {infix2pharmml::par($_[2],$_[4])}
+              | 'par' parlist ';' ?
     ;
 
 macroargpairlist:    macroargpairlist ',' macroargpairlist  { $_[1].$_[3] }
@@ -49,7 +48,9 @@ macroargpairlist:    macroargpairlist ',' macroargpairlist  { $_[1].$_[3] }
               | VAR '=' equation             {infix2pharmml::macroarg($_[1],$_[3]) } 
     ;
 
-
+parlist: parlist ',' parlist { $_[1] . $_[3] }
+    | VAR '=' equation                   {infix2pharmml::par($_[1],$_[3])}
+    ;
 
 statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
               | VAR '=' equation         {infix2pharmml::varass($_[1],$_[3])}
