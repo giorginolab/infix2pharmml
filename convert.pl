@@ -20,13 +20,12 @@ use lib 'cgi-perl/lib/perl5';
 use XML::Twig;
 use infix2pharmml; 
 use strict;
+use Getopt::Std;
 
+our($opt_s, $opt_q);
+getopts('sq') or die "Usage: convert.pl [-s (standalone)] [-q (quiet)] [expression]\n";
 
-
-if($ARGV[0] eq "-s") {
-    shift @ARGV;
-    $infix2pharmml::fullmodel=1;
-}
+$infix2pharmml::fullmodel=1 if($opt_s);
 
 
 my $string=shift @ARGV;
@@ -37,14 +36,16 @@ if (!$string) {
     chomp $string; 
 } 
 
-print "About to parse:              $string\n";
+
+print "About to parse:              $string\n" unless $opt_q;
 
 my $xml= infix2pharmml::xmlify($string);
 defined $xml or die "Parse failure";
-print "\n\nRaw:\n$xml\n\n";
 
-print "\n\nXML:\n";
-
+if(!$opt_q) {
+    print "\n\nRaw:\n$xml\n\n";
+    print "\n\nXML:\n";
+}
 
 my $twig=XML::Twig->new( pretty_print => 'indented'); 
 $twig->parse($xml);
