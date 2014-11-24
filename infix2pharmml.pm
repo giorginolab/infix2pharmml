@@ -104,7 +104,11 @@ sub diff {
 }
     
 
-
+sub par {
+    my ($id,$y)=@_;
+#    print "---- $id ---- $y";
+    $allSymbols{$id}=$y;
+}
 
 
 sub eqn {
@@ -189,7 +193,7 @@ sub fa {
 # not. Local: appears in localSymbols.
 sub symbref {
     my $id=shift;
-    $allSymbols{$id}=1;
+    $allSymbols{$id} //= undef;	# set to undefined if not already set
     return "INFIX2PHARMML_SYMBREF:$id:"
 }
 
@@ -210,7 +214,14 @@ sub getParameterModel {
     my $out="<ParameterModel blkId=\"p\">";
     foreach my $s (keys %allSymbols) {
 	if(! defined $localSymbols{$s}) {
-	    $out.="<SimpleParameter symbId=\"$s\" />";
+	    my $y=$allSymbols{$s};
+
+	    if(defined $y) {
+		my $a=assign($y);
+		$out.="<SimpleParameter symbId=\"$s\">$a</SimpleParameter>";
+	    } else {
+		$out.="<SimpleParameter symbId=\"$s\" />";
+	    }
 	}
     }
     $out.="</ParameterModel>";
