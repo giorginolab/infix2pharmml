@@ -36,15 +36,14 @@ The following features are supported:
 -   Function definitions, such as `f(x,y):=x+y`.
 -   Use `ln` for the natural logarithm. The `logx` function is always
     two-argument (argument, base).
--   Calls to user-defined functions use a special syntax described
-    below.
+-   Calls to user-defined functions use an R-like named-argument syntax
+    shown in the examples below.
 -   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
 -   *Model mode:* parameter assignments, as e.g. `par a=2, b=1+1`.
 -   *Model mode:* experimental macro support, as e.g. `Oral(2)` or
     `IV(adm=1)`. Arguments names are unchecked and unprocessed. Macros are
-    `Absorption Compartment Depot Effect Elimination IV Oral
-    Peripheral Transfer`
+    `Absorption Compartment Depot Effect Elimination IV Oral Peripheral Transfer`
 
 
 For a full list of the converter's features and limitations, see [the
