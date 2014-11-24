@@ -17,6 +17,8 @@
 
 use lib 'cgi-perl/lib/perl5';
 
+use FindBin;
+use lib "$FindBin::RealBin";
 use XML::Twig;
 use infix2pharmml; 
 use strict;
