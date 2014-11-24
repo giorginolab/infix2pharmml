@@ -26,6 +26,7 @@ use Carp;
 use infix2pharmml_statement;
 use infix2pharmml_model;
 use warnings;
+use FindBin;
 
 our $fullmodel=0;
 
@@ -247,7 +248,7 @@ sub xmlify {
 	$out=~s|INFIX2PHARMML_SYMBREF:(.+?):|<ct:SymbRef symbIdRef="$1"/>|g;
 	return $out;
     } else {
-	open F,"<emptyModel.xml" or die "Opening template";
+	open F,"< $FindBin::RealBin/emptyModel.xml" or die "Can't open template";
 	my $tmpl=join("", <F>);
 	close F;
 
