@@ -68,12 +68,13 @@ sub varass {
 
 # P. 42
 sub vardef {
-    my ($id,$y)=@_;
-    my $desc="Variable $id";
+    my ($id,$y,$c)=@_;
+    my $comm="$id (Variable)";
+    my $desc=(defined $c->[0])?"<ct:Description>$c->[0]</ct:Description>" : "" ;
     my $out=
-	"<!-- $id (Variable) -->".
+	"<!-- $comm -->".
 	"<ct:Variable symbId=\"$id\" symbolType=\"real\">".
-	"<ct:Description>$desc</ct:Description>".
+	$desc.
 	assign($y).
 	"</ct:Variable>";
     push @variableList,$out;
@@ -83,12 +84,12 @@ sub vardef {
 
 
 sub diff {
-    my ($id,$t,$y)=@_;
-    my $desc="ODE: $id";
+    my ($id,$t,$y,$c)=@_;
+    my $desc=(defined $c->[0])?"<ct:Description>$c->[0]</ct:Description>" : "" ;
     my $out=
 	"<!-- $id' (ODE) -->".
 	"<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
-	"<ct:Description>$desc</ct:Description>".
+	$desc.
 	assign($y).
 	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
 	"<ct:InitialCondition>".

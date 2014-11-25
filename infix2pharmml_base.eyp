@@ -14,6 +14,8 @@
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
+%token COMMENT = /%%([^\n;]*)/
+
 
 %left   ','
 %right  '='
@@ -23,45 +25,54 @@
 %left   '!'
 %left   NEG
 
-# "STARTRULE" will be replaced by makefile
+# The word "START RULE" below will be replaced by Makefile to make two similar grammars
 %start STARTRULE
 
 %%
 
-model:  model structuralstmt 
-                | structuralstmt
+model:
+      model ';' ? structuralstmt 
+    | structuralstmt
     ;
 
 
-structuralstmt:  VAR ':=' equation ';' ?   {infix2pharmml::vardef($_[1],$_[3])}
-              | 'diff(' VAR ',' VAR ')=' equation ';' ?
-                                           {infix2pharmml::diff($_[2],$_[4],$_[6])}
-              | 'diff(' VAR ',' VAR '):=' equation ';' ?
-                                           {infix2pharmml::diff($_[2],$_[4],$_[6])}
-              | MACRO '(' macroargpairlist ')' ';' ?
+structuralstmt:  
+      VAR ':=' equation  COMMENT ?  
+                                           {infix2pharmml::vardef($_[1],$_[3],$_[4])}
+    | 'diff(' VAR ',' VAR ')=' equation  COMMENT ?
+                                           {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
+    | 'diff(' VAR ',' VAR '):=' equation COMMENT ?
+                                           {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
+    | MACRO '(' macroargpairlist ')' 
                                            {infix2pharmml::macro($_[1],$_[3])}
-              | 'par' parlist ';' ?
+    | 'par' parlist 
+    | #empty
     ;
 
-macroargpairlist:    macroargpairlist ',' macroargpairlist  
+
+macroargpairlist:    
+      macroargpairlist ',' macroargpairlist  
                                          {$_[1].$_[3]}
-              | equation                 {infix2pharmml::macroarg($_[1]) } 
-              | VAR '=' equation         {infix2pharmml::macroarg($_[1],$_[3]) } 
+    | equation                 {infix2pharmml::macroarg($_[1]) } 
+    | VAR '=' equation         {infix2pharmml::macroarg($_[1],$_[3]) } 
     ;
 
-parlist:        parlist ',' parlist      {$_[1].$_[3]}
-              | VAR '=' equation         {infix2pharmml::par($_[1],$_[3])}
+
+parlist:
+      parlist ',' parlist      {$_[1].$_[3]}
+    | VAR '=' equation         {infix2pharmml::par($_[1],$_[3])}
     ;
 
-statement:      VAR ':=' equation        {infix2pharmml::vardef($_[1],$_[3])}
-              | VAR '=' equation         {infix2pharmml::varass($_[1],$_[3])}
-              | 'diff(' VAR ',' VAR ')=' equation
+statement:
+      VAR ':=' equation                  {infix2pharmml::vardef($_[1],$_[3])}
+    | VAR '=' equation                   {infix2pharmml::varass($_[1],$_[3])}
+    | 'diff(' VAR ',' VAR ')=' equation
                                          {infix2pharmml::diff($_[2],$_[4],$_[6])}
-              | 'diff(' VAR ',' VAR '):=' equation
+    | 'diff(' VAR ',' VAR '):=' equation
                                          {infix2pharmml::diff($_[2],$_[4],$_[6])}
-              | VAR '(' varlist '):=' equation 
+    | VAR '(' varlist '):=' equation 
                                          {infix2pharmml::funcdef($_[1],$_[3],$_[5])}
-              | equation    
+    | equation    
     ;           
 
 equation:       expr                     {infix2pharmml::eqn($_[1])}
