@@ -31,8 +31,12 @@
 %%
 
 model:
-      model ';' ? structuralstmt ';' ?
-    | structuralstmt ';' ?
+      model line
+    | line
+    ;
+
+line:
+     structuralstmt ';' ?
     ;
 
 

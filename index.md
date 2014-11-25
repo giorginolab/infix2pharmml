@@ -41,6 +41,7 @@ The following features are supported:
 -   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
 -   *Model mode:* parameter assignments, as e.g. `par a=2, b=1+1`.
+-   *Model mode:* description tags, in curly brackets, for variables and derivative variables only.
 -   *Model mode:* experimental macro support, as e.g. `Oral(2)` or
     `IV(adm=1)`. Arguments names are unchecked and unprocessed. Macros are
     `Absorption Compartment Depot Effect Elimination IV Oral Peripheral Transfer`

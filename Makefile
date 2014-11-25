@@ -32,4 +32,4 @@ clean:
 
 .PHONY:
 veryclean: clean
-	-rm infix2pharmml_model.pm infix2pharmml_statement.pm
+	-rm infix2pharmml_model.pm infix2pharmml_statement.pm index.html
