@@ -24,80 +24,80 @@ sub i2p {
 
 my $s="1+sqrt(a^2+b^2)";
 eq_or_diff(i2p($s),
-   '<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-  <Binop op="plus">
+   '<math:Equation>
+  <math:Binop op="plus">
     <ct:Real>1</ct:Real>
-    <Uniop op="sqrt">
-      <Binop op="plus">
-        <Binop op="power">
+    <math:Uniop op="sqrt">
+      <math:Binop op="plus">
+        <math:Binop op="power">
           <ct:SymbRef symbIdRef="a"/>
           <ct:Real>2</ct:Real>
-        </Binop>
-        <Binop op="power">
+        </math:Binop>
+        <math:Binop op="power">
           <ct:SymbRef symbIdRef="b"/>
           <ct:Real>2</ct:Real>
-        </Binop>
-      </Binop>
-    </Uniop>
-  </Binop>
+        </math:Binop>
+      </math:Binop>
+    </math:Uniop>
+  </math:Binop>
 </math:Equation>
 ',$s);
 
 
 $s="factorial(2)";
 eq_or_diff(i2p($s),
-'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-  <Uniop op="factorial">
+'<math:Equation>
+  <math:Uniop op="factorial">
     <ct:Real>2</ct:Real>
-  </Uniop>
+  </math:Uniop>
 </math:Equation>
 ',$s);
 
 $s="2!";
 eq_or_diff(i2p($s),
-'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-  <Uniop op="factorial">
+'<math:Equation>
+  <math:Uniop op="factorial">
     <ct:Real>2</ct:Real>
-  </Uniop>
+  </math:Uniop>
 </math:Equation>
 ',$s);
 
 
 $s="1-2-3";
 eq_or_diff(i2p($s),
-'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-  <Binop op="minus">
-    <Binop op="minus">
+'<math:Equation>
+  <math:Binop op="minus">
+    <math:Binop op="minus">
       <ct:Real>1</ct:Real>
       <ct:Real>2</ct:Real>
-    </Binop>
+    </math:Binop>
     <ct:Real>3</ct:Real>
-  </Binop>
+  </math:Binop>
 </math:Equation>
 ',$s);
 
 $s="-a*b+c";
 eq_or_diff(i2p($s),
-'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-  <Binop op="plus">
-    <Binop op="times">
-      <Uniop op="minus">
+'<math:Equation>
+  <math:Binop op="plus">
+    <math:Binop op="times">
+      <math:Uniop op="minus">
         <ct:SymbRef symbIdRef="a"/>
-      </Uniop>
+      </math:Uniop>
       <ct:SymbRef symbIdRef="b"/>
-    </Binop>
+    </math:Binop>
     <ct:SymbRef symbIdRef="c"/>
-  </Binop>
+  </math:Binop>
 </math:Equation>
 ',$s);
 
 
 $s="logx(x,e)";
 eq_or_diff(i2p($s),
-'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-  <Binop op="logx">
+'<math:Equation>
+  <math:Binop op="logx">
     <ct:SymbRef symbIdRef="x"/>
     <math:Constant op="exponentiale"/>
-  </Binop>
+  </math:Binop>
 </math:Equation>
 ',$s);

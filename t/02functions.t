@@ -25,37 +25,38 @@ my $s;
 
 $s="f(a):=a+1";
 eq_or_diff(i2p($s),
-'<FunctionDefinition symbId="f" symbolType="real" xmlns="http://www.pharmml.org/2013/03/CommonTypes">
-  <FunctionArgument symbId="a" symbolType="real"/>
-  <Definition>
-    <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-      <Binop op="plus">
+'<ct:FunctionDefinition symbId="f" symbolType="real">
+  <ct:Description>Function: f</ct:Description>
+  <ct:FunctionArgument symbId="a" symbolType="real"/>
+  <ct:Definition>
+    <math:Equation>
+      <math:Binop op="plus">
         <ct:SymbRef symbIdRef="a"/>
         <ct:Real>1</ct:Real>
-      </Binop>
+      </math:Binop>
     </math:Equation>
-  </Definition>
-</FunctionDefinition>
+  </ct:Definition>
+</ct:FunctionDefinition>
 ',$s);
 
 
 $s="myFunction(x=sin(t),y=4!)";
 eq_or_diff(i2p($s),
-'<math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
+'<math:Equation>
   <math:FunctionCall>
     <ct:SymbRef symbIdRef="myFunction"/>
     <math:FunctionArgument symbId="x">
-      <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-        <Uniop op="sin">
+      <math:Equation>
+        <math:Uniop op="sin">
           <ct:SymbRef symbIdRef="t"/>
-        </Uniop>
+        </math:Uniop>
       </math:Equation>
     </math:FunctionArgument>
     <math:FunctionArgument symbId="y">
-      <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-        <Uniop op="factorial">
+      <math:Equation>
+        <math:Uniop op="factorial">
           <ct:Real>4</ct:Real>
-        </Uniop>
+        </math:Uniop>
       </math:Equation>
     </math:FunctionArgument>
   </math:FunctionCall>
@@ -67,23 +68,23 @@ eq_or_diff(i2p($s),
 '<ct:VariableAssignment>
   <ct:SymbRef symbIdRef="output"/>
   <ct:Assign>
-    <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-      <Binop op="plus">
-        <Binop op="plus">
+    <math:Equation>
+      <math:Binop op="plus">
+        <math:Binop op="plus">
           <ct:Real>1</ct:Real>
           <math:Constant op="pi"/>
-        </Binop>
+        </math:Binop>
         <math:FunctionCall>
           <ct:SymbRef symbIdRef="myfunc"/>
           <math:FunctionArgument symbId="t">
-            <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-              <Uniop op="sin">
+            <math:Equation>
+              <math:Uniop op="sin">
                 <ct:SymbRef symbIdRef="x"/>
-              </Uniop>
+              </math:Uniop>
             </math:Equation>
           </math:FunctionArgument>
         </math:FunctionCall>
-      </Binop>
+      </math:Binop>
     </math:Equation>
   </ct:Assign>
 </ct:VariableAssignment>
@@ -92,49 +93,51 @@ eq_or_diff(i2p($s),
 
 $s="diff(q,t)=1+sin(t)";
 eq_or_diff(i2p($s),
-'<ct:DerivativeVariable symbId="q" symbolType="real">
+q(<!-- q' (ODE) --><ct:DerivativeVariable symbId="q" symbolType="real">
   <ct:Assign>
-    <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-      <Binop op="plus">
+    <math:Equation>
+      <math:Binop op="plus">
         <ct:Real>1</ct:Real>
-        <Uniop op="sin">
+        <math:Uniop op="sin">
           <ct:SymbRef symbIdRef="t"/>
-        </Uniop>
-      </Binop>
+        </math:Uniop>
+      </math:Binop>
     </math:Equation>
   </ct:Assign>
   <ct:IndependentVariable>
     <ct:SymbRef symbIdRef="t"/>
   </ct:IndependentVariable>
   <ct:InitialCondition>
-    <!-- WARNING InitialCondition need be edited -->
-    <ct:Assign>
-      <ct:Real>0</ct:Real>
-    </ct:Assign>
+    <ct:InitialValue>
+      <ct:Assign>
+        <ct:SymbRef symbIdRef="q_init"/>
+      </ct:Assign>
+    </ct:InitialValue>
   </ct:InitialCondition>
 </ct:DerivativeVariable>
-',$s);
+),$s);
 
 
 $s="myFunction(x,y,z):=x^2+y^2";
 eq_or_diff(i2p($s),
-'<FunctionDefinition symbId="myFunction" symbolType="real" xmlns="http://www.pharmml.org/2013/03/CommonTypes">
-  <FunctionArgument symbId="x" symbolType="real"/>
-  <FunctionArgument symbId="y" symbolType="real"/>
-  <FunctionArgument symbId="z" symbolType="real"/>
-  <Definition>
-    <math:Equation xmlns="http://www.pharmml.org/2013/03/Maths">
-      <Binop op="plus">
-        <Binop op="power">
+'<ct:FunctionDefinition symbId="myFunction" symbolType="real">
+  <ct:Description>Function: myFunction</ct:Description>
+  <ct:FunctionArgument symbId="x" symbolType="real"/>
+  <ct:FunctionArgument symbId="y" symbolType="real"/>
+  <ct:FunctionArgument symbId="z" symbolType="real"/>
+  <ct:Definition>
+    <math:Equation>
+      <math:Binop op="plus">
+        <math:Binop op="power">
           <ct:SymbRef symbIdRef="x"/>
           <ct:Real>2</ct:Real>
-        </Binop>
-        <Binop op="power">
+        </math:Binop>
+        <math:Binop op="power">
           <ct:SymbRef symbIdRef="y"/>
           <ct:Real>2</ct:Real>
-        </Binop>
-      </Binop>
+        </math:Binop>
+      </math:Binop>
     </math:Equation>
-  </Definition>
-</FunctionDefinition>
+  </ct:Definition>
+</ct:FunctionDefinition>
 ',$s);

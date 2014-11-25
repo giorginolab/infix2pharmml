@@ -87,7 +87,7 @@ Click to copy in the input area above.
      <p> <pre onclick="copyUp(event,true)">y:=A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(a,t)=b; <br>diff(b,t)=-a;</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(A,t)=-k*A; <br>C:=A/V</pre> 
-     <p> <pre onclick="copyUp(event,true)">A:=dose*exp(-k*t); <br>C:=A/V</pre> 
+     <p> <pre onclick="copyUp(event,true)">A:=dose*exp(-k*t) {Exponential decay model}; <br>C:=A/V {Concentration}</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(E,t)=Rin-Rout*E</pre> 
      <p> <pre onclick="copyUp(event,true)">diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;<br>diff(Z,t)=-lambda*Z+lambda*(I-Ib);</pre> 

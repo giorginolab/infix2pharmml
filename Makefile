@@ -23,8 +23,7 @@ index.html: index.md
 
 .PHONY:
 test:
-	perl t/01base.t
-	perl t/02functions.t
+	for i in t/*.t; do perl $$i; done
 
 .PHONY:
 clean:
