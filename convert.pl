@@ -33,7 +33,7 @@ $infix2pharmml::fullmodel=1 if($opt_s);
 my $string=shift @ARGV;
 
 if (!$string) {
-    print "Enter the expression to convert:\n";
+    print "Enter the expression to convert:\n" unless $opt_q;
     $string=<>;
     chomp $string; 
 } 
