@@ -40,10 +40,15 @@ The following features are supported:
     shown in the examples below.
 -   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
--   *Model mode:* parameter assignments, as e.g. `par a=2, b=1+1`.
--   *Model mode:* description tags, in curly brackets, for variables and derivative variables only.
--   *Model mode:* experimental macro support, as e.g. `Oral(2)` or
-    `IV(adm=1)`. Arguments names are unchecked and unprocessed. Macros are
+-   The `delay(X,delta)` operator (PharmML 0.3.2 and up?).
+
+
+The following features are supported in *model mode only*:
+
+-   Parameter assignments, as e.g. `par a=2, b=1+1`.
+-   Description tags, in curly brackets, for variables and derivative variables.
+-   Experimentally, macros as e.g. `Oral(2)` or
+    `IV(adm=1)`. Arguments names are unchecked and unprocessed. Recognized macro names are
     `Absorption Compartment Depot Effect Elimination IV Oral Peripheral Transfer`
 
 

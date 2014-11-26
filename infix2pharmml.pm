@@ -148,6 +148,13 @@ sub u {
     return op("math:Uniop",@_);
 }
 
+# Delay
+sub delay {
+    my ($v,$d)=@_;
+    return e("ct:Delay",symbref($v),
+	      e("ct:DelayVariable",symbref($d)));
+}
+
 # Macro call (name, args). Symbref should not be pushed in symbol table.
 sub macro {
     my ($id,$args)=@_;

@@ -5,7 +5,7 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 7;
+use Test::More tests => 8;
 use Test::Differences;
 use XML::Twig;
 
@@ -99,5 +99,18 @@ eq_or_diff(i2p($s),
     <ct:SymbRef symbIdRef="x"/>
     <math:Constant op="exponentiale"/>
   </math:Binop>
+</math:Equation>
+',$s);
+
+
+$s="delay(a,b)";
+eq_or_diff(i2p($s),
+'<math:Equation>
+  <ct:Delay>
+    <ct:SymbRef symbIdRef="a"/>
+    <ct:DelayVariable>
+      <ct:SymbRef symbIdRef="b"/>
+    </ct:DelayVariable>
+  </ct:Delay>
 </math:Equation>
 ',$s);

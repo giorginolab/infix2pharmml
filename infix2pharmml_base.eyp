@@ -96,6 +96,7 @@ expr:
     | '(' expr ')'                       {$_[2]}
     | UNIOP '(' expr ')'                 {infix2pharmml::u($_[1],$_[3])}
     | BINOP '(' expr ',' expr ')'        {infix2pharmml::b($_[1],$_[3],$_[5])}
+    | 'delay' '(' VAR.v ',' VAR.d ')'    {infix2pharmml::delay($v,$d)}
     | VAR '(' argpairlist ')'            {infix2pharmml::fc($_[1],$_[3])}
     | VAR                                {infix2pharmml::symbref($_[1])}
     ;
