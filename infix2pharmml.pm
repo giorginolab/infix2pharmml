@@ -28,7 +28,9 @@ use infix2pharmml_model;
 use warnings;
 use File::Basename;
 
-our $fullmodel=0;
+our $fullmodel=0;		# Set this to 1 to get a full model
+
+
 
 my %localSymbols=("t"=>2);
 my %allSymbols=("t"=>2);
@@ -48,9 +50,9 @@ sub funcdef {
     croak "Function definitions not allowed in stand-alone mode yet" if $fullmodel;
 
     my $out= "<ct:FunctionDefinition symbId=\"$id\" symbolType=\"real\">".
-	"<ct:Description>$desc</ct:Description>".
+	e("ct:Description",$desc).
 	$al.
-	"<ct:Definition>$eq</ct:Definition>".
+	e("ct:Definition",$eq).
 	"</ct:FunctionDefinition>";
     push @functionList,$out;
     return $out;
@@ -60,10 +62,10 @@ sub funcdef {
 sub varass {
     my ($id,$y)=@_;
     croak "Variable assignments not allowed in stand-alone mode yet" if $fullmodel;
-    return "<ct:VariableAssignment>".symbref($id).
-	assign($y).
-	"</ct:VariableAssignment>";
     $localSymbols{$id}=1;
+    return e("ct:VariableAssignment",
+	     symbref($id),
+	     assign($y));
 }
 
 # P. 42
@@ -91,13 +93,13 @@ sub diff {
 	"<ct:DerivativeVariable symbId=\"$id\" symbolType=\"real\">".
 	$desc.
 	assign($y).
-	"<ct:IndependentVariable>".symbref($t)."</ct:IndependentVariable>".
-	"<ct:InitialCondition>".
-	"<ct:InitialValue>".
+	e("ct:IndependentVariable",symbref($t)).
+	e("ct:InitialCondition",
+	  e("ct:InitialValue",
 #	assign(eqn(symbref("${id}_init"))).
-	assign(symbref("${id}_init")).
-	"</ct:InitialValue>".
-	"</ct:InitialCondition>".
+	    assign(symbref("${id}_init")) 
+	    )
+	).
 	"</ct:DerivativeVariable>";
     push @derivativeVariableList,$out;
     $localSymbols{$id}=1;
@@ -113,40 +115,13 @@ sub par {
 
 
 sub eqn {
-    return "<math:Equation>".
-	shift.
-	"</math:Equation>";
+    return e("math:Equation",shift);
 }
 
 sub assign {
-    my $y=shift;
-    return "<ct:Assign>$y</ct:Assign>";
+    return e("ct:Assign",shift);
 }
 
-# Generic tag
-sub e {
-    my $tag=shift;
-    my $c=join('',@_);
-    return "<$tag>$c</$tag>\n";
-}
-
-# Uniop or binop (1st arg)
-sub op {
-    my $tag=shift;
-    my $op=shift;
-    my $c=join('',@_);
-    return "<$tag op=\"$op\">$c</$tag>\n";
-}
-
-# Binop
-sub b {
-    return op("math:Binop",@_);
-}
-
-# Uniop
-sub u {
-    return op("math:Uniop",@_);
-}
 
 # Delay
 sub delay {
@@ -214,7 +189,35 @@ sub const {
 }
 
 
+# -------------------
 
+# Generic attribute-less tag
+sub e {
+    my $tag=shift;
+    my $c=join('',@_);
+    return "<$tag>$c</$tag>\n";
+}
+
+# Uniop or binop (1st arg), operator name (2nd arg)
+sub op {
+    my $tag=shift;
+    my $op=shift;
+    my $c=join('',@_);
+    return "<$tag op=\"$op\">$c</$tag>\n";
+}
+
+# Binop
+sub b {
+    return op("math:Binop",@_);
+}
+
+# Uniop
+sub u {
+    return op("math:Uniop",@_);
+}
+
+
+#######################
 
 # Out of the list of all symbols encountered, return only those which
 # were not defined by the user.
@@ -237,7 +240,7 @@ sub getParameterModel {
 
 
 
-
+# The main entry point.
 
 sub xmlify {
     my $in=shift;
