@@ -32,7 +32,7 @@ The following features are supported:
     *exponentiale*).
 -   Variable assignments, as in `a=b+c` and definitions, as `a:=b+c`
 -   Derivative variable (ODE) definitions, as `diff(q,t):=1+sin(t)`.
-    Initial condition has to be edited by hand.
+    The initial condition is a parameter named `q_init`.
 -   Function definitions, such as `f(x,y):=x+y`.
 -   Use `ln` for the natural logarithm. The `logx` function is always
     two-argument (argument, base).
@@ -40,13 +40,13 @@ The following features are supported:
     shown in the examples below.
 -   Factorial can be expressed as `factorial()` or with the usual
     exclamation mark.
+-   Description tags, in curly brackets, for variables and derivative variables.
 -   The `delay(X,delta)` operator (PharmML 0.3.2 and up?).
 
 
 The following features are supported in *model mode only*:
 
 -   Parameter assignments, as e.g. `par a=2, b=1+1`.
--   Description tags, in curly brackets, for variables and derivative variables.
 -   Experimentally, macros as e.g. `Oral(2)` or
     `IV(adm=1)`. Arguments names are unchecked and unprocessed. Recognized macro names are
     `Absorption Compartment Depot Effect Elimination IV Oral Peripheral Transfer`
