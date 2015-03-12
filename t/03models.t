@@ -63,19 +63,20 @@ $s="A:=2 # nothing";
 eq_or_diff(i2p($s),$ref,$s);
 
 $s="A:=2; # semicolon";
-ok(i2p($s) eq $ref,$s);
+eq_or_diff(i2p($s),$ref,$s);
 
 $s="A:=2;\n # semicolon, newline";
-ok(i2p($s) eq $ref,$s);
+eq_or_diff(i2p($s),$ref,$s);
 
 $s="A:=2\n # newline";
-ok(i2p($s) eq $ref,$s);
+eq_or_diff(i2p($s),$ref,$s);
 
 $s="# pre-newline\nA:=2";
-ok(i2p($s) eq $ref,$s);
+eq_or_diff(i2p($s),$ref,$s);
 
 $s="# pre\nA:=2\n# post";
-ok(i2p($s) eq $ref,$s);
+eq_or_diff(i2p($s),$ref,$s);
+
 
 
 
