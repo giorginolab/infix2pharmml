@@ -5,7 +5,7 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 18;
+use Test::More tests => 19;
 use Test::Exception;
 use Test::Differences;
 use XML::Twig;
@@ -30,6 +30,9 @@ my $n="A:=1\nB:=2;";
 eq_or_diff(i2p($n),i2p($s),$n);
 
 $s="par v_init=10, a=1;";   
+ok(i2p($s),$s);
+
+$s="par part=1;";   
 ok(i2p($s),$s);
 
 $s="y:=A*exp(-alpha*t)+B*exp(-beta*t)";

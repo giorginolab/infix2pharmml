@@ -10,6 +10,8 @@
 %token BINOP = /\b(atan2|logx|min|max|root|rem)\b/
 
 %token MACRO = /\b(Absorption|Compartment|Depot|Effect|Elimination|IV|Oral|Peripheral|Transfer)\b/
+
+%token PAR = /\b(par)\b/
     
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
@@ -46,7 +48,7 @@ line:
 assignment:  
       common
     | MACRO '(' macroargpairlist ')'       {infix2pharmml::macro($_[1],$_[3])}
-    | 'par' parameterlist 
+    | PAR parameterlist 
     ;
 
 
