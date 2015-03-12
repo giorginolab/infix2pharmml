@@ -3433,7 +3433,7 @@ our $LEX = sub {
 
       m{\G(\s+)}gc and $self->tokenline($1 =~ tr{\n}{});
 
-      m{\G(diff\(|delay|\)\:\=|\)\=|\:\=|\(|\/|\=|\^|\-|\!|\)|\+|\*|\,)}gc and return ($1, $1);
+      m{\G(delay|diff\(|\)\:\=|\:\=|\)\=|\^|\,|\)|\-|\+|\=|\/|\(|\!|\*)}gc and return ($1, $1);
 
       /\G\b(nan|NaN|notanumber)\b/gc and return ('NAN', $1);
       /\G\b(e|exponentiale)\b/gc and return ('EULER', $1);
@@ -3444,7 +3444,7 @@ our $LEX = sub {
       /\G\b(Absorption|Compartment|Depot|Effect|Elimination|IV|Oral|Peripheral|Transfer)\b/gc and return ('MACRO', $1);
       /\G([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/gc and return ('NUM', $1);
       /\G([A-Za-z][A-Za-z0-9_]*)/gc and return ('VAR', $1);
-      /\G#(.+?)$/gc and return ('COMMENT', $1);
+      /\G(.+?)/gc and return ('COMMENT', $1);
       /\G{(.+?)}/gc and return ('DESCRIPTION', $1);
 
 
@@ -3593,30 +3593,30 @@ sub new {
 [
 	{#State 0
 		ACTIONS => {
-			'INF' => 10,
-			'UNIOP' => 17,
+			"delay" => 10,
 			'VAR' => 18,
-			'BINOP' => 8,
-			"(" => 7,
-			"diff(" => 5,
-			'NAN' => 6,
-			"-" => 4,
-			'NUM' => 15,
-			'PI' => 12,
-			"+" => 11,
-			'EULER' => 3,
-			"delay" => 2
+			'NAN' => 9,
+			'BINOP' => 6,
+			'INF' => 7,
+			"-" => 15,
+			"+" => 16,
+			"diff(" => 4,
+			'PI' => 11,
+			'NUM' => 12,
+			"(" => 13,
+			'UNIOP' => 2,
+			'EULER' => 1
 		},
 		GOTOS => {
-			'constant' => 1,
-			'equation' => 9,
-			'common' => 13,
-			'statement' => 14,
-			'expr' => 16
+			'expr' => 3,
+			'common' => 5,
+			'equation' => 14,
+			'statement' => 8,
+			'constant' => 17
 		}
 	},
 	{#State 1
-		DEFAULT => -21
+		DEFAULT => -33
 	},
 	{#State 2
 		ACTIONS => {
@@ -3624,545 +3624,551 @@ sub new {
 		}
 	},
 	{#State 3
-		DEFAULT => -33
-	},
-	{#State 4
 		ACTIONS => {
-			"delay" => 2,
-			"+" => 11,
-			'EULER' => 3,
-			'PI' => 12,
-			"-" => 4,
-			'NUM' => 15,
-			'NAN' => 6,
-			'BINOP' => 8,
-			"(" => 7,
-			'INF' => 10,
-			'VAR' => 21,
-			'UNIOP' => 17
-		},
-		GOTOS => {
-			'expr' => 20,
-			'constant' => 1
-		}
-	},
-	{#State 5
-		ACTIONS => {
-			'VAR' => 22
-		}
-	},
-	{#State 6
-		DEFAULT => -31
-	},
-	{#State 7
-		ACTIONS => {
-			'UNIOP' => 17,
-			'VAR' => 21,
-			'INF' => 10,
-			'BINOP' => 8,
-			"(" => 7,
-			'NAN' => 6,
-			'NUM' => 15,
-			"-" => 4,
-			'PI' => 12,
-			"+" => 11,
-			'EULER' => 3,
-			"delay" => 2
-		},
-		GOTOS => {
-			'constant' => 1,
-			'expr' => 23
-		}
-	},
-	{#State 8
-		ACTIONS => {
-			"(" => 24
-		}
-	},
-	{#State 9
-		DEFAULT => -2
-	},
-	{#State 10
-		DEFAULT => -34
-	},
-	{#State 11
-		ACTIONS => {
-			'INF' => 10,
-			'UNIOP' => 17,
-			'VAR' => 21,
-			'NAN' => 6,
-			"(" => 7,
-			'BINOP' => 8,
-			"-" => 4,
-			'NUM' => 15,
-			'EULER' => 3,
-			"+" => 11,
-			"delay" => 2,
-			'PI' => 12
-		},
-		GOTOS => {
-			'constant' => 1,
-			'expr' => 25
-		}
-	},
-	{#State 12
-		DEFAULT => -32
-	},
-	{#State 13
-		DEFAULT => -1
-	},
-	{#State 14
-		ACTIONS => {
-			'' => 26
-		}
-	},
-	{#State 15
-		DEFAULT => -20
-	},
-	{#State 16
-		ACTIONS => {
-			"/" => 30,
-			"!" => 27,
-			"^" => 31,
-			"+" => 28,
-			"-" => 32,
-			"*" => 29
+			"/" => 20,
+			"!" => 21,
+			"*" => 22,
+			"-" => 23,
+			"+" => 24,
+			"^" => 25
 		},
 		DEFAULT => -14
 	},
-	{#State 17
+	{#State 4
 		ACTIONS => {
-			"(" => 33
+			'VAR' => 26
 		}
+	},
+	{#State 5
+		DEFAULT => -1
+	},
+	{#State 6
+		ACTIONS => {
+			"(" => 27
+		}
+	},
+	{#State 7
+		DEFAULT => -34
+	},
+	{#State 8
+		ACTIONS => {
+			'' => 28
+		}
+	},
+	{#State 9
+		DEFAULT => -31
+	},
+	{#State 10
+		ACTIONS => {
+			"(" => 29
+		}
+	},
+	{#State 11
+		DEFAULT => -32
+	},
+	{#State 12
+		DEFAULT => -20
+	},
+	{#State 13
+		ACTIONS => {
+			'BINOP' => 6,
+			'INF' => 7,
+			'NAN' => 9,
+			'VAR' => 30,
+			"delay" => 10,
+			'PI' => 11,
+			'EULER' => 1,
+			'NUM' => 12,
+			'UNIOP' => 2,
+			"(" => 13,
+			"-" => 15,
+			"+" => 16
+		},
+		GOTOS => {
+			'expr' => 31,
+			'constant' => 17
+		}
+	},
+	{#State 14
+		DEFAULT => -2
+	},
+	{#State 15
+		ACTIONS => {
+			'VAR' => 30,
+			'NAN' => 9,
+			"delay" => 10,
+			'BINOP' => 6,
+			'INF' => 7,
+			"-" => 15,
+			"+" => 16,
+			"(" => 13,
+			'NUM' => 12,
+			'EULER' => 1,
+			'UNIOP' => 2,
+			'PI' => 11
+		},
+		GOTOS => {
+			'constant' => 17,
+			'expr' => 32
+		}
+	},
+	{#State 16
+		ACTIONS => {
+			'PI' => 11,
+			"(" => 13,
+			'NUM' => 12,
+			'UNIOP' => 2,
+			'EULER' => 1,
+			"-" => 15,
+			"+" => 16,
+			'BINOP' => 6,
+			'INF' => 7,
+			'VAR' => 30,
+			"delay" => 10,
+			'NAN' => 9
+		},
+		GOTOS => {
+			'expr' => 33,
+			'constant' => 17
+		}
+	},
+	{#State 17
+		DEFAULT => -21
 	},
 	{#State 18
 		ACTIONS => {
-			":=" => 36,
-			"(" => 35,
-			"=" => 34
+			"=" => 35,
+			"(" => 36,
+			":=" => 34
 		},
 		DEFAULT => -30
 	},
 	{#State 19
 		ACTIONS => {
-			'VAR' => 37
+			'BINOP' => 6,
+			'INF' => 7,
+			'NAN' => 9,
+			"delay" => 10,
+			'VAR' => 30,
+			'PI' => 11,
+			'UNIOP' => 2,
+			"(" => 13,
+			'EULER' => 1,
+			'NUM' => 12,
+			"-" => 15,
+			"+" => 16
+		},
+		GOTOS => {
+			'constant' => 17,
+			'expr' => 37
 		}
 	},
 	{#State 20
-		DEFAULT => -24
+		ACTIONS => {
+			'NAN' => 9,
+			'VAR' => 30,
+			"delay" => 10,
+			'BINOP' => 6,
+			'INF' => 7,
+			"+" => 16,
+			"-" => 15,
+			'PI' => 11,
+			'EULER' => 1,
+			'NUM' => 12,
+			"(" => 13,
+			'UNIOP' => 2
+		},
+		GOTOS => {
+			'expr' => 38,
+			'constant' => 17
+		}
 	},
 	{#State 21
-		ACTIONS => {
-			"(" => 38
-		},
-		DEFAULT => -30
+		DEFAULT => -22
 	},
 	{#State 22
 		ACTIONS => {
-			"," => 39
+			'PI' => 11,
+			'NUM' => 12,
+			'EULER' => 1,
+			"(" => 13,
+			'UNIOP' => 2,
+			"+" => 16,
+			"-" => 15,
+			'BINOP' => 6,
+			'INF' => 7,
+			'VAR' => 30,
+			"delay" => 10,
+			'NAN' => 9
+		},
+		GOTOS => {
+			'constant' => 17,
+			'expr' => 39
 		}
 	},
 	{#State 23
 		ACTIONS => {
-			"/" => 30,
-			"^" => 31,
-			"+" => 28,
-			"!" => 27,
-			")" => 40,
-			"-" => 32,
-			"*" => 29
+			'BINOP' => 6,
+			'INF' => 7,
+			"delay" => 10,
+			'NAN' => 9,
+			'VAR' => 30,
+			'EULER' => 1,
+			'UNIOP' => 2,
+			'NUM' => 12,
+			"(" => 13,
+			'PI' => 11,
+			"-" => 15,
+			"+" => 16
+		},
+		GOTOS => {
+			'constant' => 17,
+			'expr' => 40
 		}
 	},
 	{#State 24
 		ACTIONS => {
-			'NUM' => 15,
-			"-" => 4,
-			'PI' => 12,
-			"+" => 11,
-			"delay" => 2,
-			'EULER' => 3,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			'INF' => 10,
-			'BINOP' => 8,
-			"(" => 7,
-			'NAN' => 6
+			'BINOP' => 6,
+			'INF' => 7,
+			"delay" => 10,
+			'VAR' => 30,
+			'NAN' => 9,
+			'PI' => 11,
+			'EULER' => 1,
+			"(" => 13,
+			'UNIOP' => 2,
+			'NUM' => 12,
+			"-" => 15,
+			"+" => 16
 		},
 		GOTOS => {
-			'constant' => 1,
+			'constant' => 17,
 			'expr' => 41
 		}
 	},
 	{#State 25
 		ACTIONS => {
-			"*" => 29,
-			"^" => 31,
-			"!" => 27,
-			"/" => 30
-		},
-		DEFAULT => -23
-	},
-	{#State 26
-		DEFAULT => 0
-	},
-	{#State 27
-		DEFAULT => -22
-	},
-	{#State 28
-		ACTIONS => {
-			"delay" => 2,
-			'EULER' => 3,
-			"+" => 11,
-			'PI' => 12,
-			"-" => 4,
-			'NUM' => 15,
-			'NAN' => 6,
-			'BINOP' => 8,
-			"(" => 7,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			'INF' => 10
+			'NUM' => 12,
+			'EULER' => 1,
+			'UNIOP' => 2,
+			"(" => 13,
+			'PI' => 11,
+			"-" => 15,
+			"+" => 16,
+			'INF' => 7,
+			'BINOP' => 6,
+			"delay" => 10,
+			'NAN' => 9,
+			'VAR' => 30
 		},
 		GOTOS => {
-			'constant' => 1,
+			'constant' => 17,
 			'expr' => 42
 		}
 	},
-	{#State 29
+	{#State 26
 		ACTIONS => {
-			'NAN' => 6,
-			'BINOP' => 8,
-			"(" => 7,
-			'INF' => 10,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			"delay" => 2,
-			'EULER' => 3,
-			"+" => 11,
-			'PI' => 12,
-			'NUM' => 15,
-			"-" => 4
+			"," => 43
+		}
+	},
+	{#State 27
+		ACTIONS => {
+			"+" => 16,
+			"-" => 15,
+			'PI' => 11,
+			'UNIOP' => 2,
+			"(" => 13,
+			'EULER' => 1,
+			'NUM' => 12,
+			'NAN' => 9,
+			"delay" => 10,
+			'VAR' => 30,
+			'INF' => 7,
+			'BINOP' => 6
 		},
 		GOTOS => {
-			'constant' => 1,
-			'expr' => 43
+			'constant' => 17,
+			'expr' => 44
+		}
+	},
+	{#State 28
+		DEFAULT => 0
+	},
+	{#State 29
+		ACTIONS => {
+			'VAR' => 45
 		}
 	},
 	{#State 30
 		ACTIONS => {
-			'NUM' => 15,
-			"-" => 4,
-			'PI' => 12,
-			"+" => 11,
-			"delay" => 2,
-			'EULER' => 3,
-			'UNIOP' => 17,
-			'VAR' => 21,
-			'INF' => 10,
-			"(" => 7,
-			'BINOP' => 8,
-			'NAN' => 6
+			"(" => 46
 		},
-		GOTOS => {
-			'expr' => 44,
-			'constant' => 1
-		}
+		DEFAULT => -30
 	},
 	{#State 31
 		ACTIONS => {
-			'BINOP' => 8,
-			"(" => 7,
-			'NAN' => 6,
-			'UNIOP' => 17,
-			'VAR' => 21,
-			'INF' => 10,
-			'PI' => 12,
-			'EULER' => 3,
-			"delay" => 2,
-			"+" => 11,
-			"-" => 4,
-			'NUM' => 15
-		},
-		GOTOS => {
-			'expr' => 45,
-			'constant' => 1
+			"-" => 23,
+			"^" => 25,
+			"+" => 24,
+			"/" => 20,
+			"*" => 22,
+			"!" => 21,
+			")" => 47
 		}
 	},
 	{#State 32
-		ACTIONS => {
-			'NUM' => 15,
-			"-" => 4,
-			'EULER' => 3,
-			"+" => 11,
-			"delay" => 2,
-			'PI' => 12,
-			'INF' => 10,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			'NAN' => 6,
-			"(" => 7,
-			'BINOP' => 8
-		},
-		GOTOS => {
-			'expr' => 46,
-			'constant' => 1
-		}
+		DEFAULT => -24
 	},
 	{#State 33
 		ACTIONS => {
-			"-" => 4,
-			'NUM' => 15,
-			'PI' => 12,
-			'EULER' => 3,
-			"delay" => 2,
-			"+" => 11,
-			'INF' => 10,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			'BINOP' => 8,
-			"(" => 7,
-			'NAN' => 6
+			"^" => 25,
+			"!" => 21,
+			"*" => 22,
+			"/" => 20
 		},
-		GOTOS => {
-			'expr' => 47,
-			'constant' => 1
-		}
+		DEFAULT => -23
 	},
 	{#State 34
 		ACTIONS => {
-			'UNIOP' => 17,
-			'VAR' => 21,
-			'INF' => 10,
-			'NAN' => 6,
-			"(" => 7,
-			'BINOP' => 8,
-			"-" => 4,
-			'NUM' => 15,
-			'EULER' => 3,
-			"+" => 11,
-			"delay" => 2,
-			'PI' => 12
+			'NAN' => 9,
+			"delay" => 10,
+			'VAR' => 30,
+			'BINOP' => 6,
+			'INF' => 7,
+			"+" => 16,
+			"-" => 15,
+			'PI' => 11,
+			"(" => 13,
+			'UNIOP' => 2,
+			'NUM' => 12,
+			'EULER' => 1
 		},
 		GOTOS => {
-			'expr' => 16,
+			'expr' => 3,
 			'equation' => 48,
-			'constant' => 1
+			'constant' => 17
 		}
 	},
 	{#State 35
 		ACTIONS => {
-			'VAR' => 49
+			"+" => 16,
+			"-" => 15,
+			'PI' => 11,
+			'NUM' => 12,
+			"(" => 13,
+			'EULER' => 1,
+			'UNIOP' => 2,
+			'VAR' => 30,
+			"delay" => 10,
+			'NAN' => 9,
+			'INF' => 7,
+			'BINOP' => 6
+		},
+		GOTOS => {
+			'expr' => 3,
+			'equation' => 49,
+			'constant' => 17
+		}
+	},
+	{#State 36
+		ACTIONS => {
+			'VAR' => 52
 		},
 		GOTOS => {
 			'varlist' => 51,
 			'argpairlist' => 50
 		}
 	},
-	{#State 36
-		ACTIONS => {
-			'BINOP' => 8,
-			"(" => 7,
-			'NAN' => 6,
-			'UNIOP' => 17,
-			'VAR' => 21,
-			'INF' => 10,
-			'PI' => 12,
-			'EULER' => 3,
-			"delay" => 2,
-			"+" => 11,
-			"-" => 4,
-			'NUM' => 15
-		},
-		GOTOS => {
-			'equation' => 52,
-			'expr' => 16,
-			'constant' => 1
-		}
-	},
 	{#State 37
 		ACTIONS => {
-			"," => 53
+			"/" => 20,
+			"!" => 21,
+			")" => 53,
+			"*" => 22,
+			"+" => 24,
+			"^" => 25,
+			"-" => 23
 		}
 	},
 	{#State 38
 		ACTIONS => {
+			"!" => 21,
+			"^" => 25
+		},
+		DEFAULT => -18
+	},
+	{#State 39
+		ACTIONS => {
+			"^" => 25,
+			"!" => 21
+		},
+		DEFAULT => -17
+	},
+	{#State 40
+		ACTIONS => {
+			"^" => 25,
+			"!" => 21,
+			"*" => 22,
+			"/" => 20
+		},
+		DEFAULT => -16
+	},
+	{#State 41
+		ACTIONS => {
+			"*" => 22,
+			"!" => 21,
+			"/" => 20,
+			"^" => 25
+		},
+		DEFAULT => -15
+	},
+	{#State 42
+		ACTIONS => {
+			"^" => 25,
+			"!" => 21
+		},
+		DEFAULT => -19
+	},
+	{#State 43
+		ACTIONS => {
 			'VAR' => 54
+		}
+	},
+	{#State 44
+		ACTIONS => {
+			"-" => 23,
+			"^" => 25,
+			"+" => 24,
+			"," => 55,
+			"/" => 20,
+			"!" => 21,
+			"*" => 22
+		}
+	},
+	{#State 45
+		ACTIONS => {
+			"," => 56
+		}
+	},
+	{#State 46
+		ACTIONS => {
+			'VAR' => 57
 		},
 		GOTOS => {
 			'argpairlist' => 50
 		}
 	},
-	{#State 39
-		ACTIONS => {
-			'VAR' => 55
-		}
-	},
-	{#State 40
+	{#State 47
 		DEFAULT => -25
 	},
-	{#State 41
-		ACTIONS => {
-			"+" => 28,
-			"!" => 27,
-			"^" => 31,
-			"/" => 30,
-			"*" => 29,
-			"-" => 32,
-			"," => 56
-		}
-	},
-	{#State 42
-		ACTIONS => {
-			"*" => 29,
-			"^" => 31,
-			"/" => 30,
-			"!" => 27
-		},
-		DEFAULT => -15
-	},
-	{#State 43
-		ACTIONS => {
-			"!" => 27,
-			"^" => 31
-		},
-		DEFAULT => -17
-	},
-	{#State 44
-		ACTIONS => {
-			"!" => 27,
-			"^" => 31
-		},
-		DEFAULT => -18
-	},
-	{#State 45
-		ACTIONS => {
-			"!" => 27,
-			"^" => 31
-		},
-		DEFAULT => -19
-	},
-	{#State 46
-		ACTIONS => {
-			"/" => 30,
-			"!" => 27,
-			"*" => 29,
-			"^" => 31
-		},
-		DEFAULT => -16
-	},
-	{#State 47
-		ACTIONS => {
-			"^" => 31,
-			"/" => 30,
-			"!" => 27,
-			"+" => 28,
-			"-" => 32,
-			"*" => 29,
-			")" => 57
-		}
-	},
 	{#State 48
-		DEFAULT => -3
+		ACTIONS => {
+			'DESCRIPTION' => 58
+		},
+		DEFAULT => -6,
+		GOTOS => {
+			'OPTIONAL-2' => 59
+		}
 	},
 	{#State 49
-		ACTIONS => {
-			"=" => 58
-		},
-		DEFAULT => -38
+		DEFAULT => -3
 	},
 	{#State 50
 		ACTIONS => {
-			")" => 59,
-			"," => 60
+			"," => 60,
+			")" => 61
 		}
 	},
 	{#State 51
 		ACTIONS => {
 			"):=" => 62,
-			"," => 61
+			"," => 63
 		}
 	},
 	{#State 52
 		ACTIONS => {
-			'DESCRIPTION' => 63
+			"=" => 64
 		},
-		DEFAULT => -6,
-		GOTOS => {
-			'OPTIONAL-2' => 64
-		}
+		DEFAULT => -38
 	},
 	{#State 53
-		ACTIONS => {
-			'VAR' => 65
-		}
+		DEFAULT => -26
 	},
 	{#State 54
 		ACTIONS => {
-			"=" => 58
+			")=" => 66,
+			"):=" => 65
 		}
 	},
 	{#State 55
 		ACTIONS => {
-			"):=" => 67,
-			")=" => 66
+			'PI' => 11,
+			'EULER' => 1,
+			"(" => 13,
+			'NUM' => 12,
+			'UNIOP' => 2,
+			"+" => 16,
+			"-" => 15,
+			'INF' => 7,
+			'BINOP' => 6,
+			'NAN' => 9,
+			"delay" => 10,
+			'VAR' => 30
+		},
+		GOTOS => {
+			'constant' => 17,
+			'expr' => 67
 		}
 	},
 	{#State 56
 		ACTIONS => {
-			'NUM' => 15,
-			"-" => 4,
-			'PI' => 12,
-			'EULER' => 3,
-			"+" => 11,
-			"delay" => 2,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			'INF' => 10,
-			'BINOP' => 8,
-			"(" => 7,
-			'NAN' => 6
-		},
-		GOTOS => {
-			'constant' => 1,
-			'expr' => 68
+			'VAR' => 68
 		}
 	},
 	{#State 57
-		DEFAULT => -26
-	},
-	{#State 58
 		ACTIONS => {
-			'NAN' => 6,
-			'BINOP' => 8,
-			"(" => 7,
-			'INF' => 10,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			"delay" => 2,
-			"+" => 11,
-			'EULER' => 3,
-			'PI' => 12,
-			"-" => 4,
-			'NUM' => 15
-		},
-		GOTOS => {
-			'equation' => 69,
-			'expr' => 16,
-			'constant' => 1
+			"=" => 64
 		}
 	},
+	{#State 58
+		DEFAULT => -5
+	},
 	{#State 59
-		DEFAULT => -29
+		DEFAULT => -11
 	},
 	{#State 60
 		ACTIONS => {
-			'VAR' => 54
+			'VAR' => 57
 		},
 		GOTOS => {
-			'argpairlist' => 70
+			'argpairlist' => 69
 		}
 	},
 	{#State 61
+		DEFAULT => -29
+	},
+	{#State 62
+		ACTIONS => {
+			'PI' => 11,
+			'NUM' => 12,
+			'EULER' => 1,
+			"(" => 13,
+			'UNIOP' => 2,
+			"-" => 15,
+			"+" => 16,
+			'INF' => 7,
+			'BINOP' => 6,
+			'VAR' => 30,
+			'NAN' => 9,
+			"delay" => 10
+		},
+		GOTOS => {
+			'expr' => 3,
+			'equation' => 70,
+			'constant' => 17
+		}
+	},
+	{#State 63
 		ACTIONS => {
 			'VAR' => 72
 		},
@@ -4170,96 +4176,90 @@ sub new {
 			'varlist' => 71
 		}
 	},
-	{#State 62
+	{#State 64
 		ACTIONS => {
-			'PI' => 12,
-			"delay" => 2,
-			"+" => 11,
-			'EULER' => 3,
-			'NUM' => 15,
-			"-" => 4,
-			"(" => 7,
-			'BINOP' => 8,
-			'NAN' => 6,
-			'INF' => 10,
-			'VAR' => 21,
-			'UNIOP' => 17
+			"delay" => 10,
+			'VAR' => 30,
+			'NAN' => 9,
+			'BINOP' => 6,
+			'INF' => 7,
+			"+" => 16,
+			"-" => 15,
+			"(" => 13,
+			'NUM' => 12,
+			'EULER' => 1,
+			'UNIOP' => 2,
+			'PI' => 11
 		},
 		GOTOS => {
-			'constant' => 1,
+			'constant' => 17,
 			'equation' => 73,
-			'expr' => 16
+			'expr' => 3
 		}
-	},
-	{#State 63
-		DEFAULT => -5
-	},
-	{#State 64
-		DEFAULT => -11
 	},
 	{#State 65
 		ACTIONS => {
-			")" => 74
+			'NUM' => 12,
+			"(" => 13,
+			'EULER' => 1,
+			'UNIOP' => 2,
+			'PI' => 11,
+			"-" => 15,
+			"+" => 16,
+			'BINOP' => 6,
+			'INF' => 7,
+			'VAR' => 30,
+			"delay" => 10,
+			'NAN' => 9
+		},
+		GOTOS => {
+			'equation' => 74,
+			'constant' => 17,
+			'expr' => 3
 		}
 	},
 	{#State 66
 		ACTIONS => {
-			"-" => 4,
-			'NUM' => 15,
-			'EULER' => 3,
-			"delay" => 2,
-			"+" => 11,
-			'PI' => 12,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			'INF' => 10,
-			'NAN' => 6,
-			"(" => 7,
-			'BINOP' => 8
+			"-" => 15,
+			"+" => 16,
+			'PI' => 11,
+			"(" => 13,
+			'UNIOP' => 2,
+			'EULER' => 1,
+			'NUM' => 12,
+			'NAN' => 9,
+			'VAR' => 30,
+			"delay" => 10,
+			'BINOP' => 6,
+			'INF' => 7
 		},
 		GOTOS => {
-			'expr' => 16,
+			'expr' => 3,
 			'equation' => 75,
-			'constant' => 1
+			'constant' => 17
 		}
 	},
 	{#State 67
 		ACTIONS => {
-			"-" => 4,
-			'NUM' => 15,
-			'PI' => 12,
-			"+" => 11,
-			"delay" => 2,
-			'EULER' => 3,
-			'INF' => 10,
-			'VAR' => 21,
-			'UNIOP' => 17,
-			"(" => 7,
-			'BINOP' => 8,
-			'NAN' => 6
-		},
-		GOTOS => {
-			'constant' => 1,
-			'expr' => 16,
-			'equation' => 76
+			"/" => 20,
+			"*" => 22,
+			")" => 76,
+			"!" => 21,
+			"+" => 24,
+			"-" => 23,
+			"^" => 25
 		}
 	},
 	{#State 68
 		ACTIONS => {
-			"/" => 30,
-			"^" => 31,
-			"!" => 27,
-			"+" => 28,
-			")" => 77,
-			"-" => 32,
-			"*" => 29
+			")" => 77
 		}
 	},
 	{#State 69
-		DEFAULT => -36
+		DEFAULT => -35
 	},
 	{#State 70
-		DEFAULT => -35
+		DEFAULT => -4
 	},
 	{#State 71
 		DEFAULT => -37
@@ -4268,43 +4268,43 @@ sub new {
 		DEFAULT => -38
 	},
 	{#State 73
-		DEFAULT => -4
+		DEFAULT => -36
 	},
 	{#State 74
-		DEFAULT => -28
-	},
-	{#State 75
 		ACTIONS => {
-			'DESCRIPTION' => 78
-		},
-		DEFAULT => -8,
-		GOTOS => {
-			'OPTIONAL-3' => 79
-		}
-	},
-	{#State 76
-		ACTIONS => {
-			'DESCRIPTION' => 81
+			'DESCRIPTION' => 79
 		},
 		DEFAULT => -10,
 		GOTOS => {
-			'OPTIONAL-4' => 80
+			'OPTIONAL-4' => 78
 		}
 	},
-	{#State 77
+	{#State 75
+		ACTIONS => {
+			'DESCRIPTION' => 80
+		},
+		DEFAULT => -8,
+		GOTOS => {
+			'OPTIONAL-3' => 81
+		}
+	},
+	{#State 76
 		DEFAULT => -27
 	},
+	{#State 77
+		DEFAULT => -28
+	},
 	{#State 78
-		DEFAULT => -7
-	},
-	{#State 79
-		DEFAULT => -12
-	},
-	{#State 80
 		DEFAULT => -13
 	},
-	{#State 81
+	{#State 79
 		DEFAULT => -9
+	},
+	{#State 80
+		DEFAULT => -7
+	},
+	{#State 81
+		DEFAULT => -12
 	}
 ],
     yyrules  =>
