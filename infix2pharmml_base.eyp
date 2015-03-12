@@ -40,14 +40,13 @@ model:
 
 line:
      assignment ';' ?
-    | COMMENT                             {  infix2pharmml::comment($_[1]); }
     ;
 
 # Things allowed in model mode
 assignment:  
-        common
-    | MACRO '(' macroargpairlist ')' 
-                                           {infix2pharmml::macro($_[1],$_[3])}
+      common
+    | MACRO '(' macroargpairlist ')'       {infix2pharmml::macro($_[1],$_[3])}
+    | COMMENT                              {infix2pharmml::comment($_[1])}
     | 'par' parameterlist 
     ;
 
