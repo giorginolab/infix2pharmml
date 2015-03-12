@@ -127,7 +127,6 @@ sub diff {
 
 sub par {
     my ($id,$y)=@_;
-#    print "---- $id ---- $y";
     $allSymbols{$id}=$y;
 }
 
@@ -308,11 +307,11 @@ sub xmlify {
 	} 
 	$tmpl =~ s/INFIX2PHARMML_MACROS/$mac/;
 
-	my $dt=localtime;
-	$tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
-
-	$tmpl =~ s/INFIX2PHARMML_INPUT/$in/g
-	    unless($noinput);
+	unless($noinput) {
+	    my $dt=localtime;
+	    $tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
+	    $tmpl =~ s/INFIX2PHARMML_INPUT/$in/g;
+	}
 
 	while($tmpl =~ m|INFIX2PHARMML_SYMBREF:(.+?):|) {
 	    my $m=quotemeta $&;
@@ -350,17 +349,19 @@ sub xmlify {
 sub getSimulxCode {
     my @par;
     my @parq;
+    my @parv;
     my $np=0;
     foreach my $s (keys %allSymbols) {
 	if(! defined $localSymbols{$s}) {
 	    push @par,$s;
-	    push @parq,qq("$s");
+	    push @parq,qq("$s"); # quoted parameter name
+	    push @parv,$allSymbols{$s}//1.0;
 	    $np++;
 	}
     }
 
     my $out= "p <- list( name  = c(" . join(",",@parq). "),\n";
-    $out.=   "           value = c(".join(",",(1)x$np).")) # FIXME\n";
+    $out.=   "           value = c(" . join(",",@parv) .")) # FIXME\n";
 
     my %localVars=%localSymbols;
     delete $localVars{"t"};
