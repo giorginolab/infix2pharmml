@@ -27,7 +27,8 @@ test:
 
 .PHONY:
 clean:
-	-rm infix2pharmml_model.eyp infix2pharmml_statement.eyp
+	-rm infix2pharmml_model.eyp infix2pharmml_statement.eyp \
+            infix2pharmml_model.pm infix2pharmml_statement.pm
 
 .PHONY:
 veryclean: clean

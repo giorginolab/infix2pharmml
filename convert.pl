@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-use lib 'cgi-perl/lib/perl5';
+#use lib 'cgi-perl/lib/perl5';
 
 use FindBin;
 use lib "$FindBin::RealBin";
@@ -33,7 +33,8 @@ $infix2pharmml::fullmodel=1 if($opt_s);
 my $string=shift @ARGV;
 
 if (!$string) {
-    print "Enter the expression to convert:\n" unless $opt_q;
+    print "Enter the expression to convert, ^D to end:\n" unless $opt_q;
+    $/=undef;
     $string=<>;
     chomp $string; 
 } 

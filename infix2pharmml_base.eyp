@@ -14,6 +14,7 @@
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
+%token COMMENT = /#(.+?)$/
 %token DESCRIPTION = /{(.+?)}/
 
 
@@ -37,6 +38,7 @@ model:
 
 line:
      assignment ';' ?
+    | COMMENT                             {  infix2pharmml::comment($_[1]); }
     ;
 
 # Things allowed in model mode

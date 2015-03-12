@@ -41,6 +41,14 @@ my @functionList=();
 my @macroText=();
 
 
+# Hash to EOL comment
+sub comment {
+    my $c=shift;
+    print "***** $c\n";
+    my $out="<!-- USER $c -->";
+    return $out;
+}
+
 
 # Top-level declarations
 sub funcdef {

@@ -10,8 +10,8 @@
   <ct:Name>Anonymous - FIXME</ct:Name>
   <ct:Description>Model translated by infix2pharmml.sourceforge.net on INFIX2PHARMML_DATE.</ct:Description>
 
-  <!-- Translation of: -->
-  <!-- INFIX2PHARMML_INPUT -->
+  <!-- Translation of: 
+       INFIX2PHARMML_INPUT -->
 
   <IndependentVariable symbId="t" />
 
