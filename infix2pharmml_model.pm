@@ -40,7 +40,7 @@ our $LEX = sub {
 
       m{\G(\s+)}gc and $self->tokenline($1 =~ tr{\n}{});
 
-      m{\G(delay|diff\(|\)\:\=|par|\)\=|\:\=|\;|\#|\-|\(|\+|\)|\,|\^|\!|\*|\/|\=)}gc and return ($1, $1);
+      m{\G(diff\(|delay|\)\:\=|par|\)\=|\:\=|\-|\;|\+|\,|\^|\!|\*|\)|\/|\=|\()}gc and return ($1, $1);
 
       /\G\b(nan|NaN|notanumber)\b/gc and return ('NAN', $1);
       /\G\b(e|exponentiale)\b/gc and return ('EULER', $1);
@@ -51,7 +51,7 @@ our $LEX = sub {
       /\G\b(Absorption|Compartment|Depot|Effect|Elimination|IV|Oral|Peripheral|Transfer)\b/gc and return ('MACRO', $1);
       /\G([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/gc and return ('NUM', $1);
       /\G([A-Za-z][A-Za-z0-9_]*)/gc and return ('VAR', $1);
-      /\G(.+?)/gc and return ('COMMENT', $1);
+      /\G#(.+?)$/gc and return ('COMMENT', $1);
       /\G{(.+?)}/gc and return ('DESCRIPTION', $1);
 
 
@@ -89,48 +89,49 @@ sub new {
   [ 'model_2' => 'model', [ 'line' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-1', [ ';' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-1', [  ], 0 ],
-  [ 'line_5' => 'line', [ 'assignment', 'OPTIONAL-1' ], 0 ],
-  [ 'assignment_6' => 'assignment', [ 'common' ], 0 ],
-  [ 'assignment_7' => 'assignment', [ 'MACRO', '(', 'macroargpairlist', ')' ], 0 ],
-  [ 'assignment_8' => 'assignment', [ '#', 'COMMENT' ], 0 ],
-  [ 'assignment_9' => 'assignment', [ 'par', 'parameterlist' ], 0 ],
-  [ '_OPTIONAL' => 'OPTIONAL-2', [ 'DESCRIPTION' ], 0 ],
+  [ '_OPTIONAL' => 'OPTIONAL-2', [ 'COMMENT' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-2', [  ], 0 ],
+  [ 'line_7' => 'line', [ 'assignment', 'OPTIONAL-1', 'OPTIONAL-2' ], 0 ],
+  [ 'assignment_8' => 'assignment', [ 'common' ], 0 ],
+  [ 'assignment_9' => 'assignment', [ 'MACRO', '(', 'macroargpairlist', ')' ], 0 ],
+  [ 'assignment_10' => 'assignment', [ 'par', 'parameterlist' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-3', [ 'DESCRIPTION' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-3', [  ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-4', [ 'DESCRIPTION' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-4', [  ], 0 ],
-  [ 'common_16' => 'common', [ 'VAR', ':=', 'equation', 'OPTIONAL-2' ], 0 ],
-  [ 'common_17' => 'common', [ 'diff(', 'VAR', ',', 'VAR', ')=', 'equation', 'OPTIONAL-3' ], 0 ],
-  [ 'common_18' => 'common', [ 'diff(', 'VAR', ',', 'VAR', '):=', 'equation', 'OPTIONAL-4' ], 0 ],
-  [ 'equation_19' => 'equation', [ 'expr' ], 0 ],
-  [ 'expr_20' => 'expr', [ 'expr', '+', 'expr' ], 0 ],
-  [ 'expr_21' => 'expr', [ 'expr', '-', 'expr' ], 0 ],
-  [ 'expr_22' => 'expr', [ 'expr', '*', 'expr' ], 0 ],
-  [ 'expr_23' => 'expr', [ 'expr', '/', 'expr' ], 0 ],
-  [ 'expr_24' => 'expr', [ 'expr', '^', 'expr' ], 0 ],
-  [ 'expr_25' => 'expr', [ 'NUM' ], 0 ],
-  [ 'expr_26' => 'expr', [ 'constant' ], 0 ],
-  [ 'expr_27' => 'expr', [ 'expr', '!' ], 0 ],
-  [ 'expr_28' => 'expr', [ '+', 'expr' ], 0 ],
-  [ 'expr_29' => 'expr', [ '-', 'expr' ], 0 ],
-  [ 'expr_30' => 'expr', [ '(', 'expr', ')' ], 0 ],
-  [ 'expr_31' => 'expr', [ 'UNIOP', '(', 'expr', ')' ], 0 ],
-  [ 'expr_32' => 'expr', [ 'BINOP', '(', 'expr', ',', 'expr', ')' ], 0 ],
-  [ 'expr_33' => 'expr', [ 'delay', '(', 'VAR', ',', 'VAR', ')' ], 0 ],
-  [ 'expr_34' => 'expr', [ 'VAR', '(', 'argpairlist', ')' ], 0 ],
-  [ 'expr_35' => 'expr', [ 'VAR' ], 0 ],
-  [ 'constant_36' => 'constant', [ 'NAN' ], 0 ],
-  [ 'constant_37' => 'constant', [ 'PI' ], 0 ],
-  [ 'constant_38' => 'constant', [ 'EULER' ], 0 ],
-  [ 'constant_39' => 'constant', [ 'INF' ], 0 ],
-  [ 'argpairlist_40' => 'argpairlist', [ 'argpairlist', ',', 'argpairlist' ], 0 ],
-  [ 'argpairlist_41' => 'argpairlist', [ 'VAR', '=', 'equation' ], 0 ],
-  [ 'macroargpairlist_42' => 'macroargpairlist', [ 'macroargpairlist', ',', 'macroargpairlist' ], 0 ],
-  [ 'macroargpairlist_43' => 'macroargpairlist', [ 'equation' ], 0 ],
-  [ 'macroargpairlist_44' => 'macroargpairlist', [ 'VAR', '=', 'equation' ], 0 ],
-  [ 'parameterlist_45' => 'parameterlist', [ 'parameterlist', ',', 'parameterlist' ], 0 ],
-  [ 'parameterlist_46' => 'parameterlist', [ 'VAR', '=', 'equation' ], 0 ],
+  [ '_OPTIONAL' => 'OPTIONAL-5', [ 'DESCRIPTION' ], 0 ],
+  [ '_OPTIONAL' => 'OPTIONAL-5', [  ], 0 ],
+  [ 'common_17' => 'common', [ 'VAR', ':=', 'equation', 'OPTIONAL-3' ], 0 ],
+  [ 'common_18' => 'common', [ 'diff(', 'VAR', ',', 'VAR', ')=', 'equation', 'OPTIONAL-4' ], 0 ],
+  [ 'common_19' => 'common', [ 'diff(', 'VAR', ',', 'VAR', '):=', 'equation', 'OPTIONAL-5' ], 0 ],
+  [ 'equation_20' => 'equation', [ 'expr' ], 0 ],
+  [ 'expr_21' => 'expr', [ 'expr', '+', 'expr' ], 0 ],
+  [ 'expr_22' => 'expr', [ 'expr', '-', 'expr' ], 0 ],
+  [ 'expr_23' => 'expr', [ 'expr', '*', 'expr' ], 0 ],
+  [ 'expr_24' => 'expr', [ 'expr', '/', 'expr' ], 0 ],
+  [ 'expr_25' => 'expr', [ 'expr', '^', 'expr' ], 0 ],
+  [ 'expr_26' => 'expr', [ 'NUM' ], 0 ],
+  [ 'expr_27' => 'expr', [ 'constant' ], 0 ],
+  [ 'expr_28' => 'expr', [ 'expr', '!' ], 0 ],
+  [ 'expr_29' => 'expr', [ '+', 'expr' ], 0 ],
+  [ 'expr_30' => 'expr', [ '-', 'expr' ], 0 ],
+  [ 'expr_31' => 'expr', [ '(', 'expr', ')' ], 0 ],
+  [ 'expr_32' => 'expr', [ 'UNIOP', '(', 'expr', ')' ], 0 ],
+  [ 'expr_33' => 'expr', [ 'BINOP', '(', 'expr', ',', 'expr', ')' ], 0 ],
+  [ 'expr_34' => 'expr', [ 'delay', '(', 'VAR', ',', 'VAR', ')' ], 0 ],
+  [ 'expr_35' => 'expr', [ 'VAR', '(', 'argpairlist', ')' ], 0 ],
+  [ 'expr_36' => 'expr', [ 'VAR' ], 0 ],
+  [ 'constant_37' => 'constant', [ 'NAN' ], 0 ],
+  [ 'constant_38' => 'constant', [ 'PI' ], 0 ],
+  [ 'constant_39' => 'constant', [ 'EULER' ], 0 ],
+  [ 'constant_40' => 'constant', [ 'INF' ], 0 ],
+  [ 'argpairlist_41' => 'argpairlist', [ 'argpairlist', ',', 'argpairlist' ], 0 ],
+  [ 'argpairlist_42' => 'argpairlist', [ 'VAR', '=', 'equation' ], 0 ],
+  [ 'macroargpairlist_43' => 'macroargpairlist', [ 'macroargpairlist', ',', 'macroargpairlist' ], 0 ],
+  [ 'macroargpairlist_44' => 'macroargpairlist', [ 'equation' ], 0 ],
+  [ 'macroargpairlist_45' => 'macroargpairlist', [ 'VAR', '=', 'equation' ], 0 ],
+  [ 'parameterlist_46' => 'parameterlist', [ 'parameterlist', ',', 'parameterlist' ], 0 ],
+  [ 'parameterlist_47' => 'parameterlist', [ 'VAR', '=', 'equation' ], 0 ],
 ],
     yyLABELS  =>
 {
@@ -139,22 +140,22 @@ sub new {
   'model_2' => 2,
   '_OPTIONAL' => 3,
   '_OPTIONAL' => 4,
-  'line_5' => 5,
-  'assignment_6' => 6,
-  'assignment_7' => 7,
+  '_OPTIONAL' => 5,
+  '_OPTIONAL' => 6,
+  'line_7' => 7,
   'assignment_8' => 8,
   'assignment_9' => 9,
-  '_OPTIONAL' => 10,
+  'assignment_10' => 10,
   '_OPTIONAL' => 11,
   '_OPTIONAL' => 12,
   '_OPTIONAL' => 13,
   '_OPTIONAL' => 14,
   '_OPTIONAL' => 15,
-  'common_16' => 16,
+  '_OPTIONAL' => 16,
   'common_17' => 17,
   'common_18' => 18,
-  'equation_19' => 19,
-  'expr_20' => 20,
+  'common_19' => 19,
+  'equation_20' => 20,
   'expr_21' => 21,
   'expr_22' => 22,
   'expr_23' => 23,
@@ -170,22 +171,22 @@ sub new {
   'expr_33' => 33,
   'expr_34' => 34,
   'expr_35' => 35,
-  'constant_36' => 36,
+  'expr_36' => 36,
   'constant_37' => 37,
   'constant_38' => 38,
   'constant_39' => 39,
-  'argpairlist_40' => 40,
+  'constant_40' => 40,
   'argpairlist_41' => 41,
-  'macroargpairlist_42' => 42,
+  'argpairlist_42' => 42,
   'macroargpairlist_43' => 43,
   'macroargpairlist_44' => 44,
-  'parameterlist_45' => 45,
+  'macroargpairlist_45' => 45,
   'parameterlist_46' => 46,
+  'parameterlist_47' => 47,
 },
     yyTERMS  =>
 { '' => { ISSEMANTIC => 0 },
 	'!' => { ISSEMANTIC => 0 },
-	'#' => { ISSEMANTIC => 0 },
 	'(' => { ISSEMANTIC => 0 },
 	')' => { ISSEMANTIC => 0 },
 	'):=' => { ISSEMANTIC => 0 },
@@ -221,41 +222,43 @@ sub new {
 [
 	{#State 0
 		ACTIONS => {
-			'VAR' => 1,
-			'MACRO' => 4,
-			"diff(" => 5,
-			"par" => 8,
-			"#" => 9
+			"diff(" => 7,
+			'VAR' => 6,
+			"par" => 5,
+			'MACRO' => 4
 		},
 		GOTOS => {
-			'assignment' => 7,
-			'line' => 6,
-			'common' => 2,
-			'model' => 3
+			'assignment' => 1,
+			'model' => 2,
+			'common' => 3,
+			'line' => 8
 		}
 	},
 	{#State 1
 		ACTIONS => {
-			":=" => 10
+			";" => 9
+		},
+		DEFAULT => -4,
+		GOTOS => {
+			'OPTIONAL-1' => 10
 		}
 	},
 	{#State 2
-		DEFAULT => -6
-	},
-	{#State 3
 		ACTIONS => {
-			"#" => 9,
-			"par" => 8,
-			'' => 12,
-			'VAR' => 1,
+			'' => 11,
 			'MACRO' => 4,
-			"diff(" => 5
+			"par" => 5,
+			'VAR' => 6,
+			"diff(" => 7
 		},
 		GOTOS => {
-			'common' => 2,
-			'line' => 11,
-			'assignment' => 7
+			'assignment' => 1,
+			'common' => 3,
+			'line' => 12
 		}
+	},
+	{#State 3
+		DEFAULT => -8
 	},
 	{#State 4
 		ACTIONS => {
@@ -264,183 +267,181 @@ sub new {
 	},
 	{#State 5
 		ACTIONS => {
-			'VAR' => 14
+			'VAR' => 15
+		},
+		GOTOS => {
+			'parameterlist' => 14
 		}
 	},
 	{#State 6
-		DEFAULT => -2
+		ACTIONS => {
+			":=" => 16
+		}
 	},
 	{#State 7
 		ACTIONS => {
-			";" => 16
-		},
-		DEFAULT => -4,
-		GOTOS => {
-			'OPTIONAL-1' => 15
+			'VAR' => 17
 		}
 	},
 	{#State 8
-		ACTIONS => {
-			'VAR' => 18
-		},
-		GOTOS => {
-			'parameterlist' => 17
-		}
+		DEFAULT => -2
 	},
 	{#State 9
-		ACTIONS => {
-			'COMMENT' => 19
-		}
+		DEFAULT => -3
 	},
 	{#State 10
 		ACTIONS => {
-			'EULER' => 33,
-			'NUM' => 31,
-			'PI' => 32,
-			"-" => 30,
-			'UNIOP' => 29,
-			"delay" => 25,
-			"(" => 27,
-			"+" => 26,
-			'NAN' => 28,
-			'INF' => 22,
-			'VAR' => 24,
-			'BINOP' => 20
+			'COMMENT' => 18
 		},
+		DEFAULT => -6,
 		GOTOS => {
-			'constant' => 23,
-			'expr' => 21,
-			'equation' => 34
+			'OPTIONAL-2' => 19
 		}
 	},
 	{#State 11
-		DEFAULT => -1
+		DEFAULT => 0
 	},
 	{#State 12
-		DEFAULT => 0
+		DEFAULT => -1
 	},
 	{#State 13
 		ACTIONS => {
-			"+" => 26,
-			"delay" => 25,
-			"(" => 27,
-			'NAN' => 28,
-			'INF' => 22,
-			'VAR' => 37,
-			'BINOP' => 20,
-			'EULER' => 33,
-			'NUM' => 31,
-			'PI' => 32,
-			"-" => 30,
-			'UNIOP' => 29
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			"delay" => 29,
+			'UNIOP' => 28,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 33,
+			'PI' => 35,
+			'BINOP' => 34
 		},
 		GOTOS => {
-			'macroargpairlist' => 35,
-			'equation' => 36,
-			'expr' => 21,
-			'constant' => 23
+			'expr' => 26,
+			'constant' => 30,
+			'equation' => 23,
+			'macroargpairlist' => 27
 		}
 	},
 	{#State 14
 		ACTIONS => {
-			"," => 38
-		}
+			"," => 36
+		},
+		DEFAULT => -10
 	},
 	{#State 15
-		DEFAULT => -5
+		ACTIONS => {
+			"=" => 37
+		}
 	},
 	{#State 16
-		DEFAULT => -3
+		ACTIONS => {
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 26,
+			'constant' => 30,
+			'equation' => 38
+		}
 	},
 	{#State 17
 		ACTIONS => {
-			"," => 39
-		},
-		DEFAULT => -9
-	},
-	{#State 18
-		ACTIONS => {
-			"=" => 40
+			"," => 40
 		}
 	},
+	{#State 18
+		DEFAULT => -5
+	},
 	{#State 19
-		DEFAULT => -8
+		DEFAULT => -7
 	},
 	{#State 20
 		ACTIONS => {
-			"(" => 41
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 41,
+			'constant' => 30
 		}
 	},
 	{#State 21
-		ACTIONS => {
-			"/" => 46,
-			"*" => 45,
-			"!" => 44,
-			"^" => 47,
-			"-" => 42,
-			"+" => 43
-		},
-		DEFAULT => -19
+		DEFAULT => -37
 	},
 	{#State 22
-		DEFAULT => -39
+		ACTIONS => {
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 42,
+			'constant' => 30
+		}
 	},
 	{#State 23
-		DEFAULT => -26
+		DEFAULT => -44
 	},
 	{#State 24
-		ACTIONS => {
-			"(" => 48
-		},
-		DEFAULT => -35
+		DEFAULT => -26
 	},
 	{#State 25
-		ACTIONS => {
-			"(" => 49
-		}
+		DEFAULT => -40
 	},
 	{#State 26
 		ACTIONS => {
-			"-" => 30,
-			'UNIOP' => 29,
-			'PI' => 32,
-			'NUM' => 31,
-			'EULER' => 33,
-			'BINOP' => 20,
-			'VAR' => 24,
-			'INF' => 22,
-			'NAN' => 28,
-			"delay" => 25,
-			"+" => 26,
-			"(" => 27
+			"-" => 43,
+			"+" => 44,
+			"!" => 45,
+			"^" => 46,
+			"*" => 47,
+			"/" => 48
 		},
-		GOTOS => {
-			'expr' => 50,
-			'constant' => 23
-		}
+		DEFAULT => -20
 	},
 	{#State 27
 		ACTIONS => {
-			'EULER' => 33,
-			'NUM' => 31,
-			'PI' => 32,
-			"-" => 30,
-			'UNIOP' => 29,
-			"+" => 26,
-			"delay" => 25,
-			"(" => 27,
-			'NAN' => 28,
-			'INF' => 22,
-			'VAR' => 24,
-			'BINOP' => 20
-		},
-		GOTOS => {
-			'expr' => 51,
-			'constant' => 23
+			"," => 49,
+			")" => 50
 		}
 	},
 	{#State 28
-		DEFAULT => -36
+		ACTIONS => {
+			"(" => 51
+		}
 	},
 	{#State 29
 		ACTIONS => {
@@ -448,578 +449,580 @@ sub new {
 		}
 	},
 	{#State 30
-		ACTIONS => {
-			"-" => 30,
-			'UNIOP' => 29,
-			'PI' => 32,
-			'NUM' => 31,
-			'EULER' => 33,
-			'BINOP' => 20,
-			'VAR' => 24,
-			'INF' => 22,
-			'NAN' => 28,
-			"+" => 26,
-			"delay" => 25,
-			"(" => 27
-		},
-		GOTOS => {
-			'constant' => 23,
-			'expr' => 53
-		}
+		DEFAULT => -27
 	},
 	{#State 31
-		DEFAULT => -25
+		DEFAULT => -39
 	},
 	{#State 32
-		DEFAULT => -37
+		ACTIONS => {
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 53,
+			'constant' => 30
+		}
 	},
 	{#State 33
-		DEFAULT => -38
+		ACTIONS => {
+			"=" => 54,
+			"(" => 55
+		},
+		DEFAULT => -36
 	},
 	{#State 34
 		ACTIONS => {
-			'DESCRIPTION' => 54
-		},
-		DEFAULT => -11,
-		GOTOS => {
-			'OPTIONAL-2' => 55
+			"(" => 56
 		}
 	},
 	{#State 35
-		ACTIONS => {
-			"," => 57,
-			")" => 56
-		}
+		DEFAULT => -38
 	},
 	{#State 36
-		DEFAULT => -43
+		ACTIONS => {
+			'VAR' => 15
+		},
+		GOTOS => {
+			'parameterlist' => 57
+		}
 	},
 	{#State 37
 		ACTIONS => {
-			"=" => 58,
-			"(" => 48
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
-		DEFAULT => -35
+		GOTOS => {
+			'expr' => 26,
+			'constant' => 30,
+			'equation' => 58
+		}
 	},
 	{#State 38
 		ACTIONS => {
-			'VAR' => 59
+			'DESCRIPTION' => 59
+		},
+		DEFAULT => -12,
+		GOTOS => {
+			'OPTIONAL-3' => 60
 		}
 	},
 	{#State 39
 		ACTIONS => {
-			'VAR' => 18
+			"(" => 55
 		},
-		GOTOS => {
-			'parameterlist' => 60
-		}
+		DEFAULT => -36
 	},
 	{#State 40
 		ACTIONS => {
-			'INF' => 22,
-			'VAR' => 24,
-			"delay" => 25,
-			"(" => 27,
-			"+" => 26,
-			'NAN' => 28,
-			'BINOP' => 20,
-			'NUM' => 31,
-			'PI' => 32,
-			'EULER' => 33,
-			'UNIOP' => 29,
-			"-" => 30
-		},
-		GOTOS => {
-			'equation' => 61,
-			'expr' => 21,
-			'constant' => 23
+			'VAR' => 61
 		}
 	},
 	{#State 41
-		ACTIONS => {
-			'UNIOP' => 29,
-			"-" => 30,
-			'NUM' => 31,
-			'PI' => 32,
-			'EULER' => 33,
-			'BINOP' => 20,
-			'INF' => 22,
-			'VAR' => 24,
-			"+" => 26,
-			"delay" => 25,
-			"(" => 27,
-			'NAN' => 28
-		},
-		GOTOS => {
-			'constant' => 23,
-			'expr' => 62
-		}
+		DEFAULT => -30
 	},
 	{#State 42
 		ACTIONS => {
-			'INF' => 22,
-			'VAR' => 24,
-			"delay" => 25,
-			"(" => 27,
-			"+" => 26,
-			'NAN' => 28,
-			'BINOP' => 20,
-			'NUM' => 31,
-			'PI' => 32,
-			'EULER' => 33,
-			'UNIOP' => 29,
-			"-" => 30
+			"!" => 45,
+			"^" => 46,
+			"*" => 47,
+			"/" => 48
 		},
-		GOTOS => {
-			'constant' => 23,
-			'expr' => 63
-		}
+		DEFAULT => -29
 	},
 	{#State 43
 		ACTIONS => {
-			'BINOP' => 20,
-			'INF' => 22,
-			'VAR' => 24,
-			"+" => 26,
-			"delay" => 25,
-			"(" => 27,
-			'NAN' => 28,
-			"-" => 30,
-			'UNIOP' => 29,
-			'NUM' => 31,
-			'PI' => 32,
-			'EULER' => 33
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
 		GOTOS => {
-			'constant' => 23,
-			'expr' => 64
+			'expr' => 62,
+			'constant' => 30
 		}
 	},
 	{#State 44
-		DEFAULT => -27
-	},
-	{#State 45
 		ACTIONS => {
-			'VAR' => 24,
-			'INF' => 22,
-			'NAN' => 28,
-			"delay" => 25,
-			"+" => 26,
-			"(" => 27,
-			'BINOP' => 20,
-			'PI' => 32,
-			'NUM' => 31,
-			'EULER' => 33,
-			"-" => 30,
-			'UNIOP' => 29
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
 		GOTOS => {
-			'constant' => 23,
-			'expr' => 65
+			'expr' => 63,
+			'constant' => 30
 		}
+	},
+	{#State 45
+		DEFAULT => -28
 	},
 	{#State 46
 		ACTIONS => {
-			'EULER' => 33,
-			'PI' => 32,
-			'NUM' => 31,
-			'UNIOP' => 29,
-			"-" => 30,
-			'NAN' => 28,
-			"+" => 26,
-			"(" => 27,
-			"delay" => 25,
-			'VAR' => 24,
-			'INF' => 22,
-			'BINOP' => 20
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
 		GOTOS => {
-			'constant' => 23,
-			'expr' => 66
+			'expr' => 64,
+			'constant' => 30
 		}
 	},
 	{#State 47
 		ACTIONS => {
-			'UNIOP' => 29,
-			"-" => 30,
-			'EULER' => 33,
-			'PI' => 32,
-			'NUM' => 31,
-			'BINOP' => 20,
-			'NAN' => 28,
-			"delay" => 25,
-			"(" => 27,
-			"+" => 26,
-			'VAR' => 24,
-			'INF' => 22
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
 		GOTOS => {
-			'expr' => 67,
-			'constant' => 23
+			'expr' => 65,
+			'constant' => 30
 		}
 	},
 	{#State 48
 		ACTIONS => {
-			'VAR' => 68
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
 		GOTOS => {
-			'argpairlist' => 69
+			'expr' => 66,
+			'constant' => 30
 		}
 	},
 	{#State 49
 		ACTIONS => {
-			'VAR' => 70
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 33,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 26,
+			'constant' => 30,
+			'equation' => 23,
+			'macroargpairlist' => 67
 		}
 	},
 	{#State 50
-		ACTIONS => {
-			"!" => 44,
-			"/" => 46,
-			"*" => 45,
-			"^" => 47
-		},
-		DEFAULT => -28
+		DEFAULT => -9
 	},
 	{#State 51
 		ACTIONS => {
-			"!" => 44,
-			"/" => 46,
-			"-" => 42,
-			"*" => 45,
-			"+" => 43,
-			")" => 71,
-			"^" => 47
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 68,
+			'constant' => 30
 		}
 	},
 	{#State 52
 		ACTIONS => {
-			'VAR' => 24,
-			'INF' => 22,
-			'NAN' => 28,
-			"delay" => 25,
-			"+" => 26,
-			"(" => 27,
-			'BINOP' => 20,
-			'PI' => 32,
-			'NUM' => 31,
-			'EULER' => 33,
-			"-" => 30,
-			'UNIOP' => 29
-		},
-		GOTOS => {
-			'constant' => 23,
-			'expr' => 72
+			'VAR' => 69
 		}
 	},
 	{#State 53
-		DEFAULT => -29
+		ACTIONS => {
+			"-" => 43,
+			"^" => 46,
+			"!" => 45,
+			"*" => 47,
+			"+" => 44,
+			"/" => 48,
+			")" => 70
+		}
 	},
 	{#State 54
-		DEFAULT => -10
+		ACTIONS => {
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 26,
+			'constant' => 30,
+			'equation' => 71
+		}
 	},
 	{#State 55
-		DEFAULT => -16
+		ACTIONS => {
+			'VAR' => 73
+		},
+		GOTOS => {
+			'argpairlist' => 72
+		}
 	},
 	{#State 56
-		DEFAULT => -7
+		ACTIONS => {
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 74,
+			'constant' => 30
+		}
 	},
 	{#State 57
-		ACTIONS => {
-			"delay" => 25,
-			"+" => 26,
-			"(" => 27,
-			'NAN' => 28,
-			'INF' => 22,
-			'VAR' => 37,
-			'BINOP' => 20,
-			'EULER' => 33,
-			'NUM' => 31,
-			'PI' => 32,
-			"-" => 30,
-			'UNIOP' => 29
-		},
-		GOTOS => {
-			'expr' => 21,
-			'constant' => 23,
-			'equation' => 36,
-			'macroargpairlist' => 73
-		}
+		DEFAULT => -46
 	},
 	{#State 58
-		ACTIONS => {
-			'BINOP' => 20,
-			'NAN' => 28,
-			"+" => 26,
-			"delay" => 25,
-			"(" => 27,
-			'VAR' => 24,
-			'INF' => 22,
-			"-" => 30,
-			'UNIOP' => 29,
-			'EULER' => 33,
-			'PI' => 32,
-			'NUM' => 31
-		},
-		GOTOS => {
-			'expr' => 21,
-			'constant' => 23,
-			'equation' => 74
-		}
+		DEFAULT => -47
 	},
 	{#State 59
-		ACTIONS => {
-			")=" => 76,
-			"):=" => 75
-		}
+		DEFAULT => -11
 	},
 	{#State 60
-		DEFAULT => -45
+		DEFAULT => -17
 	},
 	{#State 61
-		DEFAULT => -46
+		ACTIONS => {
+			"):=" => 75,
+			")=" => 76
+		}
 	},
 	{#State 62
 		ACTIONS => {
-			"*" => 45,
-			"-" => 42,
-			"/" => 46,
-			"!" => 44,
-			"^" => 47,
-			"," => 77,
-			"+" => 43
-		}
+			"!" => 45,
+			"^" => 46,
+			"*" => 47,
+			"/" => 48
+		},
+		DEFAULT => -22
 	},
 	{#State 63
 		ACTIONS => {
-			"!" => 44,
-			"*" => 45,
-			"/" => 46,
-			"^" => 47
+			"!" => 45,
+			"^" => 46,
+			"*" => 47,
+			"/" => 48
 		},
 		DEFAULT => -21
 	},
 	{#State 64
 		ACTIONS => {
-			"^" => 47,
-			"*" => 45,
-			"/" => 46,
-			"!" => 44
+			"!" => 45,
+			"^" => 46
 		},
-		DEFAULT => -20
+		DEFAULT => -25
 	},
 	{#State 65
 		ACTIONS => {
-			"!" => 44,
-			"^" => 47
-		},
-		DEFAULT => -22
-	},
-	{#State 66
-		ACTIONS => {
-			"!" => 44,
-			"^" => 47
+			"!" => 45,
+			"^" => 46
 		},
 		DEFAULT => -23
 	},
-	{#State 67
+	{#State 66
 		ACTIONS => {
-			"^" => 47,
-			"!" => 44
+			"!" => 45,
+			"^" => 46
 		},
 		DEFAULT => -24
 	},
+	{#State 67
+		DEFAULT => -43
+	},
 	{#State 68
 		ACTIONS => {
-			"=" => 78
+			"-" => 43,
+			"^" => 46,
+			"!" => 45,
+			"*" => 47,
+			"+" => 44,
+			"/" => 48,
+			")" => 77
 		}
 	},
 	{#State 69
 		ACTIONS => {
-			"," => 80,
-			")" => 79
+			"," => 78
 		}
 	},
 	{#State 70
-		ACTIONS => {
-			"," => 81
-		}
+		DEFAULT => -31
 	},
 	{#State 71
-		DEFAULT => -30
+		DEFAULT => -45
 	},
 	{#State 72
 		ACTIONS => {
-			"*" => 45,
-			"-" => 42,
-			"/" => 46,
-			"!" => 44,
-			"^" => 47,
-			")" => 82,
-			"+" => 43
+			"," => 79,
+			")" => 80
 		}
 	},
 	{#State 73
-		DEFAULT => -42
+		ACTIONS => {
+			"=" => 81
+		}
 	},
 	{#State 74
-		DEFAULT => -44
+		ACTIONS => {
+			"-" => 43,
+			"^" => 46,
+			"!" => 45,
+			"*" => 47,
+			"+" => 44,
+			"/" => 48,
+			"," => 82
+		}
 	},
 	{#State 75
 		ACTIONS => {
-			'UNIOP' => 29,
-			"-" => 30,
-			'EULER' => 33,
-			'PI' => 32,
-			'NUM' => 31,
-			'BINOP' => 20,
-			'NAN' => 28,
-			"+" => 26,
-			"(" => 27,
-			"delay" => 25,
-			'VAR' => 24,
-			'INF' => 22
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
 		GOTOS => {
-			'expr' => 21,
-			'constant' => 23,
+			'expr' => 26,
+			'constant' => 30,
 			'equation' => 83
 		}
 	},
 	{#State 76
 		ACTIONS => {
-			'EULER' => 33,
-			'PI' => 32,
-			'NUM' => 31,
-			"-" => 30,
-			'UNIOP' => 29,
-			'NAN' => 28,
-			"(" => 27,
-			"delay" => 25,
-			"+" => 26,
-			'VAR' => 24,
-			'INF' => 22,
-			'BINOP' => 20
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
 		},
 		GOTOS => {
-			'constant' => 23,
-			'expr' => 21,
+			'expr' => 26,
+			'constant' => 30,
 			'equation' => 84
 		}
 	},
 	{#State 77
-		ACTIONS => {
-			'NUM' => 31,
-			'PI' => 32,
-			'EULER' => 33,
-			'UNIOP' => 29,
-			"-" => 30,
-			'INF' => 22,
-			'VAR' => 24,
-			"+" => 26,
-			"delay" => 25,
-			"(" => 27,
-			'NAN' => 28,
-			'BINOP' => 20
-		},
-		GOTOS => {
-			'constant' => 23,
-			'expr' => 85
-		}
+		DEFAULT => -32
 	},
 	{#State 78
 		ACTIONS => {
-			"+" => 26,
-			"(" => 27,
-			"delay" => 25,
-			'NAN' => 28,
-			'INF' => 22,
-			'VAR' => 24,
-			'BINOP' => 20,
-			'EULER' => 33,
-			'NUM' => 31,
-			'PI' => 32,
-			'UNIOP' => 29,
-			"-" => 30
-		},
-		GOTOS => {
-			'expr' => 21,
-			'constant' => 23,
-			'equation' => 86
+			'VAR' => 85
 		}
 	},
 	{#State 79
-		DEFAULT => -34
-	},
-	{#State 80
 		ACTIONS => {
-			'VAR' => 68
+			'VAR' => 73
 		},
 		GOTOS => {
-			'argpairlist' => 87
+			'argpairlist' => 86
 		}
+	},
+	{#State 80
+		DEFAULT => -35
 	},
 	{#State 81
 		ACTIONS => {
-			'VAR' => 88
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 26,
+			'constant' => 30,
+			'equation' => 87
 		}
 	},
 	{#State 82
-		DEFAULT => -31
+		ACTIONS => {
+			"-" => 20,
+			'NAN' => 21,
+			"+" => 22,
+			'UNIOP' => 28,
+			"delay" => 29,
+			'EULER' => 31,
+			'NUM' => 24,
+			"(" => 32,
+			'INF' => 25,
+			'VAR' => 39,
+			'BINOP' => 34,
+			'PI' => 35
+		},
+		GOTOS => {
+			'expr' => 88,
+			'constant' => 30
+		}
 	},
 	{#State 83
 		ACTIONS => {
-			'DESCRIPTION' => 90
+			'DESCRIPTION' => 89
 		},
-		DEFAULT => -15,
+		DEFAULT => -16,
 		GOTOS => {
-			'OPTIONAL-4' => 89
+			'OPTIONAL-5' => 90
 		}
 	},
 	{#State 84
 		ACTIONS => {
-			'DESCRIPTION' => 92
+			'DESCRIPTION' => 91
 		},
-		DEFAULT => -13,
+		DEFAULT => -14,
 		GOTOS => {
-			'OPTIONAL-3' => 91
+			'OPTIONAL-4' => 92
 		}
 	},
 	{#State 85
 		ACTIONS => {
-			"!" => 44,
-			"*" => 45,
-			"-" => 42,
-			"/" => 46,
-			")" => 93,
-			"+" => 43,
-			"^" => 47
+			")" => 93
 		}
 	},
 	{#State 86
 		DEFAULT => -41
 	},
 	{#State 87
-		DEFAULT => -40
+		DEFAULT => -42
 	},
 	{#State 88
 		ACTIONS => {
+			"-" => 43,
+			"^" => 46,
+			"!" => 45,
+			"*" => 47,
+			"+" => 44,
+			"/" => 48,
 			")" => 94
 		}
 	},
 	{#State 89
-		DEFAULT => -18
+		DEFAULT => -15
 	},
 	{#State 90
-		DEFAULT => -14
+		DEFAULT => -19
 	},
 	{#State 91
-		DEFAULT => -17
+		DEFAULT => -13
 	},
 	{#State 92
-		DEFAULT => -12
+		DEFAULT => -18
 	},
 	{#State 93
-		DEFAULT => -32
+		DEFAULT => -34
 	},
 	{#State 94
 		DEFAULT => -33
@@ -1029,317 +1032,324 @@ sub new {
 [
 	[#Rule _SUPERSTART
 		 '$start', 2, undef
-#line 1032 ./infix2pharmml_model.pm
+#line 1035 ./infix2pharmml_model.pm
 	],
 	[#Rule model_1
 		 'model', 2, undef
-#line 1036 ./infix2pharmml_model.pm
+#line 1039 ./infix2pharmml_model.pm
 	],
 	[#Rule model_2
 		 'model', 1, undef
-#line 1040 ./infix2pharmml_model.pm
+#line 1043 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-1', 1,
 sub {
 #line 42 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
-#line 1047 ./infix2pharmml_model.pm
+#line 1050 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-1', 0,
 sub {
 #line 42 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
-#line 1054 ./infix2pharmml_model.pm
-	],
-	[#Rule line_5
-		 'line', 2, undef
-#line 1058 ./infix2pharmml_model.pm
-	],
-	[#Rule assignment_6
-		 'assignment', 1, undef
-#line 1062 ./infix2pharmml_model.pm
-	],
-	[#Rule assignment_7
-		 'assignment', 4,
-sub {
-#line 48 "infix2pharmml_model.eyp"
-infix2pharmml::macro($_[1],$_[3])}
-#line 1069 ./infix2pharmml_model.pm
-	],
-	[#Rule assignment_8
-		 'assignment', 2,
-sub {
-#line 49 "infix2pharmml_model.eyp"
-infix2pharmml::comment($_[1])}
-#line 1076 ./infix2pharmml_model.pm
-	],
-	[#Rule assignment_9
-		 'assignment', 2, undef
-#line 1080 ./infix2pharmml_model.pm
+#line 1057 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-2', 1,
 sub {
-#line 64 "infix2pharmml_model.eyp"
+#line 42 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
-#line 1087 ./infix2pharmml_model.pm
+#line 1064 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-2', 0,
 sub {
-#line 64 "infix2pharmml_model.eyp"
+#line 42 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
-#line 1094 ./infix2pharmml_model.pm
+#line 1071 ./infix2pharmml_model.pm
+	],
+	[#Rule line_7
+		 'line', 3, undef
+#line 1075 ./infix2pharmml_model.pm
+	],
+	[#Rule assignment_8
+		 'assignment', 1, undef
+#line 1079 ./infix2pharmml_model.pm
+	],
+	[#Rule assignment_9
+		 'assignment', 4,
+sub {
+#line 48 "infix2pharmml_model.eyp"
+infix2pharmml::macro($_[1],$_[3])}
+#line 1086 ./infix2pharmml_model.pm
+	],
+	[#Rule assignment_10
+		 'assignment', 2, undef
+#line 1090 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-3', 1,
 sub {
-#line 65 "infix2pharmml_model.eyp"
+#line 63 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
-#line 1101 ./infix2pharmml_model.pm
+#line 1097 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-3', 0,
 sub {
-#line 65 "infix2pharmml_model.eyp"
+#line 63 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
-#line 1108 ./infix2pharmml_model.pm
+#line 1104 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-4', 1,
 sub {
-#line 67 "infix2pharmml_model.eyp"
+#line 64 "infix2pharmml_model.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
-#line 1115 ./infix2pharmml_model.pm
+#line 1111 ./infix2pharmml_model.pm
 	],
 	[#Rule _OPTIONAL
 		 'OPTIONAL-4', 0,
 sub {
-#line 67 "infix2pharmml_model.eyp"
- goto &Parse::Eyapp::Driver::YYActionforT_empty }
-#line 1122 ./infix2pharmml_model.pm
-	],
-	[#Rule common_16
-		 'common', 4,
-sub {
 #line 64 "infix2pharmml_model.eyp"
-infix2pharmml::vardef($_[1],$_[3],$_[4])}
-#line 1129 ./infix2pharmml_model.pm
+ goto &Parse::Eyapp::Driver::YYActionforT_empty }
+#line 1118 ./infix2pharmml_model.pm
 	],
-	[#Rule common_17
-		 'common', 7,
+	[#Rule _OPTIONAL
+		 'OPTIONAL-5', 1,
 sub {
 #line 66 "infix2pharmml_model.eyp"
-infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
-#line 1136 ./infix2pharmml_model.pm
+ goto &Parse::Eyapp::Driver::YYActionforT_single }
+#line 1125 ./infix2pharmml_model.pm
+	],
+	[#Rule _OPTIONAL
+		 'OPTIONAL-5', 0,
+sub {
+#line 66 "infix2pharmml_model.eyp"
+ goto &Parse::Eyapp::Driver::YYActionforT_empty }
+#line 1132 ./infix2pharmml_model.pm
+	],
+	[#Rule common_17
+		 'common', 4,
+sub {
+#line 63 "infix2pharmml_model.eyp"
+infix2pharmml::vardef($_[1],$_[3],$_[4])}
+#line 1139 ./infix2pharmml_model.pm
 	],
 	[#Rule common_18
 		 'common', 7,
 sub {
-#line 68 "infix2pharmml_model.eyp"
+#line 65 "infix2pharmml_model.eyp"
 infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
-#line 1143 ./infix2pharmml_model.pm
+#line 1146 ./infix2pharmml_model.pm
 	],
-	[#Rule equation_19
+	[#Rule common_19
+		 'common', 7,
+sub {
+#line 67 "infix2pharmml_model.eyp"
+infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
+#line 1153 ./infix2pharmml_model.pm
+	],
+	[#Rule equation_20
 		 'equation', 1,
 sub {
-#line 74 "infix2pharmml_model.eyp"
+#line 73 "infix2pharmml_model.eyp"
 infix2pharmml::eqn($_[1])}
-#line 1150 ./infix2pharmml_model.pm
-	],
-	[#Rule expr_20
-		 'expr', 3,
-sub {
-#line 78 "infix2pharmml_model.eyp"
-infix2pharmml::b("plus",  $_[1], $_[3])}
-#line 1157 ./infix2pharmml_model.pm
+#line 1160 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_21
 		 'expr', 3,
 sub {
-#line 79 "infix2pharmml_model.eyp"
-infix2pharmml::b("minus", $_[1], $_[3])}
-#line 1164 ./infix2pharmml_model.pm
+#line 77 "infix2pharmml_model.eyp"
+infix2pharmml::b("plus",  $_[1], $_[3])}
+#line 1167 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_22
 		 'expr', 3,
 sub {
-#line 80 "infix2pharmml_model.eyp"
-infix2pharmml::b("times", $_[1], $_[3])}
-#line 1171 ./infix2pharmml_model.pm
+#line 78 "infix2pharmml_model.eyp"
+infix2pharmml::b("minus", $_[1], $_[3])}
+#line 1174 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_23
 		 'expr', 3,
 sub {
-#line 81 "infix2pharmml_model.eyp"
-infix2pharmml::b("divide",$_[1], $_[3])}
-#line 1178 ./infix2pharmml_model.pm
+#line 79 "infix2pharmml_model.eyp"
+infix2pharmml::b("times", $_[1], $_[3])}
+#line 1181 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_24
 		 'expr', 3,
 sub {
-#line 82 "infix2pharmml_model.eyp"
-infix2pharmml::b("power", $_[1], $_[3])}
-#line 1185 ./infix2pharmml_model.pm
+#line 80 "infix2pharmml_model.eyp"
+infix2pharmml::b("divide",$_[1], $_[3])}
+#line 1188 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_25
-		 'expr', 1,
+		 'expr', 3,
 sub {
-#line 83 "infix2pharmml_model.eyp"
-infix2pharmml::e("ct:Real",$_[1])}
-#line 1192 ./infix2pharmml_model.pm
+#line 81 "infix2pharmml_model.eyp"
+infix2pharmml::b("power", $_[1], $_[3])}
+#line 1195 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_26
 		 'expr', 1,
 sub {
-#line 84 "infix2pharmml_model.eyp"
-infix2pharmml::const($_[1])}
-#line 1199 ./infix2pharmml_model.pm
+#line 82 "infix2pharmml_model.eyp"
+infix2pharmml::e("ct:Real",$_[1])}
+#line 1202 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_27
-		 'expr', 2,
+		 'expr', 1,
 sub {
-#line 85 "infix2pharmml_model.eyp"
-infix2pharmml::u("factorial",$_[1])}
-#line 1206 ./infix2pharmml_model.pm
+#line 83 "infix2pharmml_model.eyp"
+infix2pharmml::const($_[1])}
+#line 1209 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_28
 		 'expr', 2,
 sub {
-#line 86 "infix2pharmml_model.eyp"
-$_[2]}
-#line 1213 ./infix2pharmml_model.pm
+#line 84 "infix2pharmml_model.eyp"
+infix2pharmml::u("factorial",$_[1])}
+#line 1216 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_29
 		 'expr', 2,
 sub {
-#line 87 "infix2pharmml_model.eyp"
-infix2pharmml::u("minus",$_[2])}
-#line 1220 ./infix2pharmml_model.pm
+#line 85 "infix2pharmml_model.eyp"
+$_[2]}
+#line 1223 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_30
-		 'expr', 3,
+		 'expr', 2,
 sub {
-#line 88 "infix2pharmml_model.eyp"
-$_[2]}
-#line 1227 ./infix2pharmml_model.pm
+#line 86 "infix2pharmml_model.eyp"
+infix2pharmml::u("minus",$_[2])}
+#line 1230 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_31
-		 'expr', 4,
+		 'expr', 3,
 sub {
-#line 89 "infix2pharmml_model.eyp"
-infix2pharmml::u($_[1],$_[3])}
-#line 1234 ./infix2pharmml_model.pm
+#line 87 "infix2pharmml_model.eyp"
+$_[2]}
+#line 1237 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_32
-		 'expr', 6,
+		 'expr', 4,
 sub {
-#line 90 "infix2pharmml_model.eyp"
-infix2pharmml::b($_[1],$_[3],$_[5])}
-#line 1241 ./infix2pharmml_model.pm
+#line 88 "infix2pharmml_model.eyp"
+infix2pharmml::u($_[1],$_[3])}
+#line 1244 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_33
 		 'expr', 6,
 sub {
-#line 91 "infix2pharmml_model.eyp"
-my $d = $_[5]; my $v = $_[3]; infix2pharmml::delay($v,$d)}
-#line 1248 ./infix2pharmml_model.pm
+#line 89 "infix2pharmml_model.eyp"
+infix2pharmml::b($_[1],$_[3],$_[5])}
+#line 1251 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_34
-		 'expr', 4,
+		 'expr', 6,
 sub {
-#line 92 "infix2pharmml_model.eyp"
-infix2pharmml::fc($_[1],$_[3])}
-#line 1255 ./infix2pharmml_model.pm
+#line 90 "infix2pharmml_model.eyp"
+my $d = $_[5]; my $v = $_[3]; infix2pharmml::delay($v,$d)}
+#line 1258 ./infix2pharmml_model.pm
 	],
 	[#Rule expr_35
+		 'expr', 4,
+sub {
+#line 91 "infix2pharmml_model.eyp"
+infix2pharmml::fc($_[1],$_[3])}
+#line 1265 ./infix2pharmml_model.pm
+	],
+	[#Rule expr_36
 		 'expr', 1,
 sub {
-#line 93 "infix2pharmml_model.eyp"
+#line 92 "infix2pharmml_model.eyp"
 infix2pharmml::symbref($_[1])}
-#line 1262 ./infix2pharmml_model.pm
-	],
-	[#Rule constant_36
-		 'constant', 1,
-sub {
-#line 101 "infix2pharmml_model.eyp"
-"notanumber"}
-#line 1269 ./infix2pharmml_model.pm
+#line 1272 ./infix2pharmml_model.pm
 	],
 	[#Rule constant_37
 		 'constant', 1,
 sub {
-#line 102 "infix2pharmml_model.eyp"
-"pi"}
-#line 1276 ./infix2pharmml_model.pm
+#line 100 "infix2pharmml_model.eyp"
+"notanumber"}
+#line 1279 ./infix2pharmml_model.pm
 	],
 	[#Rule constant_38
 		 'constant', 1,
 sub {
-#line 103 "infix2pharmml_model.eyp"
-"exponentiale"}
-#line 1283 ./infix2pharmml_model.pm
+#line 101 "infix2pharmml_model.eyp"
+"pi"}
+#line 1286 ./infix2pharmml_model.pm
 	],
 	[#Rule constant_39
 		 'constant', 1,
 sub {
-#line 104 "infix2pharmml_model.eyp"
-"infinity"}
-#line 1290 ./infix2pharmml_model.pm
+#line 102 "infix2pharmml_model.eyp"
+"exponentiale"}
+#line 1293 ./infix2pharmml_model.pm
 	],
-	[#Rule argpairlist_40
-		 'argpairlist', 3,
+	[#Rule constant_40
+		 'constant', 1,
 sub {
-#line 108 "infix2pharmml_model.eyp"
- $_[1].$_[3] }
-#line 1297 ./infix2pharmml_model.pm
+#line 103 "infix2pharmml_model.eyp"
+"infinity"}
+#line 1300 ./infix2pharmml_model.pm
 	],
 	[#Rule argpairlist_41
 		 'argpairlist', 3,
 sub {
-#line 109 "infix2pharmml_model.eyp"
-infix2pharmml::fa($_[1],$_[3]) }
-#line 1304 ./infix2pharmml_model.pm
+#line 107 "infix2pharmml_model.eyp"
+ $_[1].$_[3] }
+#line 1307 ./infix2pharmml_model.pm
 	],
-	[#Rule macroargpairlist_42
-		 'macroargpairlist', 3,
+	[#Rule argpairlist_42
+		 'argpairlist', 3,
 sub {
-#line 119 "infix2pharmml_model.eyp"
-$_[1].$_[3]}
-#line 1311 ./infix2pharmml_model.pm
+#line 108 "infix2pharmml_model.eyp"
+infix2pharmml::fa($_[1],$_[3]) }
+#line 1314 ./infix2pharmml_model.pm
 	],
 	[#Rule macroargpairlist_43
-		 'macroargpairlist', 1,
-sub {
-#line 120 "infix2pharmml_model.eyp"
-infix2pharmml::macroarg($_[1]) }
-#line 1318 ./infix2pharmml_model.pm
-	],
-	[#Rule macroargpairlist_44
 		 'macroargpairlist', 3,
 sub {
-#line 121 "infix2pharmml_model.eyp"
-infix2pharmml::macroarg($_[1],$_[3]) }
-#line 1325 ./infix2pharmml_model.pm
-	],
-	[#Rule parameterlist_45
-		 'parameterlist', 3,
-sub {
-#line 126 "infix2pharmml_model.eyp"
+#line 118 "infix2pharmml_model.eyp"
 $_[1].$_[3]}
-#line 1332 ./infix2pharmml_model.pm
+#line 1321 ./infix2pharmml_model.pm
+	],
+	[#Rule macroargpairlist_44
+		 'macroargpairlist', 1,
+sub {
+#line 119 "infix2pharmml_model.eyp"
+infix2pharmml::macroarg($_[1]) }
+#line 1328 ./infix2pharmml_model.pm
+	],
+	[#Rule macroargpairlist_45
+		 'macroargpairlist', 3,
+sub {
+#line 120 "infix2pharmml_model.eyp"
+infix2pharmml::macroarg($_[1],$_[3]) }
+#line 1335 ./infix2pharmml_model.pm
 	],
 	[#Rule parameterlist_46
 		 'parameterlist', 3,
 sub {
-#line 127 "infix2pharmml_model.eyp"
+#line 125 "infix2pharmml_model.eyp"
+$_[1].$_[3]}
+#line 1342 ./infix2pharmml_model.pm
+	],
+	[#Rule parameterlist_47
+		 'parameterlist', 3,
+sub {
+#line 126 "infix2pharmml_model.eyp"
 infix2pharmml::par($_[1],$_[3])}
-#line 1339 ./infix2pharmml_model.pm
+#line 1349 ./infix2pharmml_model.pm
 	]
 ],
-#line 1342 ./infix2pharmml_model.pm
+#line 1352 ./infix2pharmml_model.pm
     yybypass       => 0,
     yybuildingtree => 0,
     yyprefix       => '',
@@ -1358,22 +1368,22 @@ infix2pharmml::par($_[1],$_[3])}
          'model_2', 
          '_OPTIONAL', 
          '_OPTIONAL', 
-         'line_5', 
-         'assignment_6', 
-         'assignment_7', 
+         '_OPTIONAL', 
+         '_OPTIONAL', 
+         'line_7', 
          'assignment_8', 
          'assignment_9', 
+         'assignment_10', 
          '_OPTIONAL', 
          '_OPTIONAL', 
          '_OPTIONAL', 
          '_OPTIONAL', 
          '_OPTIONAL', 
          '_OPTIONAL', 
-         'common_16', 
          'common_17', 
          'common_18', 
-         'equation_19', 
-         'expr_20', 
+         'common_19', 
+         'equation_20', 
          'expr_21', 
          'expr_22', 
          'expr_23', 
@@ -1389,21 +1399,22 @@ infix2pharmml::par($_[1],$_[3])}
          'expr_33', 
          'expr_34', 
          'expr_35', 
-         'constant_36', 
+         'expr_36', 
          'constant_37', 
          'constant_38', 
          'constant_39', 
-         'argpairlist_40', 
+         'constant_40', 
          'argpairlist_41', 
-         'macroargpairlist_42', 
+         'argpairlist_42', 
          'macroargpairlist_43', 
          'macroargpairlist_44', 
-         'parameterlist_45', 
-         'parameterlist_46', );
+         'macroargpairlist_45', 
+         'parameterlist_46', 
+         'parameterlist_47', );
   $self;
 }
 
-#line 131 "infix2pharmml_model.eyp"
+#line 130 "infix2pharmml_model.eyp"
 
 
 
@@ -1412,7 +1423,7 @@ infix2pharmml::par($_[1],$_[3])}
 =cut
 
 
-#line 1415 ./infix2pharmml_model.pm
+#line 1426 ./infix2pharmml_model.pm
 
 
 
