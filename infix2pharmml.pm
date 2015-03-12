@@ -41,10 +41,9 @@ my @functionList=();
 my @macroText=();
 
 
-# Hash to EOL comment
+# Hash to EOL comment. Does nothing actually.
 sub comment {
     my $c=shift;
-    print "***** $c\n";
     my $out="<!-- USER $c -->";
     return $out;
 }

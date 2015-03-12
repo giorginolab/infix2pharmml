@@ -26,7 +26,9 @@
 %left   '!'
 %left   NEG
 
-# The word "START RULE" below will be replaced by Makefile to make two similar grammars
+# The word "STARTRULE" below will be replaced by Makefile to make two similar grammars
+# STARTRULE->{statement,model}
+
 %start STARTRULE
 
 %%
