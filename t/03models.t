@@ -5,14 +5,17 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 9;
+use Test::More tests => 17;
 use Test::Exception;
+use Test::Differences;
 use XML::Twig;
 
 BEGIN { use_ok('infix2pharmml') }; # TEST 1
 
 sub i2p {
     my $in=shift;
+    infix2pharmml::init;
+    $infix2pharmml::noinput=1;
     my $xml=infix2pharmml::xmlify($in);
     my $twig=XML::Twig->new( pretty_print => 'indented'); 
     $twig->parse($xml);
@@ -30,6 +33,9 @@ ok(i2p($s),$s);
 $s="A:=1; B:=2;";
 ok(i2p($s),$s);
 
+my $n="A:=1\nB:=2;";
+eq_or_diff(i2p($n),i2p($s),$n);
+
 $s="par v_init=10, a=1;";   
 ok(i2p($s),$s);
 
@@ -45,8 +51,36 @@ ok(i2p($s),$s);
 $s="Peripheral(k12, k21, amount=Ap1); E:=Ap1^2";
 ok(i2p($s),$s);
 
-
-$s="A:=2 ## B:=4;";
+$s="A:=2 ?? B:=4;";
 dies_ok { i2p($s)} "Expected error on $s";
+
+
+# Various ways to comment
+
+$s="A:=2";
+ok(i2p($s),$s);
+
+my $ref=i2p($s);
+
+$s="A:=2 # nothing";
+eq_or_diff(i2p($s),$ref,$s);
+
+$s="A:=2; # semicolon";
+ok(i2p($s) eq $ref,$s);
+
+$s="A:=2;\n # semicolon, newline";
+ok(i2p($s) eq $ref,$s);
+
+$s="A:=2\n # newline";
+ok(i2p($s) eq $ref,$s);
+
+$s="# pre\nA:=2\n# post";
+ok(i2p($s) eq $ref,$s);
+
+$s="# pre-newline\nA:=2";
+ok(i2p($s) eq $ref,$s);
+
+
+
 
 

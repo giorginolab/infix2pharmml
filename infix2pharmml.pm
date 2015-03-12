@@ -29,7 +29,7 @@ use warnings;
 use File::Basename;
 
 our $fullmodel=0;		# Set this to 1 to get a full model
-
+our $noinput=0;			# Do not replace input, for testing
 
 
 my %localSymbols=("t"=>2);
@@ -39,6 +39,17 @@ my @derivativeVariableList=();
 my @variableList=();
 my @functionList=();
 my @macroText=();
+
+
+# Start from scratch
+sub init {
+    %localSymbols=("t"=>2);
+    %allSymbols=("t"=>2);
+    @derivativeVariableList=();
+    @variableList=();
+    @functionList=();
+    @macroText=();
+}
 
 
 # Hash to EOL comment. Does nothing actually.
@@ -300,8 +311,8 @@ sub xmlify {
 	my $dt=localtime;
 	$tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
 
-	$tmpl =~ s/INFIX2PHARMML_INPUT/$in/g;
-
+	$tmpl =~ s/INFIX2PHARMML_INPUT/$in/g
+	    unless($noinput);
 
 	while($tmpl =~ m|INFIX2PHARMML_SYMBREF:(.+?):|) {
 	    my $m=quotemeta $&;
