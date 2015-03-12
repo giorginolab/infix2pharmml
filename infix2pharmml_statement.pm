@@ -3444,7 +3444,7 @@ our $LEX = sub {
       /\G\b(Absorption|Compartment|Depot|Effect|Elimination|IV|Oral|Peripheral|Transfer)\b/gc and return ('MACRO', $1);
       /\G([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/gc and return ('NUM', $1);
       /\G([A-Za-z][A-Za-z0-9_]*)/gc and return ('VAR', $1);
-      /\G#(.+?)$/gc and return ('COMMENT', $1);
+      /\G#(.*)/gc and return ('COMMENT', $1);
       /\G{(.+?)}/gc and return ('DESCRIPTION', $1);
 
 
@@ -3482,15 +3482,15 @@ sub new {
   [ 'statement_2' => 'statement', [ 'equation' ], 0 ],
   [ 'statement_3' => 'statement', [ 'VAR', '=', 'equation' ], 0 ],
   [ 'statement_4' => 'statement', [ 'VAR', '(', 'varlist', '):=', 'equation' ], 0 ],
-  [ '_OPTIONAL' => 'OPTIONAL-3', [ 'DESCRIPTION' ], 0 ],
-  [ '_OPTIONAL' => 'OPTIONAL-3', [  ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-4', [ 'DESCRIPTION' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-4', [  ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-5', [ 'DESCRIPTION' ], 0 ],
   [ '_OPTIONAL' => 'OPTIONAL-5', [  ], 0 ],
-  [ 'common_11' => 'common', [ 'VAR', ':=', 'equation', 'OPTIONAL-3' ], 0 ],
-  [ 'common_12' => 'common', [ 'diff(', 'VAR', ',', 'VAR', ')=', 'equation', 'OPTIONAL-4' ], 0 ],
-  [ 'common_13' => 'common', [ 'diff(', 'VAR', ',', 'VAR', '):=', 'equation', 'OPTIONAL-5' ], 0 ],
+  [ '_OPTIONAL' => 'OPTIONAL-6', [ 'DESCRIPTION' ], 0 ],
+  [ '_OPTIONAL' => 'OPTIONAL-6', [  ], 0 ],
+  [ 'common_11' => 'common', [ 'VAR', ':=', 'equation', 'OPTIONAL-4' ], 0 ],
+  [ 'common_12' => 'common', [ 'diff(', 'VAR', ',', 'VAR', ')=', 'equation', 'OPTIONAL-5' ], 0 ],
+  [ 'common_13' => 'common', [ 'diff(', 'VAR', ',', 'VAR', '):=', 'equation', 'OPTIONAL-6' ], 0 ],
   [ 'equation_14' => 'equation', [ 'expr' ], 0 ],
   [ 'expr_15' => 'expr', [ 'expr', '+', 'expr' ], 0 ],
   [ 'expr_16' => 'expr', [ 'expr', '-', 'expr' ], 0 ],
@@ -4056,7 +4056,7 @@ sub new {
 		},
 		DEFAULT => -6,
 		GOTOS => {
-			'OPTIONAL-3' => 58
+			'OPTIONAL-4' => 58
 		}
 	},
 	{#State 48
@@ -4272,11 +4272,11 @@ sub new {
 	},
 	{#State 74
 		ACTIONS => {
-			'DESCRIPTION' => 78
+			'DESCRIPTION' => 79
 		},
 		DEFAULT => -10,
 		GOTOS => {
-			'OPTIONAL-5' => 79
+			'OPTIONAL-6' => 78
 		}
 	},
 	{#State 75
@@ -4285,7 +4285,7 @@ sub new {
 		},
 		DEFAULT => -8,
 		GOTOS => {
-			'OPTIONAL-4' => 81
+			'OPTIONAL-5' => 81
 		}
 	},
 	{#State 76
@@ -4295,10 +4295,10 @@ sub new {
 		DEFAULT => -27
 	},
 	{#State 78
-		DEFAULT => -9
+		DEFAULT => -13
 	},
 	{#State 79
-		DEFAULT => -13
+		DEFAULT => -9
 	},
 	{#State 80
 		DEFAULT => -7
@@ -4336,42 +4336,42 @@ infix2pharmml::funcdef($_[1],$_[3],$_[5])}
 #line 4336 ./infix2pharmml_statement.pm
 	],
 	[#Rule _OPTIONAL
-		 'OPTIONAL-3', 1,
+		 'OPTIONAL-4', 1,
 sub {
 #line 63 "infix2pharmml_statement.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
 #line 4343 ./infix2pharmml_statement.pm
 	],
 	[#Rule _OPTIONAL
-		 'OPTIONAL-3', 0,
+		 'OPTIONAL-4', 0,
 sub {
 #line 63 "infix2pharmml_statement.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
 #line 4350 ./infix2pharmml_statement.pm
 	],
 	[#Rule _OPTIONAL
-		 'OPTIONAL-4', 1,
+		 'OPTIONAL-5', 1,
 sub {
 #line 64 "infix2pharmml_statement.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
 #line 4357 ./infix2pharmml_statement.pm
 	],
 	[#Rule _OPTIONAL
-		 'OPTIONAL-4', 0,
+		 'OPTIONAL-5', 0,
 sub {
 #line 64 "infix2pharmml_statement.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }
 #line 4364 ./infix2pharmml_statement.pm
 	],
 	[#Rule _OPTIONAL
-		 'OPTIONAL-5', 1,
+		 'OPTIONAL-6', 1,
 sub {
 #line 66 "infix2pharmml_statement.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_single }
 #line 4371 ./infix2pharmml_statement.pm
 	],
 	[#Rule _OPTIONAL
-		 'OPTIONAL-5', 0,
+		 'OPTIONAL-6', 0,
 sub {
 #line 66 "infix2pharmml_statement.eyp"
  goto &Parse::Eyapp::Driver::YYActionforT_empty }

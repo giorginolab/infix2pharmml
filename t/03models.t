@@ -5,7 +5,7 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 17;
+use Test::More tests => 18;
 use Test::Exception;
 use Test::Differences;
 use XML::Twig;
@@ -17,6 +17,7 @@ require "t/i2p.pl";
 
 my $s;
 $infix2pharmml::fullmodel=1;
+$infix2pharmml::noinput=1;
 
 
 $s="A:=1; B:=2";
@@ -49,6 +50,10 @@ dies_ok { i2p($s)} "Expected error on $s";
 
 # Various ways to comment
 
+$s="# comment only";
+ok(i2p($s),$s);
+
+
 $s="A:=2";
 ok(i2p($s),$s);
 
@@ -66,10 +71,10 @@ ok(i2p($s) eq $ref,$s);
 $s="A:=2\n # newline";
 ok(i2p($s) eq $ref,$s);
 
-$s="# pre\nA:=2\n# post";
+$s="# pre-newline\nA:=2";
 ok(i2p($s) eq $ref,$s);
 
-$s="# pre-newline\nA:=2";
+$s="# pre\nA:=2\n# post";
 ok(i2p($s) eq $ref,$s);
 
 

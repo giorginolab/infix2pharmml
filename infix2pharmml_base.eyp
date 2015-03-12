@@ -14,7 +14,7 @@
 %token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
-%token COMMENT = /#(.+?)$/
+%token COMMENT = /#(.*)/
 %token DESCRIPTION = /{(.+?)}/
 
 
@@ -33,13 +33,13 @@
 
 %%
 
-model:
-      model line
-    | line
+model: 
+        line +
     ;
 
 line:
-     assignment ';' ? COMMENT ?
+      COMMENT
+    | assignment ';' ? COMMENT ? 
     ;
 
 # Things allowed in model mode
