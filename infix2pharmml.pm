@@ -386,9 +386,11 @@ sub getSimulxCode {
     delete $localVars{"t"};
 
     $out.="\n";
+    $out.="out.times<-seq(0,5,length=51) # FIXME\n";
+    $out.="\n";
 
     foreach my $s (keys %localVars) {
-	$out.=sprintf(qq(%s <- list(name=c('%s'),time=seq(0,5,length=21)) # FIXME\n),$s,$s);
+	$out.=sprintf(qq(%s <- list(name=c('%s'),time=out.times)\n),$s,$s);
     }
 
     $out.="\n";
