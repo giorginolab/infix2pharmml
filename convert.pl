@@ -24,41 +24,51 @@ use infix2pharmml;
 use strict;
 use Getopt::Std;
 
-our($opt_s, $opt_q);
-getopts('sq') or die "Usage: convert.pl [-s (standalone)] [-q (quiet)] [expression]\n";
+our($opt_s, $opt_v, $opt_m);
+getopts('svm:') or die "
+  Usage: convert.pl [options] [expression]
+  Options: -s         Standalone model mode
+           -v         Verbose/debug
+           -m file.R  Outputs skeleton Simulx/R file
+  If no expression is provided, it is read from stdin.\n";
+
 
 $infix2pharmml::fullmodel=1 if($opt_s);
-
 
 my $string=shift @ARGV;
 
 if (!$string) {
-    print "Enter the expression to convert, ^D to end:\n" unless $opt_q;
     $/=undef;
     $string=<>;
     chomp $string; 
 } 
 
 
-print "About to parse:              $string\n" unless $opt_q;
+print "About to parse:              $string\n" if $opt_v;
 
 my $xml= infix2pharmml::xmlify($string);
 defined $xml or die "Parse failure";
 
-if(!$opt_q) {
+if($opt_v) {
     print "\n\nRaw:\n$xml\n\n";
     print "\n\nXML:\n";
 }
 
+
 my $twig=XML::Twig->new( pretty_print => 'indented'); 
 $twig->parse($xml);
 $twig->print;
-print "\n\n";
 
-if( $infix2pharmml::fullmodel && !$opt_q ) {
-    print "\n\nSimulx:\n";
-    print infix2pharmml::getSimulxCode();
+if ($opt_m) {
+    if( $infix2pharmml::fullmodel ) {
+	open M,">$opt_m" or die "Error opening file: $!\n";
+	print M infix2pharmml::getSimulxCode();
+	close M;
+    } else {
+	die "mlxR output only valid for full model\n";
+    }
 }
+
 
 
 	

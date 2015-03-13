@@ -387,14 +387,14 @@ sub getSimulxCode {
 
     $out.="\n";
     $out.="out.times<-seq(0,5,length=51) # FIXME\n";
-    $out.="\n";
 
+    my @tmp=();
     foreach my $s (keys %localVars) {
-	$out.=sprintf(qq(%s <- list(name=c('%s'),time=out.times)\n),$s,$s);
+	push @tmp,sprintf(qq(  list(name=c('%s'),time=out.times)),$s);
     }
 
     $out.="\n";
-    $out.="out <- list(".join(",",keys %localVars).")\n";
+    $out.="out <- list(\n".join(",\n",@tmp)."\n)\n";
 
     $out.=<<EOF;
 
