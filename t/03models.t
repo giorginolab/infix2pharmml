@@ -5,7 +5,7 @@ use warnings;
 
 use lib 'cgi-perl/lib/perl5';
 
-use Test::More tests => 19;
+use Test::More tests => 21;
 use Test::Exception;
 use Test::Differences;
 use XML::Twig;
@@ -17,7 +17,6 @@ require "t/i2p.pl";
 
 my $s;
 $infix2pharmml::fullmodel=1;
-$infix2pharmml::noinput=1;
 
 
 $s="A:=1; B:=2";
@@ -34,6 +33,15 @@ ok(i2p($s),$s);
 
 $s="par part=1;";   
 ok(i2p($s),$s);
+
+$s="par k=1.1; # No equation";   
+ok(i2p($s) !~ /Equation/,$s);
+
+TODO: {
+    local $TODO = "Can't tokenize negative numbers";
+    $s="par k=-1.1;";   
+    ok(i2p($s) !~ /Equation/,$s);
+}
 
 $s="y:=A*exp(-alpha*t)+B*exp(-beta*t)";
 ok(i2p($s),$s);

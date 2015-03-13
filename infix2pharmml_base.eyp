@@ -39,6 +39,8 @@ model:
         line +
     ;
 
+
+/* Don't remember the reason why I wanted comments in the grammar */
 line:
       COMMENT
     | assignment ';' ? COMMENT ? 
@@ -52,21 +54,10 @@ assignment:
     ;
 
 
-/* Things only allowed in statement mode */
-statement:
-      common
-    | equation    
-    | VAR '=' equation                   {infix2pharmml::varass($_[1],$_[3])}
-    | VAR '(' varlist '):=' equation     {infix2pharmml::funcdef($_[1],$_[3],$_[5])}
-    ;           
-
-
-common:
-      VAR ':=' equation  DESCRIPTION ?          {infix2pharmml::vardef($_[1],$_[3],$_[4])}
-    | 'diff(' VAR ',' VAR ')=' equation  DESCRIPTION ?
-                                                {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
-    | 'diff(' VAR ',' VAR '):=' equation DESCRIPTION ?
-                                                {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
+macroargpairlist:    
+      macroargpairlist ',' macroargpairlist     {$_[1].$_[3]}
+    | equation                                  {infix2pharmml::macroarg($_[1]) } 
+    | VAR '=' equation                          {infix2pharmml::macroarg($_[1],$_[3]) } 
     ;
 
 
@@ -75,6 +66,35 @@ parameterlist:
       parameterlist ',' parameterlist           {$_[1].$_[3]}
     | VAR '=' NUM                               {infix2pharmml::par_n($_[1],$_[3])}
     | VAR '=' equation                          {infix2pharmml::par($_[1],$_[3])}
+    ;
+
+
+
+
+/* Things only allowed in statement mode */
+statement:
+      common
+    | equation    
+    | VAR '=' equation                   {infix2pharmml::varass($_[1],$_[3])}
+    | VAR '(' varlist '):=' equation     {infix2pharmml::funcdef($_[1],$_[3],$_[5])}
+    ;           
+
+varlist:        varlist ',' varlist  {$_[1].$_[3]}
+              | VAR                  {infix2pharmml::funcarg($_[1])}
+    ;
+
+
+
+
+
+
+/* Things in both grammars */
+common:
+      VAR ':=' equation  DESCRIPTION ?          {infix2pharmml::vardef($_[1],$_[3],$_[4])}
+    | 'diff(' VAR ',' VAR ')=' equation  DESCRIPTION ?
+                                                {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
+    | 'diff(' VAR ',' VAR '):=' equation DESCRIPTION ?
+                                                {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
     ;
 
 
@@ -117,16 +137,6 @@ argpairlist:    argpairlist ',' argpairlist  { $_[1].$_[3] }
     ;
 
 
-varlist:        varlist ',' varlist  {$_[1].$_[3]}
-              | VAR                  {infix2pharmml::funcarg($_[1])}
-    ;
-
-
-macroargpairlist:    
-      macroargpairlist ',' macroargpairlist     {$_[1].$_[3]}
-    | equation                                  {infix2pharmml::macroarg($_[1]) } 
-    | VAR '=' equation                          {infix2pharmml::macroarg($_[1],$_[3]) } 
-    ;
 
 
 
