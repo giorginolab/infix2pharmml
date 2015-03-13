@@ -1,3 +1,7 @@
+2015-03-13  Toni  <toni@pcgiorgino.isib.cnr.it>
+
+	* 0.6.7 Allow comments; split outputs; simulx numeric parameters.
+
 2014-11-26  Toni  <toni@pcgiorgino.isib.cnr.it>
 
 	* 0.6.6 delay()

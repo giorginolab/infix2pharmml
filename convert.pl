@@ -61,7 +61,7 @@ $twig->print;
 
 if ($opt_m) {
     if( $infix2pharmml::fullmodel ) {
-	open M,">$opt_m" or die "Error opening file: $!\n";
+	open M,">$opt_m" or die "Error opening $opt_m: $!\n";
 	print M infix2pharmml::getSimulxCode();
 	close M;
     } else {
