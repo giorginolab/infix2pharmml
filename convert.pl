@@ -29,7 +29,7 @@ getopts('svm:') or die "
   Usage: convert.pl [options] [expression]
   Options: -s         Standalone model mode
            -v         Verbose/debug
-           -m file.R  Outputs skeleton Simulx/R file
+           -m file.R  Outputs skeleton Simulx/R/mlxR file
   If no expression is provided, it is read from stdin.\n";
 
 

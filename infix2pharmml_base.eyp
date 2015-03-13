@@ -12,8 +12,8 @@
 %token MACRO = /\b(Absorption|Compartment|Depot|Effect|Elimination|IV|Oral|Peripheral|Transfer)\b/
 
 %token PAR = /\b(par)\b/
-    
-%token NUM = /([-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)/
+
+%token NUM = /([+-]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
 %token COMMENT = /#(.*)/
@@ -44,7 +44,7 @@ line:
     | assignment ';' ? COMMENT ? 
     ;
 
-# Things allowed in model mode
+/* Things allowed in model (stand-alone) mode. We can't allow function definitions because they would their own variable scope. */
 assignment:  
       common
     | MACRO '(' macroargpairlist ')'       {infix2pharmml::macro($_[1],$_[3])}
@@ -52,7 +52,7 @@ assignment:
     ;
 
 
-# Things only allowed in stand-alone mode
+/* Things only allowed in statement mode */
 statement:
       common
     | equation    
@@ -91,7 +91,6 @@ expr:
     | NUM                                {infix2pharmml::e("ct:Real",$_[1])}
     | constant                           {infix2pharmml::const($_[1])}
     | expr '!'                           {infix2pharmml::u("factorial",$_[1])}
-    | '+' expr                           {$_[2]}
     | '-' expr %prec NEG                 {infix2pharmml::u("minus",$_[2])}
     | '(' expr ')'                       {$_[2]}
     | UNIOP '(' expr ')'                 {infix2pharmml::u($_[1],$_[3])}
@@ -102,7 +101,7 @@ expr:
     ;
 
 
-# page 245 spec. 0.2.1 + addenda
+/* page 245 spec. 0.2.1 + addenda */
 
 
 
