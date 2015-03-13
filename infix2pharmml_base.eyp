@@ -15,17 +15,14 @@
 
 %token NUM = /([+-]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?)/
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
-%token MINUS = /\-/
 
 %token COMMENT = /#(.*)/
 %token DESCRIPTION = /{(.+?)}/
 
 
-
-
 %left   ','
 %right  '='
-%left   MINUS '+'
+%left   '-' '+'
 %left   '*' '/' 
 %right  '^'
 %left   '!'
@@ -87,14 +84,14 @@ equation:       expr                     {infix2pharmml::eqn($_[1])}
 
 expr:   
       expr '+' expr                      {infix2pharmml::b("plus",  $_[1], $_[3])}
-    | expr MINUS expr                      {infix2pharmml::b("minus", $_[1], $_[3])}
+    | expr '-' expr                      {infix2pharmml::b("minus", $_[1], $_[3])}
     | expr '*' expr                      {infix2pharmml::b("times", $_[1], $_[3])}
     | expr '/' expr                      {infix2pharmml::b("divide",$_[1], $_[3])}
     | expr '^' expr                      {infix2pharmml::b("power", $_[1], $_[3])}
     | NUM                                {infix2pharmml::e("ct:Real",$_[1])}
     | constant                           {infix2pharmml::const($_[1])}
     | expr '!'                           {infix2pharmml::u("factorial",$_[1])}
-    | MINUS expr %prec NEG                 {infix2pharmml::u("minus",$_[2])}
+    | '-' expr %prec NEG                 {infix2pharmml::u("minus",$_[2])}
     | '(' expr ')'                       {$_[2]}
     | UNIOP '(' expr ')'                 {infix2pharmml::u($_[1],$_[3])}
     | BINOP '(' expr ',' expr ')'        {infix2pharmml::b($_[1],$_[3],$_[5])}
