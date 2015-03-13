@@ -45,6 +45,7 @@ our $noinput=0;			# Do not replace input, for testing
 
 my %localSymbols=("t"=>2);
 my %allSymbols=("t"=>2);
+my %parametrizableSymbols=();
 
 my @derivativeVariableList=();
 my @variableList=();
@@ -56,6 +57,7 @@ my @macroText=();
 sub init {
     %localSymbols=("t"=>2);
     %allSymbols=("t"=>2);
+    %parametrizableSymbols=();
     @derivativeVariableList=();
     @variableList=();
     @functionList=();
@@ -139,6 +141,12 @@ sub diff {
 sub par {
     my ($id,$y)=@_;
     $allSymbols{$id}=$y;
+}
+
+sub par_n {
+    my ($id,$y)=@_;
+    $allSymbols{$id}=e("ct:Real",$y);
+    $parametrizableSymbols{$id}=$y;
 }
 
 
@@ -366,7 +374,7 @@ sub getSimulxCode {
 	if(! defined $localSymbols{$s}) {
 	    push @par,$s;
 	    push @parq,qq("$s"); # quoted parameter name
-	    push @parv,$allSymbols{$s}//"NA";
+	    push @parv,$parametrizableSymbols{$s}//"NA";
 	    $np++;
 	}
     }

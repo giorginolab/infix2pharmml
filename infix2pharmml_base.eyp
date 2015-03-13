@@ -70,6 +70,13 @@ common:
     ;
 
 
+/* For reasons unknown this should precede "expr" for the VAR = NUM form to match */
+parameterlist:
+      parameterlist ',' parameterlist           {$_[1].$_[3]}
+    | VAR '=' NUM                               {infix2pharmml::par_n($_[1],$_[3])}
+    | VAR '=' equation                          {infix2pharmml::par($_[1],$_[3])}
+    ;
+
 
 
 equation:       expr                     {infix2pharmml::eqn($_[1])}
@@ -122,11 +129,6 @@ macroargpairlist:
     | VAR '=' equation                          {infix2pharmml::macroarg($_[1],$_[3]) } 
     ;
 
-
-parameterlist:
-      parameterlist ',' parameterlist           {$_[1].$_[3]}
-    | VAR '=' equation                          {infix2pharmml::par($_[1],$_[3])}
-    ;
 
 
 %%
