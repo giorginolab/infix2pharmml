@@ -1,5 +1,5 @@
 # infix2pharmml model generator
-# Copyright (C) 2014 Toni Giorgino ISIB-CNR
+# Copyright (C) 2015 Toni Giorgino ISIB-CNR
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,19 @@
 
 
 
-# Please note that this is a quick hack. This is not how XML or
-# PharmML should be generated.
+# Please note that this is a quick hack. 
+
+# This is not how XML or PharmML should be generated. Generating
+# strings from the grammar skips the AST. This means that the code
+# generator can not reason on the objects after they are
+# generated. The problem is clear e.g. in par(), which cannot store
+# the "float" value, because it is decorated by the XML stuff.
+
+# The code is totally non-reentrant. It should be made into a proper
+# class.
+
+
+
 
 package infix2pharmml;
 
@@ -309,7 +320,7 @@ sub xmlify {
 
 	unless($noinput) {
 	    my $dt=localtime;
-	    $tmpl =~ s/INFIX2PHARMML_DATE/$dt/;
+	    $tmpl =~ s/INFIX2PHARMML_DATE/$dt/g;
 	    $tmpl =~ s/INFIX2PHARMML_INPUT/$in/g;
 	}
 
@@ -355,7 +366,7 @@ sub getSimulxCode {
 	if(! defined $localSymbols{$s}) {
 	    push @par,$s;
 	    push @parq,qq("$s"); # quoted parameter name
-	    push @parv,$allSymbols{$s}//1.0;
+	    push @parv,$allSymbols{$s}//"NA";
 	    $np++;
 	}
     }
