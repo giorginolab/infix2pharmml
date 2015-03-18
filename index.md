@@ -117,3 +117,12 @@ General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see
 [http://www.gnu.org/licenses/](http://www.gnu.org/licenses/).
+
+
+Privacy policy
+--------------
+
+You acknowledge that the data submitted to the server are logged. Do
+not submit confidential information. To use the server privately,
+download the code and use it locally.
+
