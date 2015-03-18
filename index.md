@@ -122,7 +122,7 @@ along with this program. If not, see
 Privacy policy
 --------------
 
-You acknowledge that the data submitted to the server are logged. Do
-not submit confidential information. To use the server privately,
-download the code and use it locally.
+Server use and the data submitted are logged. Do not submit any
+confidential information. To use the server privately, download the
+code and use it locally.
 
