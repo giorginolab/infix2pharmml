@@ -40,31 +40,17 @@
 <h1 id="infix-notation-to-pharmml-math-online-converter">Infix notation to PharmML math online converter</h1>
 <p><script type="text/javascript">
 <!--
-h='&#x69;&#x73;&#x69;&#98;&#46;&#x63;&#110;&#114;&#46;&#x69;&#116;';a='&#64;';n='&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+h='&#x63;&#110;&#114;&#46;&#x69;&#116;';a='&#64;';n='&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
 // -->
-</script><noscript>&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;&#32;&#x61;&#116;&#32;&#x69;&#x73;&#x69;&#98;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#110;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x69;&#116;</noscript></p>
-<p>This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> markup. For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> project page at SourceForge.</p>
-<p>Version 0.6</p>
-<h2 id="whats-new">What's new</h2>
-<p>The new <em>stand-alone mode</em> creates (mostly) ready-to-run model (only comprising structural equations). In this mode, multiple statements can be provided, separated by semicolons. Statements are restricted to variable and derivative variable definitions. Stand-alone mode is intended to jump-start development, and it is not a full-fledged modeling tool.</p>
-<p>The following features are supported:</p>
-<ul>
-<li>All operators defined by PharmML 0.5 should be supported</li>
-<li>Constants (with user-friendly aliases, such as <code>e</code> for <em>exponentiale</em>).</li>
-<li>Variable assignments, as in <code>a=b+c</code> and definitions, as <code>a:=b+c</code></li>
-<li>Derivative variable (ODE) definitions, as <code>diff(q,t):=1+sin(t)</code>. The initial condition is a parameter named <code>q_init</code>.</li>
-<li>Function definitions, such as <code>f(x,y):=x+y</code>.</li>
-<li>Use <code>ln</code> for the natural logarithm. The <code>logx</code> function is always two-argument (argument, base).</li>
-<li>Calls to user-defined functions use an R-like named-argument syntax shown in the examples below.</li>
-<li>Factorial can be expressed as <code>factorial()</code> or with the usual exclamation mark.</li>
-<li>Description tags for variables and derivative variables, in curly brackets.</li>
-<li>The <code>delay(X,delta)</code> operator (PharmML 0.3.2 and up?).</li>
-</ul>
-<p>The following features are supported in <em>model mode only</em>:</p>
-<ul>
-<li>Parameter assignments, as e.g. <code>par a=2, b=1+1</code>.</li>
-</ul>
+</script><noscript>&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;&#32;&#x61;&#116;&#32;&#x63;&#110;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x69;&#116;</noscript></p>
+<p>This web service converts a mathematical expression in the usual infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> markup. PharmML is a markup for pharmacometrics documented at http://pharmml.org/ and developed within the <a href="http://www.ddmore.eu/">DDMoRe consortium</a>.</p>
+<p>Converter version 0.6.x; the output should be PharmML 0.6-compliant.</p>
+<h2 id="quickstart">Quickstart</h2>
+<p>This is an online version of the converter. For details and source code see the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> project page at SourceForge.</p>
+<p>The converter works in either <em>single-statement</em> or <em>stand-alone model</em> modes.</p>
+<p>The <em>single-statement</em> mode converts various types of statements, one at a time. The user is responsible of combining them and adding boilerplate code to get a fully-functional (e.g., XML-valid) model.</p>
+<p>The <em>stand-alone mode</em> creates a mostly ready-to-run model (only encompassing structural equations). In this mode, multiple statements can be provided, separated by semicolons. Statements are restricted to variable and derivative variable definitions. Stand-alone mode is intended to jump-start development, and it is not a full-fledged modeling tool.</p>
 <p>For a full list of the converter's features and limitations, see <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">the project's README</a>.</p>
 <h2 id="enter-the-formula-below">Enter the formula below</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
@@ -72,48 +58,48 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 1+sin(t)+b
 </textarea>
 <input type="checkbox" id="standalone" name="standalone" value="true">Build a stand-alone model<br> <input type="submit" value="Submit">
-</form> 
-
-
+</form>
 <h2 id="examples">Examples</h2>
 <p>Click to copy in the input area above.</p>
 <table style="width:80%; margin:2em">
-  <tr style="background-color: rgb(15, 42, 82); color: white;">
-   <td>
+<tr style="background-color: rgb(15, 42, 82); color: white;">
+<td>
 <em>Single-statement mode</em>
 </td>
-   <td>
+<td>
 <em>Stand-alone model mode</em>
 </td>
-  </tr>
-  <tr>
-   <td>
-     <p> <pre onclick="copyUp(event,false)">1+sqrt(a^2+b^2)</pre> 
-     <p> <pre onclick="copyUp(event,false)">logx(x,e)</pre> 
-     <p> <pre onclick="copyUp(event,false)">A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
-     <p> <pre onclick="copyUp(event,false)">output=1+pi+myfunc(t=sin(x))</pre>
-     <p> <pre onclick="copyUp(event,false)">diff(q,t)=1+sin(t)</pre>
-     <p> <pre onclick="copyUp(event,false)">myLength(x,y,z):=x^2+y^2+z^2</pre>
-     <p> <pre onclick="copyUp(event,false)">sqrt(myLength(x=sin(t),y=4!,z=0))</pre> 
-   </td>
-   <td>
-     <p> <pre onclick="copyUp(event,true)">y:=A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
-     <p> <pre onclick="copyUp(event,true)">diff(a,t)=b; <br>diff(b,t)=-a;</pre> 
-     <p> <pre onclick="copyUp(event,true)">diff(A,t)=-k*A; <br>C:=A/V</pre> 
-     <p> <pre onclick="copyUp(event,true)">A:=dose*exp(-k*t) {Exponential decay model}; <br>C:=A/V {Concentration}</pre> 
-     <p> <pre onclick="copyUp(event,true)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre> 
-     <p> <pre onclick="copyUp(event,true)">diff(E,t)=Rin-Rout*E</pre> 
-     <p> <pre onclick="copyUp(event,true)">diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;<br>diff(Z,t)=-lambda*Z+lambda*(I-Ib);</pre> 
-     <p> <pre onclick="copyUp(event,true)">par v_init=10, a=1; diff(v,t):=a+b;</pre> 
-   </td>
-  </tr>
- </table>
-
-
+</tr>
+<tr>
+<td>
+<pre><code> &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,false)&quot;&gt;1+sqrt(a^2+b^2)&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,false)&quot;&gt;logx(x,e)&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,false)&quot;&gt;A*exp(-alpha*t)+B*exp(-beta*t)&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,false)&quot;&gt;output=1+pi+myfunc(t=sin(x))&lt;/pre&gt;
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,false)&quot;&gt;diff(q,t)=1+sin(t)&lt;/pre&gt;
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,false)&quot;&gt;myLength(x,y,z):=x^2+y^2+z^2&lt;/pre&gt;
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,false)&quot;&gt;sqrt(myLength(x=sin(t),y=4!,z=0))&lt;/pre&gt; </code></pre>
+</td>
+<td>
+<pre><code> &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;y:=A*exp(-alpha*t)+B*exp(-beta*t)&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;diff(a,t)=b; &lt;br&gt;diff(b,t)=-a;&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;diff(A,t)=-k*A; &lt;br&gt;C:=A/V&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;A:=dose*exp(-k*t) {Exponential decay model}; &lt;br&gt;C:=A/V {Concentration}&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); &lt;br&gt;diff(A2,t)=-Q*(A2/V2-A1/V1); &lt;br&gt;C1:=A1/V1&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;diff(E,t)=Rin-Rout*E&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;&lt;br&gt;diff(Z,t)=-lambda*Z+lambda*(I-Ib);&lt;/pre&gt; 
+ &lt;p&gt; &lt;pre onclick=&quot;copyUp(event,true)&quot;&gt;par v_init=10, a=1; diff(v,t):=a+b;&lt;/pre&gt; </code></pre>
+</td>
+</tr>
+</table>
 <h2 id="license">License</h2>
 <p><em>infix2pharmml - Infix notation to PharmML math online converter</em></p>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.</p>
-<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.</p>
+<h2 id="privacy-policy">Privacy policy</h2>
+<p>Server use and the data submitted are logged. Do not submit any confidential information. To use the server privately, download the code and use it locally.</p>
+<h2 id="acknowledgments">Acknowledgments</h2>
+<p>Partial funding from the DDMoRe IMI project is gratefully acknowledged.</p>
 </body>
 </html>
