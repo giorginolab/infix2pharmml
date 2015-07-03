@@ -1,3 +1,7 @@
+2015-07-03  Toni  <toni@pcgiorgino.isib.cnr.it>
+
+	* 0.6.8 Updated to PharmML 0.6
+
 2015-03-13  Toni  <toni@pcgiorgino.isib.cnr.it>
 
 	* 0.6.7 Allow comments; split outputs; simulx numeric parameters.

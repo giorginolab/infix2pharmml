@@ -3,51 +3,38 @@
 Infix notation to PharmML math online converter
 ===============================================
 
-<toni.giorgino@isib.cnr.it>
+<toni.giorgino@cnr.it>
 
 This web service converts a mathematical expression in the usual infix
 notation into the corresponding [PharmML](http://pharmml.org/)
-markup. For details and source code see the
+markup. PharmML is a markup for pharmacometrics documented at
+http://pharmml.org/ and developed within the
+[DDMoRe consortium](http://www.ddmore.eu/).
+
+Converter version 0.6.x; the output should be PharmML 0.6-compliant.
+
+
+Quickstart
+----------
+
+This is an online version of the converter.  For details and source
+code see the
 [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
 project page at SourceForge.
 
-Version 0.6
+The converter works in either *single-statement* or *stand-alone
+model* modes.
 
+The *single-statement* mode converts various types of statements, one
+at a time. The user is responsible of combining them and adding
+boilerplate code to get a fully-functional (e.g., XML-valid) model.
 
-What's new
-----------
-
-The new *stand-alone mode* creates (mostly) ready-to-run model (only
-comprising structural equations). In this mode, multiple statements
+The *stand-alone mode* creates a mostly ready-to-run model (only
+encompassing structural equations). In this mode, multiple statements
 can be provided, separated by semicolons. Statements are restricted to
 variable and derivative variable definitions. Stand-alone mode is
 intended to jump-start development, and it is not a full-fledged
 modeling tool.
-
-
-The following features are supported:
-
--   All operators defined by PharmML 0.5 should be supported
--   Constants (with user-friendly aliases, such as `e` for
-    *exponentiale*).
--   Variable assignments, as in `a=b+c` and definitions, as `a:=b+c`
--   Derivative variable (ODE) definitions, as `diff(q,t):=1+sin(t)`.
-    The initial condition is a parameter named `q_init`.
--   Function definitions, such as `f(x,y):=x+y`.
--   Use `ln` for the natural logarithm. The `logx` function is always
-    two-argument (argument, base).
--   Calls to user-defined functions use an R-like named-argument syntax
-    shown in the examples below.
--   Factorial can be expressed as `factorial()` or with the usual
-    exclamation mark.
--   Description tags for variables and derivative variables, in curly brackets.
--   The `delay(X,delta)` operator (PharmML 0.3.2 and up?).
-
-
-The following features are supported in *model mode only*:
-
--   Parameter assignments, as e.g. `par a=2, b=1+1`.
-
 
 For a full list of the converter's features and limitations, see [the
 project's
@@ -126,3 +113,8 @@ Server use and the data submitted are logged. Do not submit any
 confidential information. To use the server privately, download the
 code and use it locally.
 
+Acknowledgments
+---------------
+
+Partial funding from the DDMoRe IMI project is gratefully
+acknowledged.

@@ -53,14 +53,30 @@ XML:
 Supported features
 ------------------
 
-* All operators defined by PharmML 0.3 should be supported
-* Constants (with user-friendly aliases, such as _e_ for _exponentiale_) - see below.
-* Variable assignments, such as _a=b+c_ and definitions _a:=b+c_
-* Derivative variable (ODE) definitions, as _diff(q,t):=1+sin(t)_ . Initial conditions currently have to be hand-edited.
-* Function definitions, such as _f(x,y):=x+y_
-* Use _ln_ for the natural logarithm. The _logx_ function is always two-argument (argument, base). 
-* Calls to user-defined functions use a special syntax described below.
-* Factorial can be expressed as "factorial()" or with the usual exclamation mark.
+
+The following features are supported:
+
+-   All operators defined by PharmML 0.5 should be supported
+-   Constants (with user-friendly aliases, such as `e` for
+    *exponentiale*).
+-   Variable assignments, as in `a=b+c` and definitions, as `a:=b+c`
+-   Derivative variable (ODE) definitions, as `diff(q,t):=1+sin(t)`.
+    The initial condition is a parameter named `q_init`.
+-   Function definitions, such as `f(x,y):=x+y`.
+-   Use `ln` for the natural logarithm. The `logx` function is always
+    two-argument (argument, base).
+-   Calls to user-defined functions use an R-like named-argument syntax
+    shown in the examples below.
+-   Factorial can be expressed as `factorial()` or with the usual
+    exclamation mark.
+-   The `delay(X,delta)` operator (PharmML 0.3.2 and up?).
+-   Description tags for variables and derivative variables, in curly brackets.
+
+
+The following features are supported in *model mode only*:
+
+-   Parameter assignments, as e.g. `par a=2, b=1+1`.
+
 
 
 Stand-alone mode
@@ -140,4 +156,9 @@ Note that arguments are always wrapped into _Equation_ elements, even when they 
 Acknowledgments
 ---------------
 
-This software is based on the [eyapp](http://search.cpan.org/~casiano/Parse-Eyapp-1.182/lib/Parse/Eyapp/eyapp) parser and several other Perl modules. Online syntax highlighting provided by [prism](http://prismjs.com/).
+This software is based on the [eyapp](http://search.cpan.org/~casiano/Parse-Eyapp-1.182/lib/Parse/Eyapp/eyapp)
+parser and several other Perl modules.
+
+Online syntax highlighting is provided by [prism](http://prismjs.com/).
+
+Partial funding from the DDMoRe IMI project is gratefully acknowledged.
