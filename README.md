@@ -51,33 +51,28 @@ XML:
 
 ## Modeling syntax
 
-### Supported features
-
 The following features are supported:
 
--   All operators defined by PharmML 0.5 should be supported
+-   All operators defined by PharmML 0.6 should be supported
 -   Constants (with user-friendly aliases, such as `e` for *exponentiale*).
 -   Variable assignments, as in `a=b+c` and definitions, as `a:=b+c`
 -   Derivative variable (ODE) definitions, as `diff(q,t):=1+sin(t)`.  The initial condition is a parameter named `q_init`.
 -   Function definitions, such as `f(x,y):=x+y`.
 -   Use `ln` for the natural logarithm. The `logx` function is always two-argument (argument, base).
--   Calls to user-defined functions use an R-like named-argument syntax shown in the examples below.
+-   Calls to user-defined functions use an R-like named-argument syntax (see examples below).
 -   Factorial can be expressed as `factorial()` or with the usual exclamation mark.
 -   The `delay(X,delta)` operator (PharmML 0.3.2 and up?).
 -   Description tags for variables and derivative variables, in curly brackets.
 
 
-The following features are supported in *model mode only*:
-
--   Parameter assignments, as e.g. `par a=2, b=1+1`.
-
 
 ### Stand-alone mode
 
-Stand-alone mode generates full models which should be approximately ready to run. The following caveats apply:
+Stand-alone mode generates full models which should be ready to run. The following rules apply:
 
-* Only variable assignments and derivative variables are supported.
-* Multiple statements can be provided, separated by semicolon.
+* Multiple statements can be provided, separated by semicolons.
+* Parameter assignments are supported, as e.g. `par a=2, b=1+1`.
+* The only allowed statement types are assignments of parameters, variables, and  derivative variables.
 
 
 ### Constants
@@ -127,7 +122,7 @@ which should yield
 </math:Equation>
 ~~~~
 
-Note that arguments are always wrapped into _Equation_ elements, even when they could be omitted.
+Note that arguments will be wrapped into _Equation_ elements, even when they could be omitted.
 
 
 A full-fledged example
@@ -141,10 +136,8 @@ Limitations
 
 * In single-statement mode, all symbols are assumed to reference variables in the current block (in other words, the _blkIdRef_ attribute is never generated).
 * All symbols are assumed to be of  type _real_.
-* Logical operators are _not_ supported.
-* Piecewise functions are _not_ supported.
-* Matrix and vector operations are absent.
-* Initial conditions and starting time for differential equations are missing.
+* Logical operators, piecewise functions, matrix and vector operators are _not_ supported.
+* Support for initial conditions in differential equations is crude.
 * Code generation is based on string processing rather than a more appropriate abstract syntax tree, and does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
 
 
