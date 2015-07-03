@@ -5,26 +5,28 @@ Infix notation to PharmML math online converter
 
 <toni.giorgino@cnr.it>
 
-This web service converts a mathematical expression in the usual infix
-notation into the corresponding [PharmML](http://pharmml.org/)
-markup. PharmML is a markup for pharmacometrics models developed
-within the [DDMoRe consortium](http://www.ddmore.eu/).
+The the
+[infix2pharmml](http://sourceforge.net/projects/infix2pharmml/) web
+service converts a mathematical expression in the usual infix notation
+into the corresponding [PharmML](http://pharmml.org/) markup. PharmML
+is a markup for pharmacometrics models developed by the
+[DDMoRe consortium](http://www.ddmore.eu/).
 
-Converter version 0.6.x. The output should be compliant with PharmML 0.6.
+Converter version 0.6.x. The output should be compliant with PharmML version 0.6.
 
 
 Quickstart
 ----------
 
-This is an online version of the converter.  For details,a full list
-of the converter's features and limitations, and source code see the
-[project's README](https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md).
+This is an online version of the converter.  For details, a full list
+of the converter's features and limitations, and source code, see the
+[project's README](https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md)
 and the
 [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
 project page at SourceForge.
 
 The converter works in either **single-statement** or **stand-alone
-model** modes.
+model** mode.
 
 * In **single-statement** mode it converts a variety of statement
    types into the equivalent PharmML constructs, one at a time. The
