@@ -1,11 +1,9 @@
 infix2pharmml
 =============
 
-Converter between mathematical infix notation and PharmML math markup.
+The [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/) converter translates expressions from  the usual mathematical infix notation into the corresponding [PharmML](http://pharmml.org/) markup. PharmML is a markup for pharmacometrics models developed by the [DDMoRe consortium](http://www.ddmore.eu/).
 
-PharmML is a markup for pharmacometrics documented at http://pharmml.org/ and developed within the DDMoRe consortium.
-
-Author: Toni G at ISIB CNR
+Author: Toni G at ISIB-IN-CNR
 
 
 

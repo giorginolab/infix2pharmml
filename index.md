@@ -5,9 +5,8 @@ Infix notation to PharmML math online converter
 
 <toni.giorgino@cnr.it>
 
-The the
-[infix2pharmml](http://sourceforge.net/projects/infix2pharmml/) web
-service converts a mathematical expression in the usual infix notation
+The [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/) converter
+translates expressions from  the usual mathematical infix notation
 into the corresponding [PharmML](http://pharmml.org/) markup. PharmML
 is a markup for pharmacometrics models developed by the
 [DDMoRe consortium](http://www.ddmore.eu/).
