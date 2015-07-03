@@ -50,9 +50,10 @@ XML:
 ~~~~~
 
 
-Supported features
-------------------
 
+## Modeling syntax
+
+### Supported features
 
 The following features are supported:
 
@@ -73,9 +74,7 @@ The following features are supported in *model mode only*:
 -   Parameter assignments, as e.g. `par a=2, b=1+1`.
 
 
-
-Stand-alone mode
-----------------
+### Stand-alone mode
 
 Stand-alone mode generates full models which should be approximately ready to run. The following caveats apply:
 
@@ -83,21 +82,7 @@ Stand-alone mode generates full models which should be approximately ready to ru
 * Multiple statements can be provided, separated by semicolon.
 
 
-Limitations
------------
-
-* In single-statement mode, all symbols are assumed to reference variables in the current block (in other words, the _blkIdRef_ attribute is never generated).
-* All symbols are assumed to be of  type _real_.
-* Logical operators are _not_ supported.
-* Piecewise functions are _not_ supported.
-* Matrix and vector operations are absent.
-* Initial conditions and starting time for differential equations are missing.
-* Code generation is based on string processing rather than a more appropriate abstract syntax tree, and does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
-
-
-
-Constants
----------
+### Constants
 
 These constants and aliases are defined:
 
@@ -110,8 +95,7 @@ notanumber   | nan, NaN
 
 
 
-Syntax for custom function calls
---------------------------------
+### Custom function calls
 
 Calling user-defined function (with named arguments) is achieved as follows:
 
@@ -148,11 +132,30 @@ which should yield
 Note that arguments are always wrapped into _Equation_ elements, even when they could be omitted.
 
 
+A full-fledged example
+----------------------
+
+See how *infix2pharmml* has been used to encode a relatively complex model at [Chen_BiophysJ_2009/conversion-pharmml](https://github.com/tonigi/Chen_BiophysJ_2009/tree/master/conversion-pharmml).
+
+
+Limitations
+-----------
+
+* In single-statement mode, all symbols are assumed to reference variables in the current block (in other words, the _blkIdRef_ attribute is never generated).
+* All symbols are assumed to be of  type _real_.
+* Logical operators are _not_ supported.
+* Piecewise functions are _not_ supported.
+* Matrix and vector operations are absent.
+* Initial conditions and starting time for differential equations are missing.
+* Code generation is based on string processing rather than a more appropriate abstract syntax tree, and does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
+
+
+
+
 Acknowledgments
 ---------------
 
-This software is based on the [eyapp](http://search.cpan.org/~casiano/Parse-Eyapp-1.182/lib/Parse/Eyapp/eyapp)
-parser and several other Perl modules.
+This software is based on the [eyapp](http://search.cpan.org/~casiano/Parse-Eyapp-1.182/lib/Parse/Eyapp/eyapp) parser and several other Perl modules.
 
 Online syntax highlighting is provided by [prism](http://prismjs.com/).
 
