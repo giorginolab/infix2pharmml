@@ -57,18 +57,13 @@ Supported features
 The following features are supported:
 
 -   All operators defined by PharmML 0.5 should be supported
--   Constants (with user-friendly aliases, such as `e` for
-    *exponentiale*).
+-   Constants (with user-friendly aliases, such as `e` for *exponentiale*).
 -   Variable assignments, as in `a=b+c` and definitions, as `a:=b+c`
--   Derivative variable (ODE) definitions, as `diff(q,t):=1+sin(t)`.
-    The initial condition is a parameter named `q_init`.
+-   Derivative variable (ODE) definitions, as `diff(q,t):=1+sin(t)`.  The initial condition is a parameter named `q_init`.
 -   Function definitions, such as `f(x,y):=x+y`.
--   Use `ln` for the natural logarithm. The `logx` function is always
-    two-argument (argument, base).
--   Calls to user-defined functions use an R-like named-argument syntax
-    shown in the examples below.
--   Factorial can be expressed as `factorial()` or with the usual
-    exclamation mark.
+-   Use `ln` for the natural logarithm. The `logx` function is always two-argument (argument, base).
+-   Calls to user-defined functions use an R-like named-argument syntax shown in the examples below.
+-   Factorial can be expressed as `factorial()` or with the usual exclamation mark.
 -   The `delay(X,delta)` operator (PharmML 0.3.2 and up?).
 -   Description tags for variables and derivative variables, in curly brackets.
 
