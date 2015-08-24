@@ -150,8 +150,9 @@ sub par_n {
 }
 
 
+# FIXME - to be removed
 sub eqn {
-    return e("math:Equation",shift);
+    return shift;
 }
 
 sub assign {
@@ -265,9 +266,9 @@ sub getParameterModel {
 
 	    if(defined $y) {
 		my $a=assign($y);
-		$out.="<SimpleParameter symbId=\"$s\">$a</SimpleParameter>";
+		$out.="<PopulationParameter symbId=\"$s\">$a</PopulationParameter>";
 	    } else {
-		$out.="<SimpleParameter symbId=\"$s\" />";
+		$out.="<PopulationParameter symbId=\"$s\" />";
 	    }
 	}
     }
