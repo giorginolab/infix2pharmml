@@ -45,11 +45,14 @@ Enter the formula below
 -----------------------
 
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
-<textarea rows="4" cols="50" id="math" name="math">1+sin(t)+b</textarea>
-<input type="checkbox" id="standalone" name="standalone" value="true">Build a stand-alone model<br>
+Output mode: 
+<input type="radio" id="standalone" name="standalone" value="true" checked="checked" >Stand-alone 
+<input type="radio" id="single" name="standalone" value="false">Single statement
+<br><br>
+<textarea rows="4" cols="50" style="width:500px;" id="math" name="math">1+sin(t)+b</textarea>
+<br><br>
 <input type="submit" value="Submit">
-</form> 
-
+</form>
 
 Examples
 --------

@@ -23,6 +23,7 @@ function copyUp(e,st) {
 	var math = document.getElementById("math");
 	math.value=targ.textContent;
         document.getElementById("standalone").checked=st;
+        document.getElementById("single").checked=!st;
 }
 // ]]>
 </script> 
