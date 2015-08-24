@@ -56,8 +56,8 @@ assignment:
 
 macroargpairlist:    
       macroargpairlist ',' macroargpairlist     {$_[1].$_[3]}
-    | equation                                  {infix2pharmml::macroarg($_[1]) } 
-    | VAR '=' equation                          {infix2pharmml::macroarg($_[1],$_[3]) } 
+    | expr                                  {infix2pharmml::macroarg($_[1]) } 
+    | VAR '=' expr                          {infix2pharmml::macroarg($_[1],$_[3]) } 
     ;
 
 
@@ -65,7 +65,7 @@ macroargpairlist:
 parameterlist:
       parameterlist ',' parameterlist           {$_[1].$_[3]}
     | VAR '=' NUM                               {infix2pharmml::par_n($_[1],$_[3])}
-    | VAR '=' equation                          {infix2pharmml::par($_[1],$_[3])}
+    | VAR '=' expr                          {infix2pharmml::par($_[1],$_[3])}
     ;
 
 
@@ -74,9 +74,9 @@ parameterlist:
 /* Things only allowed in statement mode */
 statement:
       common
-    | equation    
-    | VAR '=' equation                   {infix2pharmml::varass($_[1],$_[3])}
-    | VAR '(' varlist '):=' equation     {infix2pharmml::funcdef($_[1],$_[3],$_[5])}
+    | expr    
+    | VAR '=' expr                   {infix2pharmml::varass($_[1],$_[3])}
+    | VAR '(' varlist '):=' expr     {infix2pharmml::funcdef($_[1],$_[3],$_[5])}
     ;           
 
 varlist:        varlist ',' varlist  {$_[1].$_[3]}
@@ -90,17 +90,16 @@ varlist:        varlist ',' varlist  {$_[1].$_[3]}
 
 /* Things in both grammars */
 common:
-      VAR ':=' equation  DESCRIPTION ?          {infix2pharmml::vardef($_[1],$_[3],$_[4])}
-    | 'diff(' VAR ',' VAR ')=' equation  DESCRIPTION ?
+      VAR ':=' expr  DESCRIPTION ?          {infix2pharmml::vardef($_[1],$_[3],$_[4])}
+    | 'diff(' VAR ',' VAR ')=' expr  DESCRIPTION ?
                                                 {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
-    | 'diff(' VAR ',' VAR '):=' equation DESCRIPTION ?
+    | 'diff(' VAR ',' VAR '):=' expr DESCRIPTION ?
                                                 {infix2pharmml::diff($_[2],$_[4],$_[6],$_[7])}
     ;
 
 
 
-equation:       expr                     {infix2pharmml::eqn($_[1])}
-    ;
+
 
 expr:   
       expr '+' expr                      {infix2pharmml::b("plus",  $_[1], $_[3])}
@@ -133,7 +132,7 @@ constant:     NAN          {"notanumber"}
 
 
 argpairlist:    argpairlist ',' argpairlist  { $_[1].$_[3] }
-              | VAR '=' equation             {infix2pharmml::fa($_[1],$_[3]) } 
+              | VAR '=' expr             {infix2pharmml::fa($_[1],$_[3]) } 
     ;
 
 

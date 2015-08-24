@@ -150,10 +150,6 @@ sub par_n {
 }
 
 
-# FIXME - to be removed
-sub eqn {
-    return shift;
-}
 
 sub assign {
     return e("ct:Assign",shift);
@@ -204,7 +200,7 @@ sub funcarg {
 sub fa {
     my ($id,$ref)=@_;
     return "<math:FunctionArgument symbId=\"$id\">".
-	$ref.
+	assign($ref).
       "</math:FunctionArgument>";
 }
 
