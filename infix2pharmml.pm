@@ -83,7 +83,7 @@ sub funcdef {
     my $out= "<ct:FunctionDefinition symbId=\"$id\" symbolType=\"real\">".
 	e("ct:Description",$desc).
 	$al.
-	e("ct:Definition",$eq).
+	e("ct:Definition",assign($eq)).
 	"</ct:FunctionDefinition>";
     push @functionList,$out;
     return $out;

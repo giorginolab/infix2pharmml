@@ -7,8 +7,16 @@
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-export XML_CATALOG_FILES=$DIR/pharmml-spec/definitions/xmlCatalog.xml 
 
-xmllint --nowarning --noout --schema $DIR/pharmml-spec/definitions/pharmml.xsd $1
+if [[ -z $2 ]]; then
+	DEF=$DIR/pharmml-spec/definitions
+else
+	DEF=$DIR/$2/definitions
+fi
+
+
+export XML_CATALOG_FILES=$DEF/xmlCatalog.xml 
+
+xmllint --nowarning --noout --schema $DEF/pharmml.xsd $1
 
 

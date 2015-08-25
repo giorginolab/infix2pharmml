@@ -17,9 +17,9 @@ if [[ $# -ne 2 ]]; then
 Use infix2pharmml to convert a structural model (in standalone mode)
 and merge in function definitions, also converted one per line.
 
-Usage: $0 <model.infix> <functions.infix> > model.pharmml
- - <model.infix>     should contain the structural equations
- - <functions.infix> should contain the function definitions
+Usage: $0 <structural.infix> <functions.infix> > model.pharmml
+ - <structural.infix>     should contain the structural equations
+ - <functions.infix>      should contain the function definitions
 
 EOF
     exit
