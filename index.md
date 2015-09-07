@@ -11,7 +11,10 @@ into the corresponding [PharmML](http://pharmml.org/) markup. PharmML
 is a markup for pharmacometrics models developed by the
 [DDMoRe consortium](http://www.ddmore.eu/).
 
-Converter version 0.6.x. The output should be compliant with PharmML version 0.6.
+Converter version 0.7.x. The output should be compliant with PharmML version 0.7.
+
+**If you are looking for version 0.6, the legacy version
+  [is here](http://infix2pharmml.sourceforge.net/v0.6/).**
 
 
 Quickstart
@@ -49,7 +52,7 @@ Output mode:
 <input type="radio" id="standalone" name="standalone" value="true" checked="checked" >Stand-alone 
 <input type="radio" id="single" name="standalone" value="false">Single statement
 <br><br>
-<textarea rows="4" cols="50" style="width:500px;" id="math" name="math">1+sin(t)+b</textarea>
+<textarea rows="4" cols="50" style="width:500px;" id="math" name="math">y:=1+sin(t)+b</textarea>
 <br><br>
 <input type="submit" value="Submit">
 </form>
