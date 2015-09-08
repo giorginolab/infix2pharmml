@@ -14,9 +14,9 @@ the [DDMoRe consortium](http://www.ddmore.eu/).
 This is an online version of the converter, version 0.7. Output should be compliant with
 the PharmML 0.7.x specification.
 
-<div style="color: #808080">If you need code conforming to
+If you need code conforming to
   PharmML 0.6, please find the legacy version of this tool (0.6)
-  [at this link](http://infix2pharmml.sourceforge.net/v0.6/).</div>
+  [at this link](http://infix2pharmml.sourceforge.net/v0.6/).
 
 
 Quickstart
@@ -69,19 +69,10 @@ Click to copy in the input area above.
 
  <table style="width:80%; margin:2em">
   <tr style="background-color: rgb(15, 42, 82); color: white;">
-   <td><em>Single-statement mode</em></td>
    <td><em>Stand-alone model mode</em></td>
+   <td><em>Single-statement mode</em></td>
   </tr>
   <tr>
-   <td>
-  <p> <pre onclick="copyUp(event,false)">1+sqrt(a^2+b^2)</pre> 
-  <p> <pre onclick="copyUp(event,false)">logx(x,e)</pre> 
-  <p> <pre onclick="copyUp(event,false)">A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
-  <p> <pre onclick="copyUp(event,false)">output=1+pi+myfunc(t=sin(x))</pre>
-  <p> <pre onclick="copyUp(event,false)">diff(q,t)=1+sin(t)</pre>
-  <p> <pre onclick="copyUp(event,false)">myLength(x,y,z):=x^2+y^2+z^2</pre>
-  <p> <pre onclick="copyUp(event,false)">sqrt(myLength(x=sin(t),y=4!,z=0))</pre> 
-   </td>
    <td>
   <p> <pre onclick="copyUp(event,true)">y:=A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
   <p> <pre onclick="copyUp(event,true)">diff(a,t)=b; <br>diff(b,t)=-a;</pre> 
@@ -91,6 +82,15 @@ Click to copy in the input area above.
   <p> <pre onclick="copyUp(event,true)">diff(E,t)=Rin-Rout*E</pre> 
   <p> <pre onclick="copyUp(event,true)">diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;<br>diff(Z,t)=-lambda*Z+lambda*(I-Ib);</pre> 
   <p> <pre onclick="copyUp(event,true)">par v_init=10, a=1; diff(v,t):=a+b;</pre> 
+   </td>
+   <td>
+  <p> <pre onclick="copyUp(event,false)">1+sqrt(a^2+b^2)</pre> 
+  <p> <pre onclick="copyUp(event,false)">logx(x,e)</pre> 
+  <p> <pre onclick="copyUp(event,false)">A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
+  <p> <pre onclick="copyUp(event,false)">output=1+pi+myfunc(t=sin(x))</pre>
+  <p> <pre onclick="copyUp(event,false)">diff(q,t)=1+sin(t)</pre>
+  <p> <pre onclick="copyUp(event,false)">myLength(x,y,z):=x^2+y^2+z^2</pre>
+  <p> <pre onclick="copyUp(event,false)">sqrt(myLength(x=sin(t),y=4!,z=0))</pre> 
    </td>
   </tr>
  </table>
