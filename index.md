@@ -11,7 +11,7 @@ notation into the corresponding [PharmML](http://pharmml.org/)
 markup. PharmML is a markup for pharmacometrics models developed by
 the [DDMoRe consortium](http://www.ddmore.eu/). 
 
-Converter version 0.7. Output should be compliant with
+This is an online version of the converter, version 0.7. Output should be compliant with
 the PharmML 0.7.x specification.
 
 <div style="color: #808080">If you need code conforming to
@@ -22,14 +22,6 @@ the PharmML 0.7.x specification.
 Quickstart
 ----------
 
-This is an online version of the converter.  For details, a full list
-of the converter's features and limitations, and source code, see the
-[project's README](https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md)
-and the
-[infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
-project page at SourceForge. Note that this tool is intended to
-jump-start development; it is no substitute for a full-fledged
-modeling language.
 
 The converter works in either **stand-alone model** or
 **single-statement** mode.
@@ -45,6 +37,14 @@ The converter works in either **stand-alone model** or
    user is responsible of combining them, and supplying boilerplate
    code in order to get a fully-functional (e.g., XML-valid) model.
 
+For details, a full list
+of the converter's features and limitations, and source code, see the
+[project's README](https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md)
+and the
+[infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
+project page at SourceForge. Note that this tool is intended to
+jump-start development; it is no substitute for a full-fledged
+modeling language.
 
 
 
