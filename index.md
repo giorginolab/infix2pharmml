@@ -27,10 +27,12 @@ of the converter's features and limitations, and source code, see the
 [project's README](https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md)
 and the
 [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
-project page at SourceForge.
+project page at SourceForge. Note that this tool is intended to
+jump-start development; it is no substitute for a full-fledged
+modeling language.
 
-The converter works in either **single-statement** or **stand-alone
-model** mode.
+The converter works in either **stand-alone model** or
+**single-statement** mode.
 
 * In **stand-alone mode** it creates a mostly ready-to-run model
    (encompassing only structural equations). In this mode, several
@@ -43,8 +45,6 @@ model** mode.
    user is responsible of combining them, and supplying boilerplate
    code in order to get a fully-functional (e.g., XML-valid) model.
 
-Note that this tool is intended to jump-start development; it is not a
-full-fledged modeling language.
 
 
 

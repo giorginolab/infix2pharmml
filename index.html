@@ -51,13 +51,12 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 If you need code conforming to PharmML 0.6, please find the legacy version of this tool (0.6) <a href="http://infix2pharmml.sourceforge.net/v0.6/">at this link</a>.
 </div>
 <h2 id="quickstart">Quickstart</h2>
-<p>This is an online version of the converter. For details, a full list of the converter's features and limitations, and source code, see the <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">project's README</a> and the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> project page at SourceForge.</p>
-<p>The converter works in either <strong>single-statement</strong> or <strong>stand-alone model</strong> mode.</p>
+<p>This is an online version of the converter. For details, a full list of the converter's features and limitations, and source code, see the <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">project's README</a> and the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> project page at SourceForge. Note that this tool is intended to jump-start development; it is no substitute for a full-fledged modeling language.</p>
+<p>The converter works in either <strong>stand-alone model</strong> or <strong>single-statement</strong> mode.</p>
 <ul>
 <li><p>In <strong>stand-alone mode</strong> it creates a mostly ready-to-run model (encompassing only structural equations). In this mode, several statements can be provided separated by semicolons. Statement types are restricted to variable and derivative variable definitions.</p></li>
 <li><p>In <strong>single-statement</strong> mode it converts a variety of statement types into the equivalent PharmML constructs, one at a time. The user is responsible of combining them, and supplying boilerplate code in order to get a fully-functional (e.g., XML-valid) model.</p></li>
 </ul>
-<p>Note that this tool is intended to jump-start development; it is not a full-fledged modeling language.</p>
 <h2 id="enter-the-formula-below">Enter the formula below</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
 Output mode: <input type="radio" id="standalone" name="standalone" value="true" checked="checked" >Stand-alone <input type="radio" id="single" name="standalone" value="false">Single statement <br><br>
