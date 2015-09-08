@@ -14,8 +14,8 @@ c=$DIR/convert.pl
 
 if [[ $# -ne 2 ]]; then
     cat <<EOF
-Use infix2pharmml to convert a structural model (in standalone mode)
-and merge in function definitions, also converted one per line.
+Use infix2pharmml to convert a given structural model (in standalone mode),
+then merge-in function definitions, converted one per line in single-statement mode.
 
 Usage: $0 <structural.infix> <functions.infix> > model.pharmml
  - <structural.infix>     should contain the structural equations

@@ -5,16 +5,18 @@ Infix notation to PharmML math online converter
 
 <toni.giorgino@cnr.it>
 
-The [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/) converter
-translates expressions from  the usual mathematical infix notation
-into the corresponding [PharmML](http://pharmml.org/) markup. PharmML
-is a markup for pharmacometrics models developed by the
-[DDMoRe consortium](http://www.ddmore.eu/).
+The [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
+converter translates expressions from the usual mathematical infix
+notation into the corresponding [PharmML](http://pharmml.org/)
+markup. PharmML is a markup for pharmacometrics models developed by
+the [DDMoRe consortium](http://www.ddmore.eu/). 
 
-Converter version 0.7.x. The output should be compliant with PharmML version 0.7.
+Converter version 0.7. Output should be compliant with
+the PharmML 0.7.x specification.
 
-**If you are looking for version 0.6, the legacy version
-  [is here](http://infix2pharmml.sourceforge.net/v0.6/).**
+<div style="color: #808080">If you need code conforming to
+  PharmML 0.6, please find the legacy version of this tool (0.6)
+  [at this link](http://infix2pharmml.sourceforge.net/v0.6/).</div>
 
 
 Quickstart
@@ -30,17 +32,19 @@ project page at SourceForge.
 The converter works in either **single-statement** or **stand-alone
 model** mode.
 
+* In **stand-alone mode** it creates a mostly ready-to-run model
+   (encompassing only structural equations). In this mode, several
+   statements can be provided separated by semicolons. Statement types
+   are restricted to variable and derivative variable
+   definitions. 
+
 * In **single-statement** mode it converts a variety of statement
    types into the equivalent PharmML constructs, one at a time. The
    user is responsible of combining them, and supplying boilerplate
    code in order to get a fully-functional (e.g., XML-valid) model.
 
-* In **stand-alone mode** it creates a mostly ready-to-run model
-   (encompassing only structural equations). In this mode, several
-   statements can be provided separated by semicolons. Statement types
-   are restricted to variable and derivative variable
-   definitions. Stand-alone mode is intended to jump-start
-   development, and it is not a full-fledged modeling tool.
+Note that this tool is intended to jump-start development; it is not a
+full-fledged modeling language.
 
 
 
