@@ -1,46 +1,50 @@
-2015-07-03  Toni  <toni@pcgiorgino.isib.cnr.it>
+2015-09-11  Toni  <toni@...>
+
+	* 0.7.0 Updated to PharmML 0.7
+
+2015-07-03  Toni  <toni@...>
 
 	* 0.6.8 Updated to PharmML 0.6
 
-2015-03-13  Toni  <toni@pcgiorgino.isib.cnr.it>
+2015-03-13  Toni  <toni@...>
 
 	* 0.6.7 Allow comments; split outputs; simulx numeric parameters.
 
-2014-11-26  Toni  <toni@pcgiorgino.isib.cnr.it>
+2014-11-26  Toni  <toni@...>
 
 	* 0.6.6 delay()
 
-2014-11-25  Toni  <toni@pcgiorgino.isib.cnr.it>
+2014-11-25  Toni  <toni@...>
 
 	* 0.6.5 comments go in description, refactor ';'
 
-2014-11-24  Toni  <toni@tabularasa>
+2014-11-24  Toni  <toni@...>
 
 	* 0.6.4 parameter statement
 
-2014-11-12  Toni  <toni@tabularasa>
+2014-11-12  Toni  <toni@...>
 
 	* 0.6.2 color output, reintroduce ic
 
-2014-11-11  Toni  <toni@pcgiorgino.isib.cnr.it>
+2014-11-11  Toni  <toni@...>
 
 	* 0.6 stand-alone model
 
-2014-05-14  Toni  <toni@tabularasa>
+2014-05-14  Toni  <toni@...>
 
 	* 0.5 reimplementation with own grammar
 
-2014-05-05  Toni  <toni@tabularasa>
+2014-05-05  Toni  <toni@...>
 
 	* 0.4 parsable call()
 
 	* 0.3 added factorial()
 
-2014-04-09  Toni  <toni@pcgiorgino.isib.cnr.it>
+2014-04-09  Toni  <toni@...>
 
 	* 0.2 added the ln() operator
 
-2014-01-22  Toni  <toni@pcgiorgino.isib.cnr.it>
+2014-01-22  Toni  <toni@...>
 
 	* 0.1 initial release
 
