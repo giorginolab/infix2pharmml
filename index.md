@@ -32,7 +32,7 @@ The converter works in either **stand-alone model** or
    are restricted to variable and derivative variable
    definitions. 
 
-* In **single-statement** mode it converts a variety of statement
+* In **single-statement** mode it converts a wider variety of statement
    types into the equivalent PharmML constructs, one at a time. The
    user is responsible of combining them, and supplying boilerplate
    code in order to get a fully-functional (e.g., XML-valid) model.
