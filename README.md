@@ -136,9 +136,10 @@ Limitations
 
 * In single-statement mode, all symbols are assumed to reference variables in the current block (in other words, the _blkIdRef_ attribute is never generated).
 * All symbols are assumed to be of  type _real_.
+* Undefined symbols are assumed to be _population parameters_ and put into a block named _p_.
 * Logical operators, piecewise functions, matrix and vector operators are _not_ supported.
 * Support for initial conditions in differential equations is crude.
-* Code generation is based on string processing rather than a more appropriate abstract syntax tree, and does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
+* Code generation does not rely on the official [libpharmml](https://sites.google.com/site/pharmmltemp/libpharmml) API.
 
 
 
@@ -146,7 +147,7 @@ Limitations
 Acknowledgments
 ---------------
 
-This software is based on the [eyapp](http://search.cpan.org/~casiano/Parse-Eyapp-1.182/lib/Parse/Eyapp/eyapp) parser and several other Perl modules.
+This software is based on the excellent [eyapp](http://search.cpan.org/~casiano/Parse-Eyapp-1.182/lib/Parse/Eyapp/eyapp) parser and several other Perl modules.
 
 Online syntax highlighting is provided by [prism](http://prismjs.com/).
 
