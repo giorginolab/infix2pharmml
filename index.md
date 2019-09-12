@@ -8,15 +8,15 @@ Infix notation to PharmML math online converter
 The [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/)
 converter translates expressions from the usual mathematical infix
 notation into the corresponding [PharmML](http://pharmml.org/)
-markup. PharmML is a markup for pharmacometrics models developed by
+markup. PharmML is a markup for pharmacometric models developed by
 the [DDMoRe consortium](http://www.ddmore.eu/). 
 
-This is an online version of the converter, version 0.7. Output should be compliant with
-the PharmML 0.7.x specification.
+This is an online version of the converter, version 0.7. The output
+should be compliant with PharmML 0.7.x and 0.8.x specifications.
 
-If you need code conforming to
-  PharmML 0.6, please find the legacy version of this tool (0.6)
-  [at this link](http://infix2pharmml.sourceforge.net/v0.6/).
+If you need code conforming to PharmML 0.6, please find the legacy
+version of this tool (0.6)
+[here](http://infix2pharmml.sourceforge.net/v0.6/).
 
 
 Quickstart
@@ -77,7 +77,7 @@ Click to copy in the input area above.
   <p> <pre onclick="copyUp(event,true)">y:=A*exp(-alpha*t)+B*exp(-beta*t)</pre> 
   <p> <pre onclick="copyUp(event,true)">diff(a,t)=b; <br>diff(b,t)=-a;</pre> 
   <p> <pre onclick="copyUp(event,true)">diff(A,t)=-k*A; <br>C:=A/V</pre> 
-  <p> <pre onclick="copyUp(event,true)">A:=dose*exp(-k*t) {Exponential decay model}; <br>C:=A/V {Concentration}</pre> 
+  <p> <pre onclick="copyUp(event,true)">A:=dose*exp(-k*t) {Exponential decay model}; <br>C:=A/V            {Concentration}</pre> 
   <p> <pre onclick="copyUp(event,true)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre> 
   <p> <pre onclick="copyUp(event,true)">diff(E,t)=Rin-Rout*E</pre> 
   <p> <pre onclick="copyUp(event,true)">diff(G,t)=-(Sg+Si*Z)*G+Sg*Gb+Ra/V;<br>diff(Z,t)=-lambda*Z+lambda*(I-Ib);</pre> 
@@ -119,7 +119,7 @@ along with this program. If not, see
 Privacy policy
 --------------
 
-Server use and the data submitted are logged. Do not submit any
+Server use and data submitted are logged. Do not submit any
 confidential information. To use the server privately, download the
 code and use it locally.
 
