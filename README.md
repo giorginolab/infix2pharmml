@@ -5,7 +5,8 @@ The [infix2pharmml](http://sourceforge.net/projects/infix2pharmml/) converter tr
 
 Author: Toni G at ISIB-IN-CNR
 
-
+> [!NOTE]  
+> This code is kept for historical reasons only. Many external resources linked to the project have been discontinued. It should still be possible to run this code locally.
 
 License
 -------
