@@ -129,12 +129,13 @@ Note that arguments will be wrapped into _Equation_ elements, even when they cou
 A full-fledged example
 ----------------------
 
-See how *infix2pharmml* has been used to encode a relatively complex model at [Chen_BiophysJ_2009/conversion-pharmml](https://github.com/tonigi/Chen_BiophysJ_2009/tree/master/conversion-pharmml).
+See how *infix2pharmml* has been used to encode a relatively complex model at [Chen_BiophysJ_2009/conversion-pharmml](https://github.com/giorginolab/Chen_BiophysJ_2009/tree/master/conversion-pharmml).
 
 
 Limitations
 -----------
 
+* Regression tests fail because they were not updated to the 7.0 syntax.
 * In single-statement mode, all symbols are assumed to reference variables in the current block (in other words, the _blkIdRef_ attribute is never generated).
 * All symbols are assumed to be of  type _real_.
 * Undefined symbols are assumed to be _population parameters_ and put into a block named _p_.

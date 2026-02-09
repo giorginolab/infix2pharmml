@@ -17,7 +17,7 @@
 %token VAR = /([A-Za-z][A-Za-z0-9_]*)/
 
 %token COMMENT = /#(.*)/
-%token DESCRIPTION = /{(.+?)}/
+%token DESCRIPTION = /\{(.+?)\}/
 
 
 %left   ','

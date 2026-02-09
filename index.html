@@ -1,11 +1,175 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
   <style>
   body {margin: 2em}
   </style>
@@ -14,10 +178,10 @@
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  
+
     ga('create', 'UA-3201754-5', 'auto');
     ga('send', 'pageview');
-  
+
   </script>
   <script  type="text/javascript">
   // <![CDATA[
@@ -34,33 +198,56 @@
           document.getElementById("single").checked=!st;
   }
   // ]]>
-  </script>
+  </script> 
 </head>
 <body>
 <p><img src="CNR_logo_100.png" alt="Logo CNR" style="float:right"/></p>
-<h1 id="infix-notation-to-pharmml-math-online-converter">Infix notation to PharmML math online converter</h1>
-<p><script type="text/javascript">
-<!--
-h='&#x63;&#110;&#114;&#46;&#x69;&#116;';a='&#64;';n='&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#116;&#x6f;&#110;&#x69;&#46;&#x67;&#x69;&#x6f;&#114;&#x67;&#x69;&#110;&#x6f;&#32;&#x61;&#116;&#32;&#x63;&#110;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x69;&#116;</noscript></p>
-<p>The <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> converter translates expressions from the usual mathematical infix notation into the corresponding <a href="http://pharmml.org/">PharmML</a> markup. PharmML is a markup for pharmacometrics models developed by the <a href="http://www.ddmore.eu/">DDMoRe consortium</a>.</p>
-<p>This is an online version of the converter, version 0.7. Output should be compliant with the PharmML 0.7.x specification.</p>
-<p>If you need code conforming to PharmML 0.6, please find the legacy version of this tool (0.6) <a href="http://infix2pharmml.sourceforge.net/v0.6/">at this link</a>.</p>
+<h1 id="infix-notation-to-pharmml-math-online-converter">Infix notation
+to PharmML math online converter</h1>
+<p><a href="mailto:toni.giorgino@cnr.it"
+class="email">toni.giorgino@cnr.it</a></p>
+<p>The <a
+href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>
+converter translates expressions from the usual mathematical infix
+notation into the corresponding <a
+href="http://pharmml.org/">PharmML</a> markup. PharmML is a markup for
+pharmacometric models developed by the <a
+href="http://www.ddmore.eu/">DDMoRe consortium</a>.</p>
+<p>This is an online version of the converter, version 0.7. The output
+should be compliant with PharmML 0.7.x and 0.8.x specifications.</p>
+<p>If you need code conforming to PharmML 0.6, please find the legacy
+version of this tool (0.6) <a
+href="http://infix2pharmml.sourceforge.net/v0.6/">here</a>.</p>
 <h2 id="quickstart">Quickstart</h2>
-<p>The converter works in either <strong>stand-alone model</strong> or <strong>single-statement</strong> mode.</p>
+<p>The converter works in either <strong>stand-alone model</strong> or
+<strong>single-statement</strong> mode.</p>
 <ul>
-<li><p>In <strong>stand-alone mode</strong> it creates a mostly ready-to-run model (encompassing only structural equations). In this mode, several statements can be provided separated by semicolons. Statement types are restricted to variable and derivative variable definitions.</p></li>
-<li><p>In <strong>single-statement</strong> mode it converts a wider variety of statement types into the equivalent PharmML constructs, one at a time. The user is responsible of combining them, and supplying boilerplate code in order to get a fully-functional (e.g., XML-valid) model.</p></li>
+<li><p>In <strong>stand-alone mode</strong> it creates a mostly
+ready-to-run model (encompassing only structural equations). In this
+mode, several statements can be provided separated by semicolons.
+Statement types are restricted to variable and derivative variable
+definitions.</p></li>
+<li><p>In <strong>single-statement</strong> mode it converts a wider
+variety of statement types into the equivalent PharmML constructs, one
+at a time. The user is responsible of combining them, and supplying
+boilerplate code in order to get a fully-functional (e.g., XML-valid)
+model.</p></li>
 </ul>
-<p>For details, a full list of the converter's features and limitations, and source code, see the <a href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">project's README</a> and the <a href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a> project page at SourceForge. Note that this tool is intended to jump-start development; it is no substitute for a full-fledged modeling language.</p>
+<p>For details, a full list of the converter’s features and limitations,
+and source code, see the <a
+href="https://sourceforge.net/p/infix2pharmml/code/ci/master/tree/README.md">project’s
+README</a> and the <a
+href="http://sourceforge.net/projects/infix2pharmml/">infix2pharmml</a>
+project page at SourceForge. Note that this tool is intended to
+jump-start development; it is no substitute for a full-fledged modeling
+language.</p>
 <h2 id="enter-the-formula-below">Enter the formula below</h2>
 <form name="input" action="/cgi-bin/infix2pharmml/infix2pharmml.cgi" method="get">
-Output mode: <input type="radio" id="standalone" name="standalone" value="true" checked="checked" >Stand-alone <input type="radio" id="single" name="standalone" value="false">Single statement <br><br>
-<textarea rows="4" cols="50" style="width:500px;" id="math" name="math">
-y:=1+sin(t)+b
-</textarea>
+Output mode:
+<input type="radio" id="standalone" name="standalone" value="true" checked="checked" >Stand-alone
+<input type="radio" id="single" name="standalone" value="false">Single
+statement <br><br>
+<textarea rows="4" cols="50" style="width:500px;" id="math" name="math">y:=1+sin(t)+b</textarea>
 <br><br> <input type="submit" value="Submit">
 </form>
 <h2 id="examples">Examples</h2>
@@ -83,7 +270,7 @@ y:=1+sin(t)+b
 <p>
 <pre onclick="copyUp(event,true)">diff(A,t)=-k*A; <br>C:=A/V</pre>
 <p>
-<pre onclick="copyUp(event,true)">A:=dose*exp(-k*t) {Exponential decay model}; <br>C:=A/V {Concentration}</pre>
+<pre onclick="copyUp(event,true)">A:=dose*exp(-k*t) {Exponential decay model}; <br>C:=A/V            {Concentration}</pre>
 <p>
 <pre onclick="copyUp(event,true)">diff(A1,t)=-Cl*A1/V1+Q*(A2/V2-A1/V1); <br>diff(A2,t)=-Q*(A2/V2-A1/V1); <br>C1:=A1/V1</pre>
 <p>
@@ -112,13 +299,25 @@ y:=1+sin(t)+b
 </tr>
 </table>
 <h2 id="license">License</h2>
-<p><em>infix2pharmml - Infix notation to PharmML math online converter</em></p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.</p>
-<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.</p>
+<p><em>infix2pharmml - Infix notation to PharmML math online
+converter</em></p>
+<p>This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or (at
+your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU Affero General Public
+License along with this program. If not, see <a
+href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
 <h2 id="privacy-policy">Privacy policy</h2>
-<p>Server use and the data submitted are logged. Do not submit any confidential information. To use the server privately, download the code and use it locally.</p>
+<p>Server use and data submitted are logged. Do not submit any
+confidential information. To use the server privately, download the code
+and use it locally.</p>
 <h2 id="acknowledgments">Acknowledgments</h2>
-<p>Partial funding from the DDMoRe IMI project is gratefully acknowledged.</p>
+<p>Partial funding from the DDMoRe IMI project is gratefully
+acknowledged.</p>
 </body>
 </html>
